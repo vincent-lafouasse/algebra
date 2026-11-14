@@ -92,5 +92,15 @@ theorem mul_right_cancel (a b x : G) (h : a * x = b * x) : a = b :=
    _ = b * (x * x⁻¹) := by rw [mul_assoc]
    _ = b             := by rw [mul_inv_cancel, mul_one]
 
+
+theorem mul_left_cancel (a b x : G) (h : x * a = x * b) : a = b :=
+  calc a
+     = one * a       := by rw [one_mul]
+   _ = (x⁻¹ * x) * a := by rw [inv_mul_cancel]
+   _ = x⁻¹ * (x * a) := by rw [mul_assoc]
+   _ = x⁻¹ * (x * b) := by rw [h]
+   _ = (x⁻¹ * x) * b := by rw [mul_assoc]
+   _ = b             := by rw [inv_mul_cancel, one_mul]
+
 end Group
 end Algebra
