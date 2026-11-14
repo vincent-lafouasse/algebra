@@ -37,5 +37,10 @@ theorem left_one_unique (e : G) (h : ∀ a : G, e * a = a) : e = Group.one := by
      = e * Group.one := by rw [Group.mul_one e]
    _ = Group.one     := by rw [h]
 
+theorem right_one_unique (e : G) (h : ∀ a : G, a * e = a) : e = Group.one := by
+  calc e
+     = Group.one * e := by rw [Group.one_mul e]
+   _ = Group.one     := by rw [h]
+
 end Group
 end Algebra
