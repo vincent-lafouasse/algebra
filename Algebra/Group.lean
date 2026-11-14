@@ -13,5 +13,7 @@ namespace Group
 
 postfix:max "⁻¹"=> Group.inv
 
+variable {G : Type u} [Group G]
+
 end Group
 end Algebra
