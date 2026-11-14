@@ -11,7 +11,7 @@ class Group (G : Type u) extends Mul G where
 
 namespace Group
 
-postfix:max "⁻¹" => Group.inv
+scoped postfix:max "⁻¹" => Group.inv
 
 variable {G : Type u} [Group G]
 
