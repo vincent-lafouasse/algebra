@@ -17,7 +17,13 @@ variable {G : Type u} [Group G]
 
 theorem mul_inv_cancel (a : G) : a * a⁻¹ = Group.one := by
   calc a * a⁻¹
-     = Group.one * a * a⁻¹ := by rw [Group.one_mul]
+     = Group.one * (a * a⁻¹)     := by rw [Group.one_mul]
+   _ = (a⁻¹⁻¹ * a⁻¹) * (a * a⁻¹) := by rw [← Group.inv_mul_cancel a⁻¹]
+   _ = a⁻¹⁻¹ * (a⁻¹ * (a * a⁻¹)) := by rw [Group.mul_assoc]
+   _ = a⁻¹⁻¹ * ((a⁻¹ * a) * a⁻¹) := by rw [Group.mul_assoc]
+   _ = a⁻¹⁻¹ * (Group.one * a⁻¹) := by rw [Group.inv_mul_cancel]
+   _ = a⁻¹⁻¹ * a⁻¹               := by rw [Group.one_mul]
+   _ = Group.one                 := by rw [← Group.inv_mul_cancel a⁻¹]
 
 -- theorem mul_one (a : G) : a * Group.one = a := by
 --   sorry
