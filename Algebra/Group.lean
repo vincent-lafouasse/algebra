@@ -42,5 +42,8 @@ theorem right_one_unique (e : G) (h : ∀ a : G, a * e = a) : e = Group.one := b
      = Group.one * e := by rw [Group.one_mul e]
    _ = Group.one     := by rw [h]
 
+theorem one_unique (e : G) (h : ∀ a : G, a * e = a ∧ e * a = a) : e = Group.one := by
+  sorry
+
 end Group
 end Algebra
