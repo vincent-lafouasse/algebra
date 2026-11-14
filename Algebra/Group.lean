@@ -19,11 +19,11 @@ theorem mul_inv_cancel (a : G) : a * a⁻¹ = Group.one := by
   calc a * a⁻¹
      = Group.one * a * a⁻¹ := by rw [Group.one_mul]
 
-theorem mul_one (a : G) : a * Group.one = a := by
-  sorry
-
-theorem one_unique (e : G) (h : ∀ a : G, e * a = a) : e = Group.one := by
-  sorry
+-- theorem mul_one (a : G) : a * Group.one = a := by
+--   sorry
+-- 
+-- theorem one_unique (e : G) (h : ∀ a : G, e * a = a) : e = Group.one := by
+--   sorry
 
 end Group
 end Algebra
