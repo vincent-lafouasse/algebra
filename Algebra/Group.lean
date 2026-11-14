@@ -42,6 +42,7 @@ theorem right_one_unique (e : G) (h : ∀ a : G, a * e = a) : e = one := by
      = one * e := by rw [one_mul e]
    _ = one     := by rw [h]
 
+-- redudant and trivial but satisfying to state
 theorem one_unique (e : G) (h : ∀ a : G, a * e = a ∧ e * a = a) : e = one :=
   left_one_unique e (fun a => (h a).2)
 
