@@ -45,7 +45,13 @@ theorem right_one_unique (e : G) (h : ∀ a : G, a * e = a) : e = one := by
 theorem one_unique (e : G) (h : ∀ a : G, a * e = a ∧ e * a = a) : e = one :=
   left_one_unique e (fun a => (h a).2)
 
-theorem inv_inv (a : G) : a⁻¹⁻¹ = a := by sorry
+theorem inv_inv (a : G) : a⁻¹⁻¹ = a := by
+  calc a⁻¹⁻¹
+     = a⁻¹⁻¹ * one       := by rw [mul_one]
+   _ = a⁻¹⁻¹ * (a⁻¹ * a) := by rw [← inv_mul_cancel]
+   _ = (a⁻¹⁻¹ * a⁻¹) * a := by rw [← mul_assoc]
+   _ = one * a           := by rw [inv_mul_cancel a⁻¹]
+   _ = a                 := by rw [one_mul]
 
 theorem left_inv_unique (a b : G) (h : b * a = one) : b = a⁻¹ := by
   calc b
