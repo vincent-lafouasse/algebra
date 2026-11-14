@@ -62,10 +62,10 @@ theorem left_inv_unique (a b : G) (h : b * a = one) : b = a⁻¹ := by
    _ = a⁻¹             := by rw [one_mul]
 
 theorem right_inv_unique (a b : G) (h : a * b = one) : b = a⁻¹ := by
-  have h : a = b⁻¹ := left_inv_unique b a h
+  have h' : a = b⁻¹ := left_inv_unique b a h
   calc b
      = b⁻¹⁻¹ := by rw [inv_inv]
-   _ = a⁻¹   := by rw [h]
+   _ = a⁻¹   := by rw [h']
 
 theorem inv_unique (a b : G) (h : b * a = one ∧ a * b = one) : b = a⁻¹ :=
   left_inv_unique a b h.1
