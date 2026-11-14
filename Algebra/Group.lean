@@ -53,5 +53,8 @@ theorem left_inv_unique (a b : G) (h : b * a = one) : b = a⁻¹ := by
    _ = one * a⁻¹       := by rw [h]
    _ = a⁻¹             := by rw [one_mul]
 
+theorem inv_unique (a b : G) (h : b * a = one ∧ a * b = one) : b = a⁻¹ :=
+  left_inv_unique a b h.1
+
 end Group
 end Algebra
