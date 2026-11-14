@@ -18,5 +18,8 @@ variable {G : Type u} [Group G]
 theorem mul_one (a : G) : a * Group.one = a := by
   sorry
 
+theorem one_unique (e : G) (h : ∀ a : G, e * a = a) : e = Group.one := by
+  sorry
+
 end Group
 end Algebra
