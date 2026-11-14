@@ -15,5 +15,8 @@ postfix:max "⁻¹"=> Group.inv
 
 variable {G : Type u} [Group G]
 
+theorem mul_one (a : G) : a * Group.one = a := by
+  sorry
+
 end Group
 end Algebra
