@@ -16,7 +16,8 @@ postfix:max "⁻¹"=> Group.inv
 variable {G : Type u} [Group G]
 
 theorem mul_inv_cancel (a : G) : a * a⁻¹ = Group.one := by
-  sorry
+  calc a * a⁻¹
+     = Group.one * a * a⁻¹ := by rw [Group.one_mul]
 
 theorem mul_one (a : G) : a * Group.one = a := by
   sorry
