@@ -44,5 +44,13 @@ theorem right_one_unique (e : G) (h : ∀ a : G, a * e = a) : e = Group.one := b
 
 theorem one_unique (e : G) (h : ∀ a : G, a * e = a ∧ e * a = a) : e = Group.one := left_one_unique e (fun a => (h a).2)
 
+theorem left_inv_unique (a b : G) (h : b * a = Group.one) : b = a⁻¹ := by
+  calc b
+     = b * Group.one   := by rw [mul_one]
+   _ = b * (a * a⁻¹)   := by rw [mul_inv_cancel]
+   _ = (b * a) * a⁻¹   := by rw [mul_assoc]
+   _ = Group.one * a⁻¹ := by rw [h]
+   _ = a⁻¹             := by rw [one_mul]
+
 end Group
 end Algebra
