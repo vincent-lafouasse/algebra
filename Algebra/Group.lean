@@ -32,7 +32,7 @@ theorem mul_one (a : G) : a * Group.one = a := by
    _ = Group.one * a := by rw [← Group.mul_inv_cancel]
    _ = a             := by rw [Group.one_mul]
 
-theorem one_unique (e : G) (h : ∀ a : G, e * a = a) : e = Group.one := by
+theorem left_one_unique (e : G) (h : ∀ a : G, e * a = a) : e = Group.one := by
   calc e
      = e * Group.one := by rw [Group.mul_one e]
    _ = Group.one     := by rw [h]
