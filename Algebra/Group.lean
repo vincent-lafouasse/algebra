@@ -83,5 +83,8 @@ theorem inv_prod (a b : G) : (a * b)⁻¹ = b⁻¹ * a⁻¹ :=
      _ = one                   := by rw [inv_mul_cancel]
   (left_inv_unique (a * b) (b⁻¹ * a⁻¹) h).symm
 
+theorem mul_right_cancel (a b x : G) (h : a * x = b * x) : a = b :=
+  sorry
+
 end Group
 end Algebra
