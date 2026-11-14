@@ -74,13 +74,12 @@ theorem inv_unique (a b : G) (h : b * a = one ∧ a * b = one) : b = a⁻¹ :=
 theorem inv_prod (a b : G) : (a * b)⁻¹ = b⁻¹ * a⁻¹ :=
   -- tiny lemma: (b⁻¹ * a⁻¹) is the left inverse of (a * b)
   have h : (b⁻¹ * a⁻¹) * (a * b) = one :=
-    by
-      calc (b⁻¹ * a⁻¹) * (a * b)
-         = b⁻¹ * (a⁻¹ * (a * b)) := by rw [mul_assoc]
-       _ = b⁻¹ * ((a⁻¹ * a) * b) := by rw [mul_assoc a⁻¹ a b] 
-       _ = b⁻¹ * (one * b) := by rw [inv_mul_cancel]
-       _ = b⁻¹ * b := by rw [one_mul]
-       _ = one := by rw [inv_mul_cancel]
+    calc (b⁻¹ * a⁻¹) * (a * b)
+       = b⁻¹ * (a⁻¹ * (a * b)) := by rw [mul_assoc]
+     _ = b⁻¹ * ((a⁻¹ * a) * b) := by rw [mul_assoc a⁻¹ a b] 
+     _ = b⁻¹ * (one * b) := by rw [inv_mul_cancel]
+     _ = b⁻¹ * b := by rw [one_mul]
+     _ = one := by rw [inv_mul_cancel]
   (left_inv_unique (a * b) (b⁻¹ * a⁻¹) h).symm
 
 end Group
