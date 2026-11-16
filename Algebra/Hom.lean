@@ -44,8 +44,12 @@ def id (G : Type u) [Group G] : G →* G where
   toFun := λ x => x
   map_mul := λ _a _b => rfl
 
-def comp (g : H →* K) (f : G →* H) : G →* K :=
-  sorry
+def comp (g : H →* K) (f : G →* H) : G →* K where
+  toFun := λ x => g (f x)
+  map_mul := λ a b =>
+    calc g (f (a * b))
+     _ = g (f a * f b) := by rw [map_mul]
+     _ = g (f a) * g (f b) := by rw [map_mul]
 
 theorem id_comp (f : G →* H) : comp (id H) f = f :=
   sorry
