@@ -40,8 +40,9 @@ theorem map_inv (f : G →* H) (a : G) : f a⁻¹ = (f a)⁻¹ :=
 theorem ext {f g : G →* H} (h : ∀ a, f a = g a) : f = g :=
   sorry
 
-def id (G : Type u) [Group G] : G →* G :=
-  sorry
+def id (G : Type u) [Group G] : G →* G where
+  toFun := λ x => x
+  map_mul := sorry
 
 def comp (g : H →* K) (f : G →* H) : G →* K :=
   sorry
