@@ -21,7 +21,12 @@ instance : CoeFun (G →* H) (fun _ => G → H) where
   coe f := f.toFun
 
 theorem map_one (f : G →* H) : f one = one :=
-  sorry
+  have h : f one * f one = one * f one :=
+    calc f one * f one
+     _ = f (one * one) := by rw [map_mul]
+     _ = f one := by rw [one_mul]
+     _ = one * f one := by rw [one_mul]
+  mul_right_cancel (f one) one (f one) h
 
 theorem map_inv (f : G →* H) (a : G) : f a⁻¹ = (f a)⁻¹ :=
   sorry
