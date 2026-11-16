@@ -29,7 +29,12 @@ theorem map_one (f : G →* H) : f one = one :=
   mul_right_cancel (f one) one (f one) h
 
 theorem map_inv (f : G →* H) (a : G) : f a⁻¹ = (f a)⁻¹ :=
-  sorry
+  have h : f a⁻¹ * f a = one :=
+    calc f a⁻¹ * f a
+     _ = f (a⁻¹ * a) := by rw [map_mul]
+     _ = f one := by rw [inv_mul_cancel]
+     _ = one := by rw [map_one]
+  left_inv_unique (f a) (f a⁻¹) h
 
 -- two homs are equal if they agree everywhere
 theorem ext {f g : G →* H} (h : ∀ a, f a = g a) : f = g :=
