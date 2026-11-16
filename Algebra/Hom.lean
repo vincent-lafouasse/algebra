@@ -42,7 +42,7 @@ theorem ext {f g : G →* H} (h : ∀ a, f a = g a) : f = g :=
 
 def id (G : Type u) [Group G] : G →* G where
   toFun := λ x => x
-  map_mul := fun _a _b => rfl
+  map_mul := λ _a _b => rfl
 
 def comp (g : H →* K) (f : G →* H) : G →* K :=
   sorry
