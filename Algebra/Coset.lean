@@ -77,18 +77,9 @@ theorem leftRel_equivalence (N : Subgroup G) : Equivalence (leftRel N) where
 -- x ∈ aN ↔ a⁻¹x ∈ N
 theorem mem_leftCoset_iff (N : Subgroup G) (a x : G) :
     leftCoset a N x ↔ a⁻¹ * x ∈ N := by
-  constructor
-  · intro x_in_aN
-    rw [leftCoset] at x_in_aN
-    obtain ⟨z, hz⟩ := x_in_aN
-    rw [hz.2]
-    rw [inv_mul_cancel_left]
-    exact hz.1
-  · intro h
-    rw [leftCoset]
-    refine ⟨a⁻¹ * x, ?_⟩
-    refine ⟨h, ?_⟩
-    rw [mul_inv_cancel_left]
+  rw [leftCoset_eq_eqvClass]
+  rw [← leftRel_iff]
+  rfl
 
 theorem inv_mul_mem_swap (N : Subgroup G) {a b : G} (h : a⁻¹ * b ∈ N) : b⁻¹ * a ∈ N := by
   have h' := N.inv_mem h
