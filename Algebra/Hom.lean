@@ -81,5 +81,9 @@ theorem comp_assoc (h : K →* L) (g : H →* K) (f : G →* H) :
     λ _ => rfl
   ext h'
 
+theorem map_mul_inv (f : G →* H) (a b : G) : f (a * b⁻¹) = f a * (f b)⁻¹ := by
+  rw [map_mul]
+  rw [map_inv]
+
 end Hom
 end Algebra
