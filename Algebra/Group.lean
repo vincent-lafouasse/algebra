@@ -126,9 +126,8 @@ theorem mul_inv_eq_one (a b : G) : a * b⁻¹ = one ↔ a = b := by
     rw [inv_inv] at h'
     exact h'
   · intro h
-    have h' := congrArg (· * b⁻¹) h
-    rw [mul_inv_cancel] at h'
-    exact h'
+    rw [h]
+    rw [mul_inv_cancel]
 
 theorem inv_mul_eq_one (a b : G) : a⁻¹ * b = one ↔ a = b := by
   rw [← inv_mul_cancel a]
