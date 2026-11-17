@@ -106,5 +106,11 @@ theorem inv_one : inv (one : G) = one :=
   have h := one_mul (one : G)
   (left_inv_unique one one h).symm
 
+theorem inv_cancel (a b : G) (h : a⁻¹ = b⁻¹) : a = b :=
+  calc a
+   _ = a⁻¹⁻¹ := by rw [inv_inv]
+   _ = b⁻¹⁻¹ := by rw [h]
+   _ = b     := by rw [inv_inv]
+
 end Group
 end Algebra
