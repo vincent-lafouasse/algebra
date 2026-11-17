@@ -14,14 +14,14 @@ class Normal (N : Subgroup G) : Prop where
   conj_mem : ∀ n : G, n ∈ N → ∀ g : G, g * n * g⁻¹ ∈ N
 
 -- conjugating the other way round also stays in N
-theorem Normal.conj_mem' (N : Subgroup G) [N.Normal] (n : G) (hn : n ∈ N) (g : G) :
+theorem Normal.conj_mem' {N : Subgroup G} [N.Normal] (n : G) (hn : n ∈ N) (g : G) :
     g⁻¹ * n * g ∈ N := by
   have h := conj_mem n hn g⁻¹
   rw [inv_inv] at h
   exact h
 
 -- the key lemma for the quotient group: b * a = b * (a * b) * b⁻¹
-theorem Normal.mem_comm (N : Subgroup G) [N.Normal] {a b : G} (h : a * b ∈ N) : b * a ∈ N :=
+theorem Normal.mem_comm {N : Subgroup G} [N.Normal] {a b : G} (h : a * b ∈ N) : b * a ∈ N :=
   sorry
 
 instance center_normal : (center G).Normal where
