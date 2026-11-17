@@ -77,6 +77,8 @@ def inter (S T : Subgroup G) : Subgroup G where
     intro _a ha
     exact ⟨S.inv_mem ha.1, T.inv_mem ha.2⟩
 
+theorem mem_center (a : G) : a ∈ center G ↔ ∀ g : G, g * a = a * g := Iff.rfl
+
 theorem mem_bot (a : G) : a ∈ bot G ↔ a = one := Iff.rfl
 
 theorem mem_top (a : G) : a ∈ top G ↔ True := Iff.rfl
