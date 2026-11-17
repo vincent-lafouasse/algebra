@@ -57,6 +57,12 @@ def inter (S T : Subgroup G) : Subgroup G where
     intro _a ha
     exact ⟨S.inv_mem ha.1, T.inv_mem ha.2⟩
 
+theorem mem_bot (a : G) : a ∈ bot G ↔ a = one := Iff.rfl
+
+theorem mem_top (a : G) : a ∈ top G ↔ True := Iff.rfl
+
+theorem mem_inter (S T : Subgroup G) (a : G) : a ∈ inter S T ↔ a ∈ S ∧ a ∈ T := Iff.rfl
+
 end Subgroup
 
 namespace Hom
@@ -85,18 +91,16 @@ def range (f : G →* H) : Subgroup H where
     obtain ⟨xa, hxa⟩ := ha
     obtain ⟨xb, hxb⟩ := hb
     refine ⟨xa * xb, ?_⟩
-    rw [map_mul]
-    rw [hxa, hxb]
+    rw [map_mul, hxa, hxb]
   inv_mem := by
     intro _a ha
     obtain ⟨x, hx⟩ := ha
     refine ⟨x⁻¹, ?_⟩
-    rw [map_inv]
-    rw [hx]
+    rw [map_inv, hx]
 
-theorem mem_ker (f : G →* H) (a : G) : a ∈ ker f ↔ f a = one := by
-  rw [Subgroup.mem_iff]
-  rfl
+theorem mem_ker (f : G →* H) (a : G) : a ∈ ker f ↔ f a = one := Iff.rfl
+
+theorem mem_range (f : G →* H) (b : H) : b ∈ range f ↔ ∃ a : G, f a = b := Iff.rfl
 
 end Hom
 end Algebra
