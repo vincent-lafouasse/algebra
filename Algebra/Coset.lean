@@ -41,9 +41,13 @@ theorem leftRel_symm {N : Subgroup G} {x y : G} (h : leftRel N x y) : leftRel N 
   rw [inv_inv] at h'
   exact h'
 
-theorem leftRel_trans {N : Subgroup G} {x y z : G} (hxy : leftRel N x y) (hyz : leftRel N y z) : leftRel N x z := sorry
-
-#print Equivalence
+theorem leftRel_trans {N : Subgroup G} {x y z : G} (hxy : leftRel N x y) (hyz : leftRel N y z) : leftRel N x z := by
+  rw [leftRel_iff]
+  rw [leftRel_iff] at hxy
+  rw [leftRel_iff] at hyz
+  rw [← mul_inv_cancel_left y z]
+  rw [← mul_assoc]
+  exact N.mul_mem hxy hyz
 
 -- reflexive: one_mem, symmetric: inv_mem + inv_prod, transitive: mul_mem
 theorem leftRel_equivalence (N : Subgroup G) : Equivalence (leftRel N) :=
