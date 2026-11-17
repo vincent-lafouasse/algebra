@@ -19,7 +19,7 @@ theorem eqvClass_eq_iff (h : Equivalence r) (a b : α) :
   constructor
   · intro e
     have hb := congrFun e b
-    show eqvClass r a b
+    rw [← mem_eqvClass_iff r a b]
     rw [hb]
     exact mem_eqvClass_self h b
   · intro hab
