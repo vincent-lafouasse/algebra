@@ -50,11 +50,8 @@ theorem leftCoset_eq_iff (N : Subgroup G) (a b : G) :
   · intro e
     have hb : leftCoset b N b := in_own_coset N b
     rw [← e] at hb
-    rw [leftCoset] at hb
-    obtain ⟨z, hbz⟩ := hb
-    rw [hbz.2]
-    rw [inv_mul_cancel_left]
-    exact hbz.1
+    rw [mem_leftCoset_iff] at hb
+    exact hb
   · intro h_ainv_b
     funext x
     apply propext
