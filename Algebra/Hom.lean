@@ -60,6 +60,8 @@ def comp (g : H →* K) (f : G →* H) : G →* K where
      _ = g (f a * f b) := by rw [map_mul]
      _ = g (f a) * g (f b) := by rw [map_mul]
 
+theorem comp_apply (g : H →* K) (f : G →* H) (x : G) : comp g f x = g (f x) := rfl
+
 theorem id_comp (f : G →* H) : comp (id H) f = f :=
   have h : ∀ x : G, comp (id H) f x = f x :=
     λ x =>
