@@ -74,9 +74,9 @@ theorem comp_id (f : G →* H) : comp f (id G) = f :=
 
 theorem comp_assoc (h : K →* L) (g : H →* K) (f : G →* H) :
     comp (comp h g) f = comp h (comp g f) :=
-  have h : ∀ x : G, comp (comp h g) f x = comp h (comp g f) x :=
+  have h' : ∀ x : G, comp (comp h g) f x = comp h (comp g f) x :=
     λ _ => rfl
-  ext h
+  ext h'
 
 end Hom
 end Algebra
