@@ -59,7 +59,9 @@ def top (G : Type u) [Group G] : Subgroup G where
 def inter (S T : Subgroup G) : Subgroup G where
   mem := λ x => x ∈ S ∧ x ∈ T
   one_mem := ⟨S.one_mem, T.one_mem⟩
-  mul_mem := sorry
+  mul_mem := by
+    intro _a _b ha hb
+    exact ⟨S.mul_mem ha.1 hb.1, T.mul_mem ha.2 hb.2⟩
   inv_mem := by
     intro _a ha
     exact ⟨S.inv_mem ha.1, T.inv_mem ha.2⟩
