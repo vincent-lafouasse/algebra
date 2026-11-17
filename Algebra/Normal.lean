@@ -62,10 +62,9 @@ instance ker_normal (f : G →* H) : (ker f).Normal where
   conj_mem := by
     intro z hz g
     rw [mem_ker f] at hz ⊢
-    calc f (g * z * g⁻¹)
-     _ = f g * f z * (f g)⁻¹ := by rw [Hom.map_conj]
-     _ = f g * (f g)⁻¹ := by rw [hz, mul_one]
-     _ = one := by rw [mul_inv_cancel]
+    rw [map_conj]
+    rw [hz, mul_one]
+    rw [mul_inv_cancel]
 
 -- needs surjectivity, so it can't be an instance
 theorem map_normal (f : G →* H) (hf : Function.Surjective f)
