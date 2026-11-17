@@ -46,8 +46,15 @@ def bot (G : Type u) [Group G] : Subgroup G where
      _ = inv one := by rw [ha]
      _ = one := by rw [inv_one]
 
-def top (G : Type u) [Group G] : Subgroup G :=   -- everything
-  sorry
+def top (G : Type u) [Group G] : Subgroup G where
+  mem := λ _ => true
+  one_mem := rfl
+  mul_mem := by
+    intro _ _ _ _
+    rfl
+  inv_mem := by
+    intro _ _
+    rfl
 
 def inter (S T : Subgroup G) : Subgroup G :=
   sorry
