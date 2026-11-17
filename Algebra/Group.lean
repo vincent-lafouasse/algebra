@@ -122,7 +122,6 @@ theorem mul_inv_eq_one (a b : G) : a * b⁻¹ = one ↔ a = b := by
     rw [mul_inv_cancel] at h'
     exact h'
 
--- mirror of `mul_inv_eq_one`; this is the shape of the coset relation `a⁻¹ * b ∈ N`
 theorem inv_mul_eq_one (a b : G) : a⁻¹ * b = one ↔ a = b := by
   rw [← inv_mul_cancel a]
   constructor
