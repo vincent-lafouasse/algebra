@@ -28,9 +28,20 @@ theorem leftRel_iff (N : Subgroup G) (a b : G) : leftRel N a b ↔ a⁻¹ * b �
     rw [leftRel]
     exact h
 
+theorem leftRel_refl {N : Subgroup G} (x : G) : leftRel N x x := by
+  rw [leftRel_iff]
+  rw [inv_mul_cancel]
+  exact N.one_mem
+
+#print Equivalence
+
 -- reflexive: one_mem, symmetric: inv_mem + inv_prod, transitive: mul_mem
 theorem leftRel_equivalence (N : Subgroup G) : Equivalence (leftRel N) :=
-  sorry
+  {
+    refl := leftRel_refl
+    symm := sorry
+    trans := sorry
+  }
 
 -- x ∈ aN ↔ a⁻¹x ∈ N
 theorem mem_leftCoset_iff (N : Subgroup G) (a x : G) :
