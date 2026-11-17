@@ -93,6 +93,10 @@ instance : Group (G ≃* G) where
     rw [refl_toHom, trans_toHom, symm_toHom]
     exact a.left_inv
 
+theorem mul_toHom (e e' : G ≃* G) : (e * e').toHom = e.toHom.comp e'.toHom := rfl
+
+theorem conjIso_toHom (g : G) : (conjIso g).toHom = Hom.conj g := rfl
+
 -- g ↦ (conjugation by g)
 def conjHom : G →* (G ≃* G) :=
   sorry
