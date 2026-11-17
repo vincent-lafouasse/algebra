@@ -109,8 +109,7 @@ noncomputable def ofBijective (f : G →* H)
 
 theorem ofBijective_toHom (f : G →* H)
     (hi : Function.Injective f) (hs : Function.Surjective f) :
-    (ofBijective f hi hs).toHom = f :=
-  sorry
+    (ofBijective f hi hs).toHom = f := rfl
 
 end Iso
 end Algebra
