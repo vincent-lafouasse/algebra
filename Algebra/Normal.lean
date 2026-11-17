@@ -20,6 +20,9 @@ theorem Normal.conj_mem' (N : Subgroup G) [N.Normal] (n : G) (hn : n ∈ N) (g :
   rw [inv_inv] at h
   exact h
 
+instance center_normal : (center G).Normal :=
+  sorry
+
 instance bot_normal : (bot G).Normal :=
   sorry
 
