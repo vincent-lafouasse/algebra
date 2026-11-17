@@ -123,8 +123,18 @@ theorem mul_inv_eq_one (a b : G) : a * b⁻¹ = one ↔ a = b := by
     exact h'
 
 -- mirror of `mul_inv_eq_one`; this is the shape of the coset relation `a⁻¹ * b ∈ N`
-theorem inv_mul_eq_one (a b : G) : a⁻¹ * b = one ↔ a = b :=
-  sorry
+theorem inv_mul_eq_one (a b : G) : a⁻¹ * b = one ↔ a = b := by
+  rw [← inv_mul_cancel a]
+  constructor
+  · intro h
+    have h' := congrArg (a * ·) h.symm
+    rw [← mul_assoc, ← mul_assoc] at h'
+    rw [mul_inv_cancel a] at h'
+    rw [one_mul, one_mul] at h'
+    exact h'
+  · intro h
+    have h' := congrArg (a⁻¹ * ·) h.symm
+    exact h'
 
 -- iff version of `inv_injective`
 theorem inv_inj (a b : G) : a⁻¹ = b⁻¹ ↔ a = b :=
