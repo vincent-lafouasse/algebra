@@ -1,4 +1,5 @@
 import Algebra.Hom
+import Algebra.Core.Function
 
 universe u v w
 
@@ -75,15 +76,8 @@ theorem surjective (e : G ≃* H) : Function.Surjective e.toHom := by
   refine ⟨e.invHom x, ?_⟩
   rw [toHom_invHom]
 
-noncomputable def invFun (f : G →* H) (hs : Function.Surjective f) : H → G :=
-  λ y => Classical.choose (hs y)
-
-theorem invFun_spec (f : G →* H) (hs : Function.Surjective f) (y : H) :
-    f (invFun f hs y) = y :=
-  Classical.choose_spec (hs y)
-
 -- a bijective hom is an isomorphism
--- (building the inverse needs `Classical.choose`, hence `noncomputable`)
+-- (the inverse is `invFun` from Core/Function.lean, hence `noncomputable`)
 noncomputable def ofBijective (f : G →* H)
     (hi : Function.Injective f) (hs : Function.Surjective f) : G ≃* H where
   toHom := f
@@ -93,19 +87,19 @@ noncomputable def ofBijective (f : G →* H)
       intro a b
       apply hi
       rw [f.map_mul]
-      rw [invFun_spec, invFun_spec, invFun_spec]
+      rw [invFun_spec f hs, invFun_spec f hs, invFun_spec f hs]
   }
   left_inv := by
     ext a
     apply hi
     rw [Hom.id_apply a]
     rw [Hom.comp_apply]
-    rw [invFun_spec]
+    rw [invFun_spec f hs]
   right_inv := by
     ext a
     rw [Hom.id_apply a]
     rw [Hom.comp_apply]
-    rw [invFun_spec]
+    rw [invFun_spec f hs]
 
 theorem ofBijective_toHom (f : G →* H)
     (hi : Function.Injective f) (hs : Function.Surjective f) :
