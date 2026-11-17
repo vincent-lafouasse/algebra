@@ -42,8 +42,13 @@ instance top_normal : (top G).Normal where
     rw [mem_top] at hz ⊢
     exact hz
 
-instance inter_normal (S T : Subgroup G) [S.Normal] [T.Normal] : (inter S T).Normal :=
-  sorry
+instance inter_normal (S T : Subgroup G) [S.Normal] [T.Normal] : (inter S T).Normal where
+  conj_mem := by
+    intro z hz g
+    rw [mem_inter] at hz ⊢
+    have hs := Normal.conj_mem z hz.1 g
+    have ht := Normal.conj_mem z hz.2 g
+    exact ⟨hs, ht⟩
 
 end Subgroup
 
