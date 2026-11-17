@@ -183,8 +183,17 @@ theorem range_eq_map_top (f : G →* H) : range f = map f (Subgroup.top G) := by
 
 -- injective homs have trivial kernel
 theorem ker_eq_bot_of_injective (f : G →* H) (hf : Function.Injective f) :
-    ker f = Subgroup.bot G :=
-  sorry
+    ker f = Subgroup.bot G := by
+  ext a
+  rw [Subgroup.mem_bot]
+  rw [mem_ker]
+  constructor
+  · intro h
+    rw [← map_one f] at h
+    exact hf h
+  · intro h
+    rw [h]
+    rw [map_one]
 
 -- a trivial kernel forces injectivity
 theorem injective_of_ker_eq_bot (f : G →* H) (h : ker f = Subgroup.bot G) :
