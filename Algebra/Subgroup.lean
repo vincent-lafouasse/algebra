@@ -28,7 +28,7 @@ theorem ext {S T : Subgroup G} (h : ∀ a, a ∈ S ↔ a ∈ T) : S = T := by
     cases T with
     | mk t _ _ _ =>
       have e : s = t := funext (λ a => propext (h a))
-      subst e
+subst e
       rfl
 
 def bot (G : Type u) [Group G] : Subgroup G where
@@ -92,9 +92,12 @@ def range (f : Hom G H) : Subgroup H where
   one_mem := ⟨one, map_one f⟩
   mul_mem := sorry
   inv_mem := by
-    intro a ha
+    intro _a ha
     obtain ⟨x, hx⟩ := ha
-    sorry
+    exact ⟨x⁻¹, by
+      rw [map_inv]
+      rw [hx]
+    ⟩
 
 theorem mem_ker (f : Hom G H) (a : G) : a ∈ ker f ↔ f a = one :=
   sorry
