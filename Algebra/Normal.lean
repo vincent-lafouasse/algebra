@@ -39,8 +39,8 @@ instance bot_normal : (bot G).Normal where
 instance top_normal : (top G).Normal where
   conj_mem := by
     intro z hz g
-    rw [mem_top] at hz ⊢
-    exact hz
+    rw [mem_top]
+    trivial
 
 instance inter_normal (S T : Subgroup G) [S.Normal] [T.Normal] : (inter S T).Normal where
   conj_mem := by
