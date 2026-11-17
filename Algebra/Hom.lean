@@ -47,7 +47,6 @@ theorem ext {f g : G →* H} (h : ∀ a, f a = g a) : f = g := by
       subst e
       rfl
 
-
 def id (G : Type u) [Group G] : G →* G where
   toFun := λ x => x
   map_mul := λ _a _b => rfl
