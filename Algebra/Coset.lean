@@ -64,9 +64,7 @@ theorem leftCoset_eq_iff (N : Subgroup G) (a b : G) :
       rw [leftCoset]
       rw [hz.2]
       refine ⟨b⁻¹ * a * z, ?_⟩
-      have h_binv_a := N.inv_mem h_ainv_b
-      rw [Group.inv_prod] at h_binv_a
-      rw [Group.inv_inv] at h_binv_a
+      have h_binv_a := inv_mul_mem_swap N h_ainv_b
       refine ⟨N.mul_mem h_binv_a hz.1, ?_⟩
       rw [Group.mul_assoc]
       rw [← hz.2]
