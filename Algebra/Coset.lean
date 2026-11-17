@@ -72,7 +72,7 @@ theorem mem_leftCoset_iff (N : Subgroup G) (a x : G) :
     leftCoset a N x ↔ a⁻¹ * x ∈ N := by
   rw [leftCoset_eq_eqvClass]
   rw [← leftRel_iff]
-  rfl
+  rw [mem_eqvClass_iff]
 
 theorem in_own_coset (N : Subgroup G) (b : G) : leftCoset b N b := by
   rw [leftCoset_eq_eqvClass]
