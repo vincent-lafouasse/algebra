@@ -102,5 +102,9 @@ theorem mul_left_cancel (a b x : G) (h : x * a = x * b) : a = b :=
    _ = (x⁻¹ * x) * b := by rw [mul_assoc]
    _ = b             := by rw [inv_mul_cancel, one_mul]
 
+theorem inv_one : inv (one : G) = one :=
+  have h := one_mul (one : G)
+  (left_inv_unique one one h).symm
+
 end Group
 end Algebra
