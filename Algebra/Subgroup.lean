@@ -163,12 +163,10 @@ def comap (f : G →* H) (T : Subgroup H) : Subgroup G where
     exact T.inv_mem ha
 
 theorem mem_map (f : G →* H) (S : Subgroup G) (b : H) :
-    b ∈ map f S ↔ ∃ a ∈ S, f a = b :=
-  sorry
+    b ∈ map f S ↔ ∃ a ∈ S, f a = b := Iff.rfl
 
 theorem mem_comap (f : G →* H) (T : Subgroup H) (a : G) :
-    a ∈ comap f T ↔ f a ∈ T :=
-  sorry
+    a ∈ comap f T ↔ f a ∈ T := Iff.rfl
 
 theorem ker_eq_comap_bot (f : G →* H) : ker f = comap f (Subgroup.bot H) :=
   sorry
