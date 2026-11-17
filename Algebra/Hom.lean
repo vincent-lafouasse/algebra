@@ -86,9 +86,9 @@ theorem map_mul_inv (f : G →* H) (a b : G) : f (a * b⁻¹) = f a * (f b)⁻¹
   rw [map_mul]
   rw [map_inv]
 
--- pushing f through a conjugate (used by ker_normal, map_normal, comap_normal)
-theorem map_conj (f : G →* H) (g n : G) : f (g * n * g⁻¹) = f g * f n * (f g)⁻¹ :=
-  sorry
+theorem map_conj (f : G →* H) (g n : G) : f (g * n * g⁻¹) = f g * f n * (f g)⁻¹ := by
+  rw [map_mul, map_mul]
+  rw [map_inv]
 
 -- applying a hom written out as a structure literal
 theorem mk_apply (g : G → H) (h : ∀ a b : G, g (a * b) = g a * g b) (x : G) :
