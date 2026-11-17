@@ -6,3 +6,4 @@ import Algebra.Subgroup
 import Algebra.Normal
 import Algebra.Iso
 import Algebra.Coset
+import Algebra.Aut
