@@ -20,8 +20,14 @@ theorem Normal.conj_mem' (N : Subgroup G) [N.Normal] (n : G) (hn : n ∈ N) (g :
   rw [inv_inv] at h
   exact h
 
-instance center_normal : (center G).Normal :=
-  sorry
+instance center_normal : (center G).Normal where
+  conj_mem := by
+    intro z hz g
+    rw [hz g]
+    rw [mul_assoc]
+    rw [mul_inv_cancel]
+    rw [mul_one]
+    exact hz
 
 instance bot_normal : (bot G).Normal :=
   sorry
