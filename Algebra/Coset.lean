@@ -76,7 +76,6 @@ theorem leftCoset_eq_iff (N : Subgroup G) (a b : G) :
       rw [hz.2]
       refine ⟨a⁻¹ * b * z, ?_⟩
       refine ⟨N.mul_mem h_ainv_b hz.1, ?_⟩
-      rw [← hz.2]
       rw [Group.mul_assoc]
       rw [← hz.2]
       rw [mul_inv_cancel_left]
