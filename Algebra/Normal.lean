@@ -90,8 +90,11 @@ theorem map_normal (f : G →* H) (hf : Function.Surjective f)
 
 
 instance comap_normal (f : G →* H) (T : Subgroup H) [T.Normal] :
-    (comap f T).Normal :=
-  sorry
+    (comap f T).Normal where
+    conj_mem := by
+      intro n
+      simp only [mem_comap]
+      sorry
 
 end Hom
 end Algebra
