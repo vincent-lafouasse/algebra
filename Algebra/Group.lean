@@ -75,7 +75,7 @@ theorem left_inv_unique {a b : G} (h : b * a = one) : b = a⁻¹ :=
 theorem inv_inv (a : G) : a⁻¹⁻¹ = a :=
   (left_inv_unique (mul_inv_cancel a)).symm
 
-theorem right_inv_unique (a b : G) (h : a * b = one) : b = a⁻¹ :=
+theorem right_inv_unique {a b : G} (h : a * b = one) : b = a⁻¹ :=
   have h' : a = b⁻¹ := left_inv_unique h
   calc b
    _ = b⁻¹⁻¹ := by rw [inv_inv]
