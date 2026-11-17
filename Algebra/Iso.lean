@@ -20,11 +20,15 @@ variable {G : Type u} {H : Type v} {K : Type w}
 variable [Group G] [Group H] [Group K]
 
 -- pointwise versions of left_inv / right_inv
-theorem invHom_toHom (e : G ≃* H) (x : G) : e.invHom (e.toHom x) = x :=
-  sorry
+theorem invHom_toHom (e : G ≃* H) (x : G) : e.invHom (e.toHom x) = x := by
+  rw (config := { occs := .pos [2] }) [← Hom.id_apply x]
+  rw [← e.left_inv]
+  rfl
 
-theorem toHom_invHom (e : G ≃* H) (y : H) : e.toHom (e.invHom y) = y :=
-  sorry
+theorem toHom_invHom (e : G ≃* H) (y : H) : e.toHom (e.invHom y) = y := by
+  rw (config := { occs := .pos [2] }) [← Hom.id_apply y]
+  rw [← e.right_inv]
+  rfl
 
 -- G ≅ G
 def refl (G : Type u) [Group G] : G ≃* G :=
