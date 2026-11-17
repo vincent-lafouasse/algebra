@@ -106,8 +106,16 @@ theorem mul_mem_cancel_left {S : Subgroup G} {a b : G} (ha : a ∈ S) : a * b �
   · intro hb
     exact S.mul_mem ha hb
 
-theorem mul_mem_cancel_right {S : Subgroup G} {a b : G} (hb : b ∈ S) : a * b ∈ S ↔ a ∈ S :=
-  sorry
+theorem mul_mem_cancel_right {S : Subgroup G} {a b : G} (hb : b ∈ S) : a * b ∈ S ↔ a ∈ S := by
+  constructor
+  · intro hab
+    have hb_inv := hb
+    rw [← inv_mem_iff S b] at hb_inv
+    have h := S.mul_mem hab hb_inv
+    rw [Group.mul_inv_cancel_right] at h
+    exact h
+  · intro ha
+    exact S.mul_mem ha hb
 
 end Subgroup
 
