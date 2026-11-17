@@ -90,7 +90,14 @@ def ker (f : Hom G H) : Subgroup G where
 def range (f : Hom G H) : Subgroup H where
   mem := λ y : H => ∃ x : G, f x = y
   one_mem := ⟨one, map_one f⟩
-  mul_mem := sorry
+  mul_mem := by
+    intro a b ha hb
+    obtain ⟨xa, hxa⟩ := ha
+    obtain ⟨xb, hxb⟩ := hb
+    exact ⟨xa * xb, by
+      rw [map_mul]
+      rw [hxa, hxb]
+    ⟩
   inv_mem := by
     intro _a ha
     obtain ⟨x, hx⟩ := ha
