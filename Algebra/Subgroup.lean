@@ -212,8 +212,12 @@ theorem injective_of_ker_eq_bot (f : G →* H) (h : ker f = Subgroup.bot G) :
   exact hk'.symm
 
 theorem injective_iff_ker_eq_bot (f : G →* H) :
-    Function.Injective f ↔ ker f = Subgroup.bot G :=
-  sorry
+    Function.Injective f ↔ ker f = Subgroup.bot G := by
+  constructor
+  · intro h
+    exact ker_eq_bot_of_injective f h
+  · intro h
+    exact injective_of_ker_eq_bot f h
 
 end Hom
 end Algebra
