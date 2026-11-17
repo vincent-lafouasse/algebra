@@ -13,8 +13,16 @@ def eqvClass (r : α → α → Prop) (a : α) : α → Prop := λ x => r a x
 theorem mem_eqvClass_self (h : Equivalence r) (a : α) : eqvClass r a a := h.refl a
 
 theorem eqvClass_eq_iff (h : Equivalence r) (a b : α) :
-    eqvClass r a = eqvClass r b ↔ r a b :=
-  sorry
+    eqvClass r a = eqvClass r b ↔ r a b := by
+  constructor
+  · intro e
+    have hb := congrFun e b
+    show eqvClass r a b
+    rw [hb]
+    exact h.refl b
+  · intro hab
+    funext x
+    sorry
 
 -- two classes that share an element are equal → classes partition α
 theorem eqvClass_eq_of_mem (h : Equivalence r) {a b x : α}
