@@ -47,14 +47,14 @@ def bot (G : Type u) [Group G] : Subgroup G where
      _ = one := by rw [inv_one]
 
 def top (G : Type u) [Group G] : Subgroup G where
-  mem := λ _ => true
-  one_mem := rfl
+  mem := λ _ => True
+  one_mem := trivial
   mul_mem := by
     intro _ _ _ _
-    rfl
+    trivial
   inv_mem := by
     intro _ _
-    rfl
+    trivial
 
 def inter (S T : Subgroup G) : Subgroup G where
   mem := λ x => x ∈ S ∧ x ∈ T
