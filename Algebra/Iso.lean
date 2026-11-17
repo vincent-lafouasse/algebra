@@ -75,6 +75,13 @@ theorem surjective (e : G ≃* H) : Function.Surjective e.toHom := by
   refine ⟨e.invHom x, ?_⟩
   rw [toHom_invHom]
 
+noncomputable def invFun (f : G →* H) (hs : Function.Surjective f) : H → G :=
+  λ y => Classical.choose (hs y)
+
+theorem invFun_spec (f : G →* H) (hs : Function.Surjective f) (y : H) :
+    f (invFun f hs y) = y :=
+  Classical.choose_spec (hs y)
+
 -- a bijective hom is an isomorphism
 -- (building the inverse needs `Classical.choose`, hence `noncomputable`)
 noncomputable def ofBijective (f : G →* H)
