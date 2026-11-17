@@ -50,7 +50,23 @@ theorem leftCoset_eq_iff (N : Subgroup G) (a b : G) :
     exact hbz.1
   · intro h_ainv_b
     funext x
-    sorry
+    apply propext
+    constructor
+    · intro h
+      rw [leftCoset] at h
+      obtain ⟨z, hz⟩ := h
+      rw [leftCoset]
+      rw [hz.2]
+      refine ⟨b⁻¹ * a * z, ?_⟩
+      have h_binv_a := N.inv_mem h_ainv_b
+      rw [Group.inv_prod] at h_binv_a
+      rw [Group.inv_inv] at h_binv_a
+      refine ⟨N.mul_mem h_binv_a hz.1, ?_⟩
+      rw [Group.mul_assoc]
+      rw [← hz.2]
+      rw [mul_inv_cancel_left]
+    · intro h
+      sorry
 
 -- the book's definition: N is normal iff aN = Na for every a
 theorem normal_iff_cosets (N : Subgroup G) :
