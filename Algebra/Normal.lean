@@ -89,8 +89,7 @@ instance comap_normal (f : G →* H) (T : Subgroup H) [T.Normal] :
   conj_mem := by
     intro n hn g
     simp only [mem_comap]
-    simp only [map_mul]
-    simp only [map_inv]
+    simp only [map_conj]
     exact Subgroup.Normal.conj_mem (f n) hn (f g)
 
 end Hom
