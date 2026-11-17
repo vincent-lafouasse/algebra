@@ -207,9 +207,8 @@ theorem injective_of_ker_eq_bot (f : G →* H) (h : ker f = Subgroup.bot G) :
   have hk : (b * a⁻¹) ∈ ker f := h''.symm
   rw [h] at hk
   rw [Subgroup.mem_bot] at hk
-  have hk' := left_inv_unique a⁻¹ b hk
-  rw [inv_inv] at hk'
-  exact hk'.symm
+  rw [mul_inv_eq_one b a] at hk
+  exact hk.symm
 
 theorem injective_iff_ker_eq_bot (f : G →* H) :
     Function.Injective f ↔ ker f = Subgroup.bot G := by
