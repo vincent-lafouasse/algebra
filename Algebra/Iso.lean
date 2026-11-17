@@ -40,12 +40,16 @@ def refl (G : Type u) [Group G] : G ≃* G where
   right_inv := by
     rw [Hom.comp_id]
 
+theorem refl_toHom (G : Type u) [Group G] : (refl G).toHom = Hom.id G := rfl
+
 -- G ≅ H → H ≅ G
 def symm (e : G ≃* H) : H ≃* G where
   toHom := e.invHom
   invHom := e.toHom
   left_inv := e.right_inv
   right_inv := e.left_inv
+
+theorem symm_toHom (e : G ≃* H) : e.symm.toHom = e.invHom := rfl
 
 -- G ≅ H → H ≅ K → G ≅ K
 def trans (e : G ≃* H) (e' : H ≃* K) : G ≃* K where
