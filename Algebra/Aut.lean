@@ -79,8 +79,7 @@ instance : Group (G ≃* G) where
     show c.trans (b.trans a) = (c.trans b).trans a
     apply ext
     rw [trans_toHom, trans_toHom, trans_toHom, trans_toHom]
-    ext x
-    rw [Hom.comp_apply, Hom.comp_apply, Hom.comp_apply, Hom.comp_apply]
+    rw [Hom.comp_assoc]
   one_mul := by
     intro a
     show (a.trans (refl G)) = a
