@@ -63,6 +63,7 @@ def comp (g : H →* K) (f : G →* H) : G →* K where
 theorem comp_apply (g : H →* K) (f : G →* H) (x : G) : comp g f x = g (f x) := rfl
 
 theorem id_comp (f : G →* H) : comp (id H) f = f :=
+  -- pedestrian but clear
   have h : ∀ x : G, comp (id H) f x = f x :=
     λ x =>
       calc comp (id H) f x
