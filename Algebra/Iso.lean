@@ -64,6 +64,9 @@ def trans (e : G ≃* H) (e' : H ≃* K) : G ≃* K where
     rw [Hom.id_comp]
     rw [e'.right_inv]
 
+theorem trans_toHom (e : G ≃* H) (e' : H ≃* K) :
+    (e.trans e').toHom = e'.toHom.comp e.toHom := rfl
+
 theorem injective (e : G ≃* H) : Function.Injective e.toHom := by
   intro a b hab
   have h := congrArg e.invHom hab
