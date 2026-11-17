@@ -19,8 +19,14 @@ def rightCoset (N : Subgroup G) (a : G) : G → Prop := λ x => ∃ n ∈ N, x =
 -- the coset relation: a ~ b ↔ a⁻¹b ∈ N
 def leftRel (N : Subgroup G) : G → G → Prop := λ a b => a⁻¹ * b ∈ N
 
-theorem leftRel_iff (N : Subgroup G) (a b : G) : leftRel N a b ↔ a⁻¹ * b ∈ N :=
-  sorry
+theorem leftRel_iff (N : Subgroup G) (a b : G) : leftRel N a b ↔ a⁻¹ * b ∈ N := by
+  constructor
+  · intro h
+    rw [leftRel] at h
+    exact h
+  · intro h
+    rw [leftRel]
+    exact h
 
 -- reflexive: one_mem, symmetric: inv_mem + inv_prod, transitive: mul_mem
 theorem leftRel_equivalence (N : Subgroup G) : Equivalence (leftRel N) :=
