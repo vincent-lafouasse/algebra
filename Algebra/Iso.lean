@@ -95,7 +95,12 @@ noncomputable def ofBijective (f : G →* H)
       rw [f.map_mul]
       rw [invFun_spec, invFun_spec, invFun_spec]
   }
-  left_inv := sorry
+  left_inv := by
+    ext a
+    apply hi
+    rw [Hom.id_apply a]
+    rw [Hom.comp_apply]
+    rw [invFun_spec]
   right_inv := sorry
 
 theorem ofBijective_toHom (f : G →* H)
