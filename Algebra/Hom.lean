@@ -26,7 +26,7 @@ theorem map_one (f : G →* H) : f one = one :=
      _ = f (one * one) := by rw [map_mul]
      _ = f one := by rw [one_mul]
      _ = one * f one := by rw [one_mul]
-  mul_right_cancel (f one) one (f one) h
+  mul_right_cancel h
 
 theorem map_inv (f : G →* H) (a : G) : f a⁻¹ = (f a)⁻¹ :=
   have h : f a⁻¹ * f a = one :=

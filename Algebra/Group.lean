@@ -94,13 +94,13 @@ theorem inv_prod (a b : G) : (a * b)⁻¹ = b⁻¹ * a⁻¹ :=
      _ = one                   := by rw [inv_mul_cancel]
   (left_inv_unique h).symm
 
-theorem mul_right_cancel (a b x : G) (h : a * x = b * x) : a = b :=
+theorem mul_right_cancel {a b x : G} (h : a * x = b * x) : a = b :=
   calc a
    _ = (a * x) * x⁻¹ := by rw [mul_inv_cancel_right]
    _ = (b * x) * x⁻¹ := by rw [h]
    _ = b             := by rw [mul_inv_cancel_right]
 
-theorem mul_left_cancel (a b x : G) (h : x * a = x * b) : a = b :=
+theorem mul_left_cancel {a b x : G} (h : x * a = x * b) : a = b :=
   calc a
    _ = x⁻¹ * (x * a) := by rw [inv_mul_cancel_left]
    _ = x⁻¹ * (x * b) := by rw [h]
@@ -130,7 +130,7 @@ theorem inv_mul_eq_one (a b : G) : a⁻¹ * b = one ↔ a = b := by
   rw [← inv_mul_cancel a]
   constructor
   · intro h
-    exact (mul_left_cancel b a a⁻¹ h).symm
+    exact (mul_left_cancel h).symm
   · intro h
     rw [h]
 
