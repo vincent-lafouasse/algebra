@@ -85,8 +85,14 @@ theorem invFun_spec (f : G →* H) (hs : Function.Surjective f) (y : H) :
 -- a bijective hom is an isomorphism
 -- (building the inverse needs `Classical.choose`, hence `noncomputable`)
 noncomputable def ofBijective (f : G →* H)
-    (hi : Function.Injective f) (hs : Function.Surjective f) : G ≃* H :=
-  sorry
+    (hi : Function.Injective f) (hs : Function.Surjective f) : G ≃* H where
+  toHom := f
+  invHom := {
+    toFun := invFun f hs
+    map_mul := sorry
+  }
+  left_inv := sorry
+  right_inv := sorry
 
 theorem ofBijective_toHom (f : G →* H)
     (hi : Function.Injective f) (hs : Function.Surjective f) :
