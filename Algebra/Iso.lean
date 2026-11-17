@@ -31,8 +31,13 @@ theorem toHom_invHom (e : G ≃* H) (y : H) : e.toHom (e.invHom y) = y := by
   rfl
 
 -- G ≅ G
-def refl (G : Type u) [Group G] : G ≃* G :=
-  sorry
+def refl (G : Type u) [Group G] : G ≃* G where
+  toHom := Hom.id G
+  invHom := Hom.id G
+  left_inv := by
+    rw [Hom.comp_id]
+  right_inv := by
+    rw [Hom.comp_id]
 
 -- G ≅ H → H ≅ G
 def symm (e : G ≃* H) : H ≃* G :=
