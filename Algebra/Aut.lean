@@ -28,8 +28,12 @@ theorem conj_one : conj (one : G) = id G := by
   rw [inv_one]
   rw [mul_one, one_mul]
 
-theorem conj_mul (g h : G) : conj (g * h) = comp (conj g) (conj h) :=
-  sorry
+theorem conj_mul (g h : G) : conj (g * h) = comp (conj g) (conj h) := by
+  ext x
+  rw [comp_apply]
+  rw [conj_apply, conj_apply, conj_apply]
+  rw [inv_prod]
+  simp only [mul_assoc]
 
 end Hom
 
