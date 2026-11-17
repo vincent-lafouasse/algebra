@@ -20,11 +20,13 @@ def rightCoset (N : Subgroup G) (a : G) : G → Prop := λ x => ∃ n ∈ N, x =
 -- the coset relation: a ~ b ↔ a⁻¹b ∈ N
 def leftRel (N : Subgroup G) : G → G → Prop := λ a b => a⁻¹ * b ∈ N
 
+theorem leftRel_iff (N : Subgroup G) (a b : G) : leftRel N a b ↔ a⁻¹ * b ∈ N := Iff.rfl
+
 theorem leftCoset_eq_eqvClass (N : Subgroup G) (a : G) :
     leftCoset a N = eqvClass (leftRel N) a := by
   funext x
   rw [mem_eqvClass_iff]
-  unfold leftRel
+  rw [leftRel_iff]
   unfold leftCoset
   apply propext
   constructor
@@ -36,8 +38,6 @@ theorem leftCoset_eq_eqvClass (N : Subgroup G) (a : G) :
     refine ⟨a⁻¹ * x, ?_⟩
     refine ⟨h, ?_⟩
     rw [mul_inv_cancel_left]
-
-theorem leftRel_iff (N : Subgroup G) (a b : G) : leftRel N a b ↔ a⁻¹ * b ∈ N := Iff.rfl
 
 theorem leftRel_refl {N : Subgroup G} (x : G) : leftRel N x x := by
   rw [leftRel_iff]
