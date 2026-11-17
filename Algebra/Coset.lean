@@ -38,16 +38,17 @@ theorem inv_mul_mem_swap (N : Subgroup G) {a b : G} (h : a⁻¹ * b ∈ N) : b�
   rw [inv_inv] at h'
   exact h'
 
+theorem in_own_coset (N : Subgroup G) (b : G) : leftCoset b N b := by
+  rw [mem_leftCoset_iff]
+  rw [inv_mul_cancel]
+  exact N.one_mem
+
 -- aN = bN ↔ a⁻¹b ∈ N
 theorem leftCoset_eq_iff (N : Subgroup G) (a b : G) :
     leftCoset a N = leftCoset b N ↔ a⁻¹ * b ∈ N := by
   constructor
   · intro e
-    have hb : leftCoset b N b := by
-      rw [leftCoset]
-      refine ⟨one, ?_⟩
-      refine ⟨N.one_mem, ?_⟩
-      rw [mul_one]
+    have hb : leftCoset b N b := in_own_coset N b
     rw [← e] at hb
     rw [leftCoset] at hb
     obtain ⟨z, hbz⟩ := hb
