@@ -60,7 +60,12 @@ def comp (g : H →* K) (f : G →* H) : G →* K where
      _ = g (f a) * g (f b) := by rw [map_mul]
 
 theorem id_comp (f : G →* H) : comp (id H) f = f :=
-  sorry
+  have h : ∀ x : G, comp (id H) f x = f x :=
+    λ x =>
+      calc comp (id H) f x
+       _ = (id H) (f x) := rfl
+       _ = f x := rfl
+  ext h
 
 theorem comp_id (f : G →* H) : comp f (id G) = f :=
   sorry
