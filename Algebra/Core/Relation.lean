@@ -31,8 +31,9 @@ theorem eqvClass_eq_iff (h : Equivalence r) (a b : α) :
 
 -- two classes that share an element are equal → classes partition α
 theorem eqvClass_eq_of_mem (h : Equivalence r) {a b x : α}
-    (ha : eqvClass r a x) (hb : eqvClass r b x) : eqvClass r a = eqvClass r b :=
-  sorry
+    (ha : eqvClass r a x) (hb : eqvClass r b x) : eqvClass r a = eqvClass r b := by
+  rw [eqvClass_eq_iff h]
+  exact h.trans ha (h.symm hb)
 
 -- a partition of α: a collection of blocks (predicates on α)
 structure Partition (α : Sort u) where
