@@ -42,8 +42,14 @@ namespace Iso
 variable {G : Type u} {H : Type v} [Group G] [Group H]
 
 -- an iso is determined by its forward hom (inverses are unique)
-theorem ext {e e' : G ≃* H} (h : e.toHom = e'.toHom) : e = e' :=
-  sorry
+theorem ext {e e' : G ≃* H} (h : e.toHom = e'.toHom) : e = e' := by
+  cases e with
+  | mk f g hl hr =>
+    cases e' with
+    | mk f' g' hl' hr' =>
+      have eq : f = f' := h
+      subst eq
+      sorry
 
 -- conjugation by g as an automorphism, with inverse conjugation by g⁻¹
 def conjIso (g : G) : G ≃* G :=
