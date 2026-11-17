@@ -52,19 +52,19 @@ theorem inv_mul_cancel_right (a b : G) : a * b⁻¹ * b = a := by
   rw [inv_mul_cancel]
   rw [mul_one]
 
-theorem left_one_unique (e : G) (h : ∀ a : G, e * a = a) : e = one :=
+theorem left_one_unique {e : G} (h : ∀ a : G, e * a = a) : e = one :=
   calc e
    _ = e * one := by rw [mul_one e]
    _ = one     := by rw [h]
 
-theorem right_one_unique (e : G) (h : ∀ a : G, a * e = a) : e = one :=
+theorem right_one_unique {e : G} (h : ∀ a : G, a * e = a) : e = one :=
   calc e
    _ = one * e := by rw [one_mul e]
    _ = one     := by rw [h]
 
 -- redundant and trivial but satisfying to state
-theorem one_unique (e : G) (h : ∀ a : G, a * e = a ∧ e * a = a) : e = one :=
-  left_one_unique e (fun a => (h a).2)
+theorem one_unique {e : G} (h : ∀ a : G, a * e = a ∧ e * a = a) : e = one :=
+  left_one_unique (fun a => (h a).2)
 
 theorem left_inv_unique {a b : G} (h : b * a = one) : b = a⁻¹ :=
   calc b
