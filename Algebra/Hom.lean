@@ -37,8 +37,12 @@ theorem map_inv (f : G →* H) (a : G) : f a⁻¹ = (f a)⁻¹ :=
   left_inv_unique (f a) (f a⁻¹) h
 
 -- two homs are equal if they agree everywhere
-theorem ext {f g : G →* H} (h : ∀ a, f a = g a) : f = g :=
-  sorry
+theorem ext {f g : G →* H} (h : ∀ a, f a = g a) : f = g := by
+  cases f with
+  | mk f' hf =>
+    cases g with
+    | mk g' hg =>
+      have e : f' = g' := sorry
 
 def id (G : Type u) [Group G] : G →* G where
   toFun := λ x => x
