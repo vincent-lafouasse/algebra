@@ -36,8 +36,11 @@ instance bot_normal : (bot G).Normal where
     rw [hz, mul_one]
     exact mul_inv_cancel g
 
-instance top_normal : (top G).Normal :=
-  sorry
+instance top_normal : (top G).Normal where
+  conj_mem := by
+    intro z hz g
+    rw [mem_top] at hz ⊢
+    exact hz
 
 instance inter_normal (S T : Subgroup G) [S.Normal] [T.Normal] : (inter S T).Normal :=
   sorry
