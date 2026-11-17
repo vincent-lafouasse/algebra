@@ -29,8 +29,12 @@ instance center_normal : (center G).Normal where
     rw [mul_one]
     exact hz
 
-instance bot_normal : (bot G).Normal :=
-  sorry
+instance bot_normal : (bot G).Normal where
+  conj_mem := by
+    intro z hz g
+    rw [mem_bot] at hz ⊢
+    rw [hz, mul_one]
+    exact mul_inv_cancel g
 
 instance top_normal : (top G).Normal :=
   sorry
