@@ -82,7 +82,7 @@ theorem right_inv_unique {a b : G} (h : a * b = one) : b = a⁻¹ :=
    _ = a⁻¹   := by rw [h']
 
 -- redundant and trivial but satisfying to state
-theorem inv_unique (a b : G) (h : b * a = one ∧ a * b = one) : b = a⁻¹ :=
+theorem inv_unique {a b : G} (h : b * a = one ∧ a * b = one) : b = a⁻¹ :=
   left_inv_unique h.1
 
 theorem inv_prod (a b : G) : (a * b)⁻¹ = b⁻¹ * a⁻¹ :=
