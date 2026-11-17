@@ -1,0 +1,59 @@
+import Algebra.Hom
+
+universe u v w
+
+namespace Algebra
+
+open Group
+
+structure Iso (G : Type u) (H : Type v) [Group G] [Group H] where
+  toHom : G →* H
+  invHom : H →* G
+  left_inv : Hom.comp invHom toHom = Hom.id G
+  right_inv : Hom.comp toHom invHom = Hom.id H
+
+scoped infixr:25 " ≃* " => Iso
+
+namespace Iso
+
+variable {G : Type u} {H : Type v} {K : Type w}
+variable [Group G] [Group H] [Group K]
+
+-- pointwise versions of left_inv / right_inv
+theorem invHom_toHom (e : G ≃* H) (x : G) : e.invHom (e.toHom x) = x :=
+  sorry
+
+theorem toHom_invHom (e : G ≃* H) (y : H) : e.toHom (e.invHom y) = y :=
+  sorry
+
+-- G ≅ G
+def refl (G : Type u) [Group G] : G ≃* G :=
+  sorry
+
+-- G ≅ H → H ≅ G
+def symm (e : G ≃* H) : H ≃* G :=
+  sorry
+
+-- G ≅ H → H ≅ K → G ≅ K
+def trans (e : G ≃* H) (e' : H ≃* K) : G ≃* K :=
+  sorry
+
+theorem injective (e : G ≃* H) : Function.Injective e.toHom :=
+  sorry
+
+theorem surjective (e : G ≃* H) : Function.Surjective e.toHom :=
+  sorry
+
+-- a bijective hom is an isomorphism
+-- (building the inverse needs `Classical.choose`, hence `noncomputable`)
+noncomputable def ofBijective (f : G →* H)
+    (hi : Function.Injective f) (hs : Function.Surjective f) : G ≃* H :=
+  sorry
+
+theorem ofBijective_toHom (f : G →* H)
+    (hi : Function.Injective f) (hs : Function.Surjective f) :
+    (ofBijective f hi hs).toHom = f :=
+  sorry
+
+end Iso
+end Algebra
