@@ -75,8 +75,17 @@ variable {G : Type u} {H : Type v} [Group G] [Group H]
 def ker (f : Hom G H) : Subgroup G where
   mem := λ x => f x = one
   one_mem := map_one f
-  mul_mem := sorry
-  inv_mem := sorry
+  mul_mem := by
+    intro _ _ ha hb
+    rw [map_mul]
+    rw [ha, hb]
+    rw [mul_one]
+  inv_mem := by
+    intro a ha
+    rw [map_inv]
+    rw [← inv_one]
+    sorry
+
 
 def range (f : Hom G H) : Subgroup H :=
   sorry
