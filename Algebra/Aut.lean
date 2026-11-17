@@ -93,9 +93,19 @@ instance : Group (G ≃* G) where
     apply ext
     show (a.trans (refl G)).toHom = a.toHom
     rw [trans_toHom]
-    show (Hom.id G).comp a.toHom = a.toHom
+    rw [refl_toHom]
     rw [Hom.id_comp]
-  inv_mul_cancel := sorry
+  inv_mul_cancel := by
+    intro a
+    show a.trans a.symm = refl G
+    apply ext
+    rw [refl_toHom]
+    rw [trans_toHom]
+    ext x
+    rw [symm_toHom]
+    rw [Hom.comp_apply]
+    rw [← a.left_inv]
+    rfl
 
 -- g ↦ (conjugation by g)
 def conjHom : G →* (G ≃* G) :=
