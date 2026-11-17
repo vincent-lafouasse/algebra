@@ -131,7 +131,14 @@ def map (f : G →* H) (S : Subgroup G) : Subgroup H where
     refine ⟨one, ?_⟩
     refine ⟨S.one_mem, ?_⟩
     exact map_one f
-  mul_mem := sorry
+  mul_mem := by
+    intro a b ha hb
+    obtain ⟨xa, hxa⟩ := ha
+    obtain ⟨xb, hxb⟩ := hb
+    refine ⟨xa * xb, ?_⟩
+    refine ⟨S.mul_mem hxa.1 hxb.1, ?_⟩
+    rw [map_mul]
+    rw [hxa.2, hxb.2]
   inv_mem := by
     intro a ha
     obtain ⟨x, hx⟩ := ha
