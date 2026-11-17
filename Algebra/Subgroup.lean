@@ -150,7 +150,9 @@ def map (f : G →* H) (S : Subgroup G) : Subgroup H where
 -- preimage of a subgroup: φ⁻¹(T)
 def comap (f : G →* H) (T : Subgroup H) : Subgroup G where
   mem := λ x : G => (f x) ∈ T
-  one_mem := sorry
+  one_mem := by
+    rw [map_one]
+    exact T.one_mem
   mul_mem := sorry
   inv_mem := sorry
 
