@@ -157,14 +157,9 @@ theorem inv_injective {a b : G} (h : a⁻¹ = b⁻¹) : a = b :=
    _ = b     := by rw [inv_inv]
 
 theorem mul_inv_eq_one (a b : G) : a * b⁻¹ = one ↔ a = b := by
-  constructor
-  · intro h
-    have h' := left_inv_unique h
-    rw [inv_inv] at h'
-    exact h'
-  · intro h
-    rw [h]
-    rw [mul_inv_cancel]
+  rw [← eq_mul_inv_iff_mul_eq]
+  rw [inv_inv]
+  rw [one_mul]
 
 theorem inv_mul_eq_one (a b : G) : a⁻¹ * b = one ↔ a = b := by
   rw [← inv_mul_cancel a]
