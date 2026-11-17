@@ -97,8 +97,7 @@ theorem leftCoset_eq_iff (N : Subgroup G) (a b : G) :
   rw [← mem_leftCoset_iff]
   rw [leftCoset_eq_eqvClass, leftCoset_eq_eqvClass]
   rw [eqvClass_eq_iff (leftRel_equivalence N) a b]
-  unfold eqvClass
-  rfl
+  rw [mem_eqvClass_iff]
 
 -- the book's definition: N is normal iff aN = Na for every a
 theorem normal_iff_cosets (N : Subgroup G) :
