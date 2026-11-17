@@ -135,9 +135,13 @@ theorem inv_mul_eq_one (a b : G) : a⁻¹ * b = one ↔ a = b := by
     have h' := congrArg (a⁻¹ * ·) h.symm
     exact h'
 
--- iff version of `inv_injective`
-theorem inv_inj (a b : G) : a⁻¹ = b⁻¹ ↔ a = b :=
-  sorry
+theorem inv_inj (a b : G) : a⁻¹ = b⁻¹ ↔ a = b := by
+  constructor
+  · intro h
+    exact inv_injective a b h
+  · intro h
+    let h' := congrArg inv h
+    exact h'
 
 -- one-step cancellations: each replaces a mul_assoc / cancel / one_mul calc
 theorem inv_mul_cancel_left (a b : G) : a⁻¹ * (a * b) = b :=
