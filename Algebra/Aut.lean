@@ -85,7 +85,9 @@ instance : Group (G ≃* G) where
     intro a b c
     apply ext
     show (c.trans (b.trans a)).toHom = ((c.trans b).trans a).toHom
-    sorry
+    rw [trans_toHom, trans_toHom, trans_toHom, trans_toHom]
+    ext x
+    rw [Hom.comp_apply, Hom.comp_apply, Hom.comp_apply, Hom.comp_apply]
   one_mul := sorry
   inv_mul_cancel := sorry
 
