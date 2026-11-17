@@ -110,7 +110,7 @@ theorem inv_one : (one : G)⁻¹ = one :=
   have h := one_mul (one : G)
   (left_inv_unique h).symm
 
-theorem inv_injective (a b : G) (h : a⁻¹ = b⁻¹) : a = b :=
+theorem inv_injective {a b : G} (h : a⁻¹ = b⁻¹) : a = b :=
   calc a
    _ = a⁻¹⁻¹ := by rw [inv_inv]
    _ = b⁻¹⁻¹ := by rw [h]
@@ -137,7 +137,7 @@ theorem inv_mul_eq_one (a b : G) : a⁻¹ * b = one ↔ a = b := by
 theorem inv_inj (a b : G) : a⁻¹ = b⁻¹ ↔ a = b := by
   constructor
   · intro h
-    exact inv_injective a b h
+    exact inv_injective h
   · intro h
     rw [h]
 
