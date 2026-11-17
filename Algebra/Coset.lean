@@ -37,14 +37,7 @@ theorem leftCoset_eq_eqvClass (N : Subgroup G) (a : G) :
     refine ⟨h, ?_⟩
     rw [mul_inv_cancel_left]
 
-theorem leftRel_iff (N : Subgroup G) (a b : G) : leftRel N a b ↔ a⁻¹ * b ∈ N := by
-  constructor
-  · intro h
-    rw [leftRel] at h
-    exact h
-  · intro h
-    rw [leftRel]
-    exact h
+theorem leftRel_iff (N : Subgroup G) (a b : G) : leftRel N a b ↔ a⁻¹ * b ∈ N := Iff.rfl
 
 theorem leftRel_refl {N : Subgroup G} (x : G) : leftRel N x x := by
   rw [leftRel_iff]
