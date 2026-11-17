@@ -148,8 +148,11 @@ def map (f : G →* H) (S : Subgroup G) : Subgroup H where
     exact (congrArg inv hx.2)
 
 -- preimage of a subgroup: φ⁻¹(T)
-def comap (f : G →* H) (T : Subgroup H) : Subgroup G :=
-  sorry
+def comap (f : G →* H) (T : Subgroup H) : Subgroup G where
+  mem := λ x : G => (f x) ∈ T
+  one_mem := sorry
+  mul_mem := sorry
+  inv_mem := sorry
 
 theorem mem_map (f : G →* H) (S : Subgroup G) (b : H) :
     b ∈ map f S ↔ ∃ a ∈ S, f a = b :=
