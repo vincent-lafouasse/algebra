@@ -57,26 +57,10 @@ theorem leftCoset_eq_iff (N : Subgroup G) (a b : G) :
     apply propext
     constructor
     · intro h
-      rw [leftCoset] at h
-      obtain ⟨z, hz⟩ := h
-      rw [leftCoset]
-      rw [hz.2]
-      refine ⟨b⁻¹ * a * z, ?_⟩
-      have h_binv_a := inv_mul_mem_swap N h_ainv_b
-      refine ⟨N.mul_mem h_binv_a hz.1, ?_⟩
-      rw [Group.mul_assoc]
-      rw [← hz.2]
-      rw [mul_inv_cancel_left]
+      rw [← mem_leftCoset_iff] at h_ainv_b
+      sorry
     · intro h
-      rw [leftCoset] at h
-      obtain ⟨z, hz⟩ := h
-      rw [leftCoset]
-      rw [hz.2]
-      refine ⟨a⁻¹ * b * z, ?_⟩
-      refine ⟨N.mul_mem h_ainv_b hz.1, ?_⟩
-      rw [Group.mul_assoc]
-      rw [← hz.2]
-      rw [mul_inv_cancel_left]
+      sorry
 
 -- the book's definition: N is normal iff aN = Na for every a
 theorem normal_iff_cosets (N : Subgroup G) :
