@@ -144,17 +144,25 @@ theorem inv_inj (a b : G) : a⁻¹ = b⁻¹ ↔ a = b := by
     exact h'
 
 -- one-step cancellations: each replaces a mul_assoc / cancel / one_mul calc
-theorem inv_mul_cancel_left (a b : G) : a⁻¹ * (a * b) = b :=
-  sorry
+theorem inv_mul_cancel_left (a b : G) : a⁻¹ * (a * b) = b := by
+  rw [← mul_assoc]
+  rw [inv_mul_cancel]
+  rw [one_mul]
 
-theorem mul_inv_cancel_left (a b : G) : a * (a⁻¹ * b) = b :=
-  sorry
+theorem mul_inv_cancel_left (a b : G) : a * (a⁻¹ * b) = b := by
+  rw [← mul_assoc]
+  rw [mul_inv_cancel]
+  rw [one_mul]
 
-theorem mul_inv_cancel_right (a b : G) : a * b * b⁻¹ = a :=
-  sorry
+theorem mul_inv_cancel_right (a b : G) : a * b * b⁻¹ = a := by
+  rw [mul_assoc]
+  rw [mul_inv_cancel]
+  rw [mul_one]
 
-theorem inv_mul_cancel_right (a b : G) : a * b⁻¹ * b = a :=
-  sorry
+theorem inv_mul_cancel_right (a b : G) : a * b⁻¹ * b = a := by
+  rw [mul_assoc]
+  rw [inv_mul_cancel]
+  rw [mul_one]
 
 end Group
 end Algebra
