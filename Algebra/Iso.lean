@@ -70,8 +70,10 @@ theorem injective (e : G ≃* H) : Function.Injective e.toHom := by
   rw [invHom_toHom e] at h
   exact h
 
-theorem surjective (e : G ≃* H) : Function.Surjective e.toHom :=
-  sorry
+theorem surjective (e : G ≃* H) : Function.Surjective e.toHom := by
+  intro x
+  refine ⟨e.invHom x, ?_⟩
+  rw [toHom_invHom]
 
 -- a bijective hom is an isomorphism
 -- (building the inverse needs `Classical.choose`, hence `noncomputable`)
