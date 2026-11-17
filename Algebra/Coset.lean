@@ -35,6 +35,8 @@ theorem leftRel_refl {N : Subgroup G} (x : G) : leftRel N x x := by
 
 theorem leftRel_symm {N : Subgroup G} {x y : G} (h : leftRel N x y) : leftRel N y x := sorry
 
+theorem leftRel_trans {N : Subgroup G} {x y z : G} (hxy : leftRel N x y) (hyz : leftRel N y z) : leftRel N x z := sorry
+
 #print Equivalence
 
 -- reflexive: one_mem, symmetric: inv_mem + inv_prod, transitive: mul_mem
@@ -42,7 +44,7 @@ theorem leftRel_equivalence (N : Subgroup G) : Equivalence (leftRel N) :=
   {
     refl := leftRel_refl
     symm := leftRel_symm
-    trans := sorry
+    trans := leftRel_trans
   }
 
 -- x ∈ aN ↔ a⁻¹x ∈ N
