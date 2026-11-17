@@ -72,8 +72,11 @@ namespace Hom
 
 variable {G : Type u} {H : Type v} [Group G] [Group H]
 
-def ker (f : Hom G H) : Subgroup G :=
-  sorry
+def ker (f : Hom G H) : Subgroup G where
+  mem := λ x => f x = one
+  one_mem := map_one f
+  mul_mem := sorry
+  inv_mem := sorry
 
 def range (f : Hom G H) : Subgroup H :=
   sorry
