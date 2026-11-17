@@ -31,8 +31,11 @@ theorem ext {S T : Subgroup G} (h : ∀ a, a ∈ S ↔ a ∈ T) : S = T := by
       subst e
       rfl
 
-def bot (G : Type u) [Group G] : Subgroup G :=   -- just `one`
-  sorry
+def bot (G : Type u) [Group G] : Subgroup G where
+  mem := λ x => x = one
+  one_mem := rfl
+  mul_mem := sorry
+  inv_mem := sorry
 
 def top (G : Type u) [Group G] : Subgroup G :=   -- everything
   sorry
