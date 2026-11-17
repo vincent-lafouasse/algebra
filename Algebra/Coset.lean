@@ -33,7 +33,13 @@ theorem leftRel_refl {N : Subgroup G} (x : G) : leftRel N x x := by
   rw [inv_mul_cancel]
   exact N.one_mem
 
-theorem leftRel_symm {N : Subgroup G} {x y : G} (h : leftRel N x y) : leftRel N y x := sorry
+theorem leftRel_symm {N : Subgroup G} {x y : G} (h : leftRel N x y) : leftRel N y x := by
+  rw [leftRel_iff]
+  rw [leftRel_iff] at h
+  have h' := N.inv_mem h
+  rw [inv_prod] at h'
+  rw [inv_inv] at h'
+  exact h'
 
 theorem leftRel_trans {N : Subgroup G} {x y z : G} (hxy : leftRel N x y) (hyz : leftRel N y z) : leftRel N x z := sorry
 
