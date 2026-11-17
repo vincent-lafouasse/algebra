@@ -46,11 +46,10 @@ def center (G : Type u) [Group G] : Subgroup G where
      _ = (a * b) * g := by rw [mul_assoc]
   inv_mem := by
     intro a ha g
-    have h := ha g⁻¹
-    have h' := congrArg inv h
-    rw [inv_prod, inv_prod] at h'
-    rw [inv_inv] at h'
-    exact h'.symm
+    have h := congrArg inv (ha g⁻¹)
+    rw [inv_prod, inv_prod] at h
+    rw [inv_inv] at h
+    exact h.symm
 
 def bot (G : Type u) [Group G] : Subgroup G where
   mem := λ x => x = one
