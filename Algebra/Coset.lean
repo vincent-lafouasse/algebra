@@ -18,8 +18,19 @@ def rightCoset (N : Subgroup G) (a : G) : G → Prop := λ x => ∃ n ∈ N, x =
 
 -- x ∈ aN ↔ a⁻¹x ∈ N
 theorem mem_leftCoset_iff (N : Subgroup G) (a x : G) :
-    leftCoset a N x ↔ a⁻¹ * x ∈ N :=
-  sorry
+    leftCoset a N x ↔ a⁻¹ * x ∈ N := by
+  constructor
+  · intro x_in_aN
+    rw [leftCoset] at x_in_aN
+    obtain ⟨z, hz⟩ := x_in_aN
+    rw [hz.2]
+    rw [inv_mul_cancel_left]
+    exact hz.1
+  · intro h
+    rw [leftCoset]
+    refine ⟨a⁻¹ * x, ?_⟩
+    refine ⟨h, ?_⟩
+    rw [mul_inv_cancel_left]
 
 -- aN = bN ↔ a⁻¹b ∈ N
 theorem leftCoset_eq_iff (N : Subgroup G) (a b : G) :
