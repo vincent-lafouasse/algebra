@@ -63,8 +63,12 @@ def trans (e : G ≃* H) (e' : H ≃* K) : G ≃* K where
     rw [Hom.id_comp]
     rw [e'.right_inv]
 
-theorem injective (e : G ≃* H) : Function.Injective e.toHom :=
-  sorry
+theorem injective (e : G ≃* H) : Function.Injective e.toHom := by
+  intro a b hab
+  have h := congrArg e.invHom hab
+  rw [invHom_toHom e] at h
+  rw [invHom_toHom e] at h
+  exact h
 
 theorem surjective (e : G ≃* H) : Function.Surjective e.toHom :=
   sorry
