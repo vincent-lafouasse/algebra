@@ -21,8 +21,15 @@ instance : Membership G (Subgroup G) where
 
 theorem mem_iff (S : Subgroup G) (a : G) : a ∈ S ↔ S.mem a := Iff.rfl
 
-theorem ext {S T : Subgroup G} (h : ∀ a, a ∈ S ↔ a ∈ T) : S = T :=
-  sorry
+@[ext]
+theorem ext {S T : Subgroup G} (h : ∀ a, a ∈ S ↔ a ∈ T) : S = T := by
+  cases S with
+  | mk s _ _ _ =>
+    cases T with
+    | mk t _ _ _ =>
+      have e : s = t := funext (λ a => propext (h a))
+      subst e
+      rfl
 
 def bot (G : Type u) [Group G] : Subgroup G :=   -- just `one`
   sorry
