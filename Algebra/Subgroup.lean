@@ -95,8 +95,12 @@ theorem inv_mem_iff (S : Subgroup G) (a : G) : a⁻¹ ∈ S ↔ a ∈ S := by
     exact S.inv_mem h
 
 -- multiplying by a member doesn't change membership
-theorem mul_mem_cancel_left {S : Subgroup G} {a b : G} (ha : a ∈ S) : a * b ∈ S ↔ b ∈ S :=
-  sorry
+theorem mul_mem_cancel_left {S : Subgroup G} {a b : G} (ha : a ∈ S) : a * b ∈ S ↔ b ∈ S := by
+  constructor
+  · intro hab
+    sorry
+  · intro hb
+    exact S.mul_mem ha hb
 
 theorem mul_mem_cancel_right {S : Subgroup G} {a b : G} (hb : b ∈ S) : a * b ∈ S ↔ a ∈ S :=
   sorry
