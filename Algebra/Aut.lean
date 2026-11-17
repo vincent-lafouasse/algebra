@@ -92,13 +92,8 @@ instance : Group (G ≃* G) where
     intro a
     show a.trans a.symm = refl G
     apply ext
-    rw [refl_toHom]
-    rw [trans_toHom]
-    ext x
-    rw [symm_toHom]
-    rw [Hom.comp_apply]
-    rw [← a.left_inv]
-    rfl
+    rw [refl_toHom, trans_toHom, symm_toHom]
+    exact a.left_inv
 
 -- g ↦ (conjugation by g)
 def conjHom : G →* (G ≃* G) :=
