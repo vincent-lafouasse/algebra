@@ -84,7 +84,7 @@ def ker (f : Hom G H) : Subgroup G where
     intro a ha
     rw [map_inv]
     rw [← inv_one]
-    sorry
+    rw [ha]
 
 
 def range (f : Hom G H) : Subgroup H :=
