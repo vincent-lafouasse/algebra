@@ -21,12 +21,9 @@ def conj (g : G) : G →* G where
 theorem conj_apply (g x : G) : conj g x = g * x * g⁻¹ := rfl
 
 theorem conj_one : conj (one : G) = id G := by
-  unfold conj
   ext x
-  rw [mk_apply]
-  rw [id_apply]
-  rw [inv_one]
-  rw [mul_one, one_mul]
+  rw [conj_apply, id_apply]
+  rw [inv_one, mul_one, one_mul]
 
 theorem conj_mul (g h : G) : conj (g * h) = comp (conj g) (conj h) := by
   ext x
