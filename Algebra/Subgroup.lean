@@ -85,8 +85,14 @@ theorem mem_top (a : G) : a ∈ top G ↔ True := Iff.rfl
 
 theorem mem_inter (S T : Subgroup G) (a : G) : a ∈ inter S T ↔ a ∈ S ∧ a ∈ T := Iff.rfl
 
-theorem inv_mem_iff (S : Subgroup G) (a : G) : a⁻¹ ∈ S ↔ a ∈ S :=
-  sorry
+theorem inv_mem_iff (S : Subgroup G) (a : G) : a⁻¹ ∈ S ↔ a ∈ S := by
+  constructor
+  · intro h
+    have h' := S.inv_mem h
+    rw [inv_inv] at h'
+    exact h'
+  · intro h
+    exact S.inv_mem h
 
 -- multiplying by a member doesn't change membership
 theorem mul_mem_cancel_left {S : Subgroup G} {a b : G} (ha : a ∈ S) : a * b ∈ S ↔ b ∈ S :=
