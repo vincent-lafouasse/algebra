@@ -150,7 +150,7 @@ theorem inv_inj (a b : G) : a⁻¹ = b⁻¹ ↔ a = b := by
   · intro h
     exact inv_injective a b h
   · intro h
-    let h' := congrArg inv h
+    have h' := congrArg inv h
     exact h'
 
 end Group
