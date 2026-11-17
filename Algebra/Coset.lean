@@ -81,12 +81,6 @@ theorem mem_leftCoset_iff (N : Subgroup G) (a x : G) :
   rw [← leftRel_iff]
   rfl
 
-theorem inv_mul_mem_swap (N : Subgroup G) {a b : G} (h : a⁻¹ * b ∈ N) : b⁻¹ * a ∈ N := by
-  have h' := N.inv_mem h
-  rw [inv_prod] at h'
-  rw [inv_inv] at h'
-  exact h'
-
 theorem in_own_coset (N : Subgroup G) (b : G) : leftCoset b N b := by
   rw [leftCoset_eq_eqvClass]
   exact mem_eqvClass_self (leftRel_equivalence N) b
