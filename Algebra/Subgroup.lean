@@ -81,7 +81,6 @@ def ker (f : G →* H) : Subgroup G where
     rw [← inv_one]
     rw [ha]
 
-
 def range (f : G →* H) : Subgroup H where
   mem := λ y : H => ∃ x : G, f x = y
   one_mem := ⟨one, map_one f⟩
