@@ -101,7 +101,11 @@ noncomputable def ofBijective (f : G →* H)
     rw [Hom.id_apply a]
     rw [Hom.comp_apply]
     rw [invFun_spec]
-  right_inv := sorry
+  right_inv := by
+    ext a
+    rw [Hom.id_apply a]
+    rw [Hom.comp_apply]
+    rw [invFun_spec]
 
 theorem ofBijective_toHom (f : G →* H)
     (hi : Function.Injective f) (hs : Function.Surjective f) :
