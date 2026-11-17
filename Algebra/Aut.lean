@@ -85,8 +85,7 @@ instance : Group (G ≃* G) where
     intro a
     show (a.trans (refl G)) = a
     apply ext
-    rw [trans_toHom]
-    rw [refl_toHom]
+    rw [trans_toHom, refl_toHom]
     rw [Hom.id_comp]
   inv_mul_cancel := by
     intro a
