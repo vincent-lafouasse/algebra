@@ -89,7 +89,11 @@ noncomputable def ofBijective (f : G →* H)
   toHom := f
   invHom := {
     toFun := invFun f hs
-    map_mul := sorry
+    map_mul := by
+      intro a b
+      apply hi
+      rw [f.map_mul]
+      rw [invFun_spec, invFun_spec, invFun_spec]
   }
   left_inv := sorry
   right_inv := sorry
