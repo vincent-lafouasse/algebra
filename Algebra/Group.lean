@@ -52,6 +52,46 @@ theorem inv_mul_cancel_right (a b : G) : a * b⁻¹ * b = a := by
   rw [inv_mul_cancel]
   rw [mul_one]
 
+-- moving a factor across an equation
+
+theorem eq_mul_inv_of_mul_eq {a b c : G} (h : a * c = b) : a = b * c⁻¹ := by
+  rw [← h, mul_inv_cancel_right]
+
+theorem eq_inv_mul_of_mul_eq {a b c : G} (h : b * a = c) : a = b⁻¹ * c := by
+  rw [← h, inv_mul_cancel_left]
+
+theorem mul_inv_eq_of_eq_mul {a b c : G} (h : a = c * b) : a * b⁻¹ = c := by
+  rw [h, mul_inv_cancel_right]
+
+theorem inv_mul_eq_of_eq_mul {a b c : G} (h : b = a * c) : a⁻¹ * b = c := by
+  rw [h, inv_mul_cancel_left]
+
+-- the same, as iffs (usable in `rw`)
+
+theorem eq_mul_inv_iff_mul_eq (a b c : G) : a = b * c⁻¹ ↔ a * c = b := by
+  constructor
+  · intro h
+    rw [h, inv_mul_cancel_right]
+  · exact eq_mul_inv_of_mul_eq
+
+theorem eq_inv_mul_iff_mul_eq (a b c : G) : a = b⁻¹ * c ↔ b * a = c := by
+  constructor
+  · intro h
+    rw [h, mul_inv_cancel_left]
+  · exact eq_inv_mul_of_mul_eq
+
+theorem mul_inv_eq_iff_eq_mul (a b c : G) : a * b⁻¹ = c ↔ a = c * b := by
+  constructor
+  · intro h
+    rw [← h, inv_mul_cancel_right]
+  · exact mul_inv_eq_of_eq_mul
+
+theorem inv_mul_eq_iff_eq_mul (a b c : G) : a⁻¹ * b = c ↔ b = a * c := by
+  constructor
+  · intro h
+    rw [← h, mul_inv_cancel_left]
+  · exact inv_mul_eq_of_eq_mul
+
 theorem left_one_unique {e : G} (h : ∀ a : G, e * a = a) : e = one :=
   calc e
    _ = e * one := by rw [mul_one e]
