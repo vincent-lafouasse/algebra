@@ -61,11 +61,9 @@ def conjIso (g : G) : G ≃* G where
   toHom := Hom.conj g
   invHom := Hom.conj g⁻¹
   left_inv := by
-    ext x
-    rw [Hom.comp_apply, Hom.conj_apply, Hom.conj_apply, Hom.id_apply]
-    simp only [mul_assoc]
-    rw [mul_inv_cancel, mul_one]
-    rw [inv_mul_cancel_left]
+    rw [← Hom.conj_mul]
+    rw [inv_mul_cancel]
+    rw [Hom.conj_one]
   right_inv := by
     ext x
     rw [Hom.comp_apply, Hom.conj_apply, Hom.conj_apply, Hom.id_apply]
