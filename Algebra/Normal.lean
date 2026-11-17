@@ -28,9 +28,7 @@ instance center_normal : (center G).Normal where
   conj_mem := by
     intro z hz g
     rw [hz g]
-    rw [mul_assoc]
-    rw [mul_inv_cancel]
-    rw [mul_one]
+    rw [mul_inv_cancel_right]
     exact hz
 
 instance bot_normal : (bot G).Normal where
