@@ -69,5 +69,14 @@ instance ker_normal (f : G →* H) : (ker f).Normal where
      _ = f one := by rw [mul_inv_cancel]
      _ = one := by rw [map_one]
 
+-- needs surjectivity, so it can't be an instance
+theorem map_normal (f : G →* H) (hf : Function.Surjective f)
+    (S : Subgroup G) [S.Normal] : (map f S).Normal :=
+  sorry
+
+instance comap_normal (f : G →* H) (T : Subgroup H) [T.Normal] :
+    (comap f T).Normal :=
+  sorry
+
 end Hom
 end Algebra

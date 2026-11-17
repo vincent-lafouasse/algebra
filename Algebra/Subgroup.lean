@@ -124,5 +124,27 @@ theorem mem_ker (f : G →* H) (a : G) : a ∈ ker f ↔ f a = one := Iff.rfl
 
 theorem mem_range (f : G →* H) (b : H) : b ∈ range f ↔ ∃ a : G, f a = b := Iff.rfl
 
+-- image of a subgroup: φ(S)
+def map (f : G →* H) (S : Subgroup G) : Subgroup H :=
+  sorry
+
+-- preimage of a subgroup: φ⁻¹(T)
+def comap (f : G →* H) (T : Subgroup H) : Subgroup G :=
+  sorry
+
+theorem mem_map (f : G →* H) (S : Subgroup G) (b : H) :
+    b ∈ map f S ↔ ∃ a ∈ S, f a = b :=
+  sorry
+
+theorem mem_comap (f : G →* H) (T : Subgroup H) (a : G) :
+    a ∈ comap f T ↔ f a ∈ T :=
+  sorry
+
+theorem ker_eq_comap_bot (f : G →* H) : ker f = comap f (Subgroup.bot H) :=
+  sorry
+
+theorem range_eq_map_top (f : G →* H) : range f = map f (Subgroup.top G) :=
+  sorry
+
 end Hom
 end Algebra
