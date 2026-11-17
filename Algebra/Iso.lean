@@ -50,8 +50,18 @@ def symm (e : G ≃* H) : H ≃* G where
 def trans (e : G ≃* H) (e' : H ≃* K) : G ≃* K where
   toHom := e'.toHom.comp e.toHom
   invHom := e.invHom.comp e'.invHom
-  left_inv := sorry
-  right_inv := sorry
+  left_inv := by
+    rw [Hom.comp_assoc]
+    rw [← Hom.comp_assoc e'.invHom e'.toHom e.toHom]
+    rw [e'.left_inv]
+    rw [Hom.id_comp]
+    rw [e.left_inv]
+  right_inv := by
+    rw [Hom.comp_assoc]
+    rw [← Hom.comp_assoc e.toHom e.invHom e'.invHom]
+    rw [e.right_inv]
+    rw [Hom.id_comp]
+    rw [e'.right_inv]
 
 theorem injective (e : G ≃* H) : Function.Injective e.toHom :=
   sorry
