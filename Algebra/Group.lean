@@ -112,5 +112,16 @@ theorem inv_injective (a b : G) (h : a⁻¹ = b⁻¹) : a = b :=
    _ = b⁻¹⁻¹ := by rw [h]
    _ = b     := by rw [inv_inv]
 
+theorem mul_inv_eq_one (a b : G) : a * b⁻¹ = one ↔ a = b := by
+  constructor
+  · intro h
+    have h' := left_inv_unique b⁻¹ a h
+    rw [inv_inv] at h'
+    exact h'
+  · intro h
+    have h' := congrArg (· * b⁻¹) h
+    rw [mul_inv_cancel] at h'
+    exact h'
+
 end Group
 end Algebra
