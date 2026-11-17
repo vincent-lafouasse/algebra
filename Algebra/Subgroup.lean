@@ -168,11 +168,18 @@ theorem mem_map (f : G →* H) (S : Subgroup G) (b : H) :
 theorem mem_comap (f : G →* H) (T : Subgroup H) (a : G) :
     a ∈ comap f T ↔ f a ∈ T := Iff.rfl
 
-theorem ker_eq_comap_bot (f : G →* H) : ker f = comap f (Subgroup.bot H) :=
-  sorry
+theorem ker_eq_comap_bot (f : G →* H) : ker f = comap f (Subgroup.bot H) := by
+  ext a
+  rw [mem_ker]
+  rw [mem_comap]
+  rw [Subgroup.mem_bot]
 
-theorem range_eq_map_top (f : G →* H) : range f = map f (Subgroup.top G) :=
-  sorry
+theorem range_eq_map_top (f : G →* H) : range f = map f (Subgroup.top G) := by
+  ext a
+  rw [mem_range]
+  rw [mem_map]
+  simp only [Subgroup.mem_top]
+  simp only [true_and]
 
 end Hom
 end Algebra
