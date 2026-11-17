@@ -198,13 +198,11 @@ theorem ker_eq_bot_of_injective (f : G →* H) (hf : Function.Injective f) :
 -- a trivial kernel forces injectivity
 theorem injective_of_ker_eq_bot (f : G →* H) (h : ker f = Subgroup.bot G) :
     Function.Injective f := by
-  intro a b h'
-  have h'' := congrArg (· * f a⁻¹) h'
-  rw [← map_mul] at h''
-  rw [← map_mul] at h''
-  rw [mul_inv_cancel] at h''
-  rw [map_one] at h''
-  have hk : (b * a⁻¹) ∈ ker f := h''.symm
+  intro a b h_f_eq
+  have h' := congrArg (· * f a⁻¹) h_f_eq
+  rw [← map_mul, ← map_mul] at h'
+  rw [mul_inv_cancel, map_one] at h'
+  have hk : (b * a⁻¹) ∈ ker f := h'.symm
   rw [h] at hk
   rw [Subgroup.mem_bot] at hk
   rw [mul_inv_eq_one b a] at hk
