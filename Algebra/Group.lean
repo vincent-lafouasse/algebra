@@ -101,21 +101,15 @@ theorem inv_prod (a b : G) : (a * b)⁻¹ = b⁻¹ * a⁻¹ :=
 
 theorem mul_right_cancel (a b x : G) (h : a * x = b * x) : a = b :=
   calc a
-   _ = a * one       := by rw [mul_one]
-   _ = a * (x * x⁻¹) := by rw [mul_inv_cancel]
-   _ = (a * x) * x⁻¹ := by rw [mul_assoc]
+   _ = (a * x) * x⁻¹ := by rw [mul_inv_cancel_right]
    _ = (b * x) * x⁻¹ := by rw [h]
-   _ = b * (x * x⁻¹) := by rw [mul_assoc]
-   _ = b             := by rw [mul_inv_cancel, mul_one]
+   _ = b             := by rw [mul_inv_cancel_right]
 
 theorem mul_left_cancel (a b x : G) (h : x * a = x * b) : a = b :=
   calc a
-   _ = one * a       := by rw [one_mul]
-   _ = (x⁻¹ * x) * a := by rw [inv_mul_cancel]
-   _ = x⁻¹ * (x * a) := by rw [mul_assoc]
+   _ = x⁻¹ * (x * a) := by rw [inv_mul_cancel_left]
    _ = x⁻¹ * (x * b) := by rw [h]
-   _ = (x⁻¹ * x) * b := by rw [mul_assoc]
-   _ = b             := by rw [inv_mul_cancel, one_mul]
+   _ = b             := by rw [inv_mul_cancel_left]
 
 theorem inv_one : (one : G)⁻¹ = one :=
   have h := one_mul (one : G)
