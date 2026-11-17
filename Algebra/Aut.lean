@@ -49,7 +49,15 @@ theorem ext {e e' : G ≃* H} (h : e.toHom = e'.toHom) : e = e' := by
     | mk f' g' hl' hr' =>
       have eq : f = f' := h
       subst eq
-      sorry
+      have eq' : g = g' := by
+        calc g
+         _ = Hom.comp g (Hom.id H) := by rw [Hom.comp_id]
+         _ = Hom.comp g (f.comp g') := by rw [hr']
+         _ = Hom.comp (g.comp f) g' := by rw [Hom.comp_assoc]
+         _ = Hom.comp (Hom.id G) g' := by rw [hl]
+         _ = g' := by rw [Hom.id_comp]
+      subst eq'
+      rfl
 
 -- conjugation by g as an automorphism, with inverse conjugation by g⁻¹
 def conjIso (g : G) : G ≃* G :=
