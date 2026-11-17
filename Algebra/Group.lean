@@ -66,24 +66,24 @@ theorem right_one_unique (e : G) (h : ∀ a : G, a * e = a) : e = one :=
 theorem one_unique (e : G) (h : ∀ a : G, a * e = a ∧ e * a = a) : e = one :=
   left_one_unique e (fun a => (h a).2)
 
-theorem left_inv_unique (a b : G) (h : b * a = one) : b = a⁻¹ :=
+theorem left_inv_unique {a b : G} (h : b * a = one) : b = a⁻¹ :=
   calc b
    _ = (b * a) * a⁻¹   := by rw [mul_inv_cancel_right]
    _ = one * a⁻¹       := by rw [h]
    _ = a⁻¹             := by rw [one_mul]
 
 theorem inv_inv (a : G) : a⁻¹⁻¹ = a :=
-  (left_inv_unique a⁻¹ a (mul_inv_cancel a)).symm
+  (left_inv_unique (mul_inv_cancel a)).symm
 
 theorem right_inv_unique (a b : G) (h : a * b = one) : b = a⁻¹ :=
-  have h' : a = b⁻¹ := left_inv_unique b a h
+  have h' : a = b⁻¹ := left_inv_unique h
   calc b
    _ = b⁻¹⁻¹ := by rw [inv_inv]
    _ = a⁻¹   := by rw [h']
 
 -- redundant and trivial but satisfying to state
 theorem inv_unique (a b : G) (h : b * a = one ∧ a * b = one) : b = a⁻¹ :=
-  left_inv_unique a b h.1
+  left_inv_unique h.1
 
 theorem inv_prod (a b : G) : (a * b)⁻¹ = b⁻¹ * a⁻¹ :=
   -- tiny lemma: (b⁻¹ * a⁻¹) is the left inverse of (a * b)
@@ -92,7 +92,7 @@ theorem inv_prod (a b : G) : (a * b)⁻¹ = b⁻¹ * a⁻¹ :=
      _ = b⁻¹ * (a⁻¹ * (a * b)) := by rw [mul_assoc]
      _ = b⁻¹ * b               := by rw [inv_mul_cancel_left]
      _ = one                   := by rw [inv_mul_cancel]
-  (left_inv_unique (a * b) (b⁻¹ * a⁻¹) h).symm
+  (left_inv_unique h).symm
 
 theorem mul_right_cancel (a b x : G) (h : a * x = b * x) : a = b :=
   calc a
@@ -108,7 +108,7 @@ theorem mul_left_cancel (a b x : G) (h : x * a = x * b) : a = b :=
 
 theorem inv_one : (one : G)⁻¹ = one :=
   have h := one_mul (one : G)
-  (left_inv_unique one one h).symm
+  (left_inv_unique h).symm
 
 theorem inv_injective (a b : G) (h : a⁻¹ = b⁻¹) : a = b :=
   calc a
@@ -119,7 +119,7 @@ theorem inv_injective (a b : G) (h : a⁻¹ = b⁻¹) : a = b :=
 theorem mul_inv_eq_one (a b : G) : a * b⁻¹ = one ↔ a = b := by
   constructor
   · intro h
-    have h' := left_inv_unique b⁻¹ a h
+    have h' := left_inv_unique h
     rw [inv_inv] at h'
     exact h'
   · intro h

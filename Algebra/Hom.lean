@@ -34,7 +34,7 @@ theorem map_inv (f : G →* H) (a : G) : f a⁻¹ = (f a)⁻¹ :=
      _ = f (a⁻¹ * a) := by rw [map_mul]
      _ = f one := by rw [inv_mul_cancel]
      _ = one := by rw [map_one]
-  left_inv_unique (f a) (f a⁻¹) h
+  left_inv_unique h
 
 -- two homs are equal if they agree everywhere
 @[ext]
