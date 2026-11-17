@@ -92,8 +92,9 @@ theorem map_conj (f : G →* H) (g n : G) : f (g * n * g⁻¹) = f g * f n * (f 
 
 -- applying a hom written out as a structure literal
 theorem mk_apply (g : G → H) (h : ∀ a b : G, g (a * b) = g a * g b) (x : G) :
-    ({ toFun := g, map_mul := h } : G →* H) x = g x :=
-  sorry
+    ({ toFun := g, map_mul := h } : G →* H) x = g x := by
+  have hom := ({ toFun := g, map_mul := h } : G →* H)
+  rfl
 
 end Hom
 end Algebra
