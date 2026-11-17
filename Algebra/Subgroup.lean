@@ -157,7 +157,10 @@ def comap (f : G →* H) (T : Subgroup H) : Subgroup G where
     intro a b ha hb
     rw [map_mul]
     exact T.mul_mem ha hb
-  inv_mem := sorry
+  inv_mem := by
+    intro a ha
+    rw [map_inv]
+    exact T.inv_mem ha
 
 theorem mem_map (f : G →* H) (S : Subgroup G) (b : H) :
     b ∈ map f S ↔ ∃ a ∈ S, f a = b :=
