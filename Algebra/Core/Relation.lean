@@ -10,8 +10,7 @@ variable {α : Sort u} {r : α → α → Prop}
 -- the class of `a`: everything related to `a`
 def eqvClass (r : α → α → Prop) (a : α) : α → Prop := λ x => r a x
 
-theorem mem_eqvClass_self (h : Equivalence r) (a : α) : eqvClass r a a :=
-  sorry
+theorem mem_eqvClass_self (h : Equivalence r) (a : α) : eqvClass r a a := h.refl a
 
 theorem eqvClass_eq_iff (h : Equivalence r) (a b : α) :
     eqvClass r a = eqvClass r b ↔ r a b :=
