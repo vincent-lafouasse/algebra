@@ -98,8 +98,13 @@ theorem mul_toHom (e e' : G ≃* G) : (e * e').toHom = e.toHom.comp e'.toHom := 
 theorem conjIso_toHom (g : G) : (conjIso g).toHom = Hom.conj g := rfl
 
 -- g ↦ (conjugation by g)
-def conjHom : G →* (G ≃* G) :=
-  sorry
+def conjHom : G →* (G ≃* G) where
+  toFun := conjIso
+  map_mul := by
+    intro a b
+    apply ext
+    rw [conjIso_toHom, mul_toHom, conjIso_toHom, conjIso_toHom]
+    rw [Hom.conj_mul]
 
 theorem conjHom_apply (g x : G) : (conjHom g).toHom x = g * x * g⁻¹ :=
   sorry
