@@ -36,8 +36,17 @@ def center (G : Type u) [Group G] : Subgroup G where
   one_mem := by
     intro _
     rw [mul_one, one_mul]
-  mul_mem := sorry
-  inv_mem := sorry
+  mul_mem := by
+    intro a b ha hb g
+    calc g * (a * b)
+     _ = (g * a) * b := by rw [mul_assoc]
+     _ = (a * g) * b := by rw [ha]
+     _ = a * (g * b) := by rw [mul_assoc]
+     _ = a * (b * g) := by rw [hb]
+     _ = (a * b) * g := by rw [mul_assoc]
+  inv_mem := by
+    intro a ha g
+    sorry
 
 def bot (G : Type u) [Group G] : Subgroup G where
   mem := λ x => x = one
