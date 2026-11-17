@@ -32,6 +32,12 @@ theorem mem_leftCoset_iff (N : Subgroup G) (a x : G) :
     refine ⟨h, ?_⟩
     rw [mul_inv_cancel_left]
 
+theorem inv_mul_mem_swap (N : Subgroup G) {a b : G} (h : a⁻¹ * b ∈ N) : b⁻¹ * a ∈ N := by
+  have h' := N.inv_mem h
+  rw [inv_prod] at h'
+  rw [inv_inv] at h'
+  exact h'
+
 -- aN = bN ↔ a⁻¹b ∈ N
 theorem leftCoset_eq_iff (N : Subgroup G) (a b : G) :
     leftCoset a N = leftCoset b N ↔ a⁻¹ * b ∈ N := by
