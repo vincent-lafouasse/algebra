@@ -18,8 +18,7 @@ def conj (g : G) : G →* G where
     simp only [mul_assoc]
     rw [inv_mul_cancel_left]
 
-theorem conj_apply (g x : G) : conj g x = g * x * g⁻¹ :=
-  sorry
+theorem conj_apply (g x : G) : conj g x = g * x * g⁻¹ := rfl
 
 theorem conj_one : conj (one : G) = id G :=
   sorry
