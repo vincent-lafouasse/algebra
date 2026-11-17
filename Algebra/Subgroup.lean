@@ -132,7 +132,13 @@ def map (f : G →* H) (S : Subgroup G) : Subgroup H where
     refine ⟨S.one_mem, ?_⟩
     exact map_one f
   mul_mem := sorry
-  inv_mem := sorry
+  inv_mem := by
+    intro a ha
+    obtain ⟨x, hx⟩ := ha
+    refine ⟨x⁻¹, ?_⟩
+    refine ⟨S.inv_mem hx.1, ?_⟩
+    rw [map_inv]
+    exact (congrArg inv hx.2)
 
 -- preimage of a subgroup: φ⁻¹(T)
 def comap (f : G →* H) (T : Subgroup H) : Subgroup G :=
