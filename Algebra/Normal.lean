@@ -51,8 +51,18 @@ namespace Hom
 
 variable {G : Type u} {H : Type v} [Group G] [Group H]
 
-instance ker_normal (f : G →* H) : (ker f).Normal :=
-  sorry
+instance ker_normal (f : G →* H) : (ker f).Normal where
+  conj_mem := by
+    intro z hz g
+    rw [mem_ker f] at hz ⊢
+    calc f (g * z * g⁻¹)
+     _ = f (g * z) * f g⁻¹ := by rw [map_mul]
+     _ = f g * f z * f g⁻¹ := by rw [map_mul]
+     _ = f g * one * f g⁻¹ := by rw [hz]
+     _ = f g * f g⁻¹ := by rw [mul_one]
+     _ = f (g * g⁻¹) := by rw [map_mul]
+     _ = f one := by rw [mul_inv_cancel]
+     _ = one := by rw [map_one]
 
 end Hom
 end Algebra
