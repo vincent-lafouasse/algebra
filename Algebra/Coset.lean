@@ -94,21 +94,11 @@ theorem in_own_coset (N : Subgroup G) (b : G) : leftCoset b N b := by
 -- aN = bN ↔ a⁻¹b ∈ N
 theorem leftCoset_eq_iff (N : Subgroup G) (a b : G) :
     leftCoset a N = leftCoset b N ↔ a⁻¹ * b ∈ N := by
-  constructor
-  · intro e
-    have hb : leftCoset b N b := in_own_coset N b
-    rw [← e] at hb
-    rw [mem_leftCoset_iff] at hb
-    exact hb
-  · intro h_ainv_b
-    funext x
-    apply propext
-    constructor
-    · intro h
-      rw [← mem_leftCoset_iff] at h_ainv_b
-      sorry
-    · intro h
-      sorry
+  rw [← mem_leftCoset_iff]
+  rw [leftCoset_eq_eqvClass, leftCoset_eq_eqvClass]
+  rw [eqvClass_eq_iff (leftRel_equivalence N) a b]
+  unfold eqvClass
+  rfl
 
 -- the book's definition: N is normal iff aN = Na for every a
 theorem normal_iff_cosets (N : Subgroup G) :
