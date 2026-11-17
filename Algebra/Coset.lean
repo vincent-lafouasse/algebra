@@ -74,7 +74,7 @@ theorem mem_leftCoset_iff (N : Subgroup G) (a x : G) :
   rw [← leftRel_iff]
   rw [mem_eqvClass_iff]
 
-theorem in_own_coset (N : Subgroup G) (b : G) : leftCoset b N b := by
+theorem mem_leftCoset_self (N : Subgroup G) (b : G) : leftCoset b N b := by
   rw [leftCoset_eq_eqvClass]
   exact mem_eqvClass_self (leftRel_equivalence N) b
 
