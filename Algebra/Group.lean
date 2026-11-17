@@ -74,9 +74,7 @@ theorem inv_inv (a : G) : a⁻¹⁻¹ = a :=
 
 theorem left_inv_unique (a b : G) (h : b * a = one) : b = a⁻¹ :=
   calc b
-   _ = b * one         := by rw [mul_one]
-   _ = b * (a * a⁻¹)   := by rw [mul_inv_cancel]
-   _ = (b * a) * a⁻¹   := by rw [mul_assoc]
+   _ = (b * a) * a⁻¹   := by rw [mul_inv_cancel_right]
    _ = one * a⁻¹       := by rw [h]
    _ = a⁻¹             := by rw [one_mul]
 
