@@ -23,10 +23,19 @@ def leftRel (N : Subgroup G) : G → G → Prop := λ a b => a⁻¹ * b ∈ N
 theorem leftCoset_eq_eqvClass (N : Subgroup G) (a : G) :
     leftCoset a N = eqvClass (leftRel N) a := by
   funext x
-  apply propext
-  unfold eqvClass
+  rw [mem_eqvClass_iff]
   unfold leftRel
-  sorry
+  unfold leftCoset
+  apply propext
+  constructor
+  · intro h
+    obtain ⟨z, hz⟩ := h
+    rw [eq_inv_mul_of_mul_eq hz.2.symm] at hz
+    exact hz.1
+  · intro h
+    refine ⟨a⁻¹ * x, ?_⟩
+    refine ⟨h, ?_⟩
+    rw [mul_inv_cancel_left]
 
 theorem leftRel_iff (N : Subgroup G) (a b : G) : leftRel N a b ↔ a⁻¹ * b ∈ N := by
   constructor
