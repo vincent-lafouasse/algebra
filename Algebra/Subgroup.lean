@@ -31,6 +31,14 @@ theorem ext {S T : Subgroup G} (h : ∀ a, a ∈ S ↔ a ∈ T) : S = T := by
       subst e
       rfl
 
+def center (G : Type u) [Group G] : Subgroup G where
+  mem := λ x => ∀ g : G, g * x = x * g
+  one_mem := by
+    intro _
+    rw [mul_one, one_mul]
+  mul_mem := sorry
+  inv_mem := sorry
+
 def bot (G : Type u) [Group G] : Subgroup G where
   mem := λ x => x = one
   one_mem := rfl
