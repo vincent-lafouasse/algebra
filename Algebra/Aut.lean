@@ -76,15 +76,15 @@ instance : Group (G ≃* G) where
   inv e := e.symm
   mul_assoc := by
     intro a b c
+    show c.trans (b.trans a) = (c.trans b).trans a
     apply ext
-    show (c.trans (b.trans a)).toHom = ((c.trans b).trans a).toHom
     rw [trans_toHom, trans_toHom, trans_toHom, trans_toHom]
     ext x
     rw [Hom.comp_apply, Hom.comp_apply, Hom.comp_apply, Hom.comp_apply]
   one_mul := by
     intro a
+    show (a.trans (refl G)) = a
     apply ext
-    show (a.trans (refl G)).toHom = a.toHom
     rw [trans_toHom]
     rw [refl_toHom]
     rw [Hom.id_comp]
