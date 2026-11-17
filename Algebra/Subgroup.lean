@@ -98,8 +98,7 @@ theorem inv_mem_iff (S : Subgroup G) (a : G) : a⁻¹ ∈ S ↔ a ∈ S := by
 theorem mul_mem_cancel_left {S : Subgroup G} {a b : G} (ha : a ∈ S) : a * b ∈ S ↔ b ∈ S := by
   constructor
   · intro hab
-    have ha_inv := ha
-    rw [← inv_mem_iff S a] at ha_inv
+    have ha_inv := S.inv_mem ha
     have h := S.mul_mem ha_inv hab
     rw [Group.inv_mul_cancel_left] at h
     exact h
