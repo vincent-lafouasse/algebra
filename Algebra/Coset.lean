@@ -88,9 +88,8 @@ theorem inv_mul_mem_swap (N : Subgroup G) {a b : G} (h : a⁻¹ * b ∈ N) : b�
   exact h'
 
 theorem in_own_coset (N : Subgroup G) (b : G) : leftCoset b N b := by
-  rw [mem_leftCoset_iff]
-  rw [inv_mul_cancel]
-  exact N.one_mem
+  rw [leftCoset_eq_eqvClass]
+  exact mem_eqvClass_self (leftRel_equivalence N) b
 
 -- aN = bN ↔ a⁻¹b ∈ N
 theorem leftCoset_eq_iff (N : Subgroup G) (a b : G) :
