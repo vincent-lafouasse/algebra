@@ -106,7 +106,7 @@ theorem inv_one : (one : G)⁻¹ = one :=
   have h := one_mul (one : G)
   (left_inv_unique one one h).symm
 
-theorem inv_cancel (a b : G) (h : a⁻¹ = b⁻¹) : a = b :=
+theorem inv_injective (a b : G) (h : a⁻¹ = b⁻¹) : a = b :=
   calc a
    _ = a⁻¹⁻¹ := by rw [inv_inv]
    _ = b⁻¹⁻¹ := by rw [h]
