@@ -77,7 +77,7 @@ theorem inv_prod (a b : G) : (a * b)⁻¹ = b⁻¹ * a⁻¹ :=
   have h : (b⁻¹ * a⁻¹) * (a * b) = one :=
     calc (b⁻¹ * a⁻¹) * (a * b)
      _ = b⁻¹ * (a⁻¹ * (a * b)) := by rw [mul_assoc]
-     _ = b⁻¹ * ((a⁻¹ * a) * b) := by rw [mul_assoc a⁻¹ a b] 
+     _ = b⁻¹ * ((a⁻¹ * a) * b) := by rw [mul_assoc a⁻¹ a b]
      _ = b⁻¹ * (one * b)       := by rw [inv_mul_cancel]
      _ = b⁻¹ * b               := by rw [one_mul]
      _ = one                   := by rw [inv_mul_cancel]
