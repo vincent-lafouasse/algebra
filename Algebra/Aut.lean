@@ -60,8 +60,21 @@ theorem ext {e e' : G ≃* H} (h : e.toHom = e'.toHom) : e = e' := by
       rfl
 
 -- conjugation by g as an automorphism, with inverse conjugation by g⁻¹
-def conjIso (g : G) : G ≃* G :=
-  sorry
+def conjIso (g : G) : G ≃* G where
+  toHom := Hom.conj g
+  invHom := Hom.conj g⁻¹
+  left_inv := by
+    ext x
+    rw [Hom.comp_apply, Hom.conj_apply, Hom.conj_apply, Hom.id_apply]
+    simp only [mul_assoc]
+    rw [mul_inv_cancel, mul_one]
+    rw [inv_mul_cancel_left]
+  right_inv := by
+    ext x
+    rw [Hom.comp_apply, Hom.conj_apply, Hom.conj_apply, Hom.id_apply]
+    simp only [mul_assoc]
+    rw [inv_mul_cancel, mul_one]
+    rw [mul_inv_cancel_left]
 
 -- Aut(G): automorphisms under composition; (e * e') x = e (e' x)
 instance : Group (G ≃* G) where
