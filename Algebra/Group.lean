@@ -42,7 +42,7 @@ theorem right_one_unique (e : G) (h : ∀ a : G, a * e = a) : e = one :=
    _ = one * e := by rw [one_mul e]
    _ = one     := by rw [h]
 
--- redudant and trivial but satisfying to state
+-- redundant and trivial but satisfying to state
 theorem one_unique (e : G) (h : ∀ a : G, a * e = a ∧ e * a = a) : e = one :=
   left_one_unique e (fun a => (h a).2)
 
@@ -68,7 +68,7 @@ theorem right_inv_unique (a b : G) (h : a * b = one) : b = a⁻¹ :=
    _ = b⁻¹⁻¹ := by rw [inv_inv]
    _ = a⁻¹   := by rw [h']
 
--- redudant and trivial but satisfying to state
+-- redundant and trivial but satisfying to state
 theorem inv_unique (a b : G) (h : b * a = one ∧ a * b = one) : b = a⁻¹ :=
   left_inv_unique a b h.1
 
