@@ -20,6 +20,10 @@ theorem Normal.conj_mem' (N : Subgroup G) [N.Normal] (n : G) (hn : n ∈ N) (g :
   rw [inv_inv] at h
   exact h
 
+-- the key lemma for the quotient group: b * a = b * (a * b) * b⁻¹
+theorem Normal.mem_comm (N : Subgroup G) [N.Normal] {a b : G} (h : a * b ∈ N) : b * a ∈ N :=
+  sorry
+
 instance center_normal : (center G).Normal where
   conj_mem := by
     intro z hz g

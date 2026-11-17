@@ -122,5 +122,26 @@ theorem mul_inv_eq_one (a b : G) : a * b⁻¹ = one ↔ a = b := by
     rw [mul_inv_cancel] at h'
     exact h'
 
+-- mirror of `mul_inv_eq_one`; this is the shape of the coset relation `a⁻¹ * b ∈ N`
+theorem inv_mul_eq_one (a b : G) : a⁻¹ * b = one ↔ a = b :=
+  sorry
+
+-- iff version of `inv_injective`
+theorem inv_inj (a b : G) : a⁻¹ = b⁻¹ ↔ a = b :=
+  sorry
+
+-- one-step cancellations: each replaces a mul_assoc / cancel / one_mul calc
+theorem inv_mul_cancel_left (a b : G) : a⁻¹ * (a * b) = b :=
+  sorry
+
+theorem mul_inv_cancel_left (a b : G) : a * (a⁻¹ * b) = b :=
+  sorry
+
+theorem mul_inv_cancel_right (a b : G) : a * b * b⁻¹ = a :=
+  sorry
+
+theorem inv_mul_cancel_right (a b : G) : a * b⁻¹ * b = a :=
+  sorry
+
 end Group
 end Algebra

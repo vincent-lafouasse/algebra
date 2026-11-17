@@ -85,6 +85,16 @@ theorem mem_top (a : G) : a ∈ top G ↔ True := Iff.rfl
 
 theorem mem_inter (S T : Subgroup G) (a : G) : a ∈ inter S T ↔ a ∈ S ∧ a ∈ T := Iff.rfl
 
+theorem inv_mem_iff (S : Subgroup G) (a : G) : a⁻¹ ∈ S ↔ a ∈ S :=
+  sorry
+
+-- multiplying by a member doesn't change membership
+theorem mul_mem_cancel_left (S : Subgroup G) {a b : G} (ha : a ∈ S) : a * b ∈ S ↔ b ∈ S :=
+  sorry
+
+theorem mul_mem_cancel_right (S : Subgroup G) {a b : G} (hb : b ∈ S) : a * b ∈ S ↔ a ∈ S :=
+  sorry
+
 end Subgroup
 
 namespace Hom
