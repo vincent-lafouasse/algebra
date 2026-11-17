@@ -87,8 +87,14 @@ def ker (f : Hom G H) : Subgroup G where
     rw [ha]
 
 
-def range (f : Hom G H) : Subgroup H :=
-  sorry
+def range (f : Hom G H) : Subgroup H where
+  mem := λ y : H => ∃ x : G, f x = y
+  one_mem := ⟨one, map_one f⟩
+  mul_mem := sorry
+  inv_mem := by
+    intro a ha
+    obtain ⟨x, hx⟩ := ha
+    sorry
 
 theorem mem_ker (f : Hom G H) (a : G) : a ∈ ker f ↔ f a = one :=
   sorry
