@@ -99,8 +99,9 @@ def range (f : Hom G H) : Subgroup H where
     rw [map_inv]
     rw [hx]
 
-theorem mem_ker (f : Hom G H) (a : G) : a ∈ ker f ↔ f a = one :=
-  sorry
+theorem mem_ker (f : Hom G H) (a : G) : a ∈ ker f ↔ f a = one := by
+  rw [Subgroup.mem_iff]
+  rfl
 
 end Hom
 end Algebra
