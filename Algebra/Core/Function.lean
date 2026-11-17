@@ -10,6 +10,12 @@ def Bijective (f : α → β) : Prop := Function.Injective f ∧ Function.Surjec
 -- careful with core's naming: `Function.RightInverse g f` means `∀ y, f (g y) = y`
 -- i.e. g is a right inverse *of f*. `#print` them before starting.
 
+-- the contrapositive form: distinct inputs give distinct outputs
+-- (the ← direction needs classical logic: `Classical.byContradiction`)
+theorem injective_iff_ne (f : α → β) :
+    Function.Injective f ↔ ∀ a b : α, a ≠ b → f a ≠ f b :=
+  sorry
+
 -- the → direction needs `Classical.choose`, like `Iso.invFun`
 theorem surjective_iff_hasRightInverse (f : α → β) :
     Function.Surjective f ↔ ∃ g : β → α, Function.RightInverse g f :=
