@@ -40,8 +40,11 @@ def refl (G : Type u) [Group G] : G ≃* G where
     rw [Hom.comp_id]
 
 -- G ≅ H → H ≅ G
-def symm (e : G ≃* H) : H ≃* G :=
-  sorry
+def symm (e : G ≃* H) : H ≃* G where
+  toHom := e.invHom
+  invHom := e.toHom
+  left_inv := e.right_inv
+  right_inv := e.left_inv
 
 -- G ≅ H → H ≅ K → G ≅ K
 def trans (e : G ≃* H) (e' : H ≃* K) : G ≃* K :=
