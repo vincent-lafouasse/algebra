@@ -138,8 +138,7 @@ theorem inv_mul_eq_one (a b : G) : a⁻¹ * b = one ↔ a = b := by
     rw [mul_inv_cancel_left, mul_inv_cancel_left] at h'
     exact h'
   · intro h
-    have h' := congrArg (a⁻¹ * ·) h.symm
-    exact h'
+    rw [h]
 
 theorem inv_inj (a b : G) : a⁻¹ = b⁻¹ ↔ a = b := by
   constructor
