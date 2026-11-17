@@ -75,12 +75,9 @@ theorem map_normal (f : G →* H) (hf : Function.Surjective f)
     intro h g
     obtain ⟨a, ha⟩ := h
     obtain ⟨x, hx⟩ := hf g
-    rw [← hx]
-    rw [← ha.2]
-    rw [← map_inv]
-    rw [← map_mul]
-    rw [← map_mul]
     refine ⟨x * a * x⁻¹, ?_⟩
+    rw [← hx, ← ha.2]
+    rw [← map_conj]
     refine ⟨?_, rfl⟩
     exact Subgroup.Normal.conj_mem a ha.1 x
 
