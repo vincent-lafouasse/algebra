@@ -71,7 +71,6 @@ instance ker_normal (f : G →* H) : (ker f).Normal where
 
 -- needs surjectivity, so it can't be an instance
 theorem map_normal (f : G →* H) (hf : Function.Surjective f)
-
     (S : Subgroup G) [S.Normal] : (map f S).Normal where
   conj_mem := by
     intro n
