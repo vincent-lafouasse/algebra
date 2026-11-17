@@ -88,7 +88,13 @@ instance : Group (G ≃* G) where
     rw [trans_toHom, trans_toHom, trans_toHom, trans_toHom]
     ext x
     rw [Hom.comp_apply, Hom.comp_apply, Hom.comp_apply, Hom.comp_apply]
-  one_mul := sorry
+  one_mul := by
+    intro a
+    apply ext
+    show (a.trans (refl G)).toHom = a.toHom
+    rw [trans_toHom]
+    show (Hom.id G).comp a.toHom = a.toHom
+    rw [Hom.id_comp]
   inv_mul_cancel := sorry
 
 -- g ↦ (conjugation by g)
