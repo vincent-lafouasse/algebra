@@ -125,8 +125,14 @@ theorem mem_ker (f : G →* H) (a : G) : a ∈ ker f ↔ f a = one := Iff.rfl
 theorem mem_range (f : G →* H) (b : H) : b ∈ range f ↔ ∃ a : G, f a = b := Iff.rfl
 
 -- image of a subgroup: φ(S)
-def map (f : G →* H) (S : Subgroup G) : Subgroup H :=
-  sorry
+def map (f : G →* H) (S : Subgroup G) : Subgroup H where
+  mem := λ y : H => ∃ x ∈ S, f x = y
+  one_mem := by
+    refine ⟨one, ?_⟩
+    refine ⟨S.one_mem, ?_⟩
+    exact map_one f
+  mul_mem := sorry
+  inv_mem := sorry
 
 -- preimage of a subgroup: φ⁻¹(T)
 def comap (f : G →* H) (T : Subgroup H) : Subgroup G :=
