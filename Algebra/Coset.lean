@@ -33,13 +33,15 @@ theorem leftRel_refl {N : Subgroup G} (x : G) : leftRel N x x := by
   rw [inv_mul_cancel]
   exact N.one_mem
 
+theorem leftRel_symm {N : Subgroup G} {x y : G} (h : leftRel N x y) : leftRel N y x := sorry
+
 #print Equivalence
 
 -- reflexive: one_mem, symmetric: inv_mem + inv_prod, transitive: mul_mem
 theorem leftRel_equivalence (N : Subgroup G) : Equivalence (leftRel N) :=
   {
     refl := leftRel_refl
-    symm := sorry
+    symm := leftRel_symm
     trans := sorry
   }
 
