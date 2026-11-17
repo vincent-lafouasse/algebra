@@ -65,11 +65,9 @@ def conjIso (g : G) : G ≃* G where
     rw [inv_mul_cancel]
     rw [Hom.conj_one]
   right_inv := by
-    ext x
-    rw [Hom.comp_apply, Hom.conj_apply, Hom.conj_apply, Hom.id_apply]
-    simp only [mul_assoc]
-    rw [inv_mul_cancel, mul_one]
-    rw [mul_inv_cancel_left]
+    rw [← Hom.conj_mul]
+    rw [mul_inv_cancel]
+    rw [Hom.conj_one]
 
 -- Aut(G): automorphisms under composition; (e * e') x = e (e' x)
 instance : Group (G ≃* G) where
