@@ -12,6 +12,8 @@ def eqvClass (r : α → α → Prop) (a : α) : α → Prop := λ x => r a x
 
 theorem mem_eqvClass_self (h : Equivalence r) (a : α) : eqvClass r a a := h.refl a
 
+theorem mem_eqvClass_iff (r : α → α → Prop) (a x : α) : eqvClass r a x ↔ r a x := Iff.rfl
+
 theorem eqvClass_eq_iff (h : Equivalence r) (a b : α) :
     eqvClass r a = eqvClass r b ↔ r a b := by
   constructor
