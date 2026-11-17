@@ -67,7 +67,7 @@ namespace Hom
 
 variable {G : Type u} {H : Type v} [Group G] [Group H]
 
-def ker (f : Hom G H) : Subgroup G where
+def ker (f : G →* H) : Subgroup G where
   mem := λ x => f x = one
   one_mem := map_one f
   mul_mem := by
@@ -82,7 +82,7 @@ def ker (f : Hom G H) : Subgroup G where
     rw [ha]
 
 
-def range (f : Hom G H) : Subgroup H where
+def range (f : G →* H) : Subgroup H where
   mem := λ y : H => ∃ x : G, f x = y
   one_mem := ⟨one, map_one f⟩
   mul_mem := by
@@ -99,7 +99,7 @@ def range (f : Hom G H) : Subgroup H where
     rw [map_inv]
     rw [hx]
 
-theorem mem_ker (f : Hom G H) (a : G) : a ∈ ker f ↔ f a = one := by
+theorem mem_ker (f : G →* H) (a : G) : a ∈ ker f ↔ f a = one := by
   rw [Subgroup.mem_iff]
   rfl
 
