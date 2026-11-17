@@ -22,7 +22,12 @@ theorem eqvClass_eq_iff (h : Equivalence r) (a b : α) :
     exact h.refl b
   · intro hab
     funext x
-    sorry
+    apply propext
+    constructor
+    · intro e
+      exact h.trans (h.symm hab) e
+    · intro e
+      exact h.trans hab e
 
 -- two classes that share an element are equal → classes partition α
 theorem eqvClass_eq_of_mem (h : Equivalence r) {a b x : α}
