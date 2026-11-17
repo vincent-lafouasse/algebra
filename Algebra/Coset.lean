@@ -34,8 +34,23 @@ theorem mem_leftCoset_iff (N : Subgroup G) (a x : G) :
 
 -- aN = bN ↔ a⁻¹b ∈ N
 theorem leftCoset_eq_iff (N : Subgroup G) (a b : G) :
-    leftCoset a N = leftCoset b N ↔ a⁻¹ * b ∈ N :=
-  sorry
+    leftCoset a N = leftCoset b N ↔ a⁻¹ * b ∈ N := by
+  constructor
+  · intro e
+    have hb : leftCoset b N b := by
+      rw [leftCoset]
+      refine ⟨one, ?_⟩
+      refine ⟨N.one_mem, ?_⟩
+      rw [mul_one]
+    rw [← e] at hb
+    rw [leftCoset] at hb
+    obtain ⟨z, hbz⟩ := hb
+    rw [hbz.2]
+    rw [inv_mul_cancel_left]
+    exact hbz.1
+  · intro h_ainv_b
+    funext x
+    sorry
 
 -- the book's definition: N is normal iff aN = Na for every a
 theorem normal_iff_cosets (N : Subgroup G) :
