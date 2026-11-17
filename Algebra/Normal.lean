@@ -87,15 +87,14 @@ theorem map_normal (f : G →* H) (hf : Function.Surjective f)
     refine ⟨?_, rfl⟩
     exact Subgroup.Normal.conj_mem a ha.1 x
 
-
 instance comap_normal (f : G →* H) (T : Subgroup H) [T.Normal] :
     (comap f T).Normal where
-    conj_mem := by
-      intro n hn g
-      simp only [mem_comap]
-      simp only [map_mul]
-      simp only [map_inv]
-      exact Subgroup.Normal.conj_mem (f n) hn (f g)
+  conj_mem := by
+    intro n hn g
+    simp only [mem_comap]
+    simp only [map_mul]
+    simp only [map_inv]
+    exact Subgroup.Normal.conj_mem (f n) hn (f g)
 
 end Hom
 end Algebra
