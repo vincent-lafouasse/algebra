@@ -29,4 +29,42 @@ theorem eqvClass_eq_of_mem (h : Equivalence r) {a b x : α}
     (ha : eqvClass r a x) (hb : eqvClass r b x) : eqvClass r a = eqvClass r b :=
   sorry
 
+-- a partition of α: a collection of blocks (predicates on α)
+structure Partition (α : Sort u) where
+  block : (α → Prop) → Prop                                     -- "B is one of the blocks"
+  nonempty : ∀ B, block B → ∃ x, B x                            -- no empty blocks
+  cover : ∀ x, ∃ B, block B ∧ B x                               -- every element is in a block
+  disjoint : ∀ B C, block B → block C → ∀ x, B x → C x → B = C  -- overlapping blocks are equal
+
+namespace Partition
+
+-- partitions are determined by their blocks (the other fields are proofs)
+@[ext]
+theorem ext {P Q : Partition α} (h : P.block = Q.block) : P = Q :=
+  sorry
+
+-- equivalence relation → partition: the blocks are the classes
+def ofEquivalence {r : α → α → Prop} (h : Equivalence r) : Partition α where
+  block := λ B => ∃ a, B = eqvClass r a
+  nonempty := sorry
+  cover := sorry
+  disjoint := sorry
+
+-- partition → relation: x ~ y iff they share a block
+def rel (P : Partition α) : α → α → Prop := λ x y => ∃ B, P.block B ∧ B x ∧ B y
+
+theorem rel_equivalence (P : Partition α) : Equivalence P.rel :=
+  sorry
+
+-- the two constructions are inverse to each other
+theorem rel_ofEquivalence {r : α → α → Prop} (h : Equivalence r) :
+    (ofEquivalence h).rel = r :=
+  sorry
+
+theorem ofEquivalence_rel (P : Partition α) :
+    ofEquivalence (rel_equivalence P) = P :=
+  sorry
+
+end Partition
+
 end Algebra
