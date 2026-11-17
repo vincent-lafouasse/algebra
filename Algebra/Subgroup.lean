@@ -36,15 +36,10 @@ def bot (G : Type u) [Group G] : Subgroup G where
   one_mem := rfl
   mul_mem := by
     intro a b ha hb
-    calc a * b
-     _ = one * b := by rw [ha]
-     _ = b := by rw [one_mul]
-     _ = one := by rw [hb]
+    rw [ha, hb, mul_one]
   inv_mem := by
     intro a ha
-    calc a⁻¹
-     _ = inv one := by rw [ha]
-     _ = one := by rw [inv_one]
+    rw [ha, inv_one]
 
 def top (G : Type u) [Group G] : Subgroup G where
   mem := λ _ => True
