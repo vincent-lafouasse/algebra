@@ -89,17 +89,15 @@ def range (f : Hom G H) : Subgroup H where
     intro a b ha hb
     obtain ⟨xa, hxa⟩ := ha
     obtain ⟨xb, hxb⟩ := hb
-    exact ⟨xa * xb, by
-      rw [map_mul]
-      rw [hxa, hxb]
-    ⟩
+    refine ⟨xa * xb, ?_⟩
+    rw [map_mul]
+    rw [hxa, hxb]
   inv_mem := by
     intro _a ha
     obtain ⟨x, hx⟩ := ha
-    exact ⟨x⁻¹, by
-      rw [map_inv]
-      rw [hx]
-    ⟩
+    refine ⟨x⁻¹, ?_⟩
+    rw [map_inv]
+    rw [hx]
 
 theorem mem_ker (f : Hom G H) (a : G) : a ∈ ker f ↔ f a = one :=
   sorry
