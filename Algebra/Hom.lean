@@ -51,6 +51,8 @@ def id (G : Type u) [Group G] : G →* G where
   toFun := λ x => x
   map_mul := λ _a _b => rfl
 
+theorem id_apply (x : G) : id G x = x := rfl
+
 def comp (g : H →* K) (f : G →* H) : G →* K where
   toFun := λ x => g (f x)
   map_mul := λ a b =>
