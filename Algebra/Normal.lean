@@ -21,8 +21,11 @@ theorem Normal.conj_mem' {N : Subgroup G} [N.Normal] (n : G) (hn : n ∈ N) (g :
   exact h
 
 -- the key lemma for the quotient group: b * a = b * (a * b) * b⁻¹
-theorem Normal.mem_comm {N : Subgroup G} [N.Normal] {a b : G} (h : a * b ∈ N) : b * a ∈ N :=
-  sorry
+theorem Normal.mem_comm {N : Subgroup G} [N.Normal] {a b : G} (h : a * b ∈ N) : b * a ∈ N := by
+  have h' := conj_mem (a * b) h b
+  rw [mul_assoc b (a * b) b⁻¹] at h'
+  rw [mul_inv_cancel_right] at h'
+  exact h'
 
 instance center_normal : (center G).Normal where
   conj_mem := by
