@@ -21,7 +21,7 @@ theorem eqvClass_eq_iff (h : Equivalence r) (a b : α) :
     have hb := congrFun e b
     show eqvClass r a b
     rw [hb]
-    exact h.refl b
+    exact mem_eqvClass_self h b
   · intro hab
     funext x
     apply propext

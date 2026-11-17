@@ -22,6 +22,10 @@ def leftRel (N : Subgroup G) : G → G → Prop := λ a b => a⁻¹ * b ∈ N
 
 theorem leftCoset_eq_eqvClass (N : Subgroup G) (a : G) :
     leftCoset a N = eqvClass (leftRel N) a := by
+  funext x
+  apply propext
+  unfold eqvClass
+  unfold leftRel
   sorry
 
 theorem leftRel_iff (N : Subgroup G) (a b : G) : leftRel N a b ↔ a⁻¹ * b ∈ N := by
