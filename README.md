@@ -19,7 +19,7 @@ sense, so the code should feel familiar to Mathlib users.
 | `Algebra/Coset.lean` | left cosets as equivalence classes |
 | `Algebra/Quotient.lean` | quotient groups `G / N` |
 | `Algebra/SubgroupType.lean` | a subgroup as a group in its own right |
-| `Algebra/FirstIso.lean` | the first isomorphism theorem `G / ker f ≃* range f` (in progress) |
+| `Algebra/FirstIso.lean` | the first isomorphism theorem `G / ker f ≃* range f` |
 | `Algebra/Core/` | facts about functions and equivalence relations |
 | `Exercises/` | exercise sheets, stated with the library above |
 
@@ -34,7 +34,8 @@ Requires the toolchain in `lean-toolchain` (Lean 4.35.0). No dependencies.
 ## Status
 
 Work in progress. Unfinished statements are marked `sorry`; `lake build`
-lists them as warnings. Next milestone: the first isomorphism theorem.
+lists them as warnings. The first isomorphism theorem is done (`Hom.firstIso`,
+using only Lean's three built-in axioms).
 
 ## References
 
