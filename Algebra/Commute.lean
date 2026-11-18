@@ -61,7 +61,7 @@ theorem one_right (a : G) : Commute a one := by
 
 -- if a commutes with b and with c, it commutes with b * c
 theorem mul_right (hab : Commute a b) (hac : Commute a c) : Commute a (b * c) := by
-  rw [commute_iff_eq]
+  apply of_eq
   rw [mul_assoc]
   rw [← hac.eq]
   rw [← mul_assoc b a c]
@@ -73,7 +73,7 @@ theorem mul_left (hac : Commute a c) (hbc : Commute b c) : Commute (a * b) c := 
 
 -- move a factor across (`eq_inv_mul_iff_mul_eq` and friends)
 theorem inv_right (h : Commute a b) : Commute a b⁻¹ := by
-  rw [commute_iff_eq]
+  apply of_eq
   rw [eq_inv_mul_iff_mul_eq]
   rw [← mul_assoc]
   rw [mul_inv_eq_iff_eq_mul]
