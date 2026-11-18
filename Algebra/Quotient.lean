@@ -95,8 +95,12 @@ instance : Group (QuotientGroup N) where
   inv := qinv N
   mul_assoc := by
     intro a b c
-    show qmul N (qmul N a b) c = qmul N a (qmul N b c)
-    sorry
+    induction a using Quotient.ind
+    induction b using Quotient.ind
+    induction c using Quotient.ind
+    rename_i x y z
+    show mk N (x * y * z) = mk N (x * (y * z))
+    rw [mul_assoc]
   one_mul := sorry
   inv_mul_cancel := sorry
 
