@@ -156,8 +156,14 @@ theorem mem_center_iff_commute (x : G) : x ∈ center G ↔ ∀ g, Commute g x :
 
 -- the center is the intersection of all the centralizers
 theorem mem_center_iff_forall_mem_centralizer (x : G) :
-    x ∈ center G ↔ ∀ g, x ∈ centralizer g :=
-  sorry
+    x ∈ center G ↔ ∀ g, x ∈ centralizer g := by
+  constructor
+  · intro h g
+    rw [mem_centralizer_iff]
+    exact Commute.of_eq (h g)
+  · rw [Subgroup.mem_center]
+    intro h g
+    exact Commute.eq (h g)
 
 theorem center_le_centralizer (c : G) : ∀ x, x ∈ center G → x ∈ centralizer c :=
   sorry
