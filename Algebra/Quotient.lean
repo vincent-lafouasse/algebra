@@ -93,7 +93,10 @@ instance : Group (QuotientGroup N) where
   mul := qmul N
   one := mk N one
   inv := qinv N
-  mul_assoc := sorry
+  mul_assoc := by
+    intro a b c
+    show qmul N (qmul N a b) c = qmul N a (qmul N b c)
+    sorry
   one_mul := sorry
   inv_mul_cancel := sorry
 
