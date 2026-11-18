@@ -11,6 +11,7 @@ sense, so the code should feel familiar to Mathlib users.
 | File | Contents |
 |---|---|
 | `Algebra/Group.lean` | the `Group` class and basic lemmas (cancellation, inverses) |
+| `Algebra/Commute.lean` | commuting elements `Commute a b`, centralizers |
 | `Algebra/Pow.lean` | powers `g ^ n` (Nat and Int), the subgroup `zpowers g` |
 | `Algebra/Hom.lean` | homomorphisms `G →* H`, composition, `ext` |
 | `Algebra/Subgroup.lean` | subgroups, center, kernel, image, preimage |

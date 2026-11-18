@@ -1,4 +1,4 @@
-import Algebra.Subgroup
+import Algebra.Commute
 
 /-! # Powers
 
@@ -53,9 +53,39 @@ theorem one_pow' (n : Nat) : (one : G) ^ n = one := by
 theorem pow_succ' (g : G) (n : Nat) : g ^ (n + 1) = g ^ n * g :=
   sorry
 
--- g commutes with its own powers
-theorem pow_mul_comm (g : G) (n : Nat) : g ^ n * g = g * g ^ n :=
+end Group
+
+/-! ### Commuting with powers -/
+
+namespace Commute
+
+open Group
+
+variable {G : Type u} [Group G] {a b : G}
+
+-- induction on n, with `Commute.mul_left`
+theorem pow_left (h : Commute a b) (n : Nat) : Commute (a ^ n) b :=
   sorry
+
+theorem pow_right (h : Commute a b) (n : Nat) : Commute a (b ^ n) :=
+  sorry
+
+theorem pow_pow (h : Commute a b) (m n : Nat) : Commute (a ^ m) (b ^ n) :=
+  sorry
+
+-- g commutes with its own powers
+theorem self_pow (g : G) (n : Nat) : Commute g (g ^ n) :=
+  sorry
+
+-- (ab)^n = a^n b^n needs a and b to commute; false in general (try n = 2)
+theorem mul_pow (h : Commute a b) (n : Nat) : (a * b) ^ n = a ^ n * b ^ n :=
+  sorry
+
+end Commute
+
+namespace Group
+
+variable {G : Type u} [Group G]
 
 -- induction on m
 theorem pow_add (g : G) (m n : Nat) : g ^ (m + n) = g ^ m * g ^ n :=
@@ -66,11 +96,6 @@ theorem pow_mul (g : G) (m n : Nat) : g ^ (m * n) = (g ^ m) ^ n :=
   sorry
 
 theorem inv_pow (g : G) (n : Nat) : (g⁻¹) ^ n = (g ^ n)⁻¹ :=
-  sorry
-
--- (ab)^n = a^n b^n needs a and b to commute; false in general (try n = 2)
-theorem mul_pow_of_comm {a b : G} (h : a * b = b * a) (n : Nat) :
-    (a * b) ^ n = a ^ n * b ^ n :=
   sorry
 
 /-! ### Integer powers -/
