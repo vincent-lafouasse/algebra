@@ -67,7 +67,12 @@ theorem kerLiftHom_mk (a : G) : (kerLiftHom f (QuotientGroup.mk (ker f) a)).val 
   rfl
 
 -- injective: f a = f b → mk a = mk b (`eq_iff_mem_ker`, `mk_eq_mk_iff`)
-theorem kerLiftHom_injective : Function.Injective (kerLiftHom f) :=
+theorem kerLiftHom_injective : Function.Injective (kerLiftHom f) := by
+  intro a b eq
+  induction a using Quotient.ind
+  induction b using Quotient.ind
+  rename_i x y
+  show QuotientGroup.mk (ker f) x = QuotientGroup.mk (ker f) y
   sorry
 
 -- surjective: an element of range f is f a for some a, by definition
