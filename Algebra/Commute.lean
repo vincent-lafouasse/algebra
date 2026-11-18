@@ -56,9 +56,8 @@ variable {G : Type u} [Group G] {a b c : G}
 theorem one_left (a : G) : Commute one a :=
   of_eq (by rw [one_mul, mul_one])
 
-theorem one_right (a : G) : Commute a one := by
-  refine symm ?_
-  exact one_left a
+theorem one_right (a : G) : Commute a one :=
+  (one_left a).symm
 
 -- if a commutes with b and with c, it commutes with b * c
 theorem mul_right (hab : Commute a b) (hac : Commute a c) : Commute a (b * c) := by
@@ -69,9 +68,8 @@ theorem mul_right (hab : Commute a b) (hac : Commute a c) : Commute a (b * c) :=
   rw [← hab.eq]
   rw [mul_assoc]
 
-theorem mul_left (hac : Commute a c) (hbc : Commute b c) : Commute (a * b) c := by
-  refine symm ?_
-  exact mul_right hac.symm hbc.symm
+theorem mul_left (hac : Commute a c) (hbc : Commute b c) : Commute (a * b) c :=
+  (mul_right hac.symm hbc.symm).symm
 
 -- move a factor across (`eq_inv_mul_iff_mul_eq` and friends)
 theorem inv_right (h : Commute a b) : Commute a b⁻¹ := by
@@ -81,9 +79,8 @@ theorem inv_right (h : Commute a b) : Commute a b⁻¹ := by
   rw [mul_inv_eq_iff_eq_mul]
   exact h.symm.eq
 
-theorem inv_left (h : Commute a b) : Commute a⁻¹ b := by
-  refine symm ?_
-  exact inv_right h.symm
+theorem inv_left (h : Commute a b) : Commute a⁻¹ b :=
+  (inv_right h.symm).symm
 
 theorem inv_right_iff : Commute a b⁻¹ ↔ Commute a b := by
   constructor
