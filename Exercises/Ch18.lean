@@ -30,11 +30,23 @@ theorem ex_18_2 (G : Type u) [Group G] :
     ∃ Z : Subgroup G, ∀ h : G, h ∈ Z ↔ ∀ g : G, h * g = g * h := by
   have Z : Subgroup G := {
     mem := λ h => ∀ g : G, h * g = g * h
-    one_mem := sorry
-    mul_mem := sorry
+    one_mem := by
+      intro g
+      rw [mul_one, one_mul]
+    mul_mem := by
+      intro a b ha hb h
+      have hah := ha h
+      have hbh := hb h
+      rw [← mul_assoc]
+      rw [← hah]
+      rw [mul_assoc]
+      rw [hbh]
+      rw [mul_assoc]
     inv_mem := sorry
   }
-  refine ⟨Z, $_⟩
+  refine ⟨Z, ?_⟩
+  intro h
+  sorry
 
 /-! ## 18.3
 Soit G un groupe et H une partie de G. Montrer que H est un sous-groupe de G si, et
