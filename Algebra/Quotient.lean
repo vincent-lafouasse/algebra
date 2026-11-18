@@ -101,7 +101,12 @@ instance : Group (QuotientGroup N) where
     rename_i x y z
     show mk N (x * y * z) = mk N (x * (y * z))
     rw [mul_assoc]
-  one_mul := sorry
+  one_mul := by
+    intro a
+    induction a using Quotient.ind
+    rename_i x
+    show mk N (one * x) = mk N x
+    rw [one_mul]
   inv_mul_cancel := sorry
 
 /-! ### Computation lemmas: the API boundary (should all be `rfl` once qmul/qinv exist) -/
