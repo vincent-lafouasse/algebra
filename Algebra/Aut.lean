@@ -97,6 +97,8 @@ theorem mul_toHom (e e' : G ≃* G) : (e * e').toHom = e.toHom.comp e'.toHom := 
 
 theorem one_toHom : (one : G ≃* G).toHom = Hom.id G := rfl
 
+theorem inv_toHom (e : G ≃* G) : (e⁻¹).toHom = e.invHom := rfl
+
 theorem conjIso_toHom (g : G) : (conjIso g).toHom = Hom.conj g := rfl
 
 -- g ↦ (conjugation by g)
@@ -137,7 +139,7 @@ theorem ker_conjHom : Hom.ker (conjHom : G →* (G ≃* G)) = Subgroup.center G 
 
 -- inner automorphisms are normal in Aut(G): φ ∘ conj g ∘ φ⁻¹ = conj (φ g)
 theorem conj_by_aut (φ : G ≃* G) (g : G) :
-    φ * conjIso g * φ⁻¹ = conjIso (φ.toHom g) :=
+    φ * conjIso g * φ⁻¹ = conjIso (φ.toHom g) := by
   sorry
 
 instance range_conjHom_normal : (Hom.range (conjHom : G →* (G ≃* G))).Normal :=
