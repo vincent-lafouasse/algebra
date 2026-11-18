@@ -12,6 +12,9 @@ structure Hom (G : Type u) (H : Type v) [Group G] [Group H] where
 
 scoped infixr:25 " →* " => Hom
 
+-- display `f.toFun x` as `↑f x` in goals (printing only, proofs are unaffected)
+attribute [coe] Hom.toFun
+
 namespace Hom
 
 variable {G : Type u} {H : Type v} {K : Type w} {L : Type x}
