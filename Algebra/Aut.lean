@@ -151,8 +151,15 @@ theorem conj_by_aut (φ : G ≃* G) (g : G) :
   rw [Hom.map_conj]
   rw [toHom_invHom]
 
-instance range_conjHom_normal : (Hom.range (conjHom : G →* (G ≃* G))).Normal :=
-  sorry
+instance range_conjHom_normal : (Hom.range (conjHom : G →* (G ≃* G))).Normal where
+  conj_mem := by
+    intro n hn g
+    rw [Hom.mem_range]
+    rw [Hom.mem_range] at hn
+    obtain ⟨k, hnk⟩ := hn
+    refine ⟨g.toHom k, ?_⟩
+    rw [← hnk]
+    exact (conj_by_aut g k).symm
 
 end Iso
 
