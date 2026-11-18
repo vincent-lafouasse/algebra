@@ -80,11 +80,7 @@ theorem inv_right (h : Commute a b) : Commute a b⁻¹ := by
   exact h.symm.eq
 
 theorem inv_left (h : Commute a b) : Commute a⁻¹ b := by
-  rw [commute_iff_eq]
-  rw [eq_mul_inv_iff_mul_eq]
-  rw [mul_assoc]
-  rw [inv_mul_eq_iff_eq_mul]
-  exact h.eq.symm
+  exact (inv_right h.symm).symm
 
 theorem inv_right_iff : Commute a b⁻¹ ↔ Commute a b := by
   constructor
