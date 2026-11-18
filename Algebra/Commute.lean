@@ -128,8 +128,13 @@ variable {G : Type u} [Group G]
 def centralizer (c : G) : Subgroup G where
   mem := λ x => Commute c x
   one_mem := Commute.one_right c
-  mul_mem := sorry
-  inv_mem := sorry
+  mul_mem := by
+    intro a b hca hcb
+    sorry
+  inv_mem := by
+    intro a hca
+    have h := Commute.inv_right hca
+    exact h
 
 theorem mem_centralizer_iff (c x : G) : x ∈ centralizer c ↔ Commute c x :=
   sorry
