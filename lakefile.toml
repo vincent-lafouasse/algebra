@@ -1,6 +1,11 @@
 name = "algebra"
 version = "0.1.0"
-defaultTargets = ["Algebra"]
+defaultTargets = ["Algebra", "Exercises"]
 
+# the from-scratch library: never imports Mathlib
 [[lean_lib]]
 name = "Algebra"
+
+# exercise sheets, built on top of `Algebra`
+[[lean_lib]]
+name = "Exercises"

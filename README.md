@@ -19,6 +19,7 @@ sense, so the code should feel familiar to Mathlib users.
 | `Algebra/Coset.lean` | left cosets as equivalence classes |
 | `Algebra/Quotient.lean` | quotient groups `G / N` (in progress) |
 | `Algebra/Core/` | facts about functions and equivalence relations |
+| `Exercises/` | exercise sheets, stated with the library above |
 
 ## Building
 
