@@ -15,10 +15,11 @@ scoped infixr:25 " →* " => Hom
 -- display `f.toFun x` as `↑f x` in goals (printing only, proofs are unaffected)
 attribute [coe] Hom.toFun
 
-namespace Hom
-
+-- declared outside `namespace Hom`, so they survive closing and reopening it below
 variable {G : Type u} {H : Type v} {K : Type w} {L : Type x}
 variable [Group G] [Group H] [Group K] [Group L]
+
+namespace Hom
 
 instance : CoeFun (G →* H) (fun _ => G → H) where
   coe f := f.toFun
@@ -63,6 +64,17 @@ def comp (g : H →* K) (f : G →* H) : G →* K where
      _ = g (f a * f b) := by rw [map_mul]
      _ = g (f a) * g (f b) := by rw [map_mul]
 
+end Hom
+
+-- `g ∘* f` (typed `\o*`) is `Hom.comp g f`. Two scope rules decide where this goes:
+-- * names on the right are resolved here, when the notation is declared, so it must come
+--   after `def comp` (before it, `Hom.comp` would mean `Function.comp Hom`);
+-- * `scoped` attaches it to the current namespace, so it must sit in `My`, not `My.Hom`,
+--   to be active wherever `→*` is. Hence closing `Hom` for one line.
+scoped infixr:90 " ∘* " => Hom.comp
+
+namespace Hom
+
 theorem comp_apply (g : H →* K) (f : G →* H) (x : G) : comp g f x = g (f x) := rfl
 
 theorem id_comp (f : G →* H) : comp (Hom.id H) f = f :=
@@ -98,12 +110,4 @@ theorem mk_apply (g : G → H) (h : ∀ a b : G, g (a * b) = g a * g b) (x : G) 
     ({ toFun := g, map_mul := h } : G →* H) x = g x := rfl
 
 end Hom
-
--- `g ∘* f` (typed `\o*`) is `Hom.comp g f`. Two scope rules decide where this line goes:
--- * names on the right are resolved here, when the notation is declared, so it must come
---   after `def comp` (before it, `Hom.comp` would mean `Function.comp Hom`);
--- * `scoped` attaches it to the current namespace, so it must sit in `My`, not `My.Hom`,
---   to be active wherever `→*` is.
-scoped infixr:90 " ∘* " => Hom.comp
-
 end My
