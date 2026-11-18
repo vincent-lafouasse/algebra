@@ -28,8 +28,16 @@ theorem mul_rel {N : Subgroup G} [N.Normal] {a a' b b' : G}
 
 -- paper proof: (a⁻¹)⁻¹ a'⁻¹ = a a'⁻¹, and a'⁻¹a ∈ N (symmetry); use `Normal.mem_comm`
 theorem inv_rel {N : Subgroup G} [N.Normal] {a a' : G}
-    (ha : a⁻¹ * a' ∈ N) : a⁻¹⁻¹ * a'⁻¹ ∈ N :=
-  sorry
+    (ha : a⁻¹ * a' ∈ N) : a⁻¹⁻¹ * a'⁻¹ ∈ N := by
+  have h :=
+    calc a⁻¹⁻¹ * a'⁻¹
+     _ = a * a'⁻¹ := by rw [inv_inv]
+  rw [h]
+  have ha' := Normal.mem_comm ha
+  have ha'' := N.inv_mem ha'
+  rw [inv_prod] at ha''
+  rw [inv_inv] at ha''
+  exact ha''
 
 /-! ### Cosets as elements: any subgroup, no normality needed -/
 
