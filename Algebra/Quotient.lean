@@ -63,8 +63,12 @@ theorem mk_eq_mk_iff_leftCoset_eq (N : Subgroup G) (a b : G) :
   rw [leftCoset_eq_iff]
 
 -- every coset is the class of some element (`Quotient.ind` or `Quotient.exists_rep`)
-theorem mk_surjective (N : Subgroup G) : Function.Surjective (mk N) :=
-  sorry
+theorem mk_surjective (N : Subgroup G) : Function.Surjective (mk N) := by
+  intro (b : QuotientGroup  N)
+  obtain ⟨rep_b, hb⟩ := Quotient.exists_rep b
+  refine ⟨rep_b, ?_⟩
+  rw [← hb]
+  rfl
 
 /-! ### The operations -/
 
