@@ -75,9 +75,9 @@ scoped infixr:90 " ∘* " => Hom.comp
 
 namespace Hom
 
-theorem comp_apply (g : H →* K) (f : G →* H) (x : G) : comp g f x = g (f x) := rfl
+theorem comp_apply (g : H →* K) (f : G →* H) (x : G) : (g ∘* f) x = g (f x) := rfl
 
-theorem id_comp (f : G →* H) : comp (Hom.id H) f = f :=
+theorem id_comp (f : G →* H) : Hom.id H ∘* f = f :=
   -- pedestrian but clear
   have h : ∀ x : G, comp (Hom.id H) f x = f x :=
     λ x =>
