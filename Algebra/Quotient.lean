@@ -18,7 +18,12 @@ namespace QuotientGroup
 -- paper proof (write it here first):
 -- (ab)⁻¹(a'b') = b⁻¹ (a⁻¹a') b · b⁻¹b'  — conjugate of a⁻¹a' by b⁻¹, times b⁻¹b'
 theorem mul_rel {N : Subgroup G} [N.Normal] {a a' b b' : G}
-    (ha : a⁻¹ * a' ∈ N) (hb : b⁻¹ * b' ∈ N) : (a * b)⁻¹ * (a' * b') ∈ N :=
+    (ha : a⁻¹ * a' ∈ N) (hb : b⁻¹ * b' ∈ N) : (a * b)⁻¹ * (a' * b') ∈ N := by
+  have ha' := Normal.conj_mem'  (a⁻¹ * a')  ha b
+  have h := N.mul_mem ha' hb
+  simp only [mul_assoc] at h
+  rw [inv_prod]
+  simp only [mul_assoc]
   sorry
 
 -- paper proof: (a⁻¹)⁻¹ a'⁻¹ = a a'⁻¹, and a'⁻¹a ∈ N (symmetry); use `Normal.mem_comm`
