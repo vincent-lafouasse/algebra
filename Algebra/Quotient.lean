@@ -20,6 +20,12 @@ def mk (N : Subgroup G) (a : G) : QuotientGroup N := Quotient.mk (leftSetoid N) 
 theorem mk_eq_mk_iff (N : Subgroup G) (a b : G) : mk N a = mk N b ↔ a⁻¹ * b ∈ N :=
   sorry
 
+-- the quotient view agrees with the set view: equal in G / N ↔ equal as cosets
+-- (rewrite with `mk_eq_mk_iff` and `leftCoset_eq_iff`)
+theorem mk_eq_mk_iff_leftCoset_eq (N : Subgroup G) (a b : G) :
+    mk N a = mk N b ↔ leftCoset a N = leftCoset b N :=
+  sorry
+
 -- every coset is the class of some element (`Quotient.ind` or `Quotient.exists_rep`)
 theorem mk_surjective (N : Subgroup G) : Function.Surjective (mk N) :=
   sorry
