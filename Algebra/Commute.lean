@@ -135,8 +135,12 @@ def centralizer (c : G) : Subgroup G where
     intro _ hca
     exact Commute.inv_right hca
 
-theorem mem_centralizer_iff (c x : G) : x ∈ centralizer c ↔ Commute c x :=
-  sorry
+theorem mem_centralizer_iff (c x : G) : x ∈ centralizer c ↔ Commute c x := by
+  constructor
+  · intro h
+    exact h
+  · intro h
+    exact h
 
 theorem mem_centralizer_self (c : G) : c ∈ centralizer c :=
   sorry
