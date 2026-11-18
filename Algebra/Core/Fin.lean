@@ -22,6 +22,17 @@ def finSum (a b : Nat) : Fin a ⊕ Fin b ≃ Fin (a + b) :=
 def finProd (a b : Nat) : Fin a × Fin b ≃ Fin (a * b) :=
   sorry
 
+-- what the two equivalences compute, on `val`s (these pin down the formulas above)
+theorem finSum_inl (a b : Nat) (i : Fin a) : (finSum a b (Sum.inl i)).val = i.val :=
+  sorry
+
+theorem finSum_inr (a b : Nat) (j : Fin b) : (finSum a b (Sum.inr j)).val = a + j.val :=
+  sorry
+
+theorem finProd_apply (a b : Nat) (i : Fin a) (j : Fin b) :
+    (finProd a b (i, j)).val = i.val * b + j.val :=
+  sorry
+
 /-! ### Pigeonhole: the only fact about numbers we need -/
 
 -- induction on n; the step removes one point from the target (the hard part:
@@ -36,6 +47,9 @@ theorem eq_of_equiv {n m : Nat} (e : Fin n ≃ Fin m) : n = m :=
 
 -- α has exactly n elements
 def HasCard (α : Type u) (n : Nat) : Prop := Nonempty (α ≃ Fin n)
+
+theorem hasCard_iff (α : Type u) (n : Nat) : HasCard α n ↔ Nonempty (α ≃ Fin n) :=
+  sorry
 
 theorem HasCard.unique {α : Type u} {n m : Nat} (h : HasCard α n) (h' : HasCard α m) : n = m :=
   sorry

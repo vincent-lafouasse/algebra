@@ -13,6 +13,10 @@ variable {G : Type u} [Group G]
 class Normal (N : Subgroup G) : Prop where
   conj_mem : ∀ n : G, n ∈ N → ∀ g : G, g * n * g⁻¹ ∈ N
 
+-- the class as a statement: build an instance with `.mpr`, use one with `.mp`
+theorem normal_iff (N : Subgroup G) : N.Normal ↔ ∀ n : G, n ∈ N → ∀ g : G, g * n * g⁻¹ ∈ N :=
+  sorry
+
 -- conjugating the other way round also stays in N
 theorem Normal.conj_mem' {N : Subgroup G} [N.Normal] (n : G) (hn : n ∈ N) (g : G) :
     g⁻¹ * n * g ∈ N := by

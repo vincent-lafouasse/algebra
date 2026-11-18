@@ -124,5 +124,21 @@ def prodComm (α : Type u) (β : Type v) : α × β ≃ β × α :=
 def sumCongr (e : α ≃ α') (e' : β ≃ β') : α ⊕ β ≃ α' ⊕ β' :=
   sorry
 
+-- what they compute
+theorem prodCongr_apply (e : α ≃ α') (e' : β ≃ β') (p : α × β) :
+    prodCongr e e' p = (e p.1, e' p.2) :=
+  sorry
+
+theorem prodComm_apply (p : α × β) : prodComm α β p = (p.2, p.1) :=
+  sorry
+
+theorem sumCongr_inl (e : α ≃ α') (e' : β ≃ β') (x : α) :
+    sumCongr e e' (Sum.inl x) = Sum.inl (e x) :=
+  sorry
+
+theorem sumCongr_inr (e : α ≃ α') (e' : β ≃ β') (y : β) :
+    sumCongr e e' (Sum.inr y) = Sum.inr (e' y) :=
+  sorry
+
 end Equiv
 end My
