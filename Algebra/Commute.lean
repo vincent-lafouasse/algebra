@@ -129,12 +129,11 @@ def centralizer (c : G) : Subgroup G where
   mem := λ x => Commute c x
   one_mem := Commute.one_right c
   mul_mem := by
-    intro a b hca hcb
-    sorry
+    intro _ _ hca hcb
+    exact Commute.mul_right hca hcb
   inv_mem := by
-    intro a hca
-    have h := Commute.inv_right hca
-    exact h
+    intro _ hca
+    exact Commute.inv_right hca
 
 theorem mem_centralizer_iff (c x : G) : x ∈ centralizer c ↔ Commute c x :=
   sorry
