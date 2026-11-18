@@ -36,8 +36,8 @@ theorem eq (h : Commute a b) : a * b = b * a := by
 theorem refl (a : α) : Commute a a :=
   rfl
 
-theorem symm (h : Commute a b) : Commute b a :=
-  sorry
+theorem symm (h : Commute a b) : Commute b a := by
+  rw [commute_iff_eq, h]
 
 end Mul
 
@@ -47,11 +47,11 @@ open Group
 
 variable {G : Type u} [Group G] {a b c : G}
 
-theorem one_left (a : G) : Commute one a :=
-  sorry
+theorem one_left (a : G) : Commute one a := by
+  rw [commute_iff_eq, one_mul, mul_one]
 
-theorem one_right (a : G) : Commute a one :=
-  sorry
+theorem one_right (a : G) : Commute a one := by
+  rw [commute_iff_eq, one_mul, mul_one]
 
 -- if a commutes with b and with c, it commutes with b * c
 theorem mul_right (hab : Commute a b) (hac : Commute a c) : Commute a (b * c) :=
