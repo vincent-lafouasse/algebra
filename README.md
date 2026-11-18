@@ -38,18 +38,16 @@ is a development dependency, used only for linting.
 ## Linting
 
 ```
-lake lint
+scripts/lint.sh
 ```
 
-runs the nine default Batteries environment linters on `Algebra`: unused arguments,
-unused `have`s, missing docstrings on definitions, `simp` lemmas in bad form, tautological
-statements, ill-typed instances, and more. To configure:
+runs the default Batteries environment linters on `Algebra` (unused arguments, unused
+`have`s, `simp` lemmas in bad form, tautological statements, ill-typed instances, …) and
+ignores missing docstrings. To configure:
 
-- skip one declaration: `@[nolint docBlame]` (any linter name);
-- accept the current failures as a baseline: `lake exe runLinter --update Algebra`
-  writes them to `scripts/nolints.json`, and later runs only report new ones;
+- skip one declaration: `@[nolint unusedArguments]` (any linter name);
 - inside a file (after `import Batteries.Tactic.Lint`): `#lint`, `#lint only unusedArguments`,
-  `#lint docBlameThm` (adds a linter that is off by default), `#list_linters`.
+  `#list_linters`.
 
 ## Status
 
