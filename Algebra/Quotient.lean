@@ -140,7 +140,13 @@ theorem ker_mkHom : Hom.ker (mkHom N) = N := by
   constructor
   · intro h
     rw [Hom.mem_ker] at h
-    sorry
+    rw [mkHom_apply] at h
+    rw [mk_one] at h
+    rw [mk_eq_mk_iff] at h
+    rw [mul_one] at h
+    have h' := N.inv_mem h
+    rw [inv_inv] at h'
+    exact h'
   · intro h
     sorry
 
