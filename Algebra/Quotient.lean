@@ -13,6 +13,21 @@ def QuotientGroup (N : Subgroup G) : Type u := Quotient (leftSetoid N)
 
 namespace QuotientGroup
 
+/-! ### Well-definedness: pure group algebra, the only place normality is used -/
+
+-- paper proof (write it here first):
+-- (ab)⁻¹(a'b') = b⁻¹ (a⁻¹a') b · b⁻¹b'  — conjugate of a⁻¹a' by b⁻¹, times b⁻¹b'
+theorem mul_rel {N : Subgroup G} [N.Normal] {a a' b b' : G}
+    (ha : a⁻¹ * a' ∈ N) (hb : b⁻¹ * b' ∈ N) : (a * b)⁻¹ * (a' * b') ∈ N :=
+  sorry
+
+-- paper proof: (a⁻¹)⁻¹ a'⁻¹ = a a'⁻¹, and a'⁻¹a ∈ N (symmetry); use `Normal.mem_comm`
+theorem inv_rel {N : Subgroup G} [N.Normal] {a a' : G}
+    (ha : a⁻¹ * a' ∈ N) : a⁻¹⁻¹ * a'⁻¹ ∈ N :=
+  sorry
+
+/-! ### Cosets as elements: any subgroup, no normality needed -/
+
 -- the class of a in G / N
 def mk (N : Subgroup G) (a : G) : QuotientGroup N := Quotient.mk (leftSetoid N) a
 
@@ -28,19 +43,6 @@ theorem mk_eq_mk_iff_leftCoset_eq (N : Subgroup G) (a b : G) :
 
 -- every coset is the class of some element (`Quotient.ind` or `Quotient.exists_rep`)
 theorem mk_surjective (N : Subgroup G) : Function.Surjective (mk N) :=
-  sorry
-
-/-! ### Well-definedness: the only place normality is used -/
-
--- paper proof (write it here first):
--- (ab)⁻¹(a'b') = b⁻¹ (a⁻¹a') b · b⁻¹b'  — conjugate of a⁻¹a' by b⁻¹, times b⁻¹b'
-theorem mul_rel {N : Subgroup G} [N.Normal] {a a' b b' : G}
-    (ha : a⁻¹ * a' ∈ N) (hb : b⁻¹ * b' ∈ N) : (a * b)⁻¹ * (a' * b') ∈ N :=
-  sorry
-
--- paper proof: (a⁻¹)⁻¹ a'⁻¹ = a a'⁻¹, and a'⁻¹a ∈ N (symmetry); use `Normal.mem_comm`
-theorem inv_rel {N : Subgroup G} [N.Normal] {a a' : G}
-    (ha : a⁻¹ * a' ∈ N) : a⁻¹⁻¹ * a'⁻¹ ∈ N :=
   sorry
 
 /-! ### The operations -/
