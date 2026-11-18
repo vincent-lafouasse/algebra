@@ -98,4 +98,12 @@ theorem mk_apply (g : G → H) (h : ∀ a b : G, g (a * b) = g a * g b) (x : G) 
     ({ toFun := g, map_mul := h } : G →* H) x = g x := rfl
 
 end Hom
+
+-- `g ∘* f` (typed `\o*`) is `Hom.comp g f`. Two scope rules decide where this line goes:
+-- * names on the right are resolved here, when the notation is declared, so it must come
+--   after `def comp` (before it, `Hom.comp` would mean `Function.comp Hom`);
+-- * `scoped` attaches it to the current namespace, so it must sit in `My`, not `My.Hom`,
+--   to be active wherever `→*` is.
+scoped infixr:90 " ∘* " => Hom.comp
+
 end My
