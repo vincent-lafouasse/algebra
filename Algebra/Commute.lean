@@ -70,7 +70,7 @@ theorem mul_right (hab : Commute a b) (hac : Commute a c) : Commute a (b * c) :=
 
 theorem mul_left (hac : Commute a c) (hbc : Commute b c) : Commute (a * b) c := by
   rw [commute_iff_eq]
-  rw [← mul_assoc c a b]
+  rw [← mul_assoc]
   rw [← hac.eq]
   rw [mul_assoc a c b]
   rw [← hbc.eq]
