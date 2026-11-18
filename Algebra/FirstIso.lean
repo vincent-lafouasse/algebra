@@ -64,7 +64,7 @@ def kerLiftHom : QuotientGroup (ker f) →* range f where
     exact f.map_mul x y
 
 theorem kerLiftHom_mk (a : G) : (kerLiftHom f (QuotientGroup.mk (ker f) a)).val = f a :=
-  sorry
+  rfl
 
 -- injective: f a = f b → mk a = mk b (`eq_iff_mem_ker`, `mk_eq_mk_iff`)
 theorem kerLiftHom_injective : Function.Injective (kerLiftHom f) :=
