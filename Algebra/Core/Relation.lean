@@ -37,6 +37,8 @@ theorem eqvClass_eq_of_mem (h : Equivalence r) {a b x : α}
   rw [eqvClass_eq_iff h]
   exact h.trans ha (h.symm hb)
 
+/-
+
 -- a partition of α: a collection of blocks (predicates on α)
 structure Partition (α : Sort u) where
   block : (α → Prop) → Prop                                     -- "B is one of the blocks"
@@ -74,5 +76,7 @@ theorem ofEquivalence_rel (P : Partition α) :
   sorry
 
 end Partition
+
+-/
 
 end My
