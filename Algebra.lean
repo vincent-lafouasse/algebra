@@ -1,6 +1,9 @@
 import Algebra.Core.Function
 import Algebra.Core.Relation
+import Algebra.Core.Equiv
+import Algebra.Core.Fin
 import Algebra.Group
+import Algebra.Pow
 import Algebra.Hom
 import Algebra.Subgroup
 import Algebra.Normal

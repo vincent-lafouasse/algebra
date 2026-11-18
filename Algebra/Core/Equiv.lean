@@ -1,0 +1,128 @@
+import Algebra.Core.Function
+
+/-! # Bijections
+
+`α ≃ β`: a function together with a two-sided inverse. Same shape as `Iso` (`G ≃* H`)
+without `map_mul`, so the proofs should feel familiar. Core Lean has no `Equiv`.
+
+`Perm α := α ≃ α` will be a group (in `Algebra/`, since Core doesn't know groups). -/
+
+universe u v w x
+
+namespace My
+
+structure Equiv (α : Sort u) (β : Sort v) where
+  toFun : α → β
+  invFun : β → α
+  left_inv : ∀ x, invFun (toFun x) = x
+  right_inv : ∀ y, toFun (invFun y) = y
+
+scoped infixl:25 " ≃ " => Equiv
+
+attribute [coe] Equiv.toFun
+
+namespace Equiv
+
+variable {α : Sort u} {β : Sort v} {γ : Sort w}
+
+instance : CoeFun (α ≃ β) (fun _ => α → β) where
+  coe e := e.toFun
+
+-- like `Iso.ext`: the inverse is determined by the function, so only `toFun` matters
+@[ext]
+theorem ext {e e' : α ≃ β} (h : ∀ x, e x = e' x) : e = e' :=
+  sorry
+
+/-! ### refl, symm, trans -/
+
+def refl (α : Sort u) : α ≃ α where
+  toFun := sorry
+  invFun := sorry
+  left_inv := sorry
+  right_inv := sorry
+
+def symm (e : α ≃ β) : β ≃ α where
+  toFun := sorry
+  invFun := sorry
+  left_inv := sorry
+  right_inv := sorry
+
+def trans (e : α ≃ β) (e' : β ≃ γ) : α ≃ γ where
+  toFun := sorry
+  invFun := sorry
+  left_inv := sorry
+  right_inv := sorry
+
+-- computation lemmas (`rfl` once the defs exist)
+theorem refl_apply (x : α) : refl α x = x :=
+  sorry
+
+theorem trans_apply (e : α ≃ β) (e' : β ≃ γ) (x : α) : e.trans e' x = e' (e x) :=
+  sorry
+
+theorem symm_apply_apply (e : α ≃ β) (x : α) : e.symm (e x) = x :=
+  sorry
+
+theorem apply_symm_apply (e : α ≃ β) (y : β) : e (e.symm y) = y :=
+  sorry
+
+/-! ### Algebra of equivalences (all by `ext`) -/
+
+theorem symm_symm (e : α ≃ β) : e.symm.symm = e :=
+  sorry
+
+theorem trans_refl (e : α ≃ β) : e.trans (refl β) = e :=
+  sorry
+
+theorem refl_trans (e : α ≃ β) : (refl α).trans e = e :=
+  sorry
+
+theorem self_trans_symm (e : α ≃ β) : e.trans e.symm = refl α :=
+  sorry
+
+theorem trans_assoc {δ : Sort x} (e₁ : α ≃ β) (e₂ : β ≃ γ) (e₃ : γ ≃ δ) :
+    (e₁.trans e₂).trans e₃ = e₁.trans (e₂.trans e₃) :=
+  sorry
+
+/-! ### Equivalences are exactly the bijections -/
+
+theorem injective (e : α ≃ β) : Function.Injective e :=
+  sorry
+
+theorem surjective (e : α ≃ β) : Function.Surjective e :=
+  sorry
+
+theorem bijective (e : α ≃ β) : Bijective e :=
+  sorry
+
+-- the converse needs a choice of preimages: `invFun` from Core/Function.lean
+noncomputable def ofBijective (f : α → β) (hf : Bijective f) : α ≃ β where
+  toFun := f
+  invFun := sorry
+  left_inv := sorry
+  right_inv := sorry
+
+theorem ofBijective_apply (f : α → β) (hf : Bijective f) (x : α) : ofBijective f hf x = f x :=
+  sorry
+
+end Equiv
+
+/-! ### Building equivalences between types (for counting) -/
+
+namespace Equiv
+
+variable {α α' : Type u} {β β' : Type v}
+
+-- act on each component
+def prodCongr (e : α ≃ α') (e' : β ≃ β') : α × β ≃ α' × β' :=
+  sorry
+
+def prodComm (α : Type u) (β : Type v) : α × β ≃ β × α :=
+  sorry
+
+-- act on each side of a disjoint union (`Sum.inl` / `Sum.inr`; define by `match`)
+def sumCongr (e : α ≃ α') (e' : β ≃ β') : α ⊕ β ≃ α' ⊕ β' :=
+  sorry
+
+end Equiv
+end My

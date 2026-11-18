@@ -1,4 +1,4 @@
-universe u v
+universe u v w
 
 namespace My
 
@@ -18,6 +18,47 @@ noncomputable def invFun (f : α → β) (hs : Function.Surjective f) : β → �
 theorem invFun_spec (f : α → β) (hs : Function.Surjective f) (y : β) :
     f (invFun f hs y) = y :=
   Classical.choose_spec (hs y)
+
+/-! ### Composition and identity
+
+Core has `Function.Injective.comp`, `Function.Surjective.comp`, `Function.injective_id`,
+`Function.LeftInverse.injective`, `Function.RightInverse.surjective`, … Prove the ones
+below yourself first, then compare with `#print`. -/
+
+section
+
+variable {γ : Sort w}
+
+theorem injective_comp {g : β → γ} {f : α → β}
+    (hg : Function.Injective g) (hf : Function.Injective f) : Function.Injective (g ∘ f) :=
+  sorry
+
+theorem surjective_comp {g : β → γ} {f : α → β}
+    (hg : Function.Surjective g) (hf : Function.Surjective f) : Function.Surjective (g ∘ f) :=
+  sorry
+
+theorem bijective_comp {g : β → γ} {f : α → β} (hg : Bijective g) (hf : Bijective f) :
+    Bijective (g ∘ f) :=
+  sorry
+
+theorem bijective_id : Bijective (λ x : α => x) :=
+  sorry
+
+-- a two-sided inverse makes f bijective (the converse is `Equiv.ofBijective`)
+theorem bijective_of_inverse {f : α → β} {g : β → α}
+    (hl : Function.LeftInverse g f) (hr : Function.RightInverse g f) : Bijective f :=
+  sorry
+
+-- if g ∘ f is injective, f is; if g ∘ f is surjective, g is
+theorem injective_of_comp {g : β → γ} {f : α → β} (h : Function.Injective (g ∘ f)) :
+    Function.Injective f :=
+  sorry
+
+theorem surjective_of_comp {g : β → γ} {f : α → β} (h : Function.Surjective (g ∘ f)) :
+    Function.Surjective g :=
+  sorry
+
+end
 
 /-
 
