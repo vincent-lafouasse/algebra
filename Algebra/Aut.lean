@@ -111,8 +111,20 @@ def conjHom : G →* (G ≃* G) where
 theorem conjHom_apply (g x : G) : (conjHom g).toHom x = g * x * g⁻¹ := rfl
 
 -- the kernel of conjugation is the center
-theorem ker_conjHom : Hom.ker (conjHom : G →* (G ≃* G)) = Subgroup.center G :=
-  sorry
+theorem ker_conjHom : Hom.ker (conjHom : G →* (G ≃* G)) = Subgroup.center G := by
+  ext a
+  constructor
+  · intro h g
+    rw [Hom.mem_ker] at h
+    have hg := congrArg (λ (e : (G ≃* G)) => e.toHom g) h
+    rw [conjHom_apply] at hg
+    rw [one_toHom] at hg
+    rw [Hom.id_apply] at hg
+    rw [← eq_mul_inv_iff_mul_eq] at hg
+    rw [inv_inv] at hg
+    exact hg.symm
+  · intro h
+    sorry
 
 -- inner automorphisms are normal in Aut(G): φ ∘ conj g ∘ φ⁻¹ = conj (φ g)
 theorem conj_by_aut (φ : G ≃* G) (g : G) :
