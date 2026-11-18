@@ -49,13 +49,13 @@ instance (S : Subgroup G) : Group S where
 /-! ### API: what `val` does to the operations (all `rfl`) -/
 
 theorem val_mul (S : Subgroup G) (a b : S) : (a * b).val = a.val * b.val :=
-  sorry
+  rfl
 
 theorem val_inv (S : Subgroup G) (a : S) : (a⁻¹).val = a.val⁻¹ :=
-  sorry
+  rfl
 
 theorem val_one (S : Subgroup G) : (one : S).val = one :=
-  sorry
+  rfl
 
 -- the inclusion S → G is a hom, and an injective one
 def subtypeHom (S : Subgroup G) : S →* G :=
