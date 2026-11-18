@@ -53,8 +53,8 @@ open Group
 
 variable {G : Type u} [Group G] {a b c : G}
 
-theorem one_left (a : G) : Commute one a := by
-  rw [commute_iff_eq, one_mul, mul_one]
+theorem one_left (a : G) : Commute one a :=
+  of_eq (by rw [one_mul, mul_one])
 
 theorem one_right (a : G) : Commute a one := by
   exact (one_left a).symm
