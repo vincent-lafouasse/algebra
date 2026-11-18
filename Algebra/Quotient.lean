@@ -148,7 +148,12 @@ theorem ker_mkHom : Hom.ker (mkHom N) = N := by
     rw [inv_inv] at h'
     exact h'
   · intro h
-    sorry
+    rw [Hom.mem_ker]
+    rw [mkHom_apply]
+    rw [mk_one]
+    rw [mk_eq_mk_iff]
+    rw [mul_one]
+    exact N.inv_mem h
 
 end QuotientGroup
 end My
