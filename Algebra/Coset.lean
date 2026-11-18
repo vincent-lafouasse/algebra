@@ -49,7 +49,7 @@ theorem leftRel_symm {N : Subgroup G} {x y : G} (h : leftRel N x y) : leftRel N 
   rw [leftRel_iff] at h
   have h' := N.inv_mem h
   rw [inv_prod] at h'
-  rw [inv_inv] at h'
+  rw [Group.inv_inv] at h'
   exact h'
 
 theorem leftRel_trans {N : Subgroup G} {x y z : G}

@@ -109,13 +109,13 @@ theorem left_inv_unique {a b : G} (h : b * a = one) : b = a⁻¹ :=
    _ = one * a⁻¹       := by rw [h]
    _ = a⁻¹             := by rw [one_mul]
 
-theorem inv_inv (a : G) : a⁻¹⁻¹ = a :=
+protected theorem inv_inv (a : G) : a⁻¹⁻¹ = a :=
   (left_inv_unique (mul_inv_cancel a)).symm
 
 theorem right_inv_unique {a b : G} (h : a * b = one) : b = a⁻¹ :=
   have h' : a = b⁻¹ := left_inv_unique h
   calc b
-   _ = b⁻¹⁻¹ := by rw [inv_inv]
+   _ = b⁻¹⁻¹ := by rw [Group.inv_inv]
    _ = a⁻¹   := by rw [h']
 
 -- redundant and trivial but satisfying to state
@@ -149,9 +149,9 @@ theorem inv_one : (one : G)⁻¹ = one :=
 
 theorem inv_injective {a b : G} (h : a⁻¹ = b⁻¹) : a = b :=
   calc a
-   _ = a⁻¹⁻¹ := by rw [inv_inv]
+   _ = a⁻¹⁻¹ := by rw [Group.inv_inv]
    _ = b⁻¹⁻¹ := by rw [h]
-   _ = b     := by rw [inv_inv]
+   _ = b     := by rw [Group.inv_inv]
 
 theorem inv_inj (a b : G) : a⁻¹ = b⁻¹ ↔ a = b := by
   constructor
@@ -162,7 +162,7 @@ theorem inv_inj (a b : G) : a⁻¹ = b⁻¹ ↔ a = b := by
 
 theorem mul_inv_eq_one (a b : G) : a * b⁻¹ = one ↔ a = b := by
   rw [← eq_mul_inv_iff_mul_eq]
-  rw [inv_inv]
+  rw [Group.inv_inv]
   rw [one_mul]
 
 theorem inv_mul_eq_one (a b : G) : a⁻¹ * b = one ↔ a = b := by

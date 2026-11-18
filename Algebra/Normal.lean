@@ -21,7 +21,7 @@ theorem normal_iff (N : Subgroup G) : N.Normal ↔ ∀ n : G, n ∈ N → ∀ g 
 theorem Normal.conj_mem' {N : Subgroup G} [N.Normal] (n : G) (hn : n ∈ N) (g : G) :
     g⁻¹ * n * g ∈ N := by
   have h := conj_mem n hn g⁻¹
-  rw [inv_inv] at h
+  rw [Group.inv_inv] at h
   exact h
 
 -- the key lemma for the quotient group: b * a = b * (a * b) * b⁻¹

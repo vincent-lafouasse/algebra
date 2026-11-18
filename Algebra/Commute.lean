@@ -35,14 +35,14 @@ theorem of_eq (h : a * b = b * a) : Commute a b := by
   exact h
 
 -- use a commuting hypothesis as an equation: `h.eq`
-theorem eq (h : Commute a b) : a * b = b * a := by
+protected theorem eq (h : Commute a b) : a * b = b * a := by
   rw [← commute_iff_eq]
   exact h
 
-theorem refl (a : α) : Commute a a :=
+protected theorem refl (a : α) : Commute a a :=
   of_eq rfl
 
-theorem symm (h : Commute a b) : Commute b a :=
+protected theorem symm (h : Commute a b) : Commute b a :=
   of_eq h.eq.symm
 
 end Mul
@@ -57,7 +57,7 @@ theorem one_left (a : G) : Commute one a :=
   of_eq (by rw [one_mul, mul_one])
 
 theorem one_right (a : G) : Commute a one :=
-  a |> one_left |> symm
+  a |> one_left |> Commute.symm
 
 -- if a commutes with b and with c, it commutes with b * c
 theorem mul_right (hab : Commute a b) (hac : Commute a c) : Commute a (b * c) := by
@@ -80,17 +80,17 @@ theorem inv_right (h : Commute a b) : Commute a b⁻¹ := by
   exact h.symm.eq
 
 theorem inv_left (h : Commute a b) : Commute a⁻¹ b :=
-  h |> symm |> inv_right |> symm
+  h |> Commute.symm |> inv_right |> Commute.symm
 
-theorem inv_inv (h : Commute a b) : Commute a⁻¹ b⁻¹ :=
+protected theorem inv_inv (h : Commute a b) : Commute a⁻¹ b⁻¹ :=
   h |> inv_left |> inv_right
 
 theorem inv_inv_iff : Commute a b ↔ Commute a⁻¹ b⁻¹ := by
   constructor
   · intro h
-    exact inv_inv h
+    exact Commute.inv_inv h
   · intro h
-    have h' := inv_inv h
+    have h' := Commute.inv_inv h
     rw [Group.inv_inv, Group.inv_inv] at h'
     exact h'
 

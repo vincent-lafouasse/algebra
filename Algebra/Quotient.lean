@@ -31,12 +31,12 @@ theorem inv_rel {N : Subgroup G} [N.Normal] {a a' : G}
     (ha : a⁻¹ * a' ∈ N) : a⁻¹⁻¹ * a'⁻¹ ∈ N := by
   have h :=
     calc a⁻¹⁻¹ * a'⁻¹
-     _ = a * a'⁻¹ := by rw [inv_inv]
+     _ = a * a'⁻¹ := by rw [Group.inv_inv]
   rw [h]
   have ha' := Normal.mem_comm ha
   have ha'' := N.inv_mem ha'
   rw [inv_prod] at ha''
-  rw [inv_inv] at ha''
+  rw [Group.inv_inv] at ha''
   exact ha''
 
 /-! ### Cosets as elements: any subgroup, no normality needed -/
@@ -149,7 +149,7 @@ theorem ker_mkHom : Hom.ker (mkHom N) = N := by
   constructor
   · intro h
     have h' := N.inv_mem h
-    rw [inv_inv] at h'
+    rw [Group.inv_inv] at h'
     exact h'
   · intro h
     exact N.inv_mem h

@@ -30,7 +30,7 @@ theorem eq_iff_mem_ker (a b : G) : f a = f b ↔ a⁻¹ * b ∈ ker f := by
   rw [← eq_inv_mul_iff_mul_eq]
   rw [mul_one]
   rw [map_inv]
-  rw [inv_inv]
+  rw [Group.inv_inv]
   rw [eq_comm]
 
 -- mk a ↦ f a, as an element of range f; via `Quotient.lift` and `eq_iff_mem_ker`

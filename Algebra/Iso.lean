@@ -32,7 +32,7 @@ theorem toHom_invHom (e : G ≃* H) (y : H) : e.toHom (e.invHom y) = y := by
   rfl
 
 -- G ≅ G
-def refl (G : Type u) [Group G] : G ≃* G where
+protected def refl (G : Type u) [Group G] : G ≃* G where
   toHom := Hom.id G
   invHom := Hom.id G
   left_inv := by
@@ -40,10 +40,10 @@ def refl (G : Type u) [Group G] : G ≃* G where
   right_inv := by
     rw [Hom.comp_id]
 
-theorem refl_toHom (G : Type u) [Group G] : (refl G).toHom = Hom.id G := rfl
+theorem refl_toHom (G : Type u) [Group G] : (Iso.refl G).toHom = Hom.id G := rfl
 
 -- G ≅ H → H ≅ G
-def symm (e : G ≃* H) : H ≃* G where
+protected def symm (e : G ≃* H) : H ≃* G where
   toHom := e.invHom
   invHom := e.toHom
   left_inv := e.right_inv
@@ -52,7 +52,7 @@ def symm (e : G ≃* H) : H ≃* G where
 theorem symm_toHom (e : G ≃* H) : e.symm.toHom = e.invHom := rfl
 
 -- G ≅ H → H ≅ K → G ≅ K
-def trans (e : G ≃* H) (e' : H ≃* K) : G ≃* K where
+protected def trans (e : G ≃* H) (e' : H ≃* K) : G ≃* K where
   toHom := e'.toHom.comp e.toHom
   invHom := e.invHom.comp e'.invHom
   left_inv := by
@@ -71,14 +71,14 @@ def trans (e : G ≃* H) (e' : H ≃* K) : G ≃* K where
 theorem trans_toHom (e : G ≃* H) (e' : H ≃* K) :
     (e.trans e').toHom = e'.toHom.comp e.toHom := rfl
 
-theorem injective (e : G ≃* H) : Function.Injective e.toHom := by
+protected theorem injective (e : G ≃* H) : Function.Injective e.toHom := by
   intro a b hab
   have h := congrArg e.invHom hab
   rw [invHom_toHom e] at h
   rw [invHom_toHom e] at h
   exact h
 
-theorem surjective (e : G ≃* H) : Function.Surjective e.toHom := by
+protected theorem surjective (e : G ≃* H) : Function.Surjective e.toHom := by
   intro x
   refine ⟨e.invHom x, ?_⟩
   rw [toHom_invHom]

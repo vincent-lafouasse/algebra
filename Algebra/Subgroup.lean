@@ -48,7 +48,7 @@ def center (G : Type u) [Group G] : Subgroup G where
     intro a ha g
     have h := congrArg (λ x => x⁻¹) (ha g⁻¹)
     rw [inv_prod, inv_prod] at h
-    rw [inv_inv] at h
+    rw [Group.inv_inv] at h
     exact h.symm
 
 def bot (G : Type u) [Group G] : Subgroup G where
@@ -89,7 +89,7 @@ theorem inv_mem_iff (S : Subgroup G) (a : G) : a⁻¹ ∈ S ↔ a ∈ S := by
   constructor
   · intro h
     have h' := S.inv_mem h
-    rw [inv_inv] at h'
+    rw [Group.inv_inv] at h'
     exact h'
   · intro h
     exact S.inv_mem h

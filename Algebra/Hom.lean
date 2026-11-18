@@ -50,11 +50,11 @@ theorem ext {f g : G →* H} (h : ∀ a, f a = g a) : f = g := by
       subst e
       rfl
 
-def id (G : Type u) [Group G] : G →* G where
+protected def id (G : Type u) [Group G] : G →* G where
   toFun := λ x => x
   map_mul := λ _a _b => rfl
 
-theorem id_apply (x : G) : id G x = x := rfl
+theorem id_apply (x : G) : Hom.id G x = x := rfl
 
 def comp (g : H →* K) (f : G →* H) : G →* K where
   toFun := λ x => g (f x)
@@ -65,17 +65,17 @@ def comp (g : H →* K) (f : G →* H) : G →* K where
 
 theorem comp_apply (g : H →* K) (f : G →* H) (x : G) : comp g f x = g (f x) := rfl
 
-theorem id_comp (f : G →* H) : comp (id H) f = f :=
+theorem id_comp (f : G →* H) : comp (Hom.id H) f = f :=
   -- pedestrian but clear
-  have h : ∀ x : G, comp (id H) f x = f x :=
+  have h : ∀ x : G, comp (Hom.id H) f x = f x :=
     λ x =>
-      calc comp (id H) f x
-       _ = (id H) (f x) := rfl
+      calc comp (Hom.id H) f x
+       _ = (Hom.id H) (f x) := rfl
        _ = f x := rfl
   ext h
 
-theorem comp_id (f : G →* H) : comp f (id G) = f :=
-  have h : ∀ x : G, comp f (id G) x = f x :=
+theorem comp_id (f : G →* H) : comp f (Hom.id G) = f :=
+  have h : ∀ x : G, comp f (Hom.id G) x = f x :=
     λ _ => rfl
   ext h
 

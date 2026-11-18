@@ -20,7 +20,7 @@ def conj (g : G) : G →* G where
 
 theorem conj_apply (g x : G) : conj g x = g * x * g⁻¹ := rfl
 
-theorem conj_one : conj (one : G) = id G := by
+theorem conj_one : conj (one : G) = Hom.id G := by
   ext x
   rw [conj_apply, id_apply]
   rw [inv_one, mul_one, one_mul]
@@ -72,7 +72,7 @@ def conjIso (g : G) : G ≃* G where
 -- Aut(G): automorphisms under composition; (e * e') x = e (e' x)
 instance : Group (G ≃* G) where
   mul e e' := e'.trans e
-  one := refl G
+  one := Iso.refl G
   inv e := e.symm
   mul_assoc := by
     intro a b c
@@ -82,13 +82,13 @@ instance : Group (G ≃* G) where
     rw [Hom.comp_assoc]
   one_mul := by
     intro a
-    show (a.trans (refl G)) = a
+    show (a.trans (Iso.refl G)) = a
     apply ext
     rw [trans_toHom, refl_toHom]
     rw [Hom.id_comp]
   inv_mul_cancel := by
     intro a
-    show a.trans a.symm = refl G
+    show a.trans a.symm = Iso.refl G
     apply ext
     rw [refl_toHom, trans_toHom, symm_toHom]
     exact a.left_inv
@@ -125,7 +125,7 @@ theorem ker_conjHom : Hom.ker (conjHom : G →* (G ≃* G)) = Subgroup.center G 
     rw [one_toHom] at hg
     rw [Hom.id_apply] at hg
     rw [← eq_mul_inv_iff_mul_eq] at hg
-    rw [inv_inv] at hg
+    rw [Group.inv_inv] at hg
     exact hg.symm
   · intro h
     rw [Hom.mem_ker]
