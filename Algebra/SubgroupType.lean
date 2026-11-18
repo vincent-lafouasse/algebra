@@ -21,8 +21,9 @@ variable {G : Type u} [Group G]
 instance : CoeSort (Subgroup G) (Type u) := ⟨λ S => {x : G // x ∈ S}⟩
 
 -- two elements of S are equal if they are equal in G (`Subtype.ext`)
-theorem val_inj {S : Subgroup G} {a b : S} (h : a.val = b.val) : a = b :=
-  sorry
+theorem val_inj {S : Subgroup G} {a b : S} (h : a.val = b.val) : a = b := by
+  ext
+  exact h
 
 -- operations are computed in G; closure is what makes them land back in S
 instance (S : Subgroup G) : Group S where
