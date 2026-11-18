@@ -39,6 +39,30 @@ def assign(line: str, depth: int) -> int:
     return -1
 
 
+def render(name: str, rest: str) -> str:
+    """Crude highlighting: **name** `binders` : **`statement`**.
+
+    The statement starts at the first ` : ` outside brackets; colons inside
+    binders like `(f : G →* H)` don't count.
+    """
+    rest = " " + rest.strip()  # so a leading `: T` (anonymous instance) is found too
+    binders, statement, depth = rest.strip(), "", 0
+    for k, c in enumerate(rest):
+        if c in "([{⟨":
+            depth += 1
+        elif c in ")]}⟩":
+            depth -= 1
+        elif depth == 0 and rest[k - 1 : k + 2] == " : ":
+            binders, statement = rest[:k].strip(), rest[k + 1 :].strip()
+            break
+    out = [f"**{name}**"] if name else []
+    if binders:
+        out.append(f"`{binders}`")
+    if statement:
+        out.append(f": **`{statement}`**")
+    return " ".join(out)
+
+
 def fields(body: list[str]) -> list[str]:
     """Fields of a class/structure: lines indented by exactly 2, plus deeper continuations."""
     out: list[str] = []
@@ -106,18 +130,24 @@ def scan(path: Path) -> list[str]:
                 body.append(lines[i])
                 i += 1
 
-            keyword, name = m.group(1), m.group(2)
-            prefix = ".".join(n for n in namespaces if n != "My")
-            if prefix and name[0] not in ":([{":
-                rest = flat(" ".join(sig)).removeprefix(flat(keyword)).lstrip().removeprefix(name)
-                sig = [f"{keyword} {prefix}.{name}{rest}"]
-            entry = f"- `{' '.join(attrs + [flat(' '.join(sig))])}`"
+            keyword, name = flat(m.group(1)), m.group(2)
+            rest = flat(" ".join(sig)).removeprefix(keyword).lstrip()
+            if name[0] in ":([{":  # anonymous instance
+                name = ""
+            else:
+                rest = rest.removeprefix(name)
+                prefix = ".".join(n for n in namespaces if n != "My")
+                name = f"{prefix}.{name}" if prefix else name
+            head = " ".join(f"`{a}`" for a in attrs)
+            entry = f"- {head + ' ' if head else ''}*{keyword}* {render(name, rest)}"
             if re.search(r"\bsorry\b", " ".join(body)):
                 entry += " **(sorry)**"
             if comment:
                 entry += f"  \n  {' '.join(comment)}"
             if keyword.endswith(("class", "structure")):
-                entry += "".join(f"\n  - `{f}`" for f in fields(body))
+                for f in fields(body):
+                    fname, _, frest = f.partition(" ")
+                    entry += f"\n  - {render(fname, frest)}"
             out.append(entry)
             comment, attrs = [], []
             continue
