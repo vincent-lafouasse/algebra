@@ -46,8 +46,10 @@ The BibTeX entries are in [`references.bib`](references.bib).
 
 [4] J. Calais, *Éléments de théorie des groupes*, Presses Universitaires de France, Paris, 1984.
 
-[5] D. S. Dummit and R. M. Foote, *Abstract Algebra*, 3rd ed., John Wiley & Sons, Hoboken, NJ, 2004.
+[5] C. Deschamps, F. Moulin, Y. Gentric et al., *Maths MPSI-MP2I : Tout-en-un*, 6th ed., Dunod, Paris, 2021.
 
-[6] X. Gourdon, *Les maths en tête : Algèbre*, 2nd ed., Ellipses, Paris, 2009.
+[6] D. S. Dummit and R. M. Foote, *Abstract Algebra*, 3rd ed., John Wiley & Sons, Hoboken, NJ, 2004.
 
-[7] D. Perrin, *Cours d'algèbre*, Ellipses, Paris, 1996.
+[7] X. Gourdon, *Les maths en tête : Algèbre*, 2nd ed., Ellipses, Paris, 2009.
+
+[8] D. Perrin, *Cours d'algèbre*, Ellipses, Paris, 1996.
