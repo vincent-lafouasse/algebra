@@ -77,10 +77,9 @@ theorem kerLiftHom_injective : Function.Injective (kerLiftHom f) := by
   show qx = qy
   rw [QuotientGroup.mk_eq_mk_iff]
   change f.kerLiftHom (QuotientGroup.mk (ker f) x) = f.kerLiftHom (QuotientGroup.mk (ker f) y) at eq
-  rw [← mul_inv_eq_one] at eq
-  rw [← map_mul_inv] at eq
-  rw [← mem_ker] at eq
-  sorry
+  have h := congrArg Subtype.val eq
+  rw [kerLiftHom_mk, kerLiftHom_mk] at h
+  exact (eq_iff_mem_ker f x y).mp h
 
 -- surjective: an element of range f is f a for some a, by definition
 theorem kerLiftHom_surjective : Function.Surjective (kerLiftHom f) :=
