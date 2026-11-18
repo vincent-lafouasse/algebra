@@ -17,6 +17,7 @@ theorem ex_18_1 {X : Type u} {a b : X} (hab : a ≠ b) :
   refine ⟨λ _ => a, λ _ => b, ?_⟩
   intro eq
   have falsity := congrFun eq a
+  simp only [Function.comp] at falsity
   exact hab falsity
 
 /-! ## 18.2
