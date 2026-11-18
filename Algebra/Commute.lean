@@ -127,7 +127,7 @@ variable {G : Type u} [Group G]
 -- everything that commutes with c: the closure proofs are the lemmas above
 def centralizer (c : G) : Subgroup G where
   mem := λ x => Commute c x
-  one_mem := sorry
+  one_mem := Commute.one_right c
   mul_mem := sorry
   inv_mem := sorry
 
