@@ -165,8 +165,10 @@ theorem mem_center_iff_forall_mem_centralizer (x : G) :
     intro h g
     exact Commute.eq (h g)
 
-theorem center_le_centralizer (c : G) : ∀ x, x ∈ center G → x ∈ centralizer c :=
-  sorry
+theorem center_le_centralizer (c : G) : ∀ x, x ∈ center G → x ∈ centralizer c := by
+  intro x hx
+  rw [mem_centralizer_iff]
+  exact Commute.of_eq (hx c)
 
 end Subgroup
 end My
