@@ -35,13 +35,14 @@ theorem eq_iff_mem_ker (a b : G) : f a = f b ↔ a⁻¹ * b ∈ ker f := by
 
 -- mk a ↦ f a, as an element of range f; via `Quotient.lift` and `eq_iff_mem_ker`
 def kerLift : QuotientGroup (ker f) → range f :=
-  Quotient.lift (λ (x : G) => ⟨f x, ⟨x, rfl⟩⟩) (by
-  intro a b (eq : leftRel (ker f) a b)
-  rw [leftRel_iff] at eq
-  rw [← eq_iff_mem_ker] at eq
-  ext
-  show f a = f b
-  exact eq)
+  Quotient.lift (λ (x : G) => ⟨f x, ⟨x, rfl⟩⟩)
+                (by
+                  intro a b (eq : leftRel (ker f) a b)
+                  rw [leftRel_iff] at eq
+                  rw [← eq_iff_mem_ker] at eq
+                  ext
+                  show f a = f b
+                  exact eq)
 
 theorem kerLift_mk (a : G) : (kerLift f (QuotientGroup.mk (ker f) a)).val = f a := 
   rfl
