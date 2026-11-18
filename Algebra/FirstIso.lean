@@ -1,0 +1,60 @@
+import Algebra.Quotient
+import Algebra.Iso
+import Algebra.SubgroupType
+
+/-! # The first isomorphism theorem
+
+For a hom `f : G →* H`, the map `G / ker f → range f`, `mk a ↦ f a`, is a well-defined
+isomorphism of groups: `G / ker f ≃* range f`.
+
+Plan: lift `f` to the quotient (well-defined because `ker f` is exactly what `f` cannot
+see), show the lift is a hom, injective and surjective, then use `Iso.ofBijective`. -/
+
+universe u v
+
+namespace My
+
+open Group Subgroup
+
+-- note: inside `namespace Hom`, a bare `mk` means `Hom.mk` (the constructor),
+-- so the quotient projection is written `QuotientGroup.mk`
+
+namespace Hom
+
+variable {G : Type u} {H : Type v} [Group G] [Group H] (f : G →* H)
+
+-- the kernel is f's blind spot: same image ↔ same coset of ker f
+theorem eq_iff_mem_ker (a b : G) : f a = f b ↔ a⁻¹ * b ∈ ker f :=
+  sorry
+
+-- mk a ↦ f a, as an element of range f; via `Quotient.lift` and `eq_iff_mem_ker`
+def kerLift : QuotientGroup (ker f) → range f :=
+  sorry
+
+theorem kerLift_mk (a : G) : (kerLift f (QuotientGroup.mk (ker f) a)).val = f a :=
+  sorry
+
+-- the lift is a hom: reduce to representatives, then `map_mul`
+def kerLiftHom : QuotientGroup (ker f) →* range f :=
+  sorry
+
+theorem kerLiftHom_mk (a : G) : (kerLiftHom f (QuotientGroup.mk (ker f) a)).val = f a :=
+  sorry
+
+-- injective: f a = f b → mk a = mk b (`eq_iff_mem_ker`, `mk_eq_mk_iff`)
+theorem kerLiftHom_injective : Function.Injective (kerLiftHom f) :=
+  sorry
+
+-- surjective: an element of range f is f a for some a, by definition
+theorem kerLiftHom_surjective : Function.Surjective (kerLiftHom f) :=
+  sorry
+
+/-- **First isomorphism theorem**: `G / ker f ≃* range f`. -/
+noncomputable def firstIso : QuotientGroup (ker f) ≃* range f :=
+  sorry
+
+theorem firstIso_mk (a : G) : ((firstIso f).toHom (QuotientGroup.mk (ker f) a)).val = f a :=
+  sorry
+
+end Hom
+end My

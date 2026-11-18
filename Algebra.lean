@@ -8,3 +8,5 @@ import Algebra.Iso
 import Algebra.Coset
 import Algebra.Aut
 import Algebra.Quotient
+import Algebra.SubgroupType
+import Algebra.FirstIso

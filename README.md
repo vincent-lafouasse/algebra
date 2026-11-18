@@ -17,7 +17,9 @@ sense, so the code should feel familiar to Mathlib users.
 | `Algebra/Iso.lean` | isomorphisms `G ≃* H`, bijective homs |
 | `Algebra/Aut.lean` | conjugation, the group `Aut(G)`, `ker (g ↦ conj g) = Z(G)` |
 | `Algebra/Coset.lean` | left cosets as equivalence classes |
-| `Algebra/Quotient.lean` | quotient groups `G / N` (in progress) |
+| `Algebra/Quotient.lean` | quotient groups `G / N` |
+| `Algebra/SubgroupType.lean` | a subgroup as a group in its own right |
+| `Algebra/FirstIso.lean` | the first isomorphism theorem `G / ker f ≃* range f` (in progress) |
 | `Algebra/Core/` | facts about functions and equivalence relations |
 | `Exercises/` | exercise sheets, stated with the library above |
 
