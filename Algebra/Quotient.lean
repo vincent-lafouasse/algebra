@@ -117,13 +117,13 @@ instance : Group (QuotientGroup N) where
 /-! ### Computation lemmas: the API boundary (should all be `rfl` once qmul/qinv exist) -/
 
 theorem mk_mul (a b : G) : mk N a * mk N b = mk N (a * b) :=
-  sorry
+  rfl
 
 theorem mk_inv (a : G) : (mk N a)⁻¹ = mk N a⁻¹ :=
-  sorry
+  rfl
 
 theorem mk_one : (one : QuotientGroup N) = mk N one :=
-  sorry
+  rfl
 
 /-! ### The projection G → G / N -/
 
