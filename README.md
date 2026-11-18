@@ -55,6 +55,19 @@ Work in progress. Unfinished statements are marked `sorry`; `lake build`
 lists them as warnings. The first isomorphism theorem is done (`Hom.firstIso`,
 using only Lean's three built-in axioms).
 
+Each `sorry` is an axiom, and anything that uses a `sorry`'d lemma inherits it,
+while the build warning only marks the declaration where the `sorry` is written. To check
+that no proof you consider finished leans on a stub:
+
+```
+scripts/axioms.sh        # exits 1 and lists any finished-looking declaration that depends on sorry
+scripts/axioms.sh -v     # also lists every stub
+```
+
+It also prints a progress count, for example `theorems: 151 / 211 done (60 stubs, 0 tainted)`, and the same for definitions.
+
+For a single declaration, `#print axioms My.Hom.firstIso` in any file importing `Algebra`.
+
 ## References
 
 The BibTeX entries are in [`references.bib`](references.bib).
