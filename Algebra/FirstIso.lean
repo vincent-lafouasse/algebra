@@ -43,10 +43,8 @@ def kerLift : QuotientGroup (ker f) → range f :=
   show f a = f b
   exact eq)
 
-theorem kerLift_mk (a : G) : (kerLift f (QuotientGroup.mk (ker f) a)).val = f a := by
-  let coset_a : QuotientGroup (ker f) := QuotientGroup.mk (ker f) a
-  let kl : range f := kerLift f coset_a
-  sorry
+theorem kerLift_mk (a : G) : (kerLift f (QuotientGroup.mk (ker f) a)).val = f a := 
+  rfl
 
 -- the lift is a hom: reduce to representatives, then `map_mul`
 def kerLiftHom : QuotientGroup (ker f) →* range f :=
