@@ -92,12 +92,13 @@ theorem inv_left (h : Commute a b) : Commute a⁻¹ b := by
   exact h.eq.symm
 
 theorem inv_right_iff : Commute a b⁻¹ ↔ Commute a b := by
-  rw [commute_iff_eq]
-  rw [eq_inv_mul_iff_mul_eq]
-  rw [← mul_assoc]
-  rw [mul_inv_eq_iff_eq_mul]
-  rw [eq_comm]
-  rw [← commute_iff_eq]
+  constructor
+  · intro h
+    have h' := inv_right h
+    rw [inv_inv] at h'
+    exact h'
+  · intro h
+    exact inv_right h
 
 end Group
 
