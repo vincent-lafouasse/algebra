@@ -19,6 +19,8 @@ theorem invFun_spec (f : α → β) (hs : Function.Surjective f) (y : β) :
     f (invFun f hs y) = y :=
   Classical.choose_spec (hs y)
 
+/-
+
 -- the contrapositive form: distinct inputs give distinct outputs
 -- (the ← direction needs classical logic: `Classical.byContradiction`)
 theorem injective_iff_ne (f : α → β) :
@@ -38,5 +40,7 @@ theorem injective_iff_hasLeftInverse [Nonempty α] (f : α → β) :
 theorem bijective_iff_hasInverse (f : α → β) :
     Bijective f ↔ ∃ g : β → α, Function.LeftInverse g f ∧ Function.RightInverse g f :=
   sorry
+
+-/
 
 end My
