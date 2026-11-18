@@ -68,8 +68,11 @@ theorem subtypeHom_apply (S : Subgroup G) (a : S) : subtypeHom S a = a.val := by
   unfold subtypeHom
   rw [Hom.mk_apply]
 
-theorem subtypeHom_injective (S : Subgroup G) : Function.Injective (subtypeHom S) :=
-  sorry
+theorem subtypeHom_injective (S : Subgroup G) : Function.Injective (subtypeHom S) := by
+  intro a b hab
+  ext
+  rw [subtypeHom_apply, subtypeHom_apply] at hab
+  exact hab
 
 end Subgroup
 end My
