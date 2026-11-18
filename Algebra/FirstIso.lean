@@ -59,7 +59,9 @@ def kerLiftHom : QuotientGroup (ker f) →* range f where
     show f.kerLift (QuotientGroup.mk (ker f) (x * y)) =
       f.kerLift (QuotientGroup.mk (ker f) x) *
       f.kerLift (QuotientGroup.mk (ker f) y)
-    sorry
+    apply val_inj
+    show f (x * y) = f x * f y
+    exact f.map_mul x y
 
 theorem kerLiftHom_mk (a : G) : (kerLiftHom f (QuotientGroup.mk (ker f) a)).val = f a :=
   sorry
