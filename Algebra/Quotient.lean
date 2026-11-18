@@ -107,7 +107,12 @@ instance : Group (QuotientGroup N) where
     rename_i x
     show mk N (one * x) = mk N x
     rw [one_mul]
-  inv_mul_cancel := sorry
+  inv_mul_cancel := by
+    intro a
+    induction a using Quotient.ind
+    rename_i x
+    show mk N (x⁻¹ * x) = mk N one
+    rw [inv_mul_cancel]
 
 /-! ### Computation lemmas: the API boundary (should all be `rfl` once qmul/qinv exist) -/
 
