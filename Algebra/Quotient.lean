@@ -127,8 +127,9 @@ theorem mk_one : (one : QuotientGroup N) = mk N one :=
 
 /-! ### The projection G → G / N -/
 
-def mkHom : G →* QuotientGroup N :=
-  sorry
+def mkHom : G →* QuotientGroup N where
+  toFun := λ x => mk N x
+  map_mul := mk_mul N
 
 theorem mkHom_apply (a : G) : mkHom N a = mk N a :=
   sorry
