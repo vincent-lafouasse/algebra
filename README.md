@@ -11,6 +11,7 @@ sense, so the code should feel familiar to Mathlib users.
 | File | Contents |
 |---|---|
 | `Algebra/Group.lean` | the `Group` class and basic lemmas (cancellation, inverses) |
+| `Algebra/Pow.lean` | powers `g ^ n` (Nat and Int), the subgroup `zpowers g` |
 | `Algebra/Hom.lean` | homomorphisms `G →* H`, composition, `ext` |
 | `Algebra/Subgroup.lean` | subgroups, center, kernel, image, preimage |
 | `Algebra/Normal.lean` | normal subgroups |
@@ -20,7 +21,7 @@ sense, so the code should feel familiar to Mathlib users.
 | `Algebra/Quotient.lean` | quotient groups `G / N` |
 | `Algebra/SubgroupType.lean` | a subgroup as a group in its own right |
 | `Algebra/FirstIso.lean` | the first isomorphism theorem `G / ker f ≃* range f` |
-| `Algebra/Core/` | facts about functions and equivalence relations |
+| `Algebra/Core/` | functions, equivalence relations, bijections `α ≃ β`, counting with `Fin` |
 | `Exercises/` | exercise sheets, stated with the library above |
 
 ## Building
