@@ -33,8 +33,16 @@ instance (S : Subgroup G) : Group S where
   mul_assoc := by
     intro a b c
     sorry
-  one_mul := sorry
-  inv_mul_cancel := sorry
+  one_mul := by
+    intro a
+    apply val_inj
+    show one * a.val = a.val
+    rw [one_mul]
+  inv_mul_cancel := by
+    intro a
+    apply val_inj
+    show a.val⁻¹ * a.val = one
+    rw [inv_mul_cancel]
 
 /-! ### API: what `val` does to the operations (all `rfl`) -/
 
