@@ -7,3 +7,4 @@ import Algebra.Normal
 import Algebra.Iso
 import Algebra.Coset
 import Algebra.Aut
+import Algebra.Quotient
