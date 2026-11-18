@@ -21,10 +21,10 @@ theorem mul_rel {N : Subgroup G} [N.Normal] {a a' b b' : G}
     (ha : a⁻¹ * a' ∈ N) (hb : b⁻¹ * b' ∈ N) : (a * b)⁻¹ * (a' * b') ∈ N := by
   have ha' := Normal.conj_mem'  (a⁻¹ * a')  ha b
   have h := N.mul_mem ha' hb
-  simp only [mul_assoc] at h
+  simp only [mul_assoc, mul_inv_cancel_left] at h
   rw [inv_prod]
   simp only [mul_assoc]
-  sorry
+  exact h
 
 -- paper proof: (a⁻¹)⁻¹ a'⁻¹ = a a'⁻¹, and a'⁻¹a ∈ N (symmetry); use `Normal.mem_comm`
 theorem inv_rel {N : Subgroup G} [N.Normal] {a a' : G}
