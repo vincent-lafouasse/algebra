@@ -93,7 +93,7 @@ noncomputable def firstIso : QuotientGroup (ker f) ≃* range f :=
   Iso.ofBijective (kerLiftHom f) f.kerLiftHom_injective f.kerLiftHom_surjective
 
 theorem firstIso_mk (a : G) : ((firstIso f).toHom (QuotientGroup.mk (ker f) a)).val = f a :=
-  sorry
+  rfl
 
 end Hom
 end My
