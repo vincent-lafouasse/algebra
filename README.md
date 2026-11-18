@@ -1,5 +1,38 @@
 # algebra
 
+Group theory in Lean 4, from the axioms up, without Mathlib.
+
+The `Group` class has three axioms (associativity, left identity, left inverse);
+everything else is proved here. Names and design follow Mathlib where it makes
+sense, so the code should feel familiar to Mathlib users.
+
+## Layout
+
+| File | Contents |
+|---|---|
+| `Algebra/Group.lean` | the `Group` class and basic lemmas (cancellation, inverses) |
+| `Algebra/Hom.lean` | homomorphisms `G →* H`, composition, `ext` |
+| `Algebra/Subgroup.lean` | subgroups, center, kernel, image, preimage |
+| `Algebra/Normal.lean` | normal subgroups |
+| `Algebra/Iso.lean` | isomorphisms `G ≃* H`, bijective homs |
+| `Algebra/Aut.lean` | conjugation, the group `Aut(G)`, `ker (g ↦ conj g) = Z(G)` |
+| `Algebra/Coset.lean` | left cosets as equivalence classes |
+| `Algebra/Quotient.lean` | quotient groups `G / N` (in progress) |
+| `Algebra/Core/` | facts about functions and equivalence relations |
+
+## Building
+
+```
+lake build
+```
+
+Requires the toolchain in `lean-toolchain` (Lean 4.35.0). No dependencies.
+
+## Status
+
+Work in progress. Unfinished statements are marked `sorry`; `lake build`
+lists them as warnings. Next milestone: the first isomorphism theorem.
+
 ## References
 
 The BibTeX entries are in [`references.bib`](references.bib).
