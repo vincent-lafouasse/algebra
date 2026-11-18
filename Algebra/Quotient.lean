@@ -76,19 +76,21 @@ variable (N : Subgroup G) [N.Normal]
 
 -- mk a * mk b := mk (a * b), via `Quotient.lift₂` and `mul_rel`
 def qmul : QuotientGroup N → QuotientGroup N → QuotientGroup N :=
-  Quotient.lift₂ (λ a b => mk N (a * b))
-                 (by
-                    intro a b a' b' eq_a eq_b
-                    apply Quotient.sound
-                    exact mul_rel eq_a eq_b)
+  Quotient.lift₂
+    (λ a b => mk N (a * b))
+    (by
+       intro a b a' b' eq_a eq_b
+       apply Quotient.sound
+       exact mul_rel eq_a eq_b)
 
 -- (mk a)⁻¹ := mk a⁻¹, via `Quotient.lift` and `inv_rel`
 def qinv : QuotientGroup N → QuotientGroup N :=
-  Quotient.lift (λ x => mk N x⁻¹)
-                (by
-                   intro a b eq
-                   apply Quotient.sound
-                   exact inv_rel eq)
+  Quotient.lift
+    (λ x => mk N x⁻¹)
+    (by
+       intro a b eq
+       apply Quotient.sound
+       exact inv_rel eq)
 
 -- each axiom: `Quotient.ind` down to representatives, then G's axiom
 instance : Group (QuotientGroup N) where
