@@ -50,8 +50,13 @@ theorem one_pow' (n : Nat) : (one : G) ^ n = one := by
   | succ n ih => rw [pow_succ, one_mul]; exact ih
 
 -- the other way round: needs induction (and `mul_assoc`)
-theorem pow_succ' (g : G) (n : Nat) : g ^ (n + 1) = g ^ n * g :=
-  sorry
+theorem pow_succ' (g : G) (n : Nat) : g ^ (n + 1) = g ^ n * g := by
+  induction n with
+  | zero => rw [Nat.add_zero, pow_zero, one_mul, pow_one] 
+  | succ n h => rw [pow_succ g (n + 1)]
+                conv => lhs; rw [h]
+                rw [← mul_assoc]
+                rw [← pow_succ]
 
 end Group
 
