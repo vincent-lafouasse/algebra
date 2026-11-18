@@ -82,8 +82,10 @@ theorem inv_right (h : Commute a b) : Commute a b⁻¹ := by
 theorem inv_left (h : Commute a b) : Commute a⁻¹ b :=
   (inv_right h.symm).symm
 
-theorem inv_inv (h : Commute a b) : Commute a⁻¹ b⁻¹ :=
-  sorry
+theorem inv_inv (h : Commute a b) : Commute a⁻¹ b⁻¹ := by
+  apply inv_left
+  apply inv_right
+  exact h
 
 theorem inv_inv_iff : Commute a b ↔ Commute a⁻¹ b⁻¹ :=
   sorry
