@@ -73,6 +73,9 @@ theorem kerLiftHom_injective : Function.Injective (kerLiftHom f) := by
   induction b using Quotient.ind
   rename_i x y
   show QuotientGroup.mk (ker f) x = QuotientGroup.mk (ker f) y
+  rw [QuotientGroup.mk_eq_mk_iff]
+  change f.kerLiftHom (QuotientGroup.mk (ker f) x) =
+         f.kerLiftHom (QuotientGroup.mk (ker f) y) at eq
   sorry
 
 -- surjective: an element of range f is f a for some a, by definition
