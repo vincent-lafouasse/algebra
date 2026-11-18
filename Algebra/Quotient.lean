@@ -135,8 +135,14 @@ theorem mkHom_apply (a : G) : mkHom N a = mk N a :=
   Hom.mk_apply (mkHom N).toFun (mkHom N).map_mul a
 
 -- the kernel of the projection is N itself: every normal subgroup is a kernel
-theorem ker_mkHom : Hom.ker (mkHom N) = N :=
-  sorry
+theorem ker_mkHom : Hom.ker (mkHom N) = N := by
+  ext a
+  constructor
+  · intro h
+    rw [Hom.mem_ker] at h
+    sorry
+  · intro h
+    sorry
 
 end QuotientGroup
 end Algebra
