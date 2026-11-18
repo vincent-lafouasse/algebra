@@ -58,8 +58,9 @@ theorem val_one (S : Subgroup G) : (one : S).val = one :=
   rfl
 
 -- the inclusion S → G is a hom, and an injective one
-def subtypeHom (S : Subgroup G) : S →* G :=
-  sorry
+def subtypeHom (S : Subgroup G) : S →* G where
+  toFun := sorry
+  map_mul := sorry
 
 theorem subtypeHom_apply (S : Subgroup G) (a : S) : subtypeHom S a = a.val :=
   sorry
