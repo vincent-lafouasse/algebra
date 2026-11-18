@@ -140,7 +140,16 @@ theorem ker_conjHom : Hom.ker (conjHom : G →* (G ≃* G)) = Subgroup.center G 
 -- inner automorphisms are normal in Aut(G): φ ∘ conj g ∘ φ⁻¹ = conj (φ g)
 theorem conj_by_aut (φ : G ≃* G) (g : G) :
     φ * conjIso g * φ⁻¹ = conjIso (φ.toHom g) := by
-  sorry
+  apply ext
+  rw [mul_toHom, mul_toHom]
+  rw [inv_toHom]
+  rw [conjIso_toHom, conjIso_toHom]
+  apply Hom.ext
+  intro x
+  rw [Hom.comp_apply, Hom.comp_apply]
+  rw [Hom.conj_apply, Hom.conj_apply]
+  rw [Hom.map_conj]
+  rw [toHom_invHom]
 
 instance range_conjHom_normal : (Hom.range (conjHom : G →* (G ≃* G))).Normal :=
   sorry
