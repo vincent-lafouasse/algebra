@@ -143,7 +143,7 @@ theorem mem_centralizer_iff (c x : G) : x ∈ centralizer c ↔ Commute c x := b
     exact h
 
 theorem mem_centralizer_self (c : G) : c ∈ centralizer c :=
-  sorry
+  Commute.refl c
 
 -- `mem_center` restated with `Commute`
 theorem mem_center_iff_commute (x : G) : x ∈ center G ↔ ∀ g, Commute g x :=
