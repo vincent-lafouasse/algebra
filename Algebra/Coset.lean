@@ -3,7 +3,7 @@ import Algebra.Core.Relation
 
 universe u
 
-namespace Algebra
+namespace My
 
 open Group
 
@@ -96,4 +96,4 @@ def leftSetoid (N : Subgroup G) : Setoid G :=
   ⟨leftRel N, leftRel_equivalence N⟩
 
 end Subgroup
-end Algebra
+end My

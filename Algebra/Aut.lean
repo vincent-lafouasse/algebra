@@ -3,7 +3,7 @@ import Algebra.Iso
 
 universe u v
 
-namespace Algebra
+namespace My
 
 open Group
 
@@ -175,4 +175,4 @@ theorem normal_iff_conj_invariant (N : Subgroup G) :
   sorry
 
 end Subgroup
-end Algebra
+end My

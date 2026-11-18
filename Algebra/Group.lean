@@ -1,6 +1,6 @@
 universe u
 
-namespace Algebra
+namespace My
 
 class Group (G : Type u) extends Mul G where
   one : G
@@ -174,4 +174,4 @@ theorem inv_mul_eq_one (a b : G) : a⁻¹ * b = one ↔ a = b := by
   rw [inv_inj]
 
 end Group
-end Algebra
+end My

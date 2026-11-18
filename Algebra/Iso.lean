@@ -3,7 +3,7 @@ import Algebra.Core.Function
 
 universe u v w
 
-namespace Algebra
+namespace My
 
 open Group
 
@@ -113,4 +113,4 @@ theorem ofBijective_toHom (f : G →* H)
     (ofBijective f hi hs).toHom = f := rfl
 
 end Iso
-end Algebra
+end My

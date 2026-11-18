@@ -2,7 +2,7 @@ import Algebra.Subgroup
 
 universe u v
 
-namespace Algebra
+namespace My
 
 open Group
 
@@ -93,4 +93,4 @@ instance comap_normal (f : G →* H) (T : Subgroup H) [T.Normal] :
     exact Subgroup.Normal.conj_mem (f n) hn (f g)
 
 end Hom
-end Algebra
+end My

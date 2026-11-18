@@ -2,7 +2,7 @@ import Algebra.Coset
 
 universe u
 
-namespace Algebra
+namespace My
 
 open Group Subgroup
 
@@ -145,4 +145,4 @@ theorem ker_mkHom : Hom.ker (mkHom N) = N := by
     sorry
 
 end QuotientGroup
-end Algebra
+end My

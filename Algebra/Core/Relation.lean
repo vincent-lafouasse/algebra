@@ -1,6 +1,6 @@
 universe u
 
-namespace Algebra
+namespace My
 
 variable {α : Sort u} {r : α → α → Prop}
 
@@ -75,4 +75,4 @@ theorem ofEquivalence_rel (P : Partition α) :
 
 end Partition
 
-end Algebra
+end My

@@ -2,7 +2,7 @@ import Algebra.Hom
 
 universe u v
 
-namespace Algebra
+namespace My
 
 open Group
 
@@ -244,4 +244,4 @@ theorem injective_iff_ker_eq_bot (f : G →* H) :
   ⟨ker_eq_bot_of_injective f, injective_of_ker_eq_bot f⟩
 
 end Hom
-end Algebra
+end My

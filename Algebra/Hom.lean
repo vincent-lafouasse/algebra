@@ -2,7 +2,7 @@ import Algebra.Group
 
 universe u v w x
 
-namespace Algebra
+namespace My
 
 open Group
 
@@ -98,4 +98,4 @@ theorem mk_apply (g : G → H) (h : ∀ a b : G, g (a * b) = g a * g b) (x : G) 
     ({ toFun := g, map_mul := h } : G →* H) x = g x := rfl
 
 end Hom
-end Algebra
+end My

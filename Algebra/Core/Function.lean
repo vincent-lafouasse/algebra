@@ -1,6 +1,6 @@
 universe u v
 
-namespace Algebra
+namespace My
 
 variable {α : Sort u} {β : Sort v}
 
@@ -39,4 +39,4 @@ theorem bijective_iff_hasInverse (f : α → β) :
     Bijective f ↔ ∃ g : β → α, Function.LeftInverse g f ∧ Function.RightInverse g f :=
   sorry
 
-end Algebra
+end My
