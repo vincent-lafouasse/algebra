@@ -2,6 +2,10 @@ name = "algebra"
 version = "0.1.0"
 defaultTargets = ["Algebra", "Exercises"]
 
+[leanOptions]
+linter.all = true
+linter.missingDocs = false
+
 # the from-scratch library: never imports Mathlib
 [[lean_lib]]
 name = "Algebra"
