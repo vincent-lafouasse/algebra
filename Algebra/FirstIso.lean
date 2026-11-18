@@ -50,8 +50,16 @@ theorem kerLift_mk (a : G) : (kerLift f (QuotientGroup.mk (ker f) a)).val = f a 
 
 -- the lift is a hom: reduce to representatives, then `map_mul`
 def kerLiftHom : QuotientGroup (ker f) →* range f where
-  toFun := sorry
-  map_mul := sorry
+  toFun := f.kerLift
+  map_mul := by
+    intro a b
+    induction a using Quotient.ind
+    induction b using Quotient.ind
+    rename_i x y
+    show f.kerLift (QuotientGroup.mk (ker f) (x * y)) =
+      f.kerLift (QuotientGroup.mk (ker f) x) *
+      f.kerLift (QuotientGroup.mk (ker f) y)
+    sorry
 
 theorem kerLiftHom_mk (a : G) : (kerLiftHom f (QuotientGroup.mk (ker f) a)).val = f a :=
   sorry
