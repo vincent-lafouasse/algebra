@@ -13,8 +13,11 @@ Soit X un ensemble possédant au moins deux éléments distincts a et b. Constru
 applications f_a et f_b de X dans X telles que f_a ∘ f_b ≠ f_b ∘ f_a. -/
 
 theorem ex_18_1 {X : Type u} {a b : X} (hab : a ≠ b) :
-    ∃ fa fb : X → X, fa ∘ fb ≠ fb ∘ fa :=
-  sorry
+    ∃ fa fb : X → X, fa ∘ fb ≠ fb ∘ fa := by
+  refine ⟨λ _ => a, λ _ => b, ?_⟩
+  intro eq
+  have falsity := congrFun eq a
+  exact hab falsity
 
 /-! ## 18.2
 Soit G un groupe et Z = {h ∈ G : ∀ g ∈ G, hg = gh}. Montrer que Z est un sous-groupe de G.
