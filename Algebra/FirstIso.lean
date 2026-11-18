@@ -90,7 +90,7 @@ theorem kerLiftHom_surjective : Function.Surjective (kerLiftHom f) := by
 
 /-- **First isomorphism theorem**: `G / ker f ≃* range f`. -/
 noncomputable def firstIso : QuotientGroup (ker f) ≃* range f :=
-  sorry
+  Iso.ofBijective (kerLiftHom f) f.kerLiftHom_injective f.kerLiftHom_surjective
 
 theorem firstIso_mk (a : G) : ((firstIso f).toHom (QuotientGroup.mk (ker f) a)).val = f a :=
   sorry
