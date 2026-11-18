@@ -87,8 +87,14 @@ theorem inv_inv (h : Commute a b) : Commute a⁻¹ b⁻¹ := by
   apply inv_right
   exact h
 
-theorem inv_inv_iff : Commute a b ↔ Commute a⁻¹ b⁻¹ :=
-  sorry
+theorem inv_inv_iff : Commute a b ↔ Commute a⁻¹ b⁻¹ := by
+  constructor
+  · intro h
+    exact inv_inv h
+  · intro h
+    have h' := inv_inv h
+    rw [Group.inv_inv, Group.inv_inv] at h'
+    exact h'
 
 theorem inv_right_iff : Commute a b⁻¹ ↔ Commute a b := by
   constructor
