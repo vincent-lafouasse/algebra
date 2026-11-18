@@ -27,8 +27,14 @@ Already done: this is `My.Subgroup.center` (note the book writes `h * g = g * h`
 library `g * h = h * g`). Stated here as the existence of a subgroup with that carrier. -/
 
 theorem ex_18_2 (G : Type u) [Group G] :
-    ∃ Z : Subgroup G, ∀ h : G, h ∈ Z ↔ ∀ g : G, h * g = g * h :=
-  sorry
+    ∃ Z : Subgroup G, ∀ h : G, h ∈ Z ↔ ∀ g : G, h * g = g * h := by
+  have Z : Subgroup G := {
+    mem := λ h => ∀ g : G, h * g = g * h
+    one_mem := sorry
+    mul_mem := sorry
+    inv_mem := sorry
+  }
+  refine ⟨Z, $_⟩
 
 /-! ## 18.3
 Soit G un groupe et H une partie de G. Montrer que H est un sous-groupe de G si, et
