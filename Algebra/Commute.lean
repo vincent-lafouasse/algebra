@@ -2,8 +2,9 @@ import Algebra.Subgroup
 
 /-! # Commuting elements
 
-`Commute a b` means `a * b = b * a`. It's a relation between two elements, so a `def`,
-not a `class`. It only needs `Mul`; the lemmas add `Group` when they need inverses.
+`Commute a b` means `a * b = b * a`. It's a relation between two elements, not a `class`.
+It's opaque on purpose: build one with `Commute.of_eq`, use one with `h.eq`, and otherwise
+stay in the API. It only needs `Mul`; the lemmas add `Group` when they need inverses.
 
 The closure lemmas (`one_right`, `mul_right`, `inv_right`) say that the elements commuting
 with a fixed `c` form a subgroup: the centralizer of `c`. The center is what commutes
