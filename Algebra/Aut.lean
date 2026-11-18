@@ -95,6 +95,8 @@ instance : Group (G ≃* G) where
 
 theorem mul_toHom (e e' : G ≃* G) : (e * e').toHom = e.toHom.comp e'.toHom := rfl
 
+theorem one_toHom : (one : G ≃* G).toHom = Hom.id G := rfl
+
 theorem conjIso_toHom (g : G) : (conjIso g).toHom = Hom.conj g := rfl
 
 -- g ↦ (conjugation by g)
