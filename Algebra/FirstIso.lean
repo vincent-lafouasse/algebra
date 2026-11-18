@@ -86,7 +86,7 @@ theorem kerLiftHom_surjective : Function.Surjective (kerLiftHom f) := by
   obtain ⟨val, x, hx⟩ := y
   refine ⟨QuotientGroup.mk (ker f) x, ?_⟩
   apply val_inj
-  exact ((fun a => hx) ∘ fun a => G) G
+  exact hx
 
 /-- **First isomorphism theorem**: `G / ker f ≃* range f`. -/
 noncomputable def firstIso : QuotientGroup (ker f) ≃* range f :=
