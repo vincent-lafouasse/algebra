@@ -42,8 +42,8 @@ theorem eq (h : Commute a b) : a * b = b * a := by
 theorem refl (a : α) : Commute a a :=
   of_eq rfl
 
-theorem symm (h : Commute a b) : Commute b a := by
-  rw [commute_iff_eq, h.eq]
+theorem symm (h : Commute a b) : Commute b a :=
+  of_eq h.eq.symm
 
 end Mul
 
