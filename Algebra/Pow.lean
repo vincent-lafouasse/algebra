@@ -75,9 +75,7 @@ theorem pow_left (h : Commute a b) (n : Nat) : Commute (a ^ n) b := by
   | succ n h' => rw [pow_succ]; exact mul_left h h'
 
 theorem pow_right (h : Commute a b) (n : Nat) : Commute a (b ^ n) := by
-  induction n with
-  | zero => rw [pow_zero b]; exact one_right a
-  | succ n h' => rw [pow_succ']; exact mul_right h' h
+  exact (pow_left h.symm n).symm
 
 theorem pow_pow (h : Commute a b) (m n : Nat) : Commute (a ^ m) (b ^ n) :=
   sorry
