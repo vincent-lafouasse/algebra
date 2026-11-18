@@ -24,8 +24,14 @@ namespace Hom
 variable {G : Type u} {H : Type v} [Group G] [Group H] (f : G →* H)
 
 -- the kernel is f's blind spot: same image ↔ same coset of ker f
-theorem eq_iff_mem_ker (a b : G) : f a = f b ↔ a⁻¹ * b ∈ ker f :=
-  sorry
+theorem eq_iff_mem_ker (a b : G) : f a = f b ↔ a⁻¹ * b ∈ ker f := by
+  rw [Hom.mem_ker]
+  rw [f.map_mul]
+  rw [← eq_inv_mul_iff_mul_eq]
+  rw [mul_one]
+  rw [map_inv]
+  rw [inv_inv]
+  rw [eq_comm]
 
 -- mk a ↦ f a, as an element of range f; via `Quotient.lift` and `eq_iff_mem_ker`
 def kerLift : QuotientGroup (ker f) → range f :=
