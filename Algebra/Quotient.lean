@@ -45,8 +45,15 @@ theorem inv_rel {N : Subgroup G} [N.Normal] {a a' : G}
 def mk (N : Subgroup G) (a : G) : QuotientGroup N := Quotient.mk (leftSetoid N) a
 
 -- when two elements give the same coset (core has `Quotient.sound` / `Quotient.exact`)
-theorem mk_eq_mk_iff (N : Subgroup G) (a b : G) : mk N a = mk N b ↔ a⁻¹ * b ∈ N :=
-  sorry
+theorem mk_eq_mk_iff (N : Subgroup G) (a b : G) : mk N a = mk N b ↔ a⁻¹ * b ∈ N := by
+  constructor
+  · intro h
+    have e : leftRel N a b := Quotient.exact h
+    rw [leftRel_iff] at e
+    exact e
+  · intro h
+    rw [← leftRel_iff] at h
+    exact Quotient.sound h
 
 -- the quotient view agrees with the set view: equal in G / N ↔ equal as cosets
 -- (rewrite with `mk_eq_mk_iff` and `leftCoset_eq_iff`)
