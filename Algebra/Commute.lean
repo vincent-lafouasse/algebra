@@ -94,18 +94,20 @@ theorem inv_inv_iff : Commute a b ↔ Commute a⁻¹ b⁻¹ := by
     rw [Group.inv_inv, Group.inv_inv] at h'
     exact h'
 
-theorem inv_right_iff : Commute a b⁻¹ ↔ Commute a b := by
+theorem inv_right_iff : Commute a b ↔ Commute a b⁻¹ := by
   constructor
+  · intro h
+    exact inv_right h
   · intro h
     have h' := inv_right h
     rw [Group.inv_inv] at h'
     exact h'
-  · intro h
-    exact inv_right h
 
+/-
 theorem inv_left_iff : Commute a⁻¹ b ↔ Commute a b := by
   rw [← inv_right_iff]
   rw [← inv_inv_iff]
+-/
 
 end Group
 
