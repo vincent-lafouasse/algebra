@@ -137,22 +137,17 @@ theorem mkHom_apply (a : G) : mkHom N a = mk N a :=
 -- the kernel of the projection is N itself: every normal subgroup is a kernel
 theorem ker_mkHom : Hom.ker (mkHom N) = N := by
   ext a
+  rw [Hom.mem_ker]
+  rw [mkHom_apply]
+  rw [mk_one]
+  rw [mk_eq_mk_iff]
+  rw [mul_one]
   constructor
   · intro h
-    rw [Hom.mem_ker] at h
-    rw [mkHom_apply] at h
-    rw [mk_one] at h
-    rw [mk_eq_mk_iff] at h
-    rw [mul_one] at h
     have h' := N.inv_mem h
     rw [inv_inv] at h'
     exact h'
   · intro h
-    rw [Hom.mem_ker]
-    rw [mkHom_apply]
-    rw [mk_one]
-    rw [mk_eq_mk_iff]
-    rw [mul_one]
     exact N.inv_mem h
 
 end QuotientGroup
