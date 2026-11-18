@@ -81,8 +81,12 @@ theorem kerLiftHom_injective : Function.Injective (kerLiftHom f) := by
   exact (eq_iff_mem_ker f x y).mp h
 
 -- surjective: an element of range f is f a for some a, by definition
-theorem kerLiftHom_surjective : Function.Surjective (kerLiftHom f) :=
-  sorry
+theorem kerLiftHom_surjective : Function.Surjective (kerLiftHom f) := by
+  intro (y : { x // x ∈ f.range })
+  obtain ⟨val, x, hx⟩ := y
+  refine ⟨QuotientGroup.mk (ker f) x, ?_⟩
+  apply val_inj
+  exact ((fun a => hx) ∘ fun a => G) G
 
 /-- **First isomorphism theorem**: `G / ker f ≃* range f`. -/
 noncomputable def firstIso : QuotientGroup (ker f) ≃* range f :=
