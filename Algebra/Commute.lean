@@ -37,7 +37,7 @@ theorem refl (a : α) : Commute a a :=
   rfl
 
 theorem symm (h : Commute a b) : Commute b a := by
-  rw [commute_iff_eq, h]
+  rw [commute_iff_eq, h.eq]
 
 end Mul
 
@@ -54,7 +54,8 @@ theorem one_right (a : G) : Commute a one := by
   rw [commute_iff_eq, one_mul, mul_one]
 
 -- if a commutes with b and with c, it commutes with b * c
-theorem mul_right (hab : Commute a b) (hac : Commute a c) : Commute a (b * c) :=
+theorem mul_right (hab : Commute a b) (hac : Commute a c) : Commute a (b * c) := by
+  rw [commute_iff_eq]
   sorry
 
 theorem mul_left (hac : Commute a c) (hbc : Commute b c) : Commute (a * b) c :=
