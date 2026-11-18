@@ -72,11 +72,10 @@ theorem kerLiftHom_injective : Function.Injective (kerLiftHom f) := by
   induction a using Quotient.ind
   induction b using Quotient.ind
   rename_i x y
-  let qx := QuotientGroup.mk (ker f) x
-  let qy := QuotientGroup.mk (ker f) y
-  show qx = qy
+  show QuotientGroup.mk (ker f) x = QuotientGroup.mk (ker f) y
   rw [QuotientGroup.mk_eq_mk_iff]
-  change f.kerLiftHom (QuotientGroup.mk (ker f) x) = f.kerLiftHom (QuotientGroup.mk (ker f) y) at eq
+  change f.kerLiftHom (QuotientGroup.mk (ker f) x) =
+    f.kerLiftHom (QuotientGroup.mk (ker f) y) at eq
   have h := congrArg Subtype.val eq
   rw [kerLiftHom_mk, kerLiftHom_mk] at h
   exact (eq_iff_mem_ker f x y).mp h
