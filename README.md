@@ -38,18 +38,18 @@ lists them as warnings. Next milestone: the first isomorphism theorem.
 
 The BibTeX entries are in [`references.bib`](references.bib).
 
-[1] J. Avigad, L. de Moura, S. Kong, and S. Ullrich, *Theorem Proving in Lean 4*, available at <https://lean-lang.org/theorem_proving_in_lean4/>.
+[AdMKU] J. Avigad, L. de Moura, S. Kong, and S. Ullrich, *Theorem Proving in Lean 4*, available at <https://lean-lang.org/theorem_proving_in_lean4/>.
 
-[2] J. Avigad and P. Massot, *Mathematics in Lean*, available at <https://leanprover-community.github.io/mathematics_in_lean/>.
+[AM] J. Avigad and P. Massot, *Mathematics in Lean*, available at <https://leanprover-community.github.io/mathematics_in_lean/>.
 
-[3] N. Bourbaki, *Algèbre : Chapitres 1 à 3*, Éléments de mathématique, Hermann, Paris, 1970.
+[Bou70] N. Bourbaki, *Algèbre : Chapitres 1 à 3*, Éléments de mathématique, Hermann, Paris, 1970.
 
-[4] J. Calais, *Éléments de théorie des groupes*, Presses Universitaires de France, Paris, 1984.
+[Cal84] J. Calais, *Éléments de théorie des groupes*, Presses Universitaires de France, Paris, 1984.
 
-[5] C. Deschamps, F. Moulin, Y. Gentric et al., *Maths MPSI-MP2I : Tout-en-un*, 6th ed., Dunod, Paris, 2021.
+[DF04] D. S. Dummit and R. M. Foote, *Abstract Algebra*, 3rd ed., John Wiley & Sons, Hoboken, NJ, 2004.
 
-[6] D. S. Dummit and R. M. Foote, *Abstract Algebra*, 3rd ed., John Wiley & Sons, Hoboken, NJ, 2004.
+[DMG+21] C. Deschamps, F. Moulin, Y. Gentric et al., *Maths MPSI-MP2I : Tout-en-un*, 6th ed., Dunod, Paris, 2021.
 
-[7] X. Gourdon, *Les maths en tête : Algèbre*, 2nd ed., Ellipses, Paris, 2009.
+[Gou09] X. Gourdon, *Les maths en tête : Algèbre*, 2nd ed., Ellipses, Paris, 2009.
 
-[8] D. Perrin, *Cours d'algèbre*, Ellipses, Paris, 1996.
+[Per96] D. Perrin, *Cours d'algèbre*, Ellipses, Paris, 1996.
