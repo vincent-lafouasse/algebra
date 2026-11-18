@@ -53,7 +53,7 @@ example (n : Nat) : (one : G) ^ n = one := by
 -- the other way round: needs induction (and `mul_assoc`)
 theorem pow_succ' (g : G) (n : Nat) : g ^ (n + 1) = g ^ n * g := by
   induction n with
-  | zero => rw [pow_zero, one_mul, pow_one] 
+  | zero => rw [pow_zero, one_mul, pow_one]
   | succ n h => rw [pow_succ g (n + 1)]
                 conv => lhs; rw [h]
                 rw [← mul_assoc]
