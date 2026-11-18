@@ -1,6 +1,9 @@
 name = "algebra"
 version = "0.1.0"
 defaultTargets = ["Algebra", "Exercises"]
+# `lake lint` runs the Batteries environment linters on the default targets
+lintDriver = "batteries/runLinter"
+lintDriverArgs = ["Algebra"]
 
 # the from-scratch library: never imports Mathlib
 [[lean_lib]]
@@ -9,3 +12,9 @@ name = "Algebra"
 # exercise sheets, built on top of `Algebra`
 [[lean_lib]]
 name = "Exercises"
+
+# dev tooling only (`#lint`, `lake exe runLinter`); `Algebra` never imports it
+[[require]]
+name = "batteries"
+git = "https://github.com/leanprover-community/batteries"
+rev = "v4.35.0"

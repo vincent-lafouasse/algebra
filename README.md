@@ -31,7 +31,25 @@ sense, so the code should feel familiar to Mathlib users.
 lake build
 ```
 
-Requires the toolchain in `lean-toolchain` (Lean 4.35.0). No dependencies.
+Requires the toolchain in `lean-toolchain` (Lean 4.35.0). The library itself imports
+nothing but core Lean; [Batteries](https://github.com/leanprover-community/batteries)
+is a development dependency, used only for linting.
+
+## Linting
+
+```
+lake lint
+```
+
+runs the nine default Batteries environment linters on `Algebra`: unused arguments,
+unused `have`s, missing docstrings on definitions, `simp` lemmas in bad form, tautological
+statements, ill-typed instances, and more. To configure:
+
+- skip one declaration: `@[nolint docBlame]` (any linter name);
+- accept the current failures as a baseline: `lake exe runLinter --update Algebra`
+  writes them to `scripts/nolints.json`, and later runs only report new ones;
+- inside a file (after `import Batteries.Tactic.Lint`): `#lint`, `#lint only unusedArguments`,
+  `#lint docBlameThm` (adds a linter that is off by default), `#list_linters`.
 
 ## Status
 
