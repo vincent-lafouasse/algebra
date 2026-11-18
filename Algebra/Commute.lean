@@ -103,11 +103,12 @@ theorem inv_right_iff : Commute a b ↔ Commute a b⁻¹ := by
     rw [Group.inv_inv] at h'
     exact h'
 
-/-
-theorem inv_left_iff : Commute a⁻¹ b ↔ Commute a b := by
-  rw [← inv_right_iff]
-  rw [← inv_inv_iff]
--/
+theorem inv_left_iff : Commute a b ↔ Commute a⁻¹ b := by
+  constructor
+  · intro h
+    sorry
+  · intro h
+    sorry
 
 end Group
 
