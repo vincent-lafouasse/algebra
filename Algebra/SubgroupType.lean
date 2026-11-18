@@ -64,8 +64,9 @@ def subtypeHom (S : Subgroup G) : S →* G where
     intro a b
     exact val_mul S a b
 
-theorem subtypeHom_apply (S : Subgroup G) (a : S) : subtypeHom S a = a.val :=
-  sorry
+theorem subtypeHom_apply (S : Subgroup G) (a : S) : subtypeHom S a = a.val := by
+  unfold subtypeHom
+  rw [Hom.mk_apply]
 
 theorem subtypeHom_injective (S : Subgroup G) : Function.Injective (subtypeHom S) :=
   sorry
