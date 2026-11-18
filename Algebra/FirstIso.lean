@@ -35,7 +35,9 @@ theorem eq_iff_mem_ker (a b : G) : f a = f b ↔ a⁻¹ * b ∈ ker f := by
 
 -- mk a ↦ f a, as an element of range f; via `Quotient.lift` and `eq_iff_mem_ker`
 def kerLift : QuotientGroup (ker f) → range f :=
-  sorry
+  Quotient.lift (λ x => ⟨f x, sorry⟩) (by
+  intro a b eq
+  sorry)
 
 theorem kerLift_mk (a : G) : (kerLift f (QuotientGroup.mk (ker f) a)).val = f a :=
   sorry
