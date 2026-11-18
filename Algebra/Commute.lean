@@ -57,7 +57,8 @@ theorem one_left (a : G) : Commute one a :=
   of_eq (by rw [one_mul, mul_one])
 
 theorem one_right (a : G) : Commute a one := by
-  exact (one_left a).symm
+  refine symm ?_
+  exact one_left a
 
 -- if a commutes with b and with c, it commutes with b * c
 theorem mul_right (hab : Commute a b) (hac : Commute a c) : Commute a (b * c) := by
@@ -69,7 +70,8 @@ theorem mul_right (hab : Commute a b) (hac : Commute a c) : Commute a (b * c) :=
   rw [mul_assoc]
 
 theorem mul_left (hac : Commute a c) (hbc : Commute b c) : Commute (a * b) c := by
-  exact (mul_right hac.symm hbc.symm).symm
+  refine symm ?_
+  exact mul_right hac.symm hbc.symm
 
 -- move a factor across (`eq_inv_mul_iff_mul_eq` and friends)
 theorem inv_right (h : Commute a b) : Commute a b⁻¹ := by
