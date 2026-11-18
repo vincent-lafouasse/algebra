@@ -46,7 +46,7 @@ def center (G : Type u) [Group G] : Subgroup G where
      _ = (a * b) * g := by rw [mul_assoc]
   inv_mem := by
     intro a ha g
-    have h := congrArg inv (ha g⁻¹)
+    have h := congrArg (λ x => x⁻¹) (ha g⁻¹)
     rw [inv_prod, inv_prod] at h
     rw [inv_inv] at h
     exact h.symm
@@ -175,7 +175,7 @@ def map (f : G →* H) (S : Subgroup G) : Subgroup H where
     refine ⟨x⁻¹, ?_⟩
     refine ⟨S.inv_mem hx.1, ?_⟩
     rw [map_inv]
-    exact (congrArg inv hx.2)
+    exact (congrArg (λ x => x⁻¹) hx.2)
 
 -- preimage of a subgroup: φ⁻¹(T)
 def comap (f : G →* H) (T : Subgroup H) : Subgroup G where

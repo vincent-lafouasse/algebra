@@ -2,16 +2,13 @@ universe u
 
 namespace My
 
-class Group (G : Type u) extends Mul G where
+class Group (G : Type u) extends Mul G, Inv G where
   one : G
-  inv : G → G
   mul_assoc : ∀ a b c : G, a * b * c = a * (b * c)
   one_mul : ∀ a : G, one * a = a
   inv_mul_cancel : ∀ a : G, inv a * a = one
 
 namespace Group
-
-scoped postfix:max "⁻¹" => Group.inv
 
 variable {G : Type u} [Group G]
 
