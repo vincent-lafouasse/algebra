@@ -44,7 +44,8 @@ theorem one_pow (n : Nat) : (one : G) ^ n = one :=
                      rw [one_mul]
                      exact one_pow n
 
-theorem one_pow' (n : Nat) : (one : G) ^ n = one := by
+/- one_pow but inductively, why not -/
+example (n : Nat) : (one : G) ^ n = one := by
   induction n with
   | zero => rfl
   | succ n ih => rw [pow_succ, one_mul]; exact ih
