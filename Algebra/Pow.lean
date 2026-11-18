@@ -69,8 +69,10 @@ open Group
 variable {G : Type u} [Group G] {a b : G}
 
 -- induction on n, with `Commute.mul_left`
-theorem pow_left (h : Commute a b) (n : Nat) : Commute (a ^ n) b :=
-  sorry
+theorem pow_left (h : Commute a b) (n : Nat) : Commute (a ^ n) b := by
+  induction n with
+  | zero => rw [pow_zero a]; exact Commute.one_left b
+  | succ n h' => rw [pow_succ]; exact mul_left h h'
 
 theorem pow_right (h : Commute a b) (n : Nat) : Commute a (b ^ n) :=
   sorry
