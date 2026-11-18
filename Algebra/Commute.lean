@@ -106,7 +106,8 @@ theorem inv_right_iff : Commute a b⁻¹ ↔ Commute a b := by
     exact inv_right h
 
 theorem inv_left_iff : Commute a⁻¹ b ↔ Commute a b := by
-  sorry
+  rw [← inv_right_iff]
+  rw [← inv_inv_iff]
 
 end Group
 
