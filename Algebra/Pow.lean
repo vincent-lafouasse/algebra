@@ -27,10 +27,10 @@ instance : Pow G Nat := ⟨λ g n => npow n g⟩
 
 -- the two defining equations, as the API (both `rfl`)
 theorem pow_zero (g : G) : g ^ (0 : Nat) = one :=
-  sorry
+  rfl
 
 theorem pow_succ (g : G) (n : Nat) : g ^ (n + 1) = g * g ^ n :=
-  sorry
+  rfl
 
 theorem pow_one (g : G) : g ^ (1 : Nat) = g :=
   sorry
