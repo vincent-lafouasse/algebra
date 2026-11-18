@@ -30,7 +30,9 @@ instance (S : Subgroup G) : Group S where
   mul a b := ⟨a.val * b.val, S.mul_mem a.property b.property⟩
   inv a := ⟨a.val⁻¹, S.inv_mem a.property⟩
   one := ⟨one, S.one_mem⟩
-  mul_assoc := sorry
+  mul_assoc := by
+    intro a b c
+    sorry
   one_mul := sorry
   inv_mul_cancel := sorry
 
