@@ -39,8 +39,8 @@ theorem eq (h : Commute a b) : a * b = b * a := by
   rw [← commute_iff_eq]
   exact h
 
-theorem refl (a : α) : Commute a a := by
-  rw [commute_iff_eq]
+theorem refl (a : α) : Commute a a :=
+  of_eq rfl
 
 theorem symm (h : Commute a b) : Commute b a := by
   rw [commute_iff_eq, h.eq]
