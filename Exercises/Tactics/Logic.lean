@@ -10,8 +10,9 @@ namespace Exercises.Logic
 variable (p q r : Prop)
 
 -- `intro` the hypothesis, `obtain ⟨hp, hq⟩ := h` to split an `∧`, `exact ⟨_, _⟩` to build one
-theorem and_swap : p ∧ q → q ∧ p :=
-  sorry
+theorem and_swap : p ∧ q → q ∧ p := by
+  intro h
+  exact ⟨h.2, h.1⟩
 
 -- `rcases h with hp | hq` splits an `∨` into two goals; `left` / `right` pick a side
 theorem or_swap : p ∨ q → q ∨ p :=
