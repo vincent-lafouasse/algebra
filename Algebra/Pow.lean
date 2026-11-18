@@ -32,8 +32,10 @@ theorem pow_zero (g : G) : g ^ (0 : Nat) = one :=
 theorem pow_succ (g : G) (n : Nat) : g ^ (n + 1) = g * g ^ n :=
   rfl
 
-theorem pow_one (g : G) : g ^ (1 : Nat) = g :=
-  sorry
+theorem pow_one (g : G) : g ^ (1 : Nat) = g := by
+  rw [pow_succ g 0]
+  rw [pow_zero]
+  rw [mul_one]
 
 theorem one_pow (n : Nat) : (one : G) ^ n = one :=
   sorry
