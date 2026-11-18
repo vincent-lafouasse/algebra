@@ -18,8 +18,9 @@ namespace My
 def Commute {α : Type u} [Mul α] (a b : α) : Prop := a * b = b * a
 
 -- the boundary: unfold here, nowhere else
-theorem commute_iff_eq {α : Type u} [Mul α] (a b : α) : Commute a b ↔ a * b = b * a :=
-  sorry
+theorem commute_iff_eq {α : Type u} [Mul α] (a b : α) : Commute a b ↔ a * b = b * a := by
+  unfold Commute
+  rfl
 
 namespace Commute
 
@@ -28,11 +29,12 @@ section Mul
 variable {α : Type u} [Mul α] {a b : α}
 
 -- use a commuting hypothesis as an equation: `h.eq`
-theorem eq (h : Commute a b) : a * b = b * a :=
-  sorry
+theorem eq (h : Commute a b) : a * b = b * a := by
+  rw [← commute_iff_eq]
+  exact h
 
 theorem refl (a : α) : Commute a a :=
-  sorry
+  rfl
 
 theorem symm (h : Commute a b) : Commute b a :=
   sorry
