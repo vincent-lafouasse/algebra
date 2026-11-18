@@ -82,14 +82,23 @@ theorem inv_right (h : Commute a b) : Commute a b⁻¹ := by
 theorem inv_left (h : Commute a b) : Commute a⁻¹ b :=
   (inv_right h.symm).symm
 
+theorem inv_inv (h : Commute a b) : Commute a⁻¹ b⁻¹ :=
+  sorry
+
+theorem inv_inv_iff : Commute a b ↔ Commute a⁻¹ b⁻¹ :=
+  sorry
+
 theorem inv_right_iff : Commute a b⁻¹ ↔ Commute a b := by
   constructor
   · intro h
     have h' := inv_right h
-    rw [inv_inv] at h'
+    rw [Group.inv_inv] at h'
     exact h'
   · intro h
     exact inv_right h
+
+theorem inv_left_iff : Commute a⁻¹ b ↔ Commute a b := by
+  sorry
 
 end Group
 
