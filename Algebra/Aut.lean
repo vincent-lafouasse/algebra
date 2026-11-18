@@ -130,7 +130,10 @@ theorem ker_conjHom : Hom.ker (conjHom : G →* (G ≃* G)) = Subgroup.center G 
     rw [one_toHom]
     ext x
     rw [Hom.id_apply]
-    sorry
+    rw [conjHom_apply]
+    have h' := h x
+    rw [← eq_mul_inv_iff_mul_eq] at h'
+    exact h'.symm
 
 -- inner automorphisms are normal in Aut(G): φ ∘ conj g ∘ φ⁻¹ = conj (φ g)
 theorem conj_by_aut (φ : G ≃* G) (g : G) :
