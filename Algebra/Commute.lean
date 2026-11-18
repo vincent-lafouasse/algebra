@@ -78,8 +78,12 @@ theorem mul_left (hac : Commute a c) (hbc : Commute b c) : Commute (a * b) c := 
   rw [mul_assoc]
 
 -- move a factor across (`eq_inv_mul_iff_mul_eq` and friends)
-theorem inv_right (h : Commute a b) : Commute a b⁻¹ :=
-  sorry
+theorem inv_right (h : Commute a b) : Commute a b⁻¹ := by
+  rw [commute_iff_eq]
+  rw [eq_inv_mul_iff_mul_eq]
+  rw [← mul_assoc]
+  rw [mul_inv_eq_iff_eq_mul]
+  exact h.symm.eq
 
 theorem inv_left (h : Commute a b) : Commute a⁻¹ b :=
   sorry
