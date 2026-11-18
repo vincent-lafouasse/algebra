@@ -57,7 +57,7 @@ theorem one_left (a : G) : Commute one a :=
   of_eq (by rw [one_mul, mul_one])
 
 theorem one_right (a : G) : Commute a one :=
-  (one_left a).symm
+  a |> one_left |> symm
 
 -- if a commutes with b and with c, it commutes with b * c
 theorem mul_right (hab : Commute a b) (hac : Commute a c) : Commute a (b * c) := by
