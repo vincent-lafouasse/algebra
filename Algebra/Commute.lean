@@ -30,6 +30,11 @@ section Mul
 
 variable {α : Type u} [Mul α] {a b : α}
 
+theorem of_eq {a b : α} (h : a * b = b * a) : Commute a b := by
+  rw [commute_iff_eq]
+  exact h
+
+
 -- use a commuting hypothesis as an equation: `h.eq`
 theorem eq (h : Commute a b) : a * b = b * a := by
   rw [← commute_iff_eq]
