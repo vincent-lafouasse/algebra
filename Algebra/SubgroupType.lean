@@ -32,7 +32,9 @@ instance (S : Subgroup G) : Group S where
   one := ⟨one, S.one_mem⟩
   mul_assoc := by
     intro a b c
-    sorry
+    apply val_inj
+    show (a.val * b.val) * c.val = a.val * (b.val * c.val)
+    rw [mul_assoc]
   one_mul := by
     intro a
     apply val_inj
