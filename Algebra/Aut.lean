@@ -106,8 +106,7 @@ def conjHom : G →* (G ≃* G) where
     rw [conjIso_toHom, mul_toHom, conjIso_toHom, conjIso_toHom]
     rw [Hom.conj_mul]
 
-theorem conjHom_apply (g x : G) : (conjHom g).toHom x = g * x * g⁻¹ :=
-  sorry
+theorem conjHom_apply (g x : G) : (conjHom g).toHom x = g * x * g⁻¹ := rfl
 
 -- the kernel of conjugation is the center
 theorem ker_conjHom : Hom.ker (conjHom : G →* (G ≃* G)) = Subgroup.center G :=
