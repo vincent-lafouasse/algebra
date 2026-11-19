@@ -8,18 +8,24 @@ namespace Exercises.Functions
 variable {α β γ : Type}
 
 -- `funext n` reduces an equation between functions to one between values
-theorem add_zero_fun : (λ n : Nat => n + 0) = (λ n => n) :=
-  sorry
+theorem add_zero_fun : (λ n : Nat => n + 0) = (λ n => n) := by
+  funext x
+  rfl
 
--- injective functions cancel on the left: `funext x`, `apply hf`, then `congrFun h x`
+-- injective functions cancel on the left: `funext x`, `apply hf`, then `exact congrFun h x`
 theorem injective_cancel {f : β → γ} (hf : Function.Injective f) {g₁ g₂ : α → β}
-    (h : f ∘ g₁ = f ∘ g₂) : g₁ = g₂ :=
-  sorry
+    (h : f ∘ g₁ = f ∘ g₂) : g₁ = g₂ := by
+  funext x
+  apply hf
+  exact congrFun h x
 
 -- surjective functions cancel on the right: `obtain ⟨x, rfl⟩ := hf y`
 theorem surjective_cancel {f : α → β} (hf : Function.Surjective f) {g₁ g₂ : β → γ}
-    (h : g₁ ∘ f = g₂ ∘ f) : g₁ = g₂ :=
-  sorry
+    (h : g₁ ∘ f = g₂ ∘ f) : g₁ = g₂ := by
+  funext y
+  obtain ⟨x, hx⟩ := hf y
+  rw [← hx]
+  exact congrFun h x
 
 theorem succ_injective : Function.Injective Nat.succ :=
   sorry
