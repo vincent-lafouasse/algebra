@@ -13,11 +13,14 @@ variable {G : Type} [Group G]
 
 -- `simp only [mul_assoc]` rewrites everywhere, as often as it can: brackets go to the right
 theorem reassoc (a b c d : G) : (a * b) * (c * d) = a * (b * c) * d :=
-  sorry
+  by simp only [mul_assoc]
 
 -- cancellation lemmas in a `simp only`; `simp?` would tell you which ones
 theorem telescope (a b : G) : a * b * b⁻¹ * a⁻¹ = one :=
-  sorry
+  by
+    rw [mul_assoc a b b⁻¹]
+    rw [mul_inv_cancel, mul_one]
+    rw [mul_inv_cancel]
 
 -- conjugating twice is conjugating by the product
 theorem conj_conj (g h x : G) : g * (h * x * h⁻¹) * g⁻¹ = (g * h) * x * (g * h)⁻¹ :=
