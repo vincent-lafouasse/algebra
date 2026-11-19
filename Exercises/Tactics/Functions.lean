@@ -19,6 +19,8 @@ theorem injective_cancel {f : β → γ} (hf : Function.Injective f) {g₁ g₂ 
   apply hf
   exact congrFun h x
 
+#print Function.Surjective
+
 -- surjective functions cancel on the right: `obtain ⟨x, rfl⟩ := hf y`
 theorem surjective_cancel {f : α → β} (hf : Function.Surjective f) {g₁ g₂ : β → γ}
     (h : g₁ ∘ f = g₂ ∘ f) : g₁ = g₂ := by
@@ -27,8 +29,11 @@ theorem surjective_cancel {f : α → β} (hf : Function.Surjective f) {g₁ g�
   rw [← hx]
   exact congrFun h x
 
-theorem succ_injective : Function.Injective Nat.succ :=
-  sorry
+#print Function.Injective
+
+theorem succ_injective : Function.Injective Nat.succ := by
+  intro a b h
+  exact congrArg Nat.pred h
 
 -- nothing maps to 0: `nomatch` on an impossible equation (or `omega`)
 theorem succ_not_surjective : ¬Function.Surjective Nat.succ :=
