@@ -172,8 +172,14 @@ theorem inv_mul_eq_one (a b : G) : a⁻¹ * b = one ↔ a = b := by
 
 /-! ### Cancellation as `_iff` and as injectivity -/
 
-theorem mul_left_cancel_iff {a b c : G} : a * b = a * c ↔ b = c :=
-  sorry
+theorem mul_left_cancel_iff {a b c : G} : a * b = a * c ↔ b = c := by
+  constructor
+  · intro h
+    have h' := congrArg (a⁻¹ * .) h
+    rw [inv_mul_cancel_left, inv_mul_cancel_left] at h'
+    exact h'
+  · intro h
+    exact congrArg (a * .) h
 
 theorem mul_right_cancel_iff {a b c : G} : b * a = c * a ↔ b = c :=
   sorry
