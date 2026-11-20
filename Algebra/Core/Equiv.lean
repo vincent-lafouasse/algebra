@@ -97,8 +97,11 @@ theorem trans_refl (e : α ≃ β) : e.trans (Equiv.refl β) = e :=
 theorem refl_trans (e : α ≃ β) : (Equiv.refl α).trans e = e :=
   rfl
 
-theorem self_trans_symm (e : α ≃ β) : e.trans e.symm = Equiv.refl α :=
-  sorry
+theorem self_trans_symm (e : α ≃ β) : e.trans e.symm = Equiv.refl α := by
+  ext x
+  rw [refl_apply x]
+  show e.invFun (e.toFun x) = x
+  rw [e.left_inv]
 
 theorem trans_assoc {δ : Sort x} (e₁ : α ≃ β) (e₂ : β ≃ γ) (e₃ : γ ≃ δ) :
     (e₁.trans e₂).trans e₃ = e₁.trans (e₂.trans e₃) :=
