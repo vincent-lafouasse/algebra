@@ -207,8 +207,15 @@ theorem mul_left_injective (a : G) : Function.Injective (· * a) := by
   intro x y eq
   exact mul_right_cancel eq
 
-theorem mul_ne_mul_right (a : G) {b c : G} : a * b ≠ a * c ↔ b ≠ c :=
-  sorry
+theorem mul_ne_mul_right (a : G) {b c : G} : a * b ≠ a * c ↔ b ≠ c := by
+  constructor
+  · intro hneq
+    intro heq
+    have heq' := congrArg (a * ·) heq
+    exact hneq heq'
+  · intro hneq heq
+    rw [mul_left_cancel_iff] at heq
+    exact hneq heq
 
 theorem mul_ne_mul_left (a : G) {b c : G} : b * a ≠ c * a ↔ b ≠ c :=
   sorry
