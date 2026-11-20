@@ -38,8 +38,12 @@ theorem solve_left_unique {a b x y : G} (hx : a * x = b) (hy : a * y = b) : x = 
   exact mul_left_cancel (by rw [hy]; exact hx)
 
 -- `a⁻¹ = a` exactly when `a` squares to one; `calc` for one direction
-theorem inv_eq_self_iff (a : G) : a⁻¹ = a ↔ a * a = one :=
-  sorry
+theorem inv_eq_self_iff (a : G) : a⁻¹ = a ↔ a * a = one := by
+  constructor
+  · intro h
+    rw (occs = .pos) [← h]
+    sorry
+  · sorry
 
 -- if every element squares to one, the group is commutative: `have` the instances you need
 -- (`h (a * b)`, `h a`, `h b`), turn them into statements about inverses, `rw … at`
