@@ -68,8 +68,11 @@ theorem injective_iff_ne (f : α → β) :
   · intro h a b h_ne h_e
     have he' := h h_e
     exact h_ne he'
-  · intro h
-    sorry
+  · intro h a b h_e
+    apply Classical.byContradiction
+    intro h_ne
+    have hf_ne := h a b h_ne
+    exact hf_ne h_e
 
 -- the → direction needs `Classical.choose`, like `Iso.invFun`
 theorem surjective_iff_hasRightInverse (f : α → β) :
