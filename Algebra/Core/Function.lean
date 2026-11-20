@@ -81,7 +81,12 @@ theorem surjective_iff_hasRightInverse (f : α → β) :
   unfold Function.LeftInverse
   unfold Function.Surjective
   constructor
-  · sorry
+  · intro h
+    let g : β → α := λ b => Classical.choose (h b)
+    refine ⟨g, ?_⟩
+    intro y
+    show f (Classical.choose (h y)) = y
+    sorry
   · intro h
     obtain ⟨g, hg⟩ := h
     intro b
