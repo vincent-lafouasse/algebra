@@ -83,8 +83,12 @@ theorem pow_pow (h : Commute a b) (m n : Nat) : Commute (a ^ m) (b ^ n) := by
   exact pow_right h' n
 
 -- g commutes with its own powers
-theorem self_pow (g : G) (n : Nat) : Commute g (g ^ n) :=
-  sorry
+theorem self_pow (g : G) (n : Nat) : Commute g (g ^ n) := by
+  induction n with
+  | zero => rw [pow_zero]; exact one_right g
+  | succ n ih => rw [pow_succ]
+                 have comm_self : Commute g g := sorry
+                 exact mul_right comm_self ih
 
 -- (ab)^n = a^n b^n needs a and b to commute; false in general (try n = 2)
 theorem mul_pow (h : Commute a b) (n : Nat) : (a * b) ^ n = a ^ n * b ^ n :=
