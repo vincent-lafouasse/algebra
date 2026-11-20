@@ -103,33 +103,33 @@ theorem right_one_unique {e : G} (h : ∀ a : G, a * e = a) : e = one :=
 theorem one_unique {e : G} (h : ∀ a : G, a * e = a ∧ e * a = a) : e = one :=
   left_one_unique (fun a => (h a).2)
 
-theorem left_inv_unique {a b : G} (h : b * a = one) : b = a⁻¹ :=
-  calc b
-   _ = (b * a) * a⁻¹   := by rw [mul_inv_cancel_right]
-   _ = one * a⁻¹       := by rw [h]
-   _ = a⁻¹             := by rw [one_mul]
+theorem eq_inv_of_mul_eq_one_left {a b : G} (h : a * b = one) : a = b⁻¹ :=
+  calc a
+   _ = (a * b) * b⁻¹   := by rw [mul_inv_cancel_right]
+   _ = one * b⁻¹       := by rw [h]
+   _ = b⁻¹             := by rw [one_mul]
 
 protected theorem inv_inv (a : G) : a⁻¹⁻¹ = a :=
-  (left_inv_unique (mul_inv_cancel a)).symm
+  (eq_inv_of_mul_eq_one_left (mul_inv_cancel a)).symm
 
-theorem right_inv_unique {a b : G} (h : a * b = one) : b = a⁻¹ :=
-  have h' : a = b⁻¹ := left_inv_unique h
+theorem eq_inv_of_mul_eq_one_right {a b : G} (h : a * b = one) : b = a⁻¹ :=
+  have h' : a = b⁻¹ := eq_inv_of_mul_eq_one_left h
   calc b
    _ = b⁻¹⁻¹ := by rw [Group.inv_inv]
    _ = a⁻¹   := by rw [h']
 
 -- redundant and trivial but satisfying to state
 theorem inv_unique {a b : G} (h : b * a = one ∧ a * b = one) : b = a⁻¹ :=
-  left_inv_unique h.1
+  eq_inv_of_mul_eq_one_left h.1
 
-theorem inv_prod (a b : G) : (a * b)⁻¹ = b⁻¹ * a⁻¹ :=
+theorem mul_inv_rev (a b : G) : (a * b)⁻¹ = b⁻¹ * a⁻¹ :=
   -- tiny lemma: (b⁻¹ * a⁻¹) is the left inverse of (a * b)
   have h : (b⁻¹ * a⁻¹) * (a * b) = one :=
     calc (b⁻¹ * a⁻¹) * (a * b)
      _ = b⁻¹ * (a⁻¹ * (a * b)) := by rw [mul_assoc]
      _ = b⁻¹ * b               := by rw [inv_mul_cancel_left]
      _ = one                   := by rw [inv_mul_cancel]
-  (left_inv_unique h).symm
+  (eq_inv_of_mul_eq_one_left h).symm
 
 theorem mul_right_cancel {a b x : G} (h : a * x = b * x) : a = b :=
   calc a
@@ -145,7 +145,7 @@ theorem mul_left_cancel {a b x : G} (h : x * a = x * b) : a = b :=
 
 theorem inv_one : (one : G)⁻¹ = one :=
   have h := one_mul (one : G)
-  (left_inv_unique h).symm
+  (eq_inv_of_mul_eq_one_left h).symm
 
 theorem inv_injective {a b : G} (h : a⁻¹ = b⁻¹) : a = b :=
   calc a

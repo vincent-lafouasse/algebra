@@ -29,18 +29,18 @@ instance : Pow G Nat := ⟨λ g n => npow n g⟩
 theorem pow_zero (g : G) : g ^ (0 : Nat) = one :=
   rfl
 
-theorem pow_succ (g : G) (n : Nat) : g ^ (n + 1) = g * g ^ n :=
+theorem pow_succ' (g : G) (n : Nat) : g ^ (n + 1) = g * g ^ n :=
   rfl
 
 theorem pow_one (g : G) : g ^ (1 : Nat) = g := by
-  rw [pow_succ g 0]
+  rw [pow_succ' g 0]
   rw [pow_zero]
   rw [mul_one]
 
 theorem one_pow (n : Nat) : (one : G) ^ n = one :=
   match n with
   | 0 => by rw [pow_zero]
-  | Nat.succ n => by rw [pow_succ]
+  | Nat.succ n => by rw [pow_succ']
                      rw [one_mul]
                      exact one_pow n
 
@@ -48,16 +48,16 @@ theorem one_pow (n : Nat) : (one : G) ^ n = one :=
 example (n : Nat) : (one : G) ^ n = one := by
   induction n with
   | zero => rfl
-  | succ n ih => rw [pow_succ, one_mul]; exact ih
+  | succ n ih => rw [pow_succ', one_mul]; exact ih
 
 -- the other way round: needs induction (and `mul_assoc`)
-theorem pow_succ' (g : G) (n : Nat) : g ^ (n + 1) = g ^ n * g := by
+theorem pow_succ (g : G) (n : Nat) : g ^ (n + 1) = g ^ n * g := by
   induction n with
   | zero => rw [pow_zero, one_mul, pow_one]
-  | succ n h => rw [pow_succ g (n + 1)]
+  | succ n h => rw [pow_succ' g (n + 1)]
                 conv => lhs; rw [h]
                 rw [← mul_assoc]
-                rw [← pow_succ]
+                rw [← pow_succ']
 
 end Group
 
@@ -73,7 +73,7 @@ variable {G : Type u} [Group G] {a b : G}
 theorem pow_left (h : Commute a b) (n : Nat) : Commute (a ^ n) b := by
   induction n with
   | zero => rw [pow_zero a]; exact one_left b
-  | succ n h' => rw [pow_succ]; exact mul_left h h'
+  | succ n h' => rw [pow_succ']; exact mul_left h h'
 
 theorem pow_right (h : Commute a b) (n : Nat) : Commute a (b ^ n) :=
   (pow_left h.symm n).symm
@@ -86,7 +86,7 @@ theorem pow_pow (h : Commute a b) (m n : Nat) : Commute (a ^ m) (b ^ n) := by
 theorem self_pow (g : G) (n : Nat) : Commute g (g ^ n) := by
   induction n with
   | zero => rw [pow_zero]; exact one_right g
-  | succ n ih => rw [pow_succ]
+  | succ n ih => rw [pow_succ']
                  have comm_self : g * g = g * g := rfl
                  exact mul_right (Commute.of_eq comm_self) ih
 
@@ -95,12 +95,12 @@ theorem mul_pow (h : Commute a b) (n : Nat) : (a * b) ^ n = a ^ n * b ^ n := by
   induction n with
   | zero => rw [pow_zero, pow_zero, pow_zero]; rw [mul_one]
   | succ n ih => calc (a * b) ^ (n + 1)
-                  _ = (a * b) * (a * b) ^ n := by rw [pow_succ]
+                  _ = (a * b) * (a * b) ^ n := by rw [pow_succ']
                   _ = (a * b) * (a ^ n * b ^ n) := by rw [ih]
                   _ = a * (b * a ^ n) * b ^ n := by simp only [mul_assoc]
                   _ = a * (a ^ n * b) * b ^ n := by rw [Commute.eq (pow_left h n)]
                   _ = (a * a ^ n) * (b * b ^ n) := by simp only [mul_assoc]
-                  _ = a ^ (n + 1) * b ^ (n + 1) := by rw [← pow_succ, ← pow_succ]
+                  _ = a ^ (n + 1) * b ^ (n + 1) := by rw [← pow_succ', ← pow_succ']
 
 end Commute
 
@@ -113,10 +113,10 @@ theorem pow_add (g : G) (m n : Nat) : g ^ (m + n) = g ^ m * g ^ n := by
   induction m with
   | zero => simp; rw [pow_zero, one_mul]
   | succ m ih => rw [Nat.add_right_comm]
-                 rw [pow_succ]
+                 rw [pow_succ']
                  rw [ih]
                  rw [← mul_assoc]
-                 rw [← pow_succ]
+                 rw [← pow_succ']
 
 
 -- induction on n, using `pow_add`
@@ -127,7 +127,7 @@ theorem pow_mul (g : G) (m n : Nat) : g ^ (m * n) = (g ^ m) ^ n := by
                  rw [pow_add]
                  rw [Nat.mul_one]
                  rw [ih]
-                 rw [← pow_succ']
+                 rw [← pow_succ]
 
 theorem pow_two (g : G) : g ^ 2 = g * g :=
   sorry
@@ -229,11 +229,11 @@ def zpowers (g : G) : Subgroup G where
 theorem mem_zpowers_iff (g x : G) : x ∈ zpowers g ↔ ∃ k : Int, g ^ k = x :=
   sorry
 
-theorem mem_zpowers_self (g : G) : g ∈ zpowers g :=
+theorem mem_zpowers (g : G) : g ∈ zpowers g :=
   sorry
 
 -- ⟨g⟩ is the smallest subgroup containing g (state it with `≤` once you have it)
-theorem zpowers_le {g : G} {S : Subgroup G} (hg : g ∈ S) : ∀ x, x ∈ zpowers g → x ∈ S :=
+theorem zpowers_le_of_mem {g : G} {S : Subgroup G} (hg : g ∈ S) : ∀ x, x ∈ zpowers g → x ∈ S :=
   sorry
 
 end Subgroup

@@ -47,7 +47,7 @@ def center (G : Type u) [Group G] : Subgroup G where
   inv_mem := by
     intro a ha g
     have h := congrArg (λ x => x⁻¹) (ha g⁻¹)
-    rw [inv_prod, inv_prod] at h
+    rw [mul_inv_rev, mul_inv_rev] at h
     rw [Group.inv_inv] at h
     exact h.symm
 

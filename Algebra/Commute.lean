@@ -85,32 +85,33 @@ theorem inv_left (h : Commute a b) : Commute a⁻¹ b :=
 protected theorem inv_inv (h : Commute a b) : Commute a⁻¹ b⁻¹ :=
   h |> inv_left |> inv_right
 
-theorem inv_inv_iff : Commute a b ↔ Commute a⁻¹ b⁻¹ := by
+-- oriented like Mathlib's: the inverses are on the left, so `rw` removes them
+theorem inv_inv_iff : Commute a⁻¹ b⁻¹ ↔ Commute a b := by
   constructor
-  · intro h
-    exact Commute.inv_inv h
   · intro h
     have h' := Commute.inv_inv h
     rw [Group.inv_inv, Group.inv_inv] at h'
     exact h'
-
-theorem inv_right_iff : Commute a b ↔ Commute a b⁻¹ := by
-  constructor
   · intro h
-    exact inv_right h
+    exact Commute.inv_inv h
+
+theorem inv_right_iff : Commute a b⁻¹ ↔ Commute a b := by
+  constructor
   · intro h
     have h' := inv_right h
     rw [Group.inv_inv] at h'
     exact h'
-
-theorem inv_left_iff : Commute a b ↔ Commute a⁻¹ b := by
-  constructor
   · intro h
-    exact inv_left h
+    exact inv_right h
+
+theorem inv_left_iff : Commute a⁻¹ b ↔ Commute a b := by
+  constructor
   · intro h
     have h' := inv_left h
     rw [Group.inv_inv] at h'
     exact h'
+  · intro h
+    exact inv_left h
 
 end Group
 

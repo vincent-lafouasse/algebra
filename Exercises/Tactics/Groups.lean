@@ -25,7 +25,7 @@ theorem telescope (a b : G) : a * b * b⁻¹ * a⁻¹ = one :=
 -- conjugating twice is conjugating by the product
 theorem conj_conj (g h x : G) : g * (h * x * h⁻¹) * g⁻¹ = (g * h) * x * (g * h)⁻¹ := by
   simp only [mul_assoc]
-  rw [inv_prod]
+  rw [mul_inv_rev]
 
 -- equations have solutions…
 theorem solve_left (a b : G) : ∃ x, a * x = b := by
@@ -44,7 +44,7 @@ theorem inv_eq_self_iff (a : G) : a⁻¹ = a ↔ a * a = one := by
     rw (config := {occs := .pos [1]}) [← h]
     exact inv_mul_cancel a
   · intro h
-    exact Eq.symm (left_inv_unique h)
+    exact Eq.symm (eq_inv_of_mul_eq_one_left h)
 
 -- if every element squares to one, the group is commutative: `have` the instances you need
 -- (`h (a * b)`, `h a`, `h b`), turn them into statements about inverses, `rw … at`
