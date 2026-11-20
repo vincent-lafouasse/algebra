@@ -43,13 +43,11 @@ theorem map_inv (f : G →* H) (a : G) : f a⁻¹ = (f a)⁻¹ :=
 -- two homs are equal if they agree everywhere
 @[ext]
 theorem ext {f g : G →* H} (h : ∀ a, f a = g a) : f = g := by
-  cases f with
-  | mk f' hf =>
-    cases g with
-    | mk g' hg =>
-      have e : f' = g' := funext h
-      subst e
-      rfl
+  obtain ⟨f', hf⟩ := f
+  obtain ⟨g', hg⟩ := g
+  have e : f' = g' := funext h
+  subst e
+  rfl
 
 protected def id (G : Type u) [Group G] : G →* G where
   toFun := λ x => x
