@@ -48,8 +48,17 @@ theorem inv_eq_self_iff (a : G) : a⁻¹ = a ↔ a * a = one := by
 
 -- if every element squares to one, the group is commutative: `have` the instances you need
 -- (`h (a * b)`, `h a`, `h b`), turn them into statements about inverses, `rw … at`
-theorem comm_of_sq_eq_one (h : ∀ x : G, x * x = one) (a b : G) : a * b = b * a :=
-  sorry
+theorem comm_of_sq_eq_one (h : ∀ x : G, x * x = one) (a b : G) : a * b = b * a := by
+  have ha := h a
+  have hb := h b
+  have hab := h (a * b)
+  rw [← inv_eq_self_iff] at ha
+  rw [← inv_eq_self_iff] at hb
+  rw [← inv_eq_self_iff] at hab
+  calc a * b
+   _ = (a * b)⁻¹ := by rw [hab]
+   _ = b⁻¹ * a⁻¹ := by rw [mul_inv_rev]
+   _ = b * a := by rw [ha, hb]
 
 -- `(ab)⁻¹ = a⁻¹b⁻¹` iff `a` and `b` commute: rewrite the right side as an inverse, then `inv_inj`
 theorem inv_mul_iff_comm (a b : G) : (a * b)⁻¹ = a⁻¹ * b⁻¹ ↔ a * b = b * a :=
