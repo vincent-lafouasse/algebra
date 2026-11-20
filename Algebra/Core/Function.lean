@@ -63,8 +63,13 @@ theorem bijective_id : Bijective (λ x : α => x) := by
 -- the contrapositive form: distinct inputs give distinct outputs
 -- (the ← direction needs classical logic: `Classical.byContradiction`)
 theorem injective_iff_ne (f : α → β) :
-    Function.Injective f ↔ ∀ a b : α, a ≠ b → f a ≠ f b :=
-  sorry
+    Function.Injective f ↔ ∀ a b : α, a ≠ b → f a ≠ f b := by
+  constructor
+  · intro h a b h_ne h_e
+    have he' := h h_e
+    exact h_ne he'
+  · intro h
+    sorry
 
 -- the → direction needs `Classical.choose`, like `Iso.invFun`
 theorem surjective_iff_hasRightInverse (f : α → β) :
