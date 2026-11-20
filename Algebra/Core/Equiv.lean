@@ -79,8 +79,8 @@ theorem refl_apply (x : α) : Equiv.refl α x = x :=
 theorem trans_apply (e : α ≃ β) (e' : β ≃ γ) (x : α) : e.trans e' x = e' (e x) :=
   rfl
 
-theorem symm_apply_apply (e : α ≃ β) (x : α) : e.symm (e x) = x :=
-  sorry
+theorem symm_apply_apply (e : α ≃ β) (x : α) : e.symm (e x) = x := by
+  exact e.left_inv x
 
 theorem apply_symm_apply (e : α ≃ β) (y : β) : e (e.symm y) = y :=
   sorry
