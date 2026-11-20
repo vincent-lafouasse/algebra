@@ -35,9 +35,12 @@ theorem ext {e e' : α ≃ β} (h : ∀ x, e x = e' x) : e = e' := by
   obtain ⟨f', g', hl', hr'⟩ := e'
   have hfe : f = f' := funext h
   subst hfe
+  clear h
   have hge : g = g' := by
-    funext x
-    sorry
+    funext y
+    conv => lhs; rw [← hr y]
+    conv => rhs; rw [← hr y]
+    rw [hl, hl']
   subst hge
   rfl
 
