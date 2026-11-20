@@ -115,11 +115,13 @@ protected theorem injective (e : α ≃ β) : Function.Injective e := by
   rw [e.left_inv, e.left_inv] at he'
   exact he'
 
-protected theorem surjective (e : α ≃ β) : Function.Surjective e :=
-  sorry
+protected theorem surjective (e : α ≃ β) : Function.Surjective e := by
+  intro y
+  refine ⟨e.invFun y, ?_⟩
+  rw [e.right_inv]
 
 protected theorem bijective (e : α ≃ β) : Bijective e :=
-  sorry
+  ⟨Equiv.injective e, Equiv.surjective e⟩
 
 -- the converse needs a choice of preimages: `invFun` from Core/Function.lean
 noncomputable def ofBijective (f : α → β) (hf : Bijective f) : α ≃ β where
