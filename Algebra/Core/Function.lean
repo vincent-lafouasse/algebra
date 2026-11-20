@@ -38,8 +38,13 @@ theorem injective_comp {g : β → γ} {f : α → β}
   sorry
 
 theorem surjective_comp {g : β → γ} {f : α → β}
-    (hg : Function.Surjective g) (hf : Function.Surjective f) : Function.Surjective (g ∘ f) :=
-  sorry
+    (hg : Function.Surjective g) (hf : Function.Surjective f) : Function.Surjective (g ∘ f) := by
+  intro (g : γ)
+  obtain ⟨b, hb⟩ := hg g
+  obtain ⟨a, ha⟩ := hf b
+  refine ⟨a, ?_⟩
+  rw [← ha] at hb
+  exact hb
 
 theorem bijective_comp {g : β → γ} {f : α → β} (hg : Bijective g) (hf : Bijective f) :
     Bijective (g ∘ f) := 
