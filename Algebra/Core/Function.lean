@@ -42,10 +42,8 @@ theorem surjective_comp {g : β → γ} {f : α → β}
   sorry
 
 theorem bijective_comp {g : β → γ} {f : α → β} (hg : Bijective g) (hf : Bijective f) :
-    Bijective (g ∘ f) := by
-  constructor
-  · exact injective_comp hg.1 hf.1
-  · exact surjective_comp hg.2 hf.2
+    Bijective (g ∘ f) := 
+  ⟨injective_comp hg.1 hf.1, surjective_comp hg.2 hf.2⟩
 
 theorem bijective_id : Bijective (λ x : α => x) :=
   sorry
