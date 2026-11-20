@@ -170,5 +170,33 @@ theorem inv_mul_eq_one (a b : G) : a⁻¹ * b = one ↔ a = b := by
   rw [one_mul]
   rw [inv_inj]
 
+/-! ### Cancellation as `_iff` and as injectivity -/
+
+theorem mul_left_cancel_iff {a b c : G} : a * b = a * c ↔ b = c :=
+  sorry
+
+theorem mul_right_cancel_iff {a b c : G} : b * a = c * a ↔ b = c :=
+  sorry
+
+-- same statement as `mul_left_cancel_iff`, with `a` explicit (Mathlib keeps both)
+theorem mul_right_inj (a : G) {b c : G} : a * b = a * c ↔ b = c :=
+  sorry
+
+theorem mul_left_inj (a : G) {b c : G} : b * a = c * a ↔ b = c :=
+  sorry
+
+-- `(a * ·)` is `λ x => a * x`: left multiplication by `a`
+theorem mul_right_injective (a : G) : Function.Injective (a * ·) :=
+  sorry
+
+theorem mul_left_injective (a : G) : Function.Injective (· * a) :=
+  sorry
+
+theorem mul_ne_mul_right (a : G) {b c : G} : a * b ≠ a * c ↔ b ≠ c :=
+  sorry
+
+theorem mul_ne_mul_left (a : G) {b c : G} : b * a ≠ c * a ↔ b ≠ c :=
+  sorry
+
 end Group
 end My

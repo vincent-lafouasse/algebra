@@ -129,6 +129,26 @@ theorem pow_mul (g : G) (m n : Nat) : g ^ (m * n) = (g ^ m) ^ n := by
                  rw [ih]
                  rw [← pow_succ']
 
+theorem pow_two (g : G) : g ^ 2 = g * g :=
+  sorry
+
+theorem pow_three (g : G) : g ^ 3 = g * (g * g) :=
+  sorry
+
+theorem pow_three' (g : G) : g ^ 3 = g * g * g :=
+  sorry
+
+-- the other bracketing of `pow_mul`
+theorem pow_mul' (g : G) (m n : Nat) : g ^ (m * n) = (g ^ n) ^ m :=
+  sorry
+
+-- powers of the same element commute
+theorem pow_mul_comm (g : G) (m n : Nat) : g ^ m * g ^ n = g ^ n * g ^ m :=
+  sorry
+
+theorem pow_right_comm (g : G) (m n : Nat) : (g ^ m) ^ n = (g ^ n) ^ m :=
+  sorry
+
 theorem inv_pow (g : G) (n : Nat) : (g⁻¹) ^ n = (g ^ n)⁻¹ := by
   have h : (g⁻¹) ^ n * (g ^ n)⁻¹ = one := sorry
   sorry
@@ -157,6 +177,12 @@ theorem zpow_one (g : G) : g ^ (1 : Int) = g :=
 
 -- split on k; `-(ofNat (n+1)) = negSucc n` is the Int fact you need
 theorem zpow_neg (g : G) (k : Int) : g ^ (-k) = (g ^ k)⁻¹ :=
+  sorry
+
+theorem zpow_two (g : G) : g ^ (2 : Int) = g * g :=
+  sorry
+
+theorem zpow_neg_one (g : G) : g ^ (-1 : Int) = g⁻¹ :=
   sorry
 
 -- stepping stones for `zpow_add`: one more / one less

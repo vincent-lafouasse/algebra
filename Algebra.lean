@@ -5,6 +5,7 @@ import Algebra.Core.Fin
 import Algebra.Group
 import Algebra.Commute
 import Algebra.Pow
+import Algebra.CommGroup
 import Algebra.Hom
 import Algebra.Subgroup
 import Algebra.Normal

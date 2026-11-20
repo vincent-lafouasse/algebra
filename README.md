@@ -13,6 +13,7 @@ sense, so the code should feel familiar to Mathlib users.
 | `Algebra/Group.lean` | the `Group` class and basic lemmas (cancellation, inverses) |
 | `Algebra/Commute.lean` | commuting elements `Commute a b`, centralizers |
 | `Algebra/Pow.lean` | powers `g ^ n` (Nat and Int), the subgroup `zpowers g` |
+| `Algebra/CommGroup.lean` | commutative groups `CommGroup`, `Commute.all` |
 | `Algebra/Hom.lean` | homomorphisms `G →* H`, composition, `ext` |
 | `Algebra/Subgroup.lean` | subgroups, center, kernel, image, preimage |
 | `Algebra/Normal.lean` | normal subgroups |
