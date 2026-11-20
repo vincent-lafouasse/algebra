@@ -61,8 +61,15 @@ theorem comm_of_sq_eq_one (h : ∀ x : G, x * x = one) (a b : G) : a * b = b * a
    _ = b * a := by rw [ha, hb]
 
 -- `(ab)⁻¹ = a⁻¹b⁻¹` iff `a` and `b` commute: rewrite the right side as an inverse, then `inv_inj`
-theorem inv_mul_iff_comm (a b : G) : (a * b)⁻¹ = a⁻¹ * b⁻¹ ↔ a * b = b * a :=
-  sorry
+theorem inv_mul_iff_comm (a b : G) : (a * b)⁻¹ = a⁻¹ * b⁻¹ ↔ a * b = b * a := by
+  constructor
+  · intro h
+    sorry
+  · intro h
+    have h_comm := Commute.of_eq h
+    rw [← Commute.inv_inv_iff] at h_comm
+    rw [Commute.eq h_comm]
+    exact mul_inv_rev a b
 
 -- if a commutes with b, it commutes with b⁻¹: move a factor across with an `_iff` lemma
 theorem comm_inv {a b : G} (h : a * b = b * a) : a * b⁻¹ = b⁻¹ * a := by
