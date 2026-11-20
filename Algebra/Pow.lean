@@ -91,8 +91,16 @@ theorem self_pow (g : G) (n : Nat) : Commute g (g ^ n) := by
                  exact mul_right (Commute.of_eq comm_self) ih
 
 -- (ab)^n = a^n b^n needs a and b to commute; false in general (try n = 2)
-theorem mul_pow (h : Commute a b) (n : Nat) : (a * b) ^ n = a ^ n * b ^ n :=
-  sorry
+theorem mul_pow (h : Commute a b) (n : Nat) : (a * b) ^ n = a ^ n * b ^ n := by
+  induction n with
+  | zero => rw [pow_zero, pow_zero, pow_zero]; rw [mul_one]
+  | succ n ih => calc (a * b) ^ (n + 1)
+                  _ = (a * b) * (a * b) ^ n := by rw [pow_succ]
+                  _ = (a * b) * (a ^ n * b ^ n) := by rw [ih]
+                  _ = a * (b * a ^ n) * b ^ n := by simp only [mul_assoc]
+                  _ = a * (a ^ n * b) * b ^ n := by rw [Commute.eq (pow_left h n)]
+                  _ = (a * a ^ n) * (b * b ^ n) := by simp only [mul_assoc]
+                  _ = a ^ (n + 1) * b ^ (n + 1) := by rw [← pow_succ, ← pow_succ]
 
 end Commute
 
