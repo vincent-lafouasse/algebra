@@ -35,8 +35,10 @@ theorem coe_toHom (e : G ≃* H) : (e.toHom : G → H) = e := rfl
 theorem toHom_apply (e : G ≃* H) (x : G) : e.toHom x = e x := rfl
 
 -- so that `rw` works on `e (x * y)` without first going back to `e.toHom`
-theorem map_mul (e : G ≃* H) (x y : G) : e (x * y) = e x * e y :=
-  sorry
+theorem map_mul (e : G ≃* H) (x y : G) : e (x * y) = e x * e y := by
+  rw [← toHom_apply]
+  rw [Hom.map_mul]
+  rfl
 
 -- pointwise versions of left_inv / right_inv
 theorem invHom_toHom (e : G ≃* H) (x : G) : e.invHom (e.toHom x) = x := by
