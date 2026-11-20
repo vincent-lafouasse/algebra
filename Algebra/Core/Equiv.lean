@@ -36,20 +36,20 @@ theorem ext {e e' : α ≃ β} (h : ∀ x, e x = e' x) : e = e' :=
 /-! ### refl, symm, trans -/
 
 protected def refl (α : Sort u) : α ≃ α where
-  toFun := sorry
-  invFun := sorry
-  left_inv := sorry
-  right_inv := sorry
+  toFun := λ x => x
+  invFun := λ x => x
+  left_inv := by intro x; rfl
+  right_inv := by intro x; rfl
 
 protected def symm (e : α ≃ β) : β ≃ α where
-  toFun := sorry
-  invFun := sorry
-  left_inv := sorry
-  right_inv := sorry
+  toFun := e.invFun
+  invFun := e.toFun
+  left_inv := e.right_inv
+  right_inv := e.left_inv
 
 protected def trans (e : α ≃ β) (e' : β ≃ γ) : α ≃ γ where
-  toFun := sorry
-  invFun := sorry
+  toFun := e'.toFun ∘ e.toFun
+  invFun := e.invFun ∘ e'.invFun
   left_inv := sorry
   right_inv := sorry
 
