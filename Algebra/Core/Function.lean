@@ -7,8 +7,9 @@ variable {α : Sort u} {β : Sort v}
 -- not in core Lean (Mathlib has it)
 def Bijective (f : α → β) : Prop := Function.Injective f ∧ Function.Surjective f
 
-theorem bijective_iff (f : α → β) : Bijective f ↔ Function.Injective f ∧ Function.Surjective f :=
-  sorry
+theorem bijective_iff (f : α → β) : Bijective f ↔ Function.Injective f ∧ Function.Surjective f := by
+  unfold Bijective
+  rfl
 
 -- careful with core's naming: `Function.RightInverse g f` means `∀ y, f (g y) = y`
 -- i.e. g is a right inverse *of f*. `#print` them before starting.
