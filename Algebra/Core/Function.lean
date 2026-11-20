@@ -95,8 +95,18 @@ theorem surjective_iff_hasRightInverse (f : α → β) :
 
 -- `Nonempty α` is needed: if α is empty and β isn't, there is no `β → α` at all
 theorem injective_iff_hasLeftInverse [Nonempty α] (f : α → β) :
-    Function.Injective f ↔ ∃ g : β → α, Function.LeftInverse g f :=
-  sorry
+    Function.Injective f ↔ ∃ g : β → α, Function.LeftInverse g f := by
+  unfold Function.Injective
+  unfold Function.LeftInverse
+  constructor
+  · intro h
+    sorry
+  · intro h
+    obtain ⟨g, hg⟩ := h
+    intro a b he
+    rw [← hg a]
+    rw [← hg b]
+    exact congrArg g he
 
 theorem bijective_iff_hasInverse (f : α → β) :
     Bijective f ↔ ∃ g : β → α, Function.LeftInverse g f ∧ Function.RightInverse g f :=
