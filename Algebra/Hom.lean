@@ -90,10 +90,9 @@ theorem comp_id (f : G →* H) : f ∘* Hom.id G = f :=
   ext h
 
 theorem comp_assoc (h : K →* L) (g : H →* K) (f : G →* H) :
-    (h ∘* g) ∘* f = h ∘* (g ∘* f) :=
-  have h' : ∀ x : G, ((h ∘* g) ∘* f) x = (h ∘* (g ∘* f)) x :=
-    λ _ => rfl
-  ext h'
+    (h ∘* g) ∘* f = h ∘* (g ∘* f) := by
+  ext x
+  rfl
 
 theorem map_mul_inv (f : G →* H) (a b : G) : f (a * b⁻¹) = f a * (f b)⁻¹ := by
   rw [map_mul]
