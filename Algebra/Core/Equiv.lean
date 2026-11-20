@@ -33,6 +33,11 @@ instance : CoeFun (α ≃ β) (fun _ => α → β) where
 theorem ext {e e' : α ≃ β} (h : ∀ x, e x = e' x) : e = e' := by
   obtain ⟨f, g, hl, hr⟩ := e
   obtain ⟨f', g', hl', hr'⟩ := e'
+  have hfe : f = f' := funext h
+  subst hfe
+  have hge : g = g' := by
+    funext x
+    sorry
   sorry
 
 /-! ### refl, symm, trans -/
