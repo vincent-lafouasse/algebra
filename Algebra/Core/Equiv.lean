@@ -87,8 +87,9 @@ theorem apply_symm_apply (e : α ≃ β) (y : β) : e (e.symm y) = y := by
 
 /-! ### Algebra of equivalences (all by `ext`) -/
 
-theorem symm_symm (e : α ≃ β) : e.symm.symm = e :=
-  sorry
+theorem symm_symm (e : α ≃ β) : e.symm.symm = e := by
+  ext x
+  rfl
 
 theorem trans_refl (e : α ≃ β) : e.trans (Equiv.refl β) = e :=
   sorry
