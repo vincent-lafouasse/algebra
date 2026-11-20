@@ -34,8 +34,10 @@ section
 variable {γ : Sort w}
 
 theorem injective_comp {g : β → γ} {f : α → β}
-    (hg : Function.Injective g) (hf : Function.Injective f) : Function.Injective (g ∘ f) :=
-  sorry
+    (hg : Function.Injective g) (hf : Function.Injective f) : Function.Injective (g ∘ f) := by
+  intro a1 a2 h_gf_eq
+  have h_f_eq := hg h_gf_eq
+  exact hf h_f_eq
 
 theorem surjective_comp {g : β → γ} {f : α → β}
     (hg : Function.Surjective g) (hf : Function.Surjective f) : Function.Surjective (g ∘ f) := by
