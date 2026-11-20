@@ -217,8 +217,15 @@ theorem mul_ne_mul_right (a : G) {b c : G} : a * b ≠ a * c ↔ b ≠ c := by
     rw [mul_left_cancel_iff] at heq
     exact hneq heq
 
-theorem mul_ne_mul_left (a : G) {b c : G} : b * a ≠ c * a ↔ b ≠ c :=
-  sorry
+theorem mul_ne_mul_left (a : G) {b c : G} : b * a ≠ c * a ↔ b ≠ c := by
+  constructor
+  · intro hneq
+    intro heq
+    have heq' := congrArg (· * a) heq
+    exact hneq heq'
+  · intro hneq heq
+    rw [mul_right_cancel_iff] at heq
+    exact hneq heq
 
 end Group
 end My
