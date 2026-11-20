@@ -86,7 +86,7 @@ theorem surjective_iff_hasRightInverse (f : α → β) :
     refine ⟨g, ?_⟩
     intro y
     show f (Classical.choose (h y)) = y
-    sorry
+    exact Classical.choose_spec (h y)
   · intro h
     obtain ⟨g, hg⟩ := h
     intro b
