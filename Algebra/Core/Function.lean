@@ -76,8 +76,17 @@ theorem injective_iff_ne (f : α → β) :
 
 -- the → direction needs `Classical.choose`, like `Iso.invFun`
 theorem surjective_iff_hasRightInverse (f : α → β) :
-    Function.Surjective f ↔ ∃ g : β → α, Function.RightInverse g f :=
-  sorry
+    Function.Surjective f ↔ ∃ g : β → α, Function.RightInverse g f := by
+  unfold Function.RightInverse
+  unfold Function.LeftInverse
+  unfold Function.Surjective
+  constructor
+  · sorry
+  · intro h
+    obtain ⟨g, hg⟩ := h
+    intro b
+    have hgb := hg b
+    exact ⟨g b, hgb⟩
 
 -- `Nonempty α` is needed: if α is empty and β isn't, there is no `β → α` at all
 theorem injective_iff_hasLeftInverse [Nonempty α] (f : α → β) :
