@@ -60,24 +60,6 @@ theorem bijective_id : Bijective (λ x : α => x) := by
     refine ⟨y, ?_⟩
     rfl
 
--- a two-sided inverse makes f bijective (the converse is `Equiv.ofBijective`)
-theorem bijective_of_inverse {f : α → β} {g : β → α}
-    (hl : Function.LeftInverse g f) (hr : Function.RightInverse g f) : Bijective f :=
-  sorry
-
--- if g ∘ f is injective, f is; if g ∘ f is surjective, g is
-theorem injective_of_comp {g : β → γ} {f : α → β} (h : Function.Injective (g ∘ f)) :
-    Function.Injective f :=
-  sorry
-
-theorem surjective_of_comp {g : β → γ} {f : α → β} (h : Function.Surjective (g ∘ f)) :
-    Function.Surjective g :=
-  sorry
-
-end
-
-/-
-
 -- the contrapositive form: distinct inputs give distinct outputs
 -- (the ← direction needs classical logic: `Classical.byContradiction`)
 theorem injective_iff_ne (f : α → β) :
@@ -98,6 +80,20 @@ theorem bijective_iff_hasInverse (f : α → β) :
     Bijective f ↔ ∃ g : β → α, Function.LeftInverse g f ∧ Function.RightInverse g f :=
   sorry
 
--/
+-- a two-sided inverse makes f bijective (the converse is `Equiv.ofBijective`)
+theorem bijective_of_inverse {f : α → β} {g : β → α}
+    (hl : Function.LeftInverse g f) (hr : Function.RightInverse g f) : Bijective f :=
+  sorry
+
+-- if g ∘ f is injective, f is; if g ∘ f is surjective, g is
+theorem injective_of_comp {g : β → γ} {f : α → β} (h : Function.Injective (g ∘ f)) :
+    Function.Injective f :=
+  sorry
+
+theorem surjective_of_comp {g : β → γ} {f : α → β} (h : Function.Surjective (g ∘ f)) :
+    Function.Surjective g :=
+  sorry
+
+end
 
 end My
