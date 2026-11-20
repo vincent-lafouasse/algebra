@@ -108,8 +108,6 @@ namespace Group
 
 variable {G : Type u} [Group G]
 
-#check @Nat.add_right_comm
-
 -- induction on m
 theorem pow_add (g : G) (m n : Nat) : g ^ (m + n) = g ^ m * g ^ n := by
   induction m with
@@ -122,8 +120,14 @@ theorem pow_add (g : G) (m n : Nat) : g ^ (m + n) = g ^ m * g ^ n := by
 
 
 -- induction on n, using `pow_add`
-theorem pow_mul (g : G) (m n : Nat) : g ^ (m * n) = (g ^ m) ^ n :=
-  sorry
+theorem pow_mul (g : G) (m n : Nat) : g ^ (m * n) = (g ^ m) ^ n := by
+  induction n with
+  | zero => rw [Nat.mul_zero, pow_zero, pow_zero]
+  | succ n ih => rw [Nat.left_distrib]
+                 rw [pow_add]
+                 rw [Nat.mul_one]
+                 rw [ih]
+                 rw [← pow_succ']
 
 theorem inv_pow (g : G) (n : Nat) : (g⁻¹) ^ n = (g ^ n)⁻¹ :=
   sorry
