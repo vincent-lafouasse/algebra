@@ -104,8 +104,8 @@ theorem self_trans_symm (e : α ≃ β) : e.trans e.symm = Equiv.refl α := by
   rw [e.left_inv]
 
 theorem trans_assoc {δ : Sort x} (e₁ : α ≃ β) (e₂ : β ≃ γ) (e₃ : γ ≃ δ) :
-    (e₁.trans e₂).trans e₃ = e₁.trans (e₂.trans e₃) :=
-  sorry
+    (e₁.trans e₂).trans e₃ = e₁.trans (e₂.trans e₃) := by
+  rfl
 
 /-! ### Equivalences are exactly the bijections -/
 
