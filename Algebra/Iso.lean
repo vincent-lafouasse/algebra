@@ -20,6 +20,24 @@ namespace Iso
 variable {G : Type u} {H : Type v} {K : Type w}
 variable [Group G] [Group H] [Group K]
 
+/-! ### An isomorphism is a function
+
+`e x` means `e.toHom x`. `@[coe]` makes goals display it as `e x` (or `⇑e`), not as
+`Iso.toFun e x`; `coe_toHom` / `toHom_apply` are the interface between the two spellings. -/
+
+@[coe] def toFun (e : G ≃* H) : G → H := e.toHom
+
+instance : CoeFun (G ≃* H) (fun _ => G → H) where
+  coe := Iso.toFun
+
+theorem coe_toHom (e : G ≃* H) : (e.toHom : G → H) = e := rfl
+
+theorem toHom_apply (e : G ≃* H) (x : G) : e.toHom x = e x := rfl
+
+-- so that `rw` works on `e (x * y)` without first going back to `e.toHom`
+theorem map_mul (e : G ≃* H) (x y : G) : e (x * y) = e x * e y :=
+  sorry
+
 -- pointwise versions of left_inv / right_inv
 theorem invHom_toHom (e : G ≃* H) (x : G) : e.invHom (e.toHom x) = x := by
   rw (config := { occs := .pos [2] }) [← Hom.id_apply x]
