@@ -61,8 +61,16 @@ protected def symm (e : α ≃ β) : β ≃ α where
 protected def trans (e : α ≃ β) (e' : β ≃ γ) : α ≃ γ where
   toFun := e'.toFun ∘ e.toFun
   invFun := e.invFun ∘ e'.invFun
-  left_inv := sorry
-  right_inv := sorry
+  left_inv := by
+    intro x
+    show e.invFun (e'.invFun (e'.toFun (e.toFun x))) = x
+    rw [e'.left_inv]
+    rw [e.left_inv]
+  right_inv := by
+    intro x
+    show e'.toFun (e.toFun (e.invFun (e'.invFun x))) = x
+    rw [e.right_inv]
+    rw [e'.right_inv]
 
 -- computation lemmas (`rfl` once the defs exist)
 theorem refl_apply (x : α) : Equiv.refl α x = x :=
