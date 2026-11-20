@@ -38,7 +38,8 @@ theorem ext {e e' : α ≃ β} (h : ∀ x, e x = e' x) : e = e' := by
   have hge : g = g' := by
     funext x
     sorry
-  sorry
+  subst hge
+  rfl
 
 /-! ### refl, symm, trans -/
 
