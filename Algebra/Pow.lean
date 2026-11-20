@@ -87,8 +87,8 @@ theorem self_pow (g : G) (n : Nat) : Commute g (g ^ n) := by
   induction n with
   | zero => rw [pow_zero]; exact one_right g
   | succ n ih => rw [pow_succ]
-                 have comm_self : Commute g g := sorry
-                 exact mul_right comm_self ih
+                 have comm_self : g * g = g * g := rfl
+                 exact mul_right (Commute.of_eq comm_self) ih
 
 -- (ab)^n = a^n b^n needs a and b to commute; false in general (try n = 2)
 theorem mul_pow (h : Commute a b) (n : Nat) : (a * b) ^ n = a ^ n * b ^ n :=
