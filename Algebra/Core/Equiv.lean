@@ -131,7 +131,7 @@ noncomputable def ofBijective (f : α → β) (hf : Bijective f) : α ≃ β whe
   right_inv := sorry
 
 theorem ofBijective_apply (f : α → β) (hf : Bijective f) (x : α) : ofBijective f hf x = f x :=
-  sorry
+  rfl
 
 end Equiv
 
