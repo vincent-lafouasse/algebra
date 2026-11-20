@@ -116,7 +116,12 @@ theorem bijective_iff_hasInverse (f : α → β) :
     rw [surjective_iff_hasRightInverse] at h_surj
     sorry
   · intro h
-    sorry
+    obtain ⟨g, h_left, h_right⟩ := h
+    have h_right : ∃ g : β → α, Function.RightInverse g f := ⟨g, h_right⟩
+    rw [← surjective_iff_hasRightInverse] at h_right
+    have h_left : ∃ g : β → α, Function.LeftInverse g f := ⟨g, h_left⟩
+    rw [← injective_iff_hasLeftInverse] at h_left
+    exact ⟨h_left, h_right⟩
 
 -- a two-sided inverse makes f bijective (the converse is `Equiv.ofBijective`)
 theorem bijective_of_inverse {f : α → β} {g : β → α}
