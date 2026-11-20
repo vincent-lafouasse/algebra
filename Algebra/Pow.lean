@@ -129,7 +129,8 @@ theorem pow_mul (g : G) (m n : Nat) : g ^ (m * n) = (g ^ m) ^ n := by
                  rw [ih]
                  rw [← pow_succ']
 
-theorem inv_pow (g : G) (n : Nat) : (g⁻¹) ^ n = (g ^ n)⁻¹ :=
+theorem inv_pow (g : G) (n : Nat) : (g⁻¹) ^ n = (g ^ n)⁻¹ := by
+  have h : (g⁻¹) ^ n * (g ^ n)⁻¹ = one := sorry
   sorry
 
 /-! ### Integer powers -/
