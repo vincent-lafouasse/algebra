@@ -78,8 +78,9 @@ theorem pow_left (h : Commute a b) (n : Nat) : Commute (a ^ n) b := by
 theorem pow_right (h : Commute a b) (n : Nat) : Commute a (b ^ n) :=
   (pow_left h.symm n).symm
 
-theorem pow_pow (h : Commute a b) (m n : Nat) : Commute (a ^ m) (b ^ n) :=
-  sorry
+theorem pow_pow (h : Commute a b) (m n : Nat) : Commute (a ^ m) (b ^ n) := by
+  have h' := pow_left h m
+  exact pow_right h' n
 
 -- g commutes with its own powers
 theorem self_pow (g : G) (n : Nat) : Commute g (g ^ n) :=
