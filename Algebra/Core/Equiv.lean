@@ -92,10 +92,10 @@ theorem symm_symm (e : α ≃ β) : e.symm.symm = e := by
   rfl
 
 theorem trans_refl (e : α ≃ β) : e.trans (Equiv.refl β) = e :=
-  sorry
+  rfl
 
 theorem refl_trans (e : α ≃ β) : (Equiv.refl α).trans e = e :=
-  sorry
+  rfl
 
 theorem self_trans_symm (e : α ≃ β) : e.trans e.symm = Equiv.refl α :=
   sorry
