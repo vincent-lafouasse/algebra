@@ -30,7 +30,9 @@ instance : CoeFun (α ≃ β) (fun _ => α → β) where
 
 -- like `Iso.ext`: the inverse is determined by the function, so only `toFun` matters
 @[ext]
-theorem ext {e e' : α ≃ β} (h : ∀ x, e x = e' x) : e = e' :=
+theorem ext {e e' : α ≃ β} (h : ∀ x, e x = e' x) : e = e' := by
+  obtain ⟨f, g, hl, hr⟩ := e
+  obtain ⟨f', g', hl', hr'⟩ := e'
   sorry
 
 /-! ### refl, symm, trans -/
