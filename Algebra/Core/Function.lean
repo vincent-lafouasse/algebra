@@ -52,8 +52,13 @@ theorem bijective_comp {g : β → γ} {f : α → β} (hg : Bijective g) (hf : 
     Bijective (g ∘ f) := 
   ⟨injective_comp hg.1 hf.1, surjective_comp hg.2 hf.2⟩
 
-theorem bijective_id : Bijective (λ x : α => x) :=
-  sorry
+theorem bijective_id : Bijective (λ x : α => x) := by
+  constructor
+  · intro a b h
+    exact h
+  · intro y
+    refine ⟨y, ?_⟩
+    rfl
 
 -- a two-sided inverse makes f bijective (the converse is `Equiv.ofBijective`)
 theorem bijective_of_inverse {f : α → β} {g : β → α}
