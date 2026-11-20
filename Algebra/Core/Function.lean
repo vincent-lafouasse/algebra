@@ -118,7 +118,12 @@ theorem bijective_iff_hasInverse (f : α → β) :
   · intro h
     obtain ⟨g, h_left, h_right⟩ := h
     apply And.intro
-    sorry
+    intro a b h_eq
+    unfold Function.LeftInverse at h_left
+    have h_eq := congrArg g h_eq
+    rw [← h_left a]
+    rw [← h_left b]
+    exact h_eq
     rw [surjective_iff_hasRightInverse]
     exact ⟨g, h_right⟩
 
