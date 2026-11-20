@@ -181,8 +181,14 @@ theorem mul_left_cancel_iff {a b c : G} : a * b = a * c ↔ b = c := by
   · intro h
     exact congrArg (a * .) h
 
-theorem mul_right_cancel_iff {a b c : G} : b * a = c * a ↔ b = c :=
-  sorry
+theorem mul_right_cancel_iff {a b c : G} : b * a = c * a ↔ b = c := by
+  constructor
+  · intro h
+    have h' := congrArg (· * a⁻¹) h
+    rw [mul_inv_cancel_right, mul_inv_cancel_right] at h'
+    exact h'
+  · intro h
+    exact congrArg (. * a) h
 
 -- same statement as `mul_left_cancel_iff`, with `a` explicit (Mathlib keeps both)
 theorem mul_right_inj (a : G) {b c : G} : a * b = a * c ↔ b = c :=
