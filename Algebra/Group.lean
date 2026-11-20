@@ -198,11 +198,14 @@ theorem mul_left_inj (a : G) {b c : G} : b * a = c * a ↔ b = c :=
   mul_right_cancel_iff
 
 -- `(a * ·)` is `λ x => a * x`: left multiplication by `a`
-theorem mul_right_injective (a : G) : Function.Injective (a * ·) :=
-  sorry
+theorem mul_right_injective (a : G) : Function.Injective (a * ·) := by
+  intro x y eq
+  change a * x = a * y at eq
+  exact mul_left_cancel eq
 
-theorem mul_left_injective (a : G) : Function.Injective (· * a) :=
-  sorry
+theorem mul_left_injective (a : G) : Function.Injective (· * a) := by
+  intro x y eq
+  exact mul_right_cancel eq
 
 theorem mul_ne_mul_right (a : G) {b c : G} : a * b ≠ a * c ↔ b ≠ c :=
   sorry
