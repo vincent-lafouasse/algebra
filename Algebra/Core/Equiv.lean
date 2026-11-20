@@ -109,8 +109,11 @@ theorem trans_assoc {δ : Sort x} (e₁ : α ≃ β) (e₂ : β ≃ γ) (e₃ : 
 
 /-! ### Equivalences are exactly the bijections -/
 
-protected theorem injective (e : α ≃ β) : Function.Injective e :=
-  sorry
+protected theorem injective (e : α ≃ β) : Function.Injective e := by
+  intro a b he
+  have he' := congrArg e.invFun he
+  rw [e.left_inv, e.left_inv] at he'
+  exact he'
 
 protected theorem surjective (e : α ≃ β) : Function.Surjective e :=
   sorry
