@@ -192,10 +192,10 @@ theorem mul_right_cancel_iff {a b c : G} : b * a = c * a ↔ b = c := by
 
 -- same statement as `mul_left_cancel_iff`, with `a` explicit (Mathlib keeps both)
 theorem mul_right_inj (a : G) {b c : G} : a * b = a * c ↔ b = c :=
-  sorry
+  mul_left_cancel_iff
 
 theorem mul_left_inj (a : G) {b c : G} : b * a = c * a ↔ b = c :=
-  sorry
+  mul_right_cancel_iff
 
 -- `(a * ·)` is `λ x => a * x`: left multiplication by `a`
 theorem mul_right_injective (a : G) : Function.Injective (a * ·) :=
