@@ -23,16 +23,19 @@ theorem telescope (a b : G) : a * b * b⁻¹ * a⁻¹ = one :=
     rw [mul_inv_cancel]
 
 -- conjugating twice is conjugating by the product
-theorem conj_conj (g h x : G) : g * (h * x * h⁻¹) * g⁻¹ = (g * h) * x * (g * h)⁻¹ :=
-  sorry
+theorem conj_conj (g h x : G) : g * (h * x * h⁻¹) * g⁻¹ = (g * h) * x * (g * h)⁻¹ := by
+  simp only [mul_assoc]
+  rw [inv_prod]
 
 -- equations have solutions…
-theorem solve_left (a b : G) : ∃ x, a * x = b :=
-  sorry
+theorem solve_left (a b : G) : ∃ x, a * x = b := by
+  refine ⟨a⁻¹ * b, ?_⟩
+  rw [← mul_assoc]
+  rw [mul_inv_cancel, one_mul]
 
 -- …and only one: `apply mul_left_cancel (x := a)` names the implicit argument
-theorem solve_left_unique {a b x y : G} (hx : a * x = b) (hy : a * y = b) : x = y :=
-  sorry
+theorem solve_left_unique {a b x y : G} (hx : a * x = b) (hy : a * y = b) : x = y := by
+  exact mul_left_cancel (by rw [hy]; exact hx)
 
 -- `a⁻¹ = a` exactly when `a` squares to one; `calc` for one direction
 theorem inv_eq_self_iff (a : G) : a⁻¹ = a ↔ a * a = one :=
