@@ -82,8 +82,8 @@ theorem trans_apply (e : α ≃ β) (e' : β ≃ γ) (x : α) : e.trans e' x = e
 theorem symm_apply_apply (e : α ≃ β) (x : α) : e.symm (e x) = x := by
   exact e.left_inv x
 
-theorem apply_symm_apply (e : α ≃ β) (y : β) : e (e.symm y) = y :=
-  sorry
+theorem apply_symm_apply (e : α ≃ β) (y : β) : e (e.symm y) = y := by
+  exact e.right_inv y
 
 /-! ### Algebra of equivalences (all by `ext`) -/
 
