@@ -109,8 +109,14 @@ theorem injective_iff_hasLeftInverse [Nonempty α] (f : α → β) :
     exact congrArg g he
 
 theorem bijective_iff_hasInverse (f : α → β) :
-    Bijective f ↔ ∃ g : β → α, Function.LeftInverse g f ∧ Function.RightInverse g f :=
-  sorry
+    Bijective f ↔ ∃ g : β → α, Function.LeftInverse g f ∧ Function.RightInverse g f := by
+  constructor
+  · intro h
+    obtain ⟨h_inj, h_surj⟩ := h
+    rw [surjective_iff_hasRightInverse] at h_surj
+    sorry
+  · intro h
+    sorry
 
 -- a two-sided inverse makes f bijective (the converse is `Equiv.ofBijective`)
 theorem bijective_of_inverse {f : α → β} {g : β → α}
