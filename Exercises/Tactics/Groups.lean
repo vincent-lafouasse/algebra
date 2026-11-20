@@ -56,8 +56,10 @@ theorem inv_mul_iff_comm (a b : G) : (a * b)⁻¹ = a⁻¹ * b⁻¹ ↔ a * b = 
   sorry
 
 -- if a commutes with b, it commutes with b⁻¹: move a factor across with an `_iff` lemma
-theorem comm_inv {a b : G} (h : a * b = b * a) : a * b⁻¹ = b⁻¹ * a :=
-  sorry
+theorem comm_inv {a b : G} (h : a * b = b * a) : a * b⁻¹ = b⁻¹ * a := by
+  rw [Commute.eq]
+  have hc := Commute.of_eq h
+  exact Commute.inv_right hc
 
 /-! ## Subgroups -/
 
