@@ -77,21 +77,21 @@ theorem comp_apply (g : H →* K) (f : G →* H) (x : G) : (g ∘* f) x = g (f x
 
 theorem id_comp (f : G →* H) : Hom.id H ∘* f = f :=
   -- pedestrian but clear
-  have h : ∀ x : G, comp (Hom.id H) f x = f x :=
+  have h : ∀ x : G, (Hom.id H ∘* f) x = f x :=
     λ x =>
-      calc comp (Hom.id H) f x
+      calc (Hom.id H ∘* f) x
        _ = (Hom.id H) (f x) := rfl
        _ = f x := rfl
   ext h
 
-theorem comp_id (f : G →* H) : comp f (Hom.id G) = f :=
-  have h : ∀ x : G, comp f (Hom.id G) x = f x :=
+theorem comp_id (f : G →* H) : f ∘* Hom.id G = f :=
+  have h : ∀ x : G, (f ∘* Hom.id G) x = f x :=
     λ _ => rfl
   ext h
 
 theorem comp_assoc (h : K →* L) (g : H →* K) (f : G →* H) :
-    comp (comp h g) f = comp h (comp g f) :=
-  have h' : ∀ x : G, comp (comp h g) f x = comp h (comp g f) x :=
+    (h ∘* g) ∘* f = h ∘* (g ∘* f) :=
+  have h' : ∀ x : G, ((h ∘* g) ∘* f) x = (h ∘* (g ∘* f)) x :=
     λ _ => rfl
   ext h'
 
