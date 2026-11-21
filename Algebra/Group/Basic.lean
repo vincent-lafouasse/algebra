@@ -198,19 +198,19 @@ theorem eq_inv_mul_iff_mul_eq : a = b⁻¹ * c ↔ b * a = c :=
   sorry
 
 theorem eq_inv_mul_of_mul_eq (h : b * a = c) : a = b⁻¹ * c :=
-  sorry
+  eq_inv_mul_iff_mul_eq.2 h
 
 theorem mul_inv_eq_iff_eq_mul : a * b⁻¹ = c ↔ a = c * b :=
   sorry
 
 theorem mul_inv_eq_of_eq_mul (h : a = c * b) : a * b⁻¹ = c :=
-  sorry
+  mul_inv_eq_iff_eq_mul.2 h
 
 theorem inv_mul_eq_iff_eq_mul : a⁻¹ * b = c ↔ b = a * c :=
   sorry
 
 theorem inv_mul_eq_of_eq_mul (h : b = a * c) : a⁻¹ * b = c :=
-  sorry
+  inv_mul_eq_iff_eq_mul.2 h
 
 /-! ### Commutative groups -/
 
