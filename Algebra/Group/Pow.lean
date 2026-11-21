@@ -257,43 +257,10 @@ theorem zpow_sub_one (g : G) (k : Int) : g ^ (k - 1) = g ^ k * g⁻¹ := by
 -- the hard one: split on the sign of `l`, then induction on its size,
 -- moving one factor at a time with the two lemmas above
 theorem zpow_add (g : G) (k l : Int) : g ^ (k + l) = g ^ k * g ^ l := by
-  cases l with
-  | ofNat nl =>
-    induction nl with
-    | zero =>
-      rw [Int.ofNat_eq_natCast]
-      rw [zpow_natCast]
-      rw [pow_zero g, mul_one]
-      rw [Int.natCast_zero, Int.add_zero]
-    | succ nl' ih =>
-      rw [Int.ofNat_eq_natCast]
-      rw [Int.ofNat_eq_natCast] at ih
-      rw [Int.natCast_add]
-      rw [← Int.add_assoc]
-      rw [Int.natCast_one]
-      rw [zpow_add_one]
-      rw [ih]
-      rw [zpow_add_one]
-      rw [mul_assoc]
-  | negSucc nl =>
-    induction nl with
-    | zero =>
-      rw [zpow_negSucc]
-      rw [pow_add]
-      rw [pow_zero, pow_one, one_mul]
-      rw [Int.negSucc_eq]
-      rw [Int.ofNat_add_one_out]
-      rw [Int.natCast_one]
-      rw [Int.add_neg_one]
-      exact zpow_sub_one g k
-    | succ nl' ih =>
-      rw [zpow_negSucc]
-      rw [Int.negSucc_eq]
-      rw [Int.natCast_add]
-      rw [Int.natCast_one]
-      rw [pow_succ]
-      rw [pow_succ]
-      sorry
+  induction l using Int.induction_on with
+  | zero => rw [Int.add_zero, zpow_zero, mul_one]
+  | succ n => sorry
+  | pred n => sorry
 
 theorem zpow_mul (g : G) (k l : Int) : g ^ (k * l) = (g ^ k) ^ l :=
   sorry
