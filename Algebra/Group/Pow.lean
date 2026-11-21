@@ -233,7 +233,13 @@ theorem zpow_add_one (g : G) (k : Int) : g ^ (k + 1) = g ^ k * g := by
     rw [← Int.natCast_add_one]
     rw [zpow_natCast]
     exact pow_succ g n
-  | .negSucc 0 => sorry
+  | .negSucc 0 =>
+    rw [zpow_negSucc]
+    rw [Int.negSucc_zero_add_one]
+    rw [zpow_zero]
+    rw [Nat.zero_add]
+    rw [pow_one]
+    exact Eq.symm (inv_mul_cancel g)
   | .negSucc n => sorry
 
 theorem zpow_sub_one (g : G) (k : Int) : g ^ (k - 1) = g ^ k * g⁻¹ :=
