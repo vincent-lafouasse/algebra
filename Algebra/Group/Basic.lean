@@ -171,15 +171,19 @@ theorem inv_injective : Function.Injective (Inv.inv : G → G) := by
 theorem inv_inj : a⁻¹ = b⁻¹ ↔ a = b :=
   Function.Injective.eq_iff inv_injective
 
-theorem mul_inv_eq_one : a * b⁻¹ = 1 ↔ a = b :=
-  sorry
+theorem mul_inv_eq_one : a * b⁻¹ = 1 ↔ a = b := by
+  rw [mul_eq_one_iff_inv_eq]
+  exact inv_inj
 
-theorem inv_mul_eq_one : a⁻¹ * b = 1 ↔ a = b :=
-  sorry
+theorem inv_mul_eq_one : a⁻¹ * b = 1 ↔ a = b := by
+  rw [mul_eq_one_iff_eq_inv]
+  exact inv_inj
 
 -- a conjugate of b is trivial only if b is
-theorem conj_eq_one_iff : a * b * a⁻¹ = 1 ↔ b = 1 :=
-  sorry
+theorem conj_eq_one_iff : a * b * a⁻¹ = 1 ↔ b = 1 := by
+  rw [mul_inv_eq_one]
+  conv => rhs; rw [← mul_right_inj a]
+  exact (by rw [mul_one])
 
 /-! ### Moving a factor across an equation -/
 
