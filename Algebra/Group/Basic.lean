@@ -90,22 +90,12 @@ theorem mul_left_injective (a : G) : Function.Injective (· * a) := by
   exact he
 
 theorem mul_ne_mul_right (a : G) {b c : G} : a * b ≠ a * c ↔ b ≠ c := by
-  constructor
-  · intro h he
-    have he := congrArg (a * ·) he
-    exact h he
-  · intro h he
-    rw [mul_left_cancel_iff] at he
-    exact h he
+  rw [ne_eq, ne_eq]
+  conv => rhs; rw [← mul_right_inj a]
 
 theorem mul_ne_mul_left (a : G) {b c : G} : b * a ≠ c * a ↔ b ≠ c := by
-  constructor
-  · intro h he
-    have he := congrArg (· * a) he
-    exact h he
-  · intro h he
-    rw [mul_right_cancel_iff] at he
-    exact h he
+  rw [ne_eq, ne_eq]
+  conv => rhs; rw [← mul_left_inj a]
 
 /-! ### Inverses -/
 
