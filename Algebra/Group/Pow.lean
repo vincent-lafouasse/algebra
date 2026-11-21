@@ -225,8 +225,11 @@ theorem inv_zpow (g : G) (k : Int) : g⁻¹ ^ k = (g ^ k)⁻¹ := by
     rw [inv_pow]
 
 -- stepping stones for `zpow_add`: one more / one less
-theorem zpow_add_one (g : G) (k : Int) : g ^ (k + 1) = g ^ k * g :=
-  sorry
+theorem zpow_add_one (g : G) (k : Int) : g ^ (k + 1) = g ^ k * g := by
+  match k with
+  | .ofNat n => sorry
+  | .negSucc 0 => sorry
+  | .negSucc n => sorry
 
 theorem zpow_sub_one (g : G) (k : Int) : g ^ (k - 1) = g ^ k * g⁻¹ :=
   sorry
