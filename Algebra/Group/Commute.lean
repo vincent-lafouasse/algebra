@@ -12,6 +12,7 @@ universe u
 
 namespace My
 
+@[irreducible]
 def Commute {S : Type u} [Mul S] (a b : S) : Prop := a * b = b * a
 
 theorem commute_iff_eq {S : Type u} [Mul S] (a b : S) : Commute a b ↔ a * b = b * a := by
@@ -31,7 +32,7 @@ protected theorem of_eq (h : a * b = b * a) : Commute a b :=
   (commute_iff_eq a b).2 h
 
 protected theorem refl (a : S) : Commute a a :=
-  rfl
+  Commute.of_eq rfl
 
 protected theorem symm (h : Commute a b) : Commute b a :=
   Commute.of_eq (Commute.eq h).symm
@@ -53,10 +54,10 @@ theorem one_right (a : G) : Commute a 1 :=
 theorem mul_right (hab : Commute a b) (hac : Commute a c) : Commute a (b * c) := by
   apply Commute.of_eq
   rw [mul_assoc]
-  rw [hac.symm]
+  rw [Commute.eq hac.symm]
   rw [← mul_assoc]
   rw [← mul_assoc]
-  rw [hab]
+  rw [Commute.eq hab]
 
 theorem mul_left (hac : Commute a c) (hbc : Commute b c) : Commute (a * b) c :=
   Commute.symm (mul_right hac.symm hbc.symm)
@@ -68,7 +69,7 @@ theorem inv_right (h : Commute a b) : Commute a b⁻¹ := by
   rw [mul_inv_cancel_right] at h
   rw [mul_assoc] at h
   rw [inv_mul_cancel_left] at h
-  exact Commute.symm h
+  exact h |> Commute.of_eq |> Commute.symm
 
 theorem inv_left (h : Commute a b) : Commute a⁻¹ b :=
   h |> Commute.symm |> inv_right |> Commute.symm
