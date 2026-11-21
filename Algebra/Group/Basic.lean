@@ -137,10 +137,10 @@ theorem eq_inv_of_mul_eq_one_right (h : a * b = 1) : b = a⁻¹ := by
   exact mul_left_cancel h
 
 theorem inv_eq_of_mul_eq_one_left (h : a * b = 1) : b⁻¹ = a :=
-  sorry
+  Eq.symm (eq_inv_of_mul_eq_one_left h)
 
 theorem inv_eq_of_mul_eq_one_right (h : a * b = 1) : a⁻¹ = b :=
-  sorry
+  Eq.symm (eq_inv_of_mul_eq_one_right h)
 
 -- `a * b = 1` four ways: solve for `a` or for `b`, inverse on either side of the `=`
 theorem mul_eq_one_iff_eq_inv : a * b = 1 ↔ a = b⁻¹ :=
