@@ -191,8 +191,9 @@ theorem zpow_neg (g : G) (k : Int) : g ^ (-k) = (g ^ k)⁻¹ := by
   | ofNat n =>
     rw [Int.ofNat_eq_natCast]
     rw [zpow_natCast]
-    rw [← inv_pow]
-    sorry -- ⊢ g ^ (-↑n) = g⁻¹ ^ n
+    cases n with
+    | zero => sorry
+    | succ n => sorry
   | negSucc n =>
     sorry
 
