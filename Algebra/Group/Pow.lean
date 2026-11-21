@@ -211,8 +211,15 @@ theorem zpow_neg_one (g : G) : g ^ (-1 : Int) = g⁻¹ := by
   rw [zpow_neg g 1]
   rw [zpow_one]
 
-theorem inv_zpow (g : G) (k : Int) : g⁻¹ ^ k = (g ^ k)⁻¹ :=
-  sorry
+theorem inv_zpow (g : G) (k : Int) : g⁻¹ ^ k = (g ^ k)⁻¹ := by
+  cases k with
+  | ofNat n =>
+    rw [Int.ofNat_eq_natCast]
+    rw [zpow_natCast]
+    rw [zpow_natCast]
+    exact inv_pow g n
+  | negSucc n =>
+    sorry
 
 -- stepping stones for `zpow_add`: one more / one less
 theorem zpow_add_one (g : G) (k : Int) : g ^ (k + 1) = g ^ k * g :=
