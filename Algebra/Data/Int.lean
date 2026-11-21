@@ -47,8 +47,11 @@ theorem negSucc_succ_add_one (n : Nat) : Int.negSucc (n + 1) + 1 = Int.negSucc n
   rw [Int.natCast_add]
 
 -- one step up from `-1` (not in Mathlib)
-theorem negSucc_zero_add_one : Int.negSucc 0 + 1 = 0 :=
-  sorry
+theorem negSucc_zero_add_one : Int.negSucc 0 + 1 = 0 := by
+  rw [Int.negSucc_eq]
+  rw [Int.neg_add]
+  rw [Int.neg_add_cancel_right]
+  rw [Int.neg_ofNat_zero]
 
 end Int
 
