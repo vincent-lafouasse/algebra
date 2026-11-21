@@ -248,8 +248,14 @@ theorem zpow_add_one (g : G) (k : Int) : g ^ (k + 1) = g ^ k * g := by
     conv => rhs; rw [mul_inv_rev]
     rw [inv_mul_cancel_right]
 
-theorem zpow_sub_one (g : G) (k : Int) : g ^ (k - 1) = g ^ k * g⁻¹ :=
-  sorry
+theorem zpow_sub_one (g : G) (k : Int) : g ^ (k - 1) = g ^ k * g⁻¹ := by
+  match k with
+  | .ofNat 0 =>
+    sorry
+  | .ofNat (n + 1) =>
+    sorry
+  | .negSucc n =>
+    sorry
 
 -- the hard one: split on the sign of `l`, then induction on its size,
 -- moving one factor at a time with the two lemmas above
