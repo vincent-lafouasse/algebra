@@ -240,11 +240,13 @@ theorem zpow_add_one (g : G) (k : Int) : g ^ (k + 1) = g ^ k * g := by
     rw [Nat.zero_add]
     rw [pow_one]
     exact Eq.symm (inv_mul_cancel g)
-  | .negSucc n =>
+  | .negSucc (n + 1) =>
+    rw [Int.negSucc_succ_add_one]
     rw [zpow_negSucc]
-    rw [pow_add]
-    rw [pow_one]
-    sorry
+    rw [zpow_negSucc]
+    rw [pow_succ' g (n + 1)]
+    conv => rhs; rw [mul_inv_rev]
+    rw [inv_mul_cancel_right]
 
 theorem zpow_sub_one (g : G) (k : Int) : g ^ (k - 1) = g ^ k * g⁻¹ :=
   sorry
