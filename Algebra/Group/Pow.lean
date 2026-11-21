@@ -186,8 +186,13 @@ theorem one_zpow (k : Int) : (1 : G) ^ k = 1 := by
     exact one_pow (n + 1)
 
 -- split on k; `-(ofNat (n+1)) = negSucc n` is the Int fact you need
-theorem zpow_neg (g : G) (k : Int) : g ^ (-k) = (g ^ k)⁻¹ :=
-  sorry
+theorem zpow_neg (g : G) (k : Int) : g ^ (-k) = (g ^ k)⁻¹ := by
+  cases k with
+  | ofNat n =>
+    rw [Int.ofNat_eq_natCast]
+    sorry
+  | negSucc n =>
+    sorry
 
 theorem zpow_neg_one (g : G) : g ^ (-1 : Int) = g⁻¹ :=
   sorry
