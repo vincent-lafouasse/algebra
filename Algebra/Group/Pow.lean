@@ -74,8 +74,15 @@ theorem pow_add (g : G) (m n : Nat) : g ^ (m + n) = g ^ m * g ^ n := by
     rw [ih]
     rw [mul_assoc]
 
-theorem pow_mul (g : G) (m n : Nat) : g ^ (m * n) = (g ^ m) ^ n :=
-  sorry
+theorem pow_mul (g : G) (m n : Nat) : g ^ (m * n) = (g ^ m) ^ n := by
+  induction n with
+  | zero => rw [Nat.mul_zero, pow_zero, pow_zero]
+  | succ n ih =>
+    rw [Nat.left_distrib]
+    rw [pow_add]
+    rw [pow_succ]
+    rw [ih]
+    rw [Nat.mul_one]
 
 theorem pow_mul' (g : G) (m n : Nat) : g ^ (m * n) = (g ^ n) ^ m :=
   sorry
