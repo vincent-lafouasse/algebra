@@ -136,13 +136,31 @@ theorem eq_inv_of_mul_eq_one_right (h : a * b = 1) : b = a⁻¹ := by
   rw [← mul_inv_cancel a] at h
   exact mul_left_cancel h
 
-theorem eq_inv_of_mul_eq_one_right (h : a * b = 1) : b = a⁻¹ :=
+theorem inv_eq_of_mul_eq_one_left (h : a * b = 1) : b⁻¹ = a :=
   sorry
 
 theorem inv_eq_of_mul_eq_one_right (h : a * b = 1) : a⁻¹ = b :=
   sorry
 
+-- `a * b = 1` four ways: solve for `a` or for `b`, inverse on either side of the `=`
 theorem mul_eq_one_iff_eq_inv : a * b = 1 ↔ a = b⁻¹ :=
+  sorry
+
+theorem mul_eq_one_iff_inv_eq : a * b = 1 ↔ a⁻¹ = b :=
+  sorry
+
+-- variants with the equality swapped
+theorem mul_eq_one_iff_eq_inv' : a * b = 1 ↔ b = a⁻¹ :=
+  sorry
+
+theorem mul_eq_one_iff_inv_eq' : a * b = 1 ↔ b⁻¹ = a :=
+  sorry
+
+-- the same, read from the other side (handy for `rw` on a goal `a = b⁻¹`)
+theorem eq_inv_iff_mul_eq_one : a = b⁻¹ ↔ a * b = 1 :=
+  sorry
+
+theorem inv_eq_iff_mul_eq_one : a⁻¹ = b ↔ a * b = 1 :=
   sorry
 
 theorem inv_inv (a : G) : a⁻¹⁻¹ = a :=
@@ -153,6 +171,9 @@ theorem inv_inv (a : G) : a⁻¹⁻¹ = a :=
 
 
 theorem inv_one : (1 : G)⁻¹ = 1 :=
+  sorry
+
+theorem inv_eq_one : a⁻¹ = 1 ↔ a = 1 :=
   sorry
 
 -- the inverse of a product reverses the order
@@ -169,6 +190,10 @@ theorem mul_inv_eq_one : a * b⁻¹ = 1 ↔ a = b :=
   sorry
 
 theorem inv_mul_eq_one : a⁻¹ * b = 1 ↔ a = b :=
+  sorry
+
+-- a conjugate of b is trivial only if b is
+theorem conj_eq_one_iff : a * b * a⁻¹ = 1 ↔ b = 1 :=
   sorry
 
 /-! ### Moving a factor across an equation -/
