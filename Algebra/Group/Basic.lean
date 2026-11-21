@@ -163,14 +163,7 @@ theorem inv_one : (1 : G)⁻¹ = 1 :=
   inv_eq_of_mul_eq_one_right (one_mul 1)
 
 theorem inv_eq_one : a⁻¹ = 1 ↔ a = 1 := by
-  constructor
-  · intro h
-    have h' := congrArg Inv.inv h
-    rw [inv_inv, inv_one] at h'
-    exact h'
-  · intro h
-    rw [h]
-    rw [inv_one]
+  rw [inv_eq_iff_mul_eq_one, mul_one]
 
 
 -- the inverse of a product reverses the order
