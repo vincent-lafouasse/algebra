@@ -277,7 +277,15 @@ theorem zpow_add (g : G) (k l : Int) : g ^ (k + l) = g ^ k * g ^ l := by
       rw [mul_assoc]
   | negSucc nl =>
     induction nl with
-    | zero => sorry
+    | zero =>
+      rw [zpow_negSucc]
+      rw [pow_add]
+      rw [pow_zero, pow_one, one_mul]
+      rw [Int.negSucc_eq]
+      rw [Int.ofNat_add_one_out]
+      rw [Int.natCast_one]
+      rw [Int.add_neg_one]
+      exact zpow_sub_one g k
     | succ nl' ih => sorry
 
 theorem zpow_mul (g : G) (k l : Int) : g ^ (k * l) = (g ^ k) ^ l :=
