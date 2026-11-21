@@ -79,7 +79,7 @@ theorem inv_inv (h : Commute a b) : Commute a⁻¹ b⁻¹ :=
 theorem inv_inv_iff : Commute a⁻¹ b⁻¹ ↔ Commute a b := by
   refine ⟨?_, inv_inv⟩
   intro h
-  replace h := h |> inv_left |> inv_right
+  replace h := h |> inv_inv
   rw [My.inv_inv a] at h
   rw [My.inv_inv b] at h
   exact h
