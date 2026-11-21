@@ -47,7 +47,11 @@ theorem one_pow (n : Nat) : (1 : G) ^ n = 1 := by
 theorem pow_succ' (g : G) (n : Nat) : g ^ (n + 1) = g * g ^ n := by
   induction n with
   | zero => rw [Nat.zero_add, pow_one, pow_zero, mul_one]
-  | succ n ih => sorry
+  | succ n ih =>
+    rw [pow_succ]
+    conv => lhs; rw [ih]
+    rw [pow_succ]
+    rw [mul_assoc]
 
 theorem pow_two (g : G) : g ^ 2 = g * g :=
   sorry
