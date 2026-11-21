@@ -19,9 +19,16 @@ theorem negSucc_two : Int.negSucc 2 = -3 :=
 theorem neg_three_add_five : (-3 : Int) + 5 = 2 :=
   rfl
 
+#print Int.ofNat_eq_natCast
+
+#print Int.natCast_add
+
 -- with a variable, `rfl` still works when the computation does not get stuck on `n`
-theorem ofNat_add_one (n : Nat) : Int.ofNat n + 1 = Int.ofNat (n + 1) :=
-  sorry
+theorem ofNat_add_one (n : Nat) : Int.ofNat n + 1 = Int.ofNat (n + 1) := by
+  rw [Int.ofNat_eq_natCast]
+  rw [Int.ofNat_eq_natCast]
+  rw [Int.natCast_add]
+  rw [Int.natCast_one]
 
 /-! ## Constructors -/
 
