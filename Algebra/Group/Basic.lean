@@ -169,7 +169,7 @@ theorem inv_injective : Function.Injective (Inv.inv : G → G) := by
   exact he
 
 theorem inv_inj : a⁻¹ = b⁻¹ ↔ a = b :=
-  sorry
+  Function.Injective.eq_iff inv_injective
 
 theorem mul_inv_eq_one : a * b⁻¹ = 1 ↔ a = b :=
   sorry
