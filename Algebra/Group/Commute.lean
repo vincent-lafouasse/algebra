@@ -80,9 +80,9 @@ theorem inv_right_iff : Commute a b⁻¹ ↔ Commute a b := by
   exact h
 
 theorem inv_left_iff : Commute a⁻¹ b ↔ Commute a b := by
-  conv => lhs; rw [Commute.symm_iff]
-  conv => rhs; rw [Commute.symm_iff]
+  rw [Commute.symm_iff]
   rw [inv_right_iff]
+  rw [Commute.symm_iff]
 
 theorem inv_inv (h : Commute a b) : Commute a⁻¹ b⁻¹ :=
   h |> inv_left |> inv_right
