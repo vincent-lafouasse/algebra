@@ -31,10 +31,10 @@ protected theorem of_eq (h : a * b = b * a) : Commute a b :=
   (commute_iff_eq a b).2 h
 
 protected theorem refl (a : S) : Commute a a :=
-  sorry
+  rfl
 
 protected theorem symm (h : Commute a b) : Commute b a :=
-  sorry
+  Commute.of_eq (Commute.eq h).symm
 
 protected theorem symm_iff : Commute a b ↔ Commute b a :=
   sorry
