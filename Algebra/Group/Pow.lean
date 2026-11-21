@@ -162,8 +162,10 @@ theorem zpow_negSucc (g : G) (n : Nat) : g ^ (Int.negSucc n) = (g ^ (n + 1))⁻�
 theorem zpow_zero (g : G) : g ^ (0 : Int) = 1 :=
   rfl
 
-theorem zpow_one (g : G) : g ^ (1 : Int) = g :=
-  sorry
+theorem zpow_one (g : G) : g ^ (1 : Int) = g := by
+  rw [← Int.ofNat_one]
+  rw [zpow_natCast g 1]
+  rw [pow_one]
 
 theorem zpow_two (g : G) : g ^ (2 : Int) = g * g :=
   sorry
