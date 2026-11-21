@@ -165,26 +165,25 @@ theorem zpow_zero (g : G) : g ^ (0 : Int) = 1 :=
   rfl
 
 theorem zpow_one (g : G) : g ^ (1 : Int) = g := by
-                         -- ⊢ g ^ 1 = g
-  rw [← Int.ofNat_one]   -- ⊢ g ^ ↑1 = g
-  rw [zpow_natCast g 1]  -- ⊢ g ^ 1 = g
-  rw [pow_one]           -- ⊢ g = g
+  rw [← Int.ofNat_one]
+  rw [zpow_natCast g 1]
+  rw [pow_one]
 
 theorem zpow_two (g : G) : g ^ (2 : Int) = g * g := by
   rw [← Int.ofNat_two]
   rw [zpow_natCast]
   rw [pow_two]
 
+#print Int.ofNat_toNat
+
 theorem one_zpow (k : Int) : (1 : G) ^ k = 1 := by
   cases k with
   | ofNat n =>
-    induction n with
-    | zero => exact zpow_zero (1 : G)
-    | succ n ih => sorry
+    rw [Int.ofNat_eq_natCast]
+    rw [zpow_natCast]
+    rw [one_pow n]
   | negSucc n =>
-    induction n with
-    | zero => sorry
-    | succ n ih => sorry
+    sorry
 
 -- split on k; `-(ofNat (n+1)) = negSucc n` is the Int fact you need
 theorem zpow_neg (g : G) (k : Int) : g ^ (-k) = (g ^ k)⁻¹ :=
