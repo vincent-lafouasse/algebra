@@ -19,6 +19,7 @@ comment says "(not in Mathlib)".
 | `Algebra/Order/Notation.lean` | `⊥`, `⊤`, `⊓` | `Order/Notation` |
 | `Algebra/Group/Defs.lean` | `Group`, `CommGroup` | `Algebra/Group/Defs` |
 | `Algebra/Group/Basic.lean` | cancellation, inverses | `Algebra/Group/{Defs,Basic}` |
+| `Algebra/Group/Ext.lean` | `Group.ext` | `Algebra/Group/Ext` |
 | `Algebra/Group/Commute.lean` | `Commute a b` | `Algebra/Group/Commute/{Defs,Basic}` |
 | `Algebra/Group/Pow.lean` | `g ^ n` (Nat and Int) | `Algebra/Group/Defs`, `…/Basic` |
 | `Algebra/Group/Hom.lean` | homomorphisms `G →* H` | `Algebra/Group/Hom/Defs` |
