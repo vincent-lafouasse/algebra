@@ -59,14 +59,14 @@ theorem inv_mul_cancel_right (a b : G) : a * b⁻¹ * b = a := by
 /-! ### Cancellation -/
 
 theorem mul_left_cancel (h : a * b = a * c) : b = c := by
-  rw [← inv_mul_cancel_left a b]
-  rw [h]
-  exact inv_mul_cancel_left a c
+  replace h := congrArg (a⁻¹ * ·) h
+  rw [inv_mul_cancel_left, inv_mul_cancel_left] at h
+  exact h
 
 theorem mul_right_cancel (h : a * b = c * b) : a = c := by
-  rw [← mul_inv_cancel_right a b]
-  rw [h]
-  exact mul_inv_cancel_right c b
+  replace h := congrArg (· * b⁻¹) h
+  rw [mul_inv_cancel_right, mul_inv_cancel_right] at h
+  exact h
 
 theorem mul_left_cancel_iff : a * b = a * c ↔ b = c :=
   ⟨mul_left_cancel, congrArg (a * ·)⟩
