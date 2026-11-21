@@ -33,7 +33,7 @@ theorem mul_inv_cancel (a : G) : a * a⁻¹ = 1 := by
 
 theorem mul_one (a : G) : a * 1 = a :=
   calc a * 1
-   _ = a * (a⁻¹ * a) := by rw [← inv_mul_cancel]
+   _ = a * (a⁻¹ * a) := by rw [← inv_mul_cancel a]
    _ = (a * a⁻¹) * a := by rw [mul_assoc]
    _ = 1 * a := by rw [mul_inv_cancel]
    _ = a := by rw [one_mul]
