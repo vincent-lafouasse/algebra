@@ -26,8 +26,16 @@ namespace Int
 Prove it by `cases i`, then a `Nat` induction in each case. -/
 theorem induction_on {motive : Int → Prop} (i : Int) (zero : motive 0)
     (succ : ∀ i : Nat, motive ↑i → motive (↑i + 1))
-    (pred : ∀ i : Nat, motive (-↑i) → motive (-↑i - 1)) : motive i :=
-  sorry
+    (pred : ∀ i : Nat, motive (-↑i) → motive (-↑i - 1)) : motive i := by
+  cases i with
+  | ofNat n =>
+    induction n with
+      | zero => exact zero
+      | succ n ih => exact succ n ih
+  | negSucc n =>
+    induction n with
+      | zero => exact pred 0 zero
+      | succ n ih => exact pred n.succ ih
 
 -- one step up from a negative number (not in Mathlib; `Int.negSucc_sub_one` read backwards)
 theorem negSucc_succ_add_one (n : Nat) : Int.negSucc (n + 1) + 1 = Int.negSucc n :=
