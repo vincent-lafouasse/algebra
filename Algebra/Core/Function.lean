@@ -110,7 +110,7 @@ theorem injective_iff_hasLeftInverse [Nonempty α] (f : α → β) :
     have ex : ∃ a', f a' = f a := ⟨a, rfl⟩
     show (if hb : ∃ a', f a' = f a then Classical.choose hb else Classical.ofNonempty) = a
     rw [dite_eq_left ex]
-    sorry
+    exact h (Classical.choose_spec ex)
   · intro h
     obtain ⟨g, hg⟩ := h
     intro a b he
