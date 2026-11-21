@@ -222,19 +222,25 @@ section CommGroup
 variable {G : Type u} [CommGroup G]
 
 theorem inv_mul_cancel_comm (a b : G) : a⁻¹ * b * a = b :=
-  sorry
+  calc a⁻¹ * b * a
+   _ = a⁻¹ * a * b := by ac_rfl
+   _ = b := by rw [inv_mul_cancel, one_mul]
 
-theorem mul_inv_cancel_comm (a b : G) : a * b * a⁻¹ = b :=
-  sorry
+theorem mul_inv_cancel_comm (a b : G) : a * b * a⁻¹ = b := by
+  conv => lhs; left; rw [← inv_inv a]
+  exact inv_mul_cancel_comm a⁻¹ b
 
-theorem inv_mul_cancel_comm_assoc (a b : G) : a⁻¹ * (b * a) = b :=
-  sorry
+theorem inv_mul_cancel_comm_assoc (a b : G) : a⁻¹ * (b * a) = b := by
+  rw [← mul_assoc]
+  rw [inv_mul_cancel_comm]
 
-theorem mul_inv_cancel_comm_assoc (a b : G) : a * (b * a⁻¹) = b :=
-  sorry
+theorem mul_inv_cancel_comm_assoc (a b : G) : a * (b * a⁻¹) = b := by
+  rw [← mul_assoc]
+  rw [mul_inv_cancel_comm]
 
-theorem mul_inv (a b : G) : (a * b)⁻¹ = a⁻¹ * b⁻¹ :=
-  sorry
+theorem mul_inv (a b : G) : (a * b)⁻¹ = a⁻¹ * b⁻¹ := by
+  rw [mul_inv_rev]
+  exact mul_comm b⁻¹ a⁻¹
 
 end CommGroup
 
