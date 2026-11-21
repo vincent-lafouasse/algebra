@@ -74,7 +74,7 @@ theorem inv_right (h : Commute a b) : Commute a b⁻¹ := by
   exact Commute.of_eq h.symm
 
 theorem inv_left (h : Commute a b) : Commute a⁻¹ b :=
-  Commute.symm (inv_right h.symm)
+  h |> Commute.symm |> inv_right |> Commute.symm
 
 theorem inv_inv (h : Commute a b) : Commute a⁻¹ b⁻¹ :=
   h |> inv_left |> inv_right
