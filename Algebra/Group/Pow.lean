@@ -272,7 +272,12 @@ theorem zpow_add (g : G) (k l : Int) : g ^ (k + l) = g ^ k * g ^ l := by
     rw [ih]
     simp only [mul_assoc]
 
-theorem zpow_mul (g : G) (k l : Int) : g ^ (k * l) = (g ^ k) ^ l :=
-  sorry
+theorem zpow_mul (g : G) (k l : Int) : g ^ (k * l) = (g ^ k) ^ l := by
+  induction l using Int.induction_on with
+  | zero => rw [Int.mul_zero, zpow_zero, zpow_zero]
+  | succ n ih =>
+    sorry
+  | pred n ih =>
+    sorry
 
 end My
