@@ -38,8 +38,10 @@ theorem pow_one (g : G) : g ^ (1 : Nat) = g := by
   rw [pow_zero]
   rw [one_mul]
 
-theorem one_pow (n : Nat) : (1 : G) ^ n = 1 :=
-  sorry
+theorem one_pow (n : Nat) : (1 : G) ^ n = 1 := by
+  induction n with
+  | zero => rfl
+  | succ n ih => rw [pow_succ, ih, mul_one]
 
 -- the other way round: needs induction (and `mul_assoc`)
 theorem pow_succ' (g : G) (n : Nat) : g ^ (n + 1) = g * g ^ n := by
