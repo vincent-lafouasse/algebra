@@ -80,12 +80,12 @@ theorem mul_left_inj (a : G) {b c : G} : b * a = c * a ↔ b = c :=
 
 -- `(a * ·)` is `fun x => a * x`: left multiplication by `a`
 theorem mul_right_injective (a : G) : Function.Injective (a * ·) := by
-  intro a b he
+  intro x y he
   rw [← mul_left_cancel_iff]
   exact he
 
 theorem mul_left_injective (a : G) : Function.Injective (· * a) := by
-  intro a b he
+  intro x y he
   rw [← mul_right_cancel_iff]
   exact he
 
