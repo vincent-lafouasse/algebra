@@ -163,9 +163,10 @@ theorem zpow_zero (g : G) : g ^ (0 : Int) = 1 :=
   rfl
 
 theorem zpow_one (g : G) : g ^ (1 : Int) = g := by
-  rw [← Int.ofNat_one]
-  rw [zpow_natCast g 1]
-  rw [pow_one]
+                         -- ⊢ g ^ 1 = g
+  rw [← Int.ofNat_one]   -- ⊢ g ^ ↑1 = g
+  rw [zpow_natCast g 1]  -- ⊢ g ^ 1 = g
+  rw [pow_one]           -- ⊢ g = g
 
 theorem zpow_two (g : G) : g ^ (2 : Int) = g * g := by
   rw [← Int.ofNat_two]
