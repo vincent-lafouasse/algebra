@@ -50,8 +50,13 @@ theorem one_left (a : G) : Commute 1 a := by
 theorem one_right (a : G) : Commute a 1 :=
   Commute.symm (one_left a)
 
-theorem mul_right (hab : Commute a b) (hac : Commute a c) : Commute a (b * c) :=
-  sorry
+theorem mul_right (hab : Commute a b) (hac : Commute a c) : Commute a (b * c) := by
+  apply Commute.of_eq
+  rw [mul_assoc]
+  rw [Commute.of_eq hac.symm]
+  rw [← mul_assoc]
+  rw [← mul_assoc]
+  rw [Commute.of_eq hab]
 
 theorem mul_left (hac : Commute a c) (hbc : Commute b c) : Commute (a * b) c :=
   sorry
