@@ -15,6 +15,7 @@ comment says "(not in Mathlib)".
 | `Algebra/Logic/Function.lean` | injective/surjective/bijective, `surjInv`, `invFun` | `Logic/Function/{Defs,Basic}` |
 | `Algebra/Logic/Equiv.lean` | bijections `α ≃ β` | `Logic/Equiv/Defs` |
 | `Algebra/Data/Set.lean` | `Set α`, `{x \| p x}`, `⊆`, `{a}`, `univ` | `Data/Set/{Defs,Basic}` |
+| `Algebra/Data/Int.lean` | `Int.induction_on`, `negSucc` stepping facts | `Data/Int/Init` |
 | `Algebra/Order/Notation.lean` | `⊥`, `⊤`, `⊓` | `Order/Notation` |
 | `Algebra/Group/Defs.lean` | `Group`, `CommGroup` | `Algebra/Group/Defs` |
 | `Algebra/Group/Basic.lean` | cancellation, inverses | `Algebra/Group/{Defs,Basic}` |

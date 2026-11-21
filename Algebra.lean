@@ -1,6 +1,7 @@
 import Algebra.Logic.Function
 import Algebra.Logic.Equiv
 import Algebra.Data.Set
+import Algebra.Data.Int
 import Algebra.Order.Notation
 import Algebra.Group.Defs
 import Algebra.Group.Basic

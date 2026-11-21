@@ -1,4 +1,5 @@
 import Algebra.Group.Commute
+import Algebra.Data.Int
 
 /-! # Powers
 
