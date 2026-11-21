@@ -141,7 +141,11 @@ theorem mul_eq_one_iff_eq_inv : a * b = 1 ↔ a = b⁻¹ :=
   sorry
 
 theorem inv_inv (a : G) : a⁻¹⁻¹ = a :=
-  sorry
+  calc a⁻¹⁻¹
+   _ = a⁻¹⁻¹ * 1 := by rw [mul_one]
+   _ = a⁻¹⁻¹ * (a⁻¹ * a) := by rw [← inv_mul_cancel]
+   _ = a := by rw [inv_mul_cancel_left]
+
 
 theorem inv_one : (1 : G)⁻¹ = 1 :=
   sorry
