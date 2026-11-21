@@ -98,10 +98,13 @@ theorem inv_left_iff : Commute a⁻¹ b ↔ Commute a b := by
 
 -- conjugating b by an element it commutes with does nothing
 protected theorem inv_mul_cancel (h : Commute a b) : a⁻¹ * b * a = b :=
-  sorry
+  calc a⁻¹ * b * a
+   _ = b * a⁻¹ * a := by rw [Commute.eq (inv_left h)]
+   _ = b := by rw [inv_mul_cancel_right]
 
-protected theorem mul_inv_cancel (h : Commute a b) : a * b * a⁻¹ = b :=
-  sorry
+protected theorem mul_inv_cancel (h : Commute a b) : a * b * a⁻¹ = b := by
+  rw [mul_inv_eq_iff_eq_mul]
+  exact h |> Commute.eq
 
 end Commute
 
