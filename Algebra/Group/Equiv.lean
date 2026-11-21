@@ -1,0 +1,142 @@
+import Algebra.Group.Hom
+import Algebra.Logic.Equiv
+
+/-! # Isomorphisms `G ≃* H`
+
+Mathlib: `Mathlib/Algebra/Group/Equiv/Defs.lean`.
+
+An isomorphism is a bijection `G ≃ H` (with its inverse as data) that preserves `*`.
+Mathlib writes `structure MulEquiv extends G ≃ H, MulHom G H`; here the fields are listed
+flat, and `toEquiv` / `toMonoidHom` forget part of the structure. -/
+
+universe u v w
+
+namespace My
+
+structure MulEquiv (G : Type u) (H : Type v) [Group G] [Group H] where
+  toFun : G → H
+  invFun : H → G
+  left_inv : Function.LeftInverse invFun toFun
+  right_inv : Function.RightInverse invFun toFun
+  map_mul' : ∀ x y : G, toFun (x * y) = toFun x * toFun y
+
+@[inherit_doc] infixl:25 " ≃* " => MulEquiv
+
+namespace MulEquiv
+
+variable {G : Type u} {H : Type v} {K : Type w} [Group G] [Group H] [Group K]
+
+attribute [coe] MulEquiv.toFun
+
+instance : CoeFun (G ≃* H) (fun _ => G → H) := ⟨MulEquiv.toFun⟩
+
+theorem ext {e e' : G ≃* H} (h : ∀ x, e x = e' x) : e = e' :=
+  sorry
+
+def toEquiv (e : G ≃* H) : G ≃ H where
+  toFun := e.toFun
+  invFun := e.invFun
+  left_inv := e.left_inv
+  right_inv := e.right_inv
+
+theorem coe_toEquiv (e : G ≃* H) : (e.toEquiv : G → H) = e :=
+  sorry
+
+protected theorem map_mul (e : G ≃* H) (x y : G) : e (x * y) = e x * e y :=
+  sorry
+
+protected theorem map_one (e : G ≃* H) : e 1 = 1 :=
+  sorry
+
+protected theorem map_inv (e : G ≃* H) (x : G) : e x⁻¹ = (e x)⁻¹ :=
+  sorry
+
+def toMonoidHom (e : G ≃* H) : G →* H where
+  toFun := e.toFun
+  map_one' := sorry
+  map_mul' := e.map_mul'
+
+theorem coe_toMonoidHom (e : G ≃* H) : (e.toMonoidHom : G → H) = e :=
+  sorry
+
+theorem toMonoidHom_injective : Function.Injective (toMonoidHom : (G ≃* H) → (G →* H)) :=
+  sorry
+
+/-! ### refl, symm, trans -/
+
+protected def refl (G : Type u) [Group G] : G ≃* G where
+  toFun := id
+  invFun := id
+  left_inv := sorry
+  right_inv := sorry
+  map_mul' := sorry
+
+-- the inverse of an isomorphism is a hom: the proof is the exercise
+protected def symm (e : G ≃* H) : H ≃* G where
+  toFun := e.invFun
+  invFun := e.toFun
+  left_inv := e.right_inv
+  right_inv := e.left_inv
+  map_mul' := sorry
+
+protected def trans (e : G ≃* H) (e' : H ≃* K) : G ≃* K where
+  toFun := e'.toFun ∘ e.toFun
+  invFun := e.invFun ∘ e'.invFun
+  left_inv := sorry
+  right_inv := sorry
+  map_mul' := sorry
+
+theorem refl_apply (x : G) : MulEquiv.refl G x = x :=
+  sorry
+
+theorem trans_apply (e : G ≃* H) (e' : H ≃* K) (x : G) : e.trans e' x = e' (e x) :=
+  sorry
+
+theorem symm_apply_apply (e : G ≃* H) (x : G) : e.symm (e x) = x :=
+  sorry
+
+theorem apply_symm_apply (e : G ≃* H) (y : H) : e (e.symm y) = y :=
+  sorry
+
+theorem symm_symm (e : G ≃* H) : e.symm.symm = e :=
+  sorry
+
+theorem self_trans_symm (e : G ≃* H) : e.trans e.symm = MulEquiv.refl G :=
+  sorry
+
+theorem symm_trans_self (e : G ≃* H) : e.symm.trans e = MulEquiv.refl H :=
+  sorry
+
+theorem toMonoidHom_refl : (MulEquiv.refl G).toMonoidHom = MonoidHom.id G :=
+  sorry
+
+theorem toMonoidHom_trans (e : G ≃* H) (e' : H ≃* K) :
+    (e.trans e').toMonoidHom = e'.toMonoidHom.comp e.toMonoidHom :=
+  sorry
+
+protected theorem injective (e : G ≃* H) : Function.Injective e :=
+  sorry
+
+protected theorem surjective (e : G ≃* H) : Function.Surjective e :=
+  sorry
+
+protected theorem bijective (e : G ≃* H) : Function.Bijective e :=
+  sorry
+
+/-! ### A bijective hom is an isomorphism
+
+The inverse is `Function.surjInv`, picked by choice, hence `noncomputable`. -/
+
+noncomputable def ofBijective (f : G →* H) (hf : Function.Bijective f) : G ≃* H where
+  toFun := f
+  invFun := Function.surjInv hf.2
+  left_inv := sorry
+  right_inv := sorry
+  map_mul' := sorry
+
+theorem ofBijective_apply (f : G →* H) (hf : Function.Bijective f) (x : G) :
+    ofBijective f hf x = f x :=
+  sorry
+
+end MulEquiv
+end My

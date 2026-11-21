@@ -1,0 +1,163 @@
+import Algebra.Group.Defs
+
+/-! # Basic group lemmas
+
+Mathlib: `Mathlib/Algebra/Group/Defs.lean`, `Mathlib/Algebra/Group/Basic.lean`.
+
+Naming: the conclusion comes first, then `of`, then the hypotheses
+(`eq_inv_of_mul_eq_one_left : a * b = 1 → a = b⁻¹`). -/
+
+universe u
+
+namespace My
+
+variable {G : Type u} [Group G] {a b c : G}
+
+/-! ### The right-hand axioms
+
+Only `one_mul` and `inv_mul_cancel` are given: prove the right-hand versions from them.
+`mul_inv_cancel` comes first (`mul_one` needs it). -/
+
+theorem mul_inv_cancel (a : G) : a * a⁻¹ = 1 :=
+  sorry
+
+theorem mul_one (a : G) : a * 1 = a :=
+  sorry
+
+/-! ### Cancelling a factor and its inverse -/
+
+theorem inv_mul_cancel_left (a b : G) : a⁻¹ * (a * b) = b :=
+  sorry
+
+theorem mul_inv_cancel_left (a b : G) : a * (a⁻¹ * b) = b :=
+  sorry
+
+theorem mul_inv_cancel_right (a b : G) : a * b * b⁻¹ = a :=
+  sorry
+
+theorem inv_mul_cancel_right (a b : G) : a * b⁻¹ * b = a :=
+  sorry
+
+/-! ### Cancellation -/
+
+theorem mul_left_cancel (h : a * b = a * c) : b = c :=
+  sorry
+
+theorem mul_right_cancel (h : a * b = c * b) : a = c :=
+  sorry
+
+theorem mul_left_cancel_iff : a * b = a * c ↔ b = c :=
+  sorry
+
+theorem mul_right_cancel_iff : b * a = c * a ↔ b = c :=
+  sorry
+
+-- the same statements with `a` explicit (Mathlib keeps both)
+theorem mul_right_inj (a : G) {b c : G} : a * b = a * c ↔ b = c :=
+  sorry
+
+theorem mul_left_inj (a : G) {b c : G} : b * a = c * a ↔ b = c :=
+  sorry
+
+-- `(a * ·)` is `fun x => a * x`: left multiplication by `a`
+theorem mul_right_injective (a : G) : Function.Injective (a * ·) :=
+  sorry
+
+theorem mul_left_injective (a : G) : Function.Injective (· * a) :=
+  sorry
+
+theorem mul_ne_mul_right (a : G) {b c : G} : a * b ≠ a * c ↔ b ≠ c :=
+  sorry
+
+theorem mul_ne_mul_left (a : G) {b c : G} : b * a ≠ c * a ↔ b ≠ c :=
+  sorry
+
+/-! ### Inverses -/
+
+-- an element with a right inverse: that inverse is the inverse
+theorem eq_inv_of_mul_eq_one_left (h : a * b = 1) : a = b⁻¹ :=
+  sorry
+
+theorem eq_inv_of_mul_eq_one_right (h : a * b = 1) : b = a⁻¹ :=
+  sorry
+
+theorem inv_eq_of_mul_eq_one_right (h : a * b = 1) : a⁻¹ = b :=
+  sorry
+
+theorem mul_eq_one_iff_eq_inv : a * b = 1 ↔ a = b⁻¹ :=
+  sorry
+
+theorem inv_inv (a : G) : a⁻¹⁻¹ = a :=
+  sorry
+
+theorem inv_one : (1 : G)⁻¹ = 1 :=
+  sorry
+
+-- the inverse of a product reverses the order
+theorem mul_inv_rev (a b : G) : (a * b)⁻¹ = b⁻¹ * a⁻¹ :=
+  sorry
+
+theorem inv_injective : Function.Injective (Inv.inv : G → G) :=
+  sorry
+
+theorem inv_inj : a⁻¹ = b⁻¹ ↔ a = b :=
+  sorry
+
+theorem mul_inv_eq_one : a * b⁻¹ = 1 ↔ a = b :=
+  sorry
+
+theorem inv_mul_eq_one : a⁻¹ * b = 1 ↔ a = b :=
+  sorry
+
+/-! ### Moving a factor across an equation -/
+
+theorem eq_mul_inv_of_mul_eq (h : a * c = b) : a = b * c⁻¹ :=
+  sorry
+
+theorem eq_inv_mul_of_mul_eq (h : b * a = c) : a = b⁻¹ * c :=
+  sorry
+
+theorem mul_inv_eq_of_eq_mul (h : a = c * b) : a * b⁻¹ = c :=
+  sorry
+
+theorem inv_mul_eq_of_eq_mul (h : b = a * c) : a⁻¹ * b = c :=
+  sorry
+
+-- the same, as iffs (usable in `rw`)
+
+theorem eq_mul_inv_iff_mul_eq : a = b * c⁻¹ ↔ a * c = b :=
+  sorry
+
+theorem eq_inv_mul_iff_mul_eq : a = b⁻¹ * c ↔ b * a = c :=
+  sorry
+
+theorem mul_inv_eq_iff_eq_mul : a * b⁻¹ = c ↔ a = c * b :=
+  sorry
+
+theorem inv_mul_eq_iff_eq_mul : a⁻¹ * b = c ↔ b = a * c :=
+  sorry
+
+/-! ### Commutative groups -/
+
+section CommGroup
+
+variable {G : Type u} [CommGroup G]
+
+theorem inv_mul_cancel_comm (a b : G) : a⁻¹ * b * a = b :=
+  sorry
+
+theorem mul_inv_cancel_comm (a b : G) : a * b * a⁻¹ = b :=
+  sorry
+
+theorem inv_mul_cancel_comm_assoc (a b : G) : a⁻¹ * (b * a) = b :=
+  sorry
+
+theorem mul_inv_cancel_comm_assoc (a b : G) : a * (b * a⁻¹) = b :=
+  sorry
+
+theorem mul_inv (a b : G) : (a * b)⁻¹ = a⁻¹ * b⁻¹ :=
+  sorry
+
+end CommGroup
+
+end My

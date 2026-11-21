@@ -3,28 +3,31 @@
 Group theory in Lean 4, from the axioms up, without Mathlib.
 
 The `Group` class has three axioms (associativity, left identity, left inverse);
-everything else is proved here. Names and design follow Mathlib where it makes
-sense, so the code should feel familiar to Mathlib users.
+everything else is proved here. The library tracks Mathlib: names, statements, namespaces
+and file layout follow Mathlib's, so that reading this code teaches you Mathlib. Each file's
+header names the Mathlib files it mirrors. Where something has no Mathlib counterpart, a
+comment says "(not in Mathlib)".
 
 ## Layout
 
-| File | Contents |
-|---|---|
-| `Algebra/Group.lean` | the `Group` class and basic lemmas (cancellation, inverses) |
-| `Algebra/Commute.lean` | commuting elements `Commute a b`, centralizers |
-| `Algebra/Pow.lean` | powers `g ^ n` (Nat and Int), the subgroup `zpowers g` |
-| `Algebra/CommGroup.lean` | commutative groups `CommGroup`, `Commute.all` |
-| `Algebra/Hom.lean` | homomorphisms `G →* H`, composition, `ext` |
-| `Algebra/Subgroup.lean` | subgroups, center, kernel, image, preimage |
-| `Algebra/Normal.lean` | normal subgroups |
-| `Algebra/Iso.lean` | isomorphisms `G ≃* H`, bijective homs |
-| `Algebra/Aut.lean` | conjugation, the group `Aut(G)`, `ker (g ↦ conj g) = Z(G)` |
-| `Algebra/Coset.lean` | left cosets as equivalence classes |
-| `Algebra/Quotient.lean` | quotient groups `G / N` |
-| `Algebra/SubgroupType.lean` | a subgroup as a group in its own right |
-| `Algebra/FirstIso.lean` | the first isomorphism theorem `G / ker f ≃* range f` |
-| `Algebra/Core/` | functions, equivalence relations, bijections `α ≃ β`, counting with `Fin` |
-| `Exercises/` | exercise sheets, stated with the library above |
+| File | Contents | Mathlib |
+|---|---|---|
+| `Algebra/Logic/Function.lean` | injective/surjective/bijective, `surjInv`, `invFun` | `Logic/Function/{Defs,Basic}` |
+| `Algebra/Logic/Equiv.lean` | bijections `α ≃ β` | `Logic/Equiv/Defs` |
+| `Algebra/Data/Set.lean` | `Set α`, `{x \| p x}`, `⊆`, `{a}`, `univ` | `Data/Set/{Defs,Basic}` |
+| `Algebra/Order/Notation.lean` | `⊥`, `⊤`, `⊓` | `Order/Notation` |
+| `Algebra/Group/Defs.lean` | `Group`, `CommGroup` | `Algebra/Group/Defs` |
+| `Algebra/Group/Basic.lean` | cancellation, inverses | `Algebra/Group/{Defs,Basic}` |
+| `Algebra/Group/Commute.lean` | `Commute a b` | `Algebra/Group/Commute/{Defs,Basic}` |
+| `Algebra/Group/Pow.lean` | `g ^ n` (Nat and Int) | `Algebra/Group/Defs`, `…/Basic` |
+| `Algebra/Group/Hom.lean` | homomorphisms `G →* H` | `Algebra/Group/Hom/Defs` |
+| `Algebra/Group/Equiv.lean` | isomorphisms `G ≃* H` | `Algebra/Group/Equiv/Defs` |
+| `Algebra/Group/End.lean` | `MulAut G`, `MulAut.conj` | `Algebra/Group/End` |
+| `Algebra/Group/Subgroup/` | `Subgroup`, `≤`, `⊥ ⊤ ⊓`, `ker`, `range`, `map`, `comap`, `zpowers`, `Normal` | `Algebra/Group/Subgroup/` |
+| `Algebra/GroupTheory/Center.lean`, `Centralizer.lean` | `center G`, `centralizer s` | `GroupTheory/Subgroup/{Center,Centralizer}` |
+| `Algebra/GroupTheory/Coset.lean` | `a • s`, `leftRel` | `GroupTheory/Coset/{Defs,Basic}` |
+| `Algebra/GroupTheory/QuotientGroup/` | `G ⧸ N`, `lift`, the first isomorphism theorem | `GroupTheory/QuotientGroup/{Defs,Basic}` |
+| `Exercises/` | exercise sheets, stated with the library above | |
 
 ## Building
 
@@ -52,9 +55,9 @@ ignores missing docstrings. To configure:
 
 ## Status
 
-Work in progress. Unfinished statements are marked `sorry`; `lake build`
-lists them as warnings. The first isomorphism theorem is done (`Hom.firstIso`,
-using only Lean's three built-in axioms).
+Restarted on 2026-11-21 with the Mathlib-shaped design: every proof is a `sorry` stub to
+fill in. `lake build` lists them as warnings. The goal is
+`QuotientGroup.quotientKerEquivRange`, the first isomorphism theorem.
 
 Each `sorry` is an axiom, and anything that uses a `sorry`'d lemma inherits it,
 while the build warning only marks the declaration where the `sorry` is written. To check
@@ -67,7 +70,7 @@ scripts/axioms.sh -v     # also lists every stub
 
 It also prints a progress count, for example `theorems: 151 / 211 done (60 stubs, 0 tainted)`, and the same for definitions.
 
-For a single declaration, `#print axioms My.Hom.firstIso` in any file importing `Algebra`.
+For a single declaration, `#print axioms My.QuotientGroup.quotientKerEquivRange` in any file importing `Algebra`.
 
 ## References
 

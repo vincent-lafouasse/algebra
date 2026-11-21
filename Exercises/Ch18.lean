@@ -6,7 +6,7 @@ universe u
 
 namespace Exercises.Ch18
 
-open My My.Group
+open My
 
 /-! ## 18.1
 Soit X un ensemble possédant au moins deux éléments distincts a et b. Construire deux
@@ -23,29 +23,11 @@ theorem ex_18_1 {X : Type u} {a b : X} (hab : a ≠ b) :
 /-! ## 18.2
 Soit G un groupe et Z = {h ∈ G : ∀ g ∈ G, hg = gh}. Montrer que Z est un sous-groupe de G.
 
-Already done: this is `My.Subgroup.center` (note the book writes `h * g = g * h`, the
-library `g * h = h * g`). Stated here as the existence of a subgroup with that carrier. -/
+This is `My.Subgroup.center` (the book writes `h * g = g * h`, Mathlib and the library
+`g * h = h * g`). Stated here as the existence of a subgroup with that carrier. -/
 
 theorem ex_18_2 (G : Type u) [Group G] :
-    ∃ Z : Subgroup G, ∀ h : G, h ∈ Z ↔ ∀ g : G, h * g = g * h := by
-  have Z : Subgroup G := {
-    mem := λ h => ∀ g : G, h * g = g * h
-    one_mem := by
-      intro g
-      rw [mul_one, one_mul]
-    mul_mem := by
-      intro a b ha hb h
-      have hah := ha h
-      have hbh := hb h
-      rw [← mul_assoc]
-      rw [← hah]
-      rw [mul_assoc]
-      rw [hbh]
-      rw [mul_assoc]
-    inv_mem := sorry
-  }
-  refine ⟨Z, ?_⟩
-  intro h
+    ∃ Z : Subgroup G, ∀ h : G, h ∈ Z ↔ ∀ g : G, h * g = g * h :=
   sorry
 
 /-! ## 18.3
@@ -54,9 +36,9 @@ seulement si, H est non vide et : ∀ (x, y) ∈ H², xy⁻¹ ∈ H.
 
 "H is a subgroup" = some `Subgroup G` has exactly H as its members. -/
 
-theorem ex_18_3 {G : Type u} [Group G] (H : G → Prop) :
-    (∃ S : Subgroup G, ∀ x, x ∈ S ↔ H x) ↔
-      (∃ x, H x) ∧ ∀ x y, H x → H y → H (x * y⁻¹) :=
+theorem ex_18_3 {G : Type u} [Group G] (H : Set G) :
+    (∃ S : Subgroup G, ∀ x, x ∈ S ↔ x ∈ H) ↔
+      (∃ x, x ∈ H) ∧ ∀ x y, x ∈ H → y ∈ H → x * y⁻¹ ∈ H :=
   sorry
 
 /-! ## 18.4

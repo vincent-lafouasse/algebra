@@ -1,0 +1,71 @@
+import Algebra.Group.Subgroup.Map
+import Algebra.Group.End
+
+/-! # Normal subgroups
+
+Mathlib: `Mathlib/Algebra/Group/Subgroup/Defs.lean` (the class),
+`Mathlib/Algebra/Group/Subgroup/Basic.lean`, `Mathlib/Algebra/Group/Subgroup/Ker.lean`,
+`Mathlib/Algebra/Group/Subgroup/Map.lean`.
+
+`Normal` is a class, so that a quotient `G ⧸ N` can find the proof by itself. Lemmas that
+*use* normality take it as an explicit argument `(nH : H.Normal)` (Mathlib's convention), so
+you write `nH.mem_comm h`. -/
+
+universe u v
+
+namespace My
+namespace Subgroup
+
+variable {G : Type u} [Group G]
+
+class Normal (H : Subgroup G) : Prop where
+  conj_mem : ∀ n, n ∈ H → ∀ g : G, g * n * g⁻¹ ∈ H
+
+-- conjugating the other way round also stays in H
+theorem Normal.conj_mem' {H : Subgroup G} (nH : H.Normal) (n : G) (hn : n ∈ H) (g : G) :
+    g⁻¹ * n * g ∈ H :=
+  sorry
+
+theorem Normal.mem_comm {H : Subgroup G} (nH : H.Normal) {a b : G} (h : a * b ∈ H) :
+    b * a ∈ H :=
+  sorry
+
+theorem Normal.mem_comm_iff {H : Subgroup G} (nH : H.Normal) {a b : G} :
+    a * b ∈ H ↔ b * a ∈ H :=
+  sorry
+
+instance normal_bot : (⊥ : Subgroup G).Normal :=
+  sorry
+
+instance normal_top : (⊤ : Subgroup G).Normal :=
+  sorry
+
+instance normal_inf_normal (H K : Subgroup G) [H.Normal] [K.Normal] : (H ⊓ K).Normal :=
+  sorry
+
+-- in a commutative group every subgroup is normal
+theorem normal_of_comm {G : Type u} [CommGroup G] (H : Subgroup G) : H.Normal :=
+  sorry
+
+-- normal = invariant under every inner automorphism
+theorem normal_iff_map_conj_eq {H : Subgroup G} :
+    H.Normal ↔ ∀ g : G, map (MulEquiv.toMonoidHom (MulAut.conj g)) H = H :=
+  sorry
+
+variable {N : Type v} [Group N]
+
+-- the image of a normal subgroup is normal *in the range*; under a surjective hom, in N
+theorem Normal.map {H : Subgroup G} (h : H.Normal) (f : G →* N) (hf : Function.Surjective f) :
+    (map f H).Normal :=
+  sorry
+
+instance normal_comap {H : Subgroup N} [H.Normal] (f : G →* N) : (comap f H).Normal :=
+  sorry
+
+end Subgroup
+
+instance MonoidHom.normal_ker {G : Type u} {H : Type v} [Group G] [Group H] (f : G →* H) :
+    f.ker.Normal :=
+  sorry
+
+end My
