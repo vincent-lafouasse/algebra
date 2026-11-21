@@ -77,7 +77,8 @@ theorem inv_inv (h : Commute a b) : Commute a⁻¹ b⁻¹ :=
   h |> inv_left |> inv_right
 
 -- oriented like Mathlib's: the inverses are on the left, so `rw` removes them
-theorem inv_inv_iff : Commute a⁻¹ b⁻¹ ↔ Commute a b :=
+theorem inv_inv_iff : Commute a⁻¹ b⁻¹ ↔ Commute a b := by
+  refine ⟨?_, inv_inv⟩
   sorry
 
 theorem inv_right_iff : Commute a b⁻¹ ↔ Commute a b :=
