@@ -115,12 +115,11 @@ theorem pow_left (h : Commute a b) (n : Nat) : Commute (a ^ n) b := by
     rw [pow_succ]
     exact mul_left ih h
 
-theorem pow_right (h : Commute a b) (n : Nat) : Commute a (b ^ n) := by
-  apply Commute.symm
-  exact pow_left h.symm n
+theorem pow_right (h : Commute a b) (n : Nat) : Commute a (b ^ n) :=
+  pow_left h.symm n |> Commute.symm
 
 theorem pow_pow (h : Commute a b) (m n : Nat) : Commute (a ^ m) (b ^ n) :=
-  sorry
+  pow_right (pow_left h m) n
 
 theorem self_pow (g : G) (n : Nat) : Commute g (g ^ n) :=
   sorry
