@@ -40,7 +40,7 @@ theorem pow_one (g : G) : g ^ (1 : Nat) = g := by
 
 theorem one_pow (n : Nat) : (1 : G) ^ n = 1 := by
   induction n with
-  | zero => rfl
+  | zero => exact pow_zero 1
   | succ n ih => rw [pow_succ, ih, mul_one]
 
 theorem pow_add (g : G) (m n : Nat) : g ^ (m + n) = g ^ m * g ^ n := by
