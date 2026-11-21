@@ -68,7 +68,11 @@ theorem pow_three (g : G) : g ^ 3 = g * (g * g) := by
 theorem pow_add (g : G) (m n : Nat) : g ^ (m + n) = g ^ m * g ^ n := by
   induction n with
   | zero => rw [Nat.add_zero, pow_zero, mul_one]
-  | succ n ih => sorry
+  | succ n ih =>
+    rw [← Nat.add_assoc]
+    rw [pow_succ, pow_succ]
+    rw [ih]
+    rw [mul_assoc]
 
 theorem pow_mul (g : G) (m n : Nat) : g ^ (m * n) = (g ^ m) ^ n :=
   sorry
