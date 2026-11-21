@@ -128,8 +128,13 @@ theorem mul_ne_mul_left (a : G) {b c : G} : b * a ≠ c * a ↔ b ≠ c := by
 /-! ### Inverses -/
 
 -- an element with a right inverse: that inverse is the inverse
-theorem eq_inv_of_mul_eq_one_left (h : a * b = 1) : a = b⁻¹ :=
-  sorry
+theorem eq_inv_of_mul_eq_one_left (h : a * b = 1) : a = b⁻¹ := by
+  rw [← inv_mul_cancel b] at h
+  exact mul_right_cancel h
+
+theorem eq_inv_of_mul_eq_one_right (h : a * b = 1) : b = a⁻¹ := by
+  rw [← mul_inv_cancel a] at h
+  exact mul_left_cancel h
 
 theorem eq_inv_of_mul_eq_one_right (h : a * b = 1) : b = a⁻¹ :=
   sorry
