@@ -164,11 +164,13 @@ theorem mul_eq_one_iff_inv_eq : a * b = 1 ↔ a⁻¹ = b := by
     exact mul_inv_cancel a
 
 -- variants with the equality swapped
-theorem mul_eq_one_iff_eq_inv' : a * b = 1 ↔ b = a⁻¹ :=
-  sorry
+theorem mul_eq_one_iff_eq_inv' : a * b = 1 ↔ b = a⁻¹ := by
+  rw [mul_eq_one_iff_inv_eq]
+  conv => lhs; rw [eq_comm]
 
-theorem mul_eq_one_iff_inv_eq' : a * b = 1 ↔ b⁻¹ = a :=
-  sorry
+theorem mul_eq_one_iff_inv_eq' : a * b = 1 ↔ b⁻¹ = a := by
+  rw [mul_eq_one_iff_eq_inv]
+  conv => lhs; rw [eq_comm]
 
 -- the same, read from the other side (handy for `rw` on a goal `a = b⁻¹`)
 theorem eq_inv_iff_mul_eq_one : a = b⁻¹ ↔ a * b = 1 :=
