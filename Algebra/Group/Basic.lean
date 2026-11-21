@@ -89,13 +89,11 @@ theorem mul_left_injective (a : G) : Function.Injective (· * a) := by
   rw [← mul_left_inj a]
   exact he
 
-theorem mul_ne_mul_right (a : G) {b c : G} : a * b ≠ a * c ↔ b ≠ c := by
-  rw [ne_eq, ne_eq]
-  rw [mul_right_inj a]
+theorem mul_ne_mul_right (a : G) {b c : G} : a * b ≠ a * c ↔ b ≠ c :=
+  Function.Injective.ne_iff (mul_right_injective a)
 
-theorem mul_ne_mul_left (a : G) {b c : G} : b * a ≠ c * a ↔ b ≠ c := by
-  rw [ne_eq, ne_eq]
-  rw [mul_left_inj a]
+theorem mul_ne_mul_left (a : G) {b c : G} : b * a ≠ c * a ↔ b ≠ c :=
+  Function.Injective.ne_iff (mul_left_injective a)
 
 /-! ### Inverses -/
 
