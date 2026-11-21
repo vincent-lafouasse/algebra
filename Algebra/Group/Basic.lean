@@ -132,18 +132,16 @@ theorem inv_inv (a : G) : a⁻¹⁻¹ = a :=
 
 -- `a * b = 1` four ways: solve for `a` or for `b`, inverse on either side of the `=`
 theorem mul_eq_one_iff_eq_inv : a * b = 1 ↔ a = b⁻¹ := by
-  constructor
-  · exact eq_inv_of_mul_eq_one_left
-  · intro h
-    rw [h]
-    exact inv_mul_cancel b
+  refine ⟨eq_inv_of_mul_eq_one_left, ?_⟩
+  intro h
+  rw [h]
+  exact inv_mul_cancel b
 
 theorem mul_eq_one_iff_inv_eq : a * b = 1 ↔ a⁻¹ = b := by
-  constructor
-  · exact inv_eq_of_mul_eq_one_right
-  · intro h
-    rw [← h]
-    exact mul_inv_cancel a
+  refine ⟨inv_eq_of_mul_eq_one_right, ?_⟩
+  intro h
+  rw [← h]
+  exact mul_inv_cancel a
 
 -- variants with the equality swapped
 theorem mul_eq_one_iff_eq_inv' : a * b = 1 ↔ b = a⁻¹ := by
