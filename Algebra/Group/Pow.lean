@@ -53,14 +53,17 @@ theorem pow_succ' (g : G) (n : Nat) : g ^ (n + 1) = g * g ^ n := by
     rw [pow_succ]
     rw [mul_assoc]
 
-theorem pow_two (g : G) : g ^ 2 = g * g :=
-  sorry
+theorem pow_two (g : G) : g ^ 2 = g * g := by
+  rw [pow_succ]
+  rw [pow_one]
 
-theorem pow_three' (g : G) : g ^ 3 = g * g * g :=
-  sorry
+theorem pow_three' (g : G) : g ^ 3 = g * g * g := by
+  rw [pow_succ]
+  rw [pow_two]
 
-theorem pow_three (g : G) : g ^ 3 = g * (g * g) :=
-  sorry
+theorem pow_three (g : G) : g ^ 3 = g * (g * g) := by
+  rw [← mul_assoc]
+  rw [pow_three']
 
 theorem pow_add (g : G) (m n : Nat) : g ^ (m + n) = g ^ m * g ^ n :=
   sorry
