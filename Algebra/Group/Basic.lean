@@ -179,8 +179,9 @@ theorem eq_inv_iff_mul_eq_one : a = b⁻¹ ↔ a * b = 1 :=
 theorem inv_eq_iff_mul_eq_one : a⁻¹ = b ↔ a * b = 1 :=
   Iff.symm (mul_eq_one_iff_inv_eq)
 
-theorem inv_one : (1 : G)⁻¹ = 1 :=
-  sorry
+theorem inv_one : (1 : G)⁻¹ = 1 := by
+  have h : (1 : G) * 1 = 1 := by rw [one_mul 1]
+  exact inv_eq_of_mul_eq_one_right h
 
 theorem inv_eq_one : a⁻¹ = 1 ↔ a = 1 :=
   sorry
