@@ -19,10 +19,17 @@ Only `one_mul` and `inv_mul_cancel` are given: prove the right-hand versions fro
 `mul_inv_cancel` comes first (`mul_one` needs it). -/
 
 theorem mul_inv_cancel (a : G) : a * a⁻¹ = 1 := by
-  have h : ∀ e : G, e * e = e → e = 1 := sorry
-  apply h
-  have h' : (a * a⁻¹) * (a * a⁻¹) = (a * a⁻¹) := sorry
-  exact h'
+  have key : ∀ e : G, e * e = e → e = 1 := by
+    intro e he
+    have he := congrArg (e⁻¹ * ·) he
+    rw [← mul_assoc] at he
+    rw [inv_mul_cancel, one_mul] at he
+    exact he
+  apply key
+  calc (a * a⁻¹) * (a * a⁻¹)
+   _ = a * (a⁻¹ * a * a⁻¹) := by simp only [mul_assoc]
+   _ = a * (1 * a⁻¹) := by rw [inv_mul_cancel]
+   _ = a * a⁻¹ := by rw [one_mul]
 
 theorem mul_one (a : G) : a * 1 = a :=
   calc a * 1
