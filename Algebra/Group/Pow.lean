@@ -33,15 +33,19 @@ theorem pow_zero (g : G) : g ^ (0 : Nat) = 1 :=
 theorem pow_succ (g : G) (n : Nat) : g ^ (n + 1) = g ^ n * g :=
   rfl
 
--- the other way round: needs induction (and `mul_assoc`)
-theorem pow_succ' (g : G) (n : Nat) : g ^ (n + 1) = g * g ^ n :=
-  sorry
-
-theorem pow_one (g : G) : g ^ (1 : Nat) = g :=
-  sorry
+theorem pow_one (g : G) : g ^ (1 : Nat) = g := by
+  rw [pow_succ]
+  rw [pow_zero]
+  rw [one_mul]
 
 theorem one_pow (n : Nat) : (1 : G) ^ n = 1 :=
   sorry
+
+-- the other way round: needs induction (and `mul_assoc`)
+theorem pow_succ' (g : G) (n : Nat) : g ^ (n + 1) = g * g ^ n := by
+  induction n with
+  | zero => rw [Nat.zero_add, pow_one, pow_zero, mul_one]
+  | succ n ih => sorry
 
 theorem pow_two (g : G) : g ^ 2 = g * g :=
   sorry
