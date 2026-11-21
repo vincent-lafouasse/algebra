@@ -138,8 +138,9 @@ theorem pow_three (g : G) : g ^ 3 = g * (g * g) := by
   rw [pow_two]
   rw [mul_assoc]
 
-theorem pow_three' (g : G) : g ^ 3 = g * g * g :=
-  sorry
+theorem pow_three' (g : G) : g ^ 3 = g * g * g := by
+  rw [pow_succ]
+  rw [pow_two]
 
 -- the other bracketing of `pow_mul`
 theorem pow_mul' (g : G) (m n : Nat) : g ^ (m * n) = (g ^ n) ^ m :=
