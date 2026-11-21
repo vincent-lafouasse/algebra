@@ -187,30 +187,28 @@ theorem conj_eq_one_iff : a * b * a⁻¹ = 1 ↔ b = 1 := by
 
 /-! ### Moving a factor across an equation -/
 
-theorem eq_mul_inv_of_mul_eq (h : a * c = b) : a = b * c⁻¹ :=
-  sorry
-
-theorem eq_inv_mul_of_mul_eq (h : b * a = c) : a = b⁻¹ * c :=
-  sorry
-
-theorem mul_inv_eq_of_eq_mul (h : a = c * b) : a * b⁻¹ = c :=
-  sorry
-
-theorem inv_mul_eq_of_eq_mul (h : b = a * c) : a⁻¹ * b = c :=
-  sorry
-
--- the same, as iffs (usable in `rw`)
-
 theorem eq_mul_inv_iff_mul_eq : a = b * c⁻¹ ↔ a * c = b :=
+  sorry
+
+theorem eq_mul_inv_of_mul_eq (h : a * c = b) : a = b * c⁻¹ :=
   sorry
 
 theorem eq_inv_mul_iff_mul_eq : a = b⁻¹ * c ↔ b * a = c :=
   sorry
 
+theorem eq_inv_mul_of_mul_eq (h : b * a = c) : a = b⁻¹ * c :=
+  sorry
+
 theorem mul_inv_eq_iff_eq_mul : a * b⁻¹ = c ↔ a = c * b :=
   sorry
 
+theorem mul_inv_eq_of_eq_mul (h : a = c * b) : a * b⁻¹ = c :=
+  sorry
+
 theorem inv_mul_eq_iff_eq_mul : a⁻¹ * b = c ↔ b = a * c :=
+  sorry
+
+theorem inv_mul_eq_of_eq_mul (h : b = a * c) : a⁻¹ * b = c :=
   sorry
 
 /-! ### Commutative groups -/
