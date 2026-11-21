@@ -105,6 +105,9 @@ theorem injective_iff_hasLeftInverse [Nonempty α] (f : α → β) :
       if hb : ∃ a, f a = b
       then Classical.choose hb
       else Classical.ofNonempty
+    refine ⟨g, ?_⟩
+    intro a
+    have ex : ∃ a', f a' = f a := ⟨a, rfl⟩
     sorry
   · intro h
     obtain ⟨g, hg⟩ := h
