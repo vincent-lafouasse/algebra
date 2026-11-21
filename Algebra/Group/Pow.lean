@@ -177,8 +177,7 @@ theorem one_zpow (k : Int) : (1 : G) ^ k = 1 := by
   cases k with
   | ofNat n =>
     induction n with
-    | zero =>
-      sorry
+    | zero => exact zpow_zero (1 : G)
     | succ n ih => sorry
   | negSucc n =>
     induction n with
