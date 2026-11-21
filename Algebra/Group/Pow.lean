@@ -122,7 +122,7 @@ theorem pow_pow (h : Commute a b) (m n : Nat) : Commute (a ^ m) (b ^ n) :=
   pow_right (pow_left h m) n
 
 theorem self_pow (g : G) (n : Nat) : Commute g (g ^ n) :=
-  sorry
+  pow_right (Commute.refl g) n
 
 -- (ab)^n = a^n b^n needs a and b to commute: false in general (try n = 2)
 protected theorem mul_pow (h : Commute a b) (n : Nat) : (a * b) ^ n = a ^ n * b ^ n :=
