@@ -58,11 +58,8 @@ theorem mul_right (hab : Commute a b) (hac : Commute a c) : Commute a (b * c) :=
   rw [← mul_assoc]
   rw [Commute.of_eq hab]
 
-theorem mul_left (hac : Commute a c) (hbc : Commute b c) : Commute (a * b) c := by
-  apply Commute.symm
-  apply mul_right
-  · exact Commute.symm hac
-  · exact Commute.symm hbc
+theorem mul_left (hac : Commute a c) (hbc : Commute b c) : Commute (a * b) c :=
+  Commute.symm (mul_right hac.symm hbc.symm)
 
 theorem inv_right (h : Commute a b) : Commute a b⁻¹ := by
   replace h := Commute.eq h
