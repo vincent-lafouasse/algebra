@@ -197,9 +197,15 @@ theorem zpow_neg (g : G) (k : Int) : g ^ (-k) = (g ^ k)⁻¹ := by
       rw [zpow_zero]
       rw [pow_zero]
       exact Eq.symm inv_one
-    | succ n => sorry
+    | succ n =>
+      conv => lhs; rw [Nat.add_one]
+      rw [Int.neg_ofNat_succ]
+      rw [zpow_negSucc]
   | negSucc n =>
-    sorry
+    rw [Int.neg_negSucc]
+    rw [zpow_negSucc]
+    rw [My.inv_inv]
+    rw [zpow_natCast]
 
 theorem zpow_neg_one (g : G) : g ^ (-1 : Int) = g⁻¹ :=
   sorry
