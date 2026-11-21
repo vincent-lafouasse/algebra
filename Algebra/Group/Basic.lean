@@ -183,7 +183,7 @@ theorem inv_mul_eq_one : a⁻¹ * b = 1 ↔ a = b := by
 theorem conj_eq_one_iff : a * b * a⁻¹ = 1 ↔ b = 1 := by
   rw [mul_inv_eq_one]
   conv => rhs; rw [← mul_right_inj a]
-  exact (by rw [mul_one])
+  rw [mul_one]
 
 /-! ### Moving a factor across an equation -/
 
