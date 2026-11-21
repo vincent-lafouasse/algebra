@@ -84,11 +84,17 @@ theorem inv_inv_iff : Commute a⁻¹ b⁻¹ ↔ Commute a b := by
   rw [My.inv_inv b] at h
   exact h
 
-theorem inv_right_iff : Commute a b⁻¹ ↔ Commute a b :=
-  sorry
+theorem inv_right_iff : Commute a b⁻¹ ↔ Commute a b := by
+  refine ⟨?_, inv_right⟩
+  intro h
+  replace h := inv_right h
+  rw [My.inv_inv] at h
+  exact h
 
-theorem inv_left_iff : Commute a⁻¹ b ↔ Commute a b :=
-  sorry
+theorem inv_left_iff : Commute a⁻¹ b ↔ Commute a b := by
+  conv => lhs; rw [Commute.symm_iff]
+  conv => rhs; rw [Commute.symm_iff]
+  rw [inv_right_iff]
 
 -- conjugating b by an element it commutes with does nothing
 protected theorem inv_mul_cancel (h : Commute a b) : a⁻¹ * b * a = b :=
