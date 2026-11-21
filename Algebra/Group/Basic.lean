@@ -112,11 +112,9 @@ theorem inv_eq_of_mul_eq_one_left (h : a * b = 1) : b⁻¹ = a :=
 theorem inv_eq_of_mul_eq_one_right (h : a * b = 1) : a⁻¹ = b :=
   Eq.symm (eq_inv_of_mul_eq_one_right h)
 
-theorem inv_inv (a : G) : a⁻¹⁻¹ = a :=
-  calc a⁻¹⁻¹
-   _ = a⁻¹⁻¹ * 1 := by rw [mul_one]
-   _ = a⁻¹⁻¹ * (a⁻¹ * a) := by rw [← inv_mul_cancel]
-   _ = a := by rw [inv_mul_cancel_left]
+theorem inv_inv (a : G) : a⁻¹⁻¹ = a := by
+  apply inv_eq_of_mul_eq_one_left
+  exact mul_inv_cancel a
 
 -- `a * b = 1` four ways: solve for `a` or for `b`, inverse on either side of the `=`
 theorem mul_eq_one_iff_eq_inv : a * b = 1 ↔ a = b⁻¹ := by
