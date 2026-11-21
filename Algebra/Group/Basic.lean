@@ -194,20 +194,23 @@ theorem eq_mul_inv_iff_mul_eq : a = b * c⁻¹ ↔ a * c = b := by
 theorem eq_mul_inv_of_mul_eq (h : a * c = b) : a = b * c⁻¹ :=
   eq_mul_inv_iff_mul_eq.2 h
 
-theorem eq_inv_mul_iff_mul_eq : a = b⁻¹ * c ↔ b * a = c :=
-  sorry
+theorem eq_inv_mul_iff_mul_eq : a = b⁻¹ * c ↔ b * a = c := by
+  conv => lhs; rw [← mul_right_inj b]
+  rw [mul_inv_cancel_left]
 
 theorem eq_inv_mul_of_mul_eq (h : b * a = c) : a = b⁻¹ * c :=
   eq_inv_mul_iff_mul_eq.2 h
 
-theorem mul_inv_eq_iff_eq_mul : a * b⁻¹ = c ↔ a = c * b :=
-  sorry
+theorem mul_inv_eq_iff_eq_mul : a * b⁻¹ = c ↔ a = c * b := by
+  conv => lhs; rw [← mul_left_inj b]
+  rw [inv_mul_cancel_right]
 
 theorem mul_inv_eq_of_eq_mul (h : a = c * b) : a * b⁻¹ = c :=
   mul_inv_eq_iff_eq_mul.2 h
 
-theorem inv_mul_eq_iff_eq_mul : a⁻¹ * b = c ↔ b = a * c :=
-  sorry
+theorem inv_mul_eq_iff_eq_mul : a⁻¹ * b = c ↔ b = a * c := by
+  conv => lhs; rw [← mul_right_inj a]
+  rw [mul_inv_cancel_left]
 
 theorem inv_mul_eq_of_eq_mul (h : b = a * c) : a⁻¹ * b = c :=
   inv_mul_eq_iff_eq_mul.2 h
