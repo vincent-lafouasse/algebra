@@ -268,7 +268,13 @@ theorem zpow_add (g : G) (k l : Int) : g ^ (k + l) = g ^ k * g ^ l := by
     | succ nl' ih =>
       rw [Int.ofNat_eq_natCast]
       rw [Int.ofNat_eq_natCast] at ih
-      sorry
+      rw [Int.natCast_add]
+      rw [← Int.add_assoc]
+      rw [Int.natCast_one]
+      rw [zpow_add_one]
+      rw [ih]
+      rw [zpow_add_one]
+      rw [mul_assoc]
   | negSucc nl =>
     induction nl with
     | zero => sorry
