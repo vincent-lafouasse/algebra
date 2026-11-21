@@ -37,7 +37,7 @@ protected theorem symm (h : Commute a b) : Commute b a :=
   Commute.of_eq (Commute.eq h).symm
 
 protected theorem symm_iff : Commute a b ↔ Commute b a :=
-  sorry
+  ⟨Commute.symm, Commute.symm⟩
 
 end Mul
 
