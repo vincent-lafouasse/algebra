@@ -43,11 +43,12 @@ end Mul
 
 variable {G : Type u} [Group G] {a b c : G}
 
-theorem one_left (a : G) : Commute 1 a :=
-  sorry
+theorem one_left (a : G) : Commute 1 a := by
+  apply Commute.of_eq
+  rw [mul_one, one_mul]
 
 theorem one_right (a : G) : Commute a 1 :=
-  sorry
+  Commute.symm (one_left a)
 
 theorem mul_right (hab : Commute a b) (hac : Commute a c) : Commute a (b * c) :=
   sorry
