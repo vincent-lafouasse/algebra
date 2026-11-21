@@ -69,7 +69,7 @@ theorem mul_left_cancel_iff : a * b = a * c ↔ b = c :=
   ⟨mul_left_cancel, congrArg (a * ·)⟩
 
 theorem mul_right_cancel_iff : b * a = c * a ↔ b = c :=
-    ⟨mul_right_cancel, congrArg (· * a)⟩
+  ⟨mul_right_cancel, congrArg (· * a)⟩
 
 -- the same statements with `a` explicit (Mathlib keeps both)
 theorem mul_right_inj (a : G) {b c : G} : a * b = a * c ↔ b = c :=
