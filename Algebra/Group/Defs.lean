@@ -34,6 +34,8 @@ theorem one_mul (a : G) : 1 * a = a :=
 theorem inv_mul_cancel (a : G) : a⁻¹ * a = 1 :=
   Group.inv_mul_cancel a
 
+instance Group.to_isAssociative : Std.Associative (λ (a b : G) => a * b) := ⟨mul_assoc⟩
+
 end
 
 theorem mul_comm {G : Type u} [CommGroup G] (a b : G) : a * b = b * a :=
