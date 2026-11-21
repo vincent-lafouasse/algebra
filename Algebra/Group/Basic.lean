@@ -223,8 +223,8 @@ variable {G : Type u} [CommGroup G]
 
 theorem inv_mul_cancel_comm (a b : G) : a⁻¹ * b * a = b :=
   calc a⁻¹ * b * a
-   _ = a⁻¹ * a * b := by ac_rfl
-   _ = b := by rw [inv_mul_cancel, one_mul]
+  _ = b * a⁻¹ * a := by rw [mul_comm a⁻¹ b]
+   _ = b := by rw [inv_mul_cancel_right]
 
 theorem mul_inv_cancel_comm (a b : G) : a * b * a⁻¹ = b := by
   conv => lhs; left; rw [← inv_inv a]
