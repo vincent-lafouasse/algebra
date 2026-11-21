@@ -35,7 +35,7 @@ protected theorem refl (a : S) : Commute a a :=
   Commute.of_eq rfl
 
 protected theorem symm (h : Commute a b) : Commute b a :=
-  Commute.of_eq (Commute.eq h).symm
+  h |> Commute.eq |> Eq.symm |> Commute.of_eq
 
 protected theorem symm_iff : Commute a b ↔ Commute b a :=
   ⟨Commute.symm, Commute.symm⟩
