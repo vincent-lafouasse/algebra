@@ -140,7 +140,7 @@ protected theorem mul_pow (h : Commute a b) (n : Nat) : (a * b) ^ n = a ^ n * b 
 end Commute
 
 theorem mul_pow {G : Type u} [CommGroup G] (a b : G) (n : Nat) : (a * b) ^ n = a ^ n * b ^ n :=
-  sorry
+  Commute.mul_pow (mul_comm a b |> Commute.of_eq) n
 
 /-! ### Integer powers -/
 
