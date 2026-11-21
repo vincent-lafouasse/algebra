@@ -90,8 +90,10 @@ theorem pow_mul_comm (g : G) (m n : Nat) : g ^ m * g ^ n = g ^ n * g ^ m := by
   rw [Nat.add_comm]
   rw [pow_add]
 
-theorem pow_right_comm (g : G) (m n : Nat) : (g ^ m) ^ n = (g ^ n) ^ m :=
-  sorry
+theorem pow_right_comm (g : G) (m n : Nat) : (g ^ m) ^ n = (g ^ n) ^ m := by
+  rw [← pow_mul]
+  rw [Nat.mul_comm]
+  rw [pow_mul]
 
 theorem inv_pow (g : G) (n : Nat) : g⁻¹ ^ n = (g ^ n)⁻¹ :=
   sorry
