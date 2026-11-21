@@ -155,8 +155,12 @@ theorem inv_eq_one : a⁻¹ = 1 ↔ a = 1 := by
   rw [inv_eq_iff_mul_eq_one, mul_one]
 
 -- the inverse of a product reverses the order
-theorem mul_inv_rev (a b : G) : (a * b)⁻¹ = b⁻¹ * a⁻¹ :=
-  sorry
+theorem mul_inv_rev (a b : G) : (a * b)⁻¹ = b⁻¹ * a⁻¹ := by
+  apply inv_eq_of_mul_eq_one_left 
+  calc b⁻¹ * a⁻¹ * (a * b)
+   _ = b⁻¹ * (a⁻¹ * a) * b := by simp only [mul_assoc]
+   _ = b⁻¹ * b := by rw [inv_mul_cancel, mul_one]
+   _ = 1 := by rw [inv_mul_cancel]
 
 theorem inv_injective : Function.Injective (Inv.inv : G → G) :=
   sorry
