@@ -129,11 +129,14 @@ theorem pow_mul (g : G) (m n : Nat) : g ^ (m * n) = (g ^ m) ^ n := by
                  rw [ih]
                  rw [← pow_succ]
 
-theorem pow_two (g : G) : g ^ 2 = g * g :=
-  sorry
+theorem pow_two (g : G) : g ^ 2 = g * g := by
+  rw [pow_succ]
+  rw [pow_one]
 
-theorem pow_three (g : G) : g ^ 3 = g * (g * g) :=
-  sorry
+theorem pow_three (g : G) : g ^ 3 = g * (g * g) := by
+  rw [pow_succ]
+  rw [pow_two]
+  rw [mul_assoc]
 
 theorem pow_three' (g : G) : g ^ 3 = g * g * g :=
   sorry
