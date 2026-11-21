@@ -108,11 +108,16 @@ namespace Commute
 
 variable {a b : G}
 
-theorem pow_left (h : Commute a b) (n : Nat) : Commute (a ^ n) b :=
-  sorry
+theorem pow_left (h : Commute a b) (n : Nat) : Commute (a ^ n) b := by
+  induction n with
+  | zero => rw [pow_zero]; exact one_left b
+  | succ n ih =>
+    rw [pow_succ]
+    exact mul_left ih h
 
-theorem pow_right (h : Commute a b) (n : Nat) : Commute a (b ^ n) :=
-  sorry
+theorem pow_right (h : Commute a b) (n : Nat) : Commute a (b ^ n) := by
+  apply Commute.symm
+  exact pow_left h.symm n
 
 theorem pow_pow (h : Commute a b) (m n : Nat) : Commute (a ^ m) (b ^ n) :=
   sorry
