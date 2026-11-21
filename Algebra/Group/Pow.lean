@@ -133,7 +133,7 @@ protected theorem mul_pow (h : Commute a b) (n : Nat) : (a * b) ^ n = a ^ n * b 
      _ = (a * b) ^ n * (a * b) := by rw [pow_succ]
      _ = a ^ n * b ^ n * (a * b) := by rw [ih]
      _ = a ^ n * (b ^ n * a) * b := by simp only [mul_assoc]
-     _ = a ^ n * (a * b ^ n) * b := by rw [pow_right h n |> Commute.eq]
+     _ = a ^ n * (a * b ^ n) * b := by rw [← pow_right h n |> Commute.eq]
      _ = (a ^ n * a) * (b ^ n * b) := by simp only [mul_assoc]
      _ = a ^ (n + 1) * b ^ (n + 1) := by rw [← pow_succ, ← pow_succ]
 
