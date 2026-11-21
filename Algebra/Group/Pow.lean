@@ -54,13 +54,9 @@ theorem pow_add (g : G) (m n : Nat) : g ^ (m + n) = g ^ m * g ^ n := by
 
 -- the other way round: needs induction (and `mul_assoc`)
 theorem pow_succ' (g : G) (n : Nat) : g ^ (n + 1) = g * g ^ n := by
-  induction n with
-  | zero => rw [Nat.zero_add, pow_one, pow_zero, mul_one]
-  | succ n ih =>
-    rw [pow_succ]
-    conv => lhs; rw [ih]
-    rw [pow_succ]
-    rw [mul_assoc]
+  rw [Nat.add_comm]
+  rw [pow_add]
+  rw [pow_one]
 
 theorem pow_two (g : G) : g ^ 2 = g * g := by
   rw [pow_succ]
