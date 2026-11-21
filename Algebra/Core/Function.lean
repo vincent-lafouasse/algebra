@@ -23,6 +23,17 @@ theorem invFun_spec (f : α → β) (hs : Function.Surjective f) (y : β) :
     f (invFun f hs y) = y :=
   Classical.choose_spec (hs y)
 
+-- an inverse of *any* f: a preimage of y if there is one, an arbitrary element if not
+-- (Mathlib calls it `Function.invFun`). The `if` on a Prop needs `open Classical in`
+-- in front of the `def`, and "an arbitrary element" is where `[Nonempty α]` comes in.
+noncomputable def inverse [Nonempty α] (f : α → β) : β → α :=
+  sorry
+
+-- the only interface lemma that looks inside `inverse` (Mathlib: `Function.invFun_eq`)
+theorem inverse_spec [Nonempty α] {f : α → β} (y : β) (h : ∃ x, f x = y) :
+    f (inverse f y) = y :=
+  sorry
+
 /-! ### Composition and identity
 
 Core has `Function.Injective.comp`, `Function.Surjective.comp`, `Function.injective_id`,
@@ -74,49 +85,40 @@ theorem injective_iff_ne (f : α → β) :
     have hf_ne := h a b h_ne
     exact hf_ne h_e
 
--- the → direction needs `Classical.choose`, like `Iso.invFun`
+-- no `Nonempty α` here, so `inverse` is not available: the → witness is `invFun`
 theorem surjective_iff_hasRightInverse (f : α → β) :
-    Function.Surjective f ↔ ∃ g : β → α, Function.RightInverse g f := by
-  unfold Function.RightInverse
-  unfold Function.LeftInverse
-  unfold Function.Surjective
-  constructor
-  · intro h
-    let g : β → α := λ b => Classical.choose (h b)
-    refine ⟨g, ?_⟩
-    intro y
-    show f (Classical.choose (h y)) = y
-    exact Classical.choose_spec (h y)
-  · intro h
-    obtain ⟨g, hg⟩ := h
-    intro b
-    have hgb := hg b
-    exact ⟨g b, hgb⟩
+    Function.Surjective f ↔ ∃ g : β → α, Function.RightInverse g f :=
+  sorry
+
+/-! ### `inverse` as a left / right inverse
+
+From here on, use `inverse_spec`, never the definition of `inverse`. -/
+
+-- (Mathlib: `Function.leftInverse_invFun`)
+theorem leftInverse_inverse [Nonempty α] {f : α → β} (hf : Function.Injective f) :
+    Function.LeftInverse (inverse f) f :=
+  sorry
+
+-- (Mathlib: `Function.rightInverse_invFun`)
+theorem rightInverse_inverse [Nonempty α] {f : α → β} (hf : Function.Surjective f) :
+    Function.RightInverse (inverse f) f :=
+  sorry
+
+-- f is injective iff `inverse f` undoes it
+theorem injective_iff_leftInverse_inverse [Nonempty α] (f : α → β) :
+    Function.Injective f ↔ Function.LeftInverse (inverse f) f :=
+  sorry
+
+-- f is surjective iff `inverse f` is a section of it
+theorem surjective_iff_rightInverse_inverse [Nonempty α] (f : α → β) :
+    Function.Surjective f ↔ Function.RightInverse (inverse f) f :=
+  sorry
 
 -- `Nonempty α` is needed: if α is empty and β isn't, there is no `β → α` at all
-open Classical in
+-- (→ has a one-word witness now)
 theorem injective_iff_hasLeftInverse [Nonempty α] (f : α → β) :
-    Function.Injective f ↔ ∃ g : β → α, Function.LeftInverse g f := by
-  unfold Function.Injective
-  unfold Function.LeftInverse
-  constructor
-  · intro h
-    let g : β → α := λ b =>
-      if hb : ∃ a, f a = b
-      then Classical.choose hb
-      else Classical.ofNonempty
-    refine ⟨g, ?_⟩
-    intro a
-    have ex : ∃ a', f a' = f a := ⟨a, rfl⟩
-    show (if hb : ∃ a', f a' = f a then Classical.choose hb else Classical.ofNonempty) = a
-    rw [dite_eq_left ex]
-    exact h (Classical.choose_spec ex)
-  · intro h
-    obtain ⟨g, hg⟩ := h
-    intro a b he
-    rw [← hg a]
-    rw [← hg b]
-    exact congrArg g he
+    Function.Injective f ↔ ∃ g : β → α, Function.LeftInverse g f :=
+  sorry
 
 theorem bijective_iff_hasInverse (f : α → β) :
     Bijective f ↔ ∃ g : β → α, Function.LeftInverse g f ∧ Function.RightInverse g f := by
