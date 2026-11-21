@@ -21,7 +21,7 @@ Only `one_mul` and `inv_mul_cancel` are given: prove the right-hand versions fro
 theorem mul_inv_cancel (a : G) : a * a⁻¹ = 1 := by
   have key : ∀ e : G, e * e = e → e = 1 := by
     intro e he
-    have he := congrArg (e⁻¹ * ·) he
+    replace he := congrArg (e⁻¹ * ·) he
     rw [← mul_assoc] at he
     rw [inv_mul_cancel, one_mul] at he
     exact he
