@@ -64,8 +64,14 @@ theorem mul_left (hac : Commute a c) (hbc : Commute b c) : Commute (a * b) c := 
   · exact Commute.symm hac
   · exact Commute.symm hbc
 
-theorem inv_right (h : Commute a b) : Commute a b⁻¹ :=
-  sorry
+theorem inv_right (h : Commute a b) : Commute a b⁻¹ := by
+  replace h := Commute.eq h
+  rw [← mul_left_inj b⁻¹] at h
+  rw [← mul_right_inj b⁻¹] at h
+  rw [mul_inv_cancel_right] at h
+  rw [mul_assoc] at h
+  rw [inv_mul_cancel_left] at h
+  exact Commute.of_eq h.symm
 
 theorem inv_left (h : Commute a b) : Commute a⁻¹ b :=
   sorry
