@@ -84,8 +84,9 @@ theorem pow_mul (g : G) (m n : Nat) : g ^ (m * n) = (g ^ m) ^ n := by
     rw [ih]
     rw [Nat.mul_one]
 
-theorem pow_mul' (g : G) (m n : Nat) : g ^ (m * n) = (g ^ n) ^ m :=
-  sorry
+theorem pow_mul' (g : G) (m n : Nat) : g ^ (m * n) = (g ^ n) ^ m := by
+  rw [Nat.mul_comm]
+  rw [pow_mul]
 
 -- powers of the same element commute
 theorem pow_mul_comm (g : G) (m n : Nat) : g ^ m * g ^ n = g ^ n * g ^ m :=
