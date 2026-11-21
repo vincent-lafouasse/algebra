@@ -72,18 +72,6 @@ theorem inv_right (h : Commute a b) : Commute a b⁻¹ := by
 theorem inv_left (h : Commute a b) : Commute a⁻¹ b :=
   h |> Commute.symm |> inv_right |> Commute.symm
 
-theorem inv_inv (h : Commute a b) : Commute a⁻¹ b⁻¹ :=
-  h |> inv_left |> inv_right
-
--- oriented like Mathlib's: the inverses are on the left, so `rw` removes them
-theorem inv_inv_iff : Commute a⁻¹ b⁻¹ ↔ Commute a b := by
-  refine ⟨?_, inv_inv⟩
-  intro h
-  replace h := h |> inv_inv
-  rw [My.inv_inv a] at h
-  rw [My.inv_inv b] at h
-  exact h
-
 theorem inv_right_iff : Commute a b⁻¹ ↔ Commute a b := by
   refine ⟨?_, inv_right⟩
   intro h
@@ -95,6 +83,13 @@ theorem inv_left_iff : Commute a⁻¹ b ↔ Commute a b := by
   conv => lhs; rw [Commute.symm_iff]
   conv => rhs; rw [Commute.symm_iff]
   rw [inv_right_iff]
+
+theorem inv_inv (h : Commute a b) : Commute a⁻¹ b⁻¹ :=
+  h |> inv_left |> inv_right
+
+-- oriented like Mathlib's: the inverses are on the left, so `rw` removes them
+theorem inv_inv_iff : Commute a⁻¹ b⁻¹ ↔ Commute a b := by
+  rw [inv_left_iff, inv_right_iff]
 
 -- conjugating b by an element it commutes with does nothing
 protected theorem inv_mul_cancel (h : Commute a b) : a⁻¹ * b * a = b :=
