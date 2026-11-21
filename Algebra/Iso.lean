@@ -104,29 +104,29 @@ protected theorem surjective (e : G ≃* H) : Function.Surjective e.toHom := by
   rw [toHom_invHom]
 
 -- a bijective hom is an isomorphism
--- (the inverse is `invFun` from Core/Function.lean, hence `noncomputable`)
+-- (the inverse is `Function.surjInv` from Core/Function.lean, hence `noncomputable`)
 noncomputable def ofBijective (f : G →* H)
     (hi : Function.Injective f) (hs : Function.Surjective f) : G ≃* H where
   toHom := f
   invHom := {
-    toFun := invFun f hs
+    toFun := Function.surjInv hs
     map_mul := by
       intro a b
       apply hi
       rw [f.map_mul]
-      rw [invFun_spec f hs, invFun_spec f hs, invFun_spec f hs]
+      rw [Function.surjInv_eq hs, Function.surjInv_eq hs, Function.surjInv_eq hs]
   }
   left_inv := by
     ext a
     apply hi
     rw [Hom.id_apply a]
     rw [Hom.comp_apply]
-    rw [invFun_spec f hs]
+    rw [Function.surjInv_eq hs]
   right_inv := by
     ext a
     rw [Hom.id_apply a]
     rw [Hom.comp_apply]
-    rw [invFun_spec f hs]
+    rw [Function.surjInv_eq hs]
 
 theorem ofBijective_toHom (f : G →* H)
     (hi : Function.Injective f) (hs : Function.Surjective f) :
