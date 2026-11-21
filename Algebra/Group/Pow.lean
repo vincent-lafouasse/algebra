@@ -98,12 +98,9 @@ theorem inv_pow (g : G) (n : Nat) : g⁻¹ ^ n = (g ^ n)⁻¹ := by
   induction n with
   | zero => rw [pow_zero, pow_zero, inv_one]
   | succ n ih =>
-    rw [← mul_eq_one_iff_eq_inv]
-    rw [pow_succ]
-    rw [pow_succ']
+    rw [pow_succ, pow_succ']
     rw [ih]
-    rw [← mul_inv_rev]
-    rw [inv_mul_cancel]
+    rw [mul_inv_rev]
 
 /-! ### Commuting with powers -/
 
