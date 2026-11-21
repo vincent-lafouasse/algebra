@@ -53,10 +53,10 @@ theorem one_right (a : G) : Commute a 1 :=
 theorem mul_right (hab : Commute a b) (hac : Commute a c) : Commute a (b * c) := by
   apply Commute.of_eq
   rw [mul_assoc]
-  rw [Commute.of_eq hac.symm]
+  rw [hac.symm]
   rw [← mul_assoc]
   rw [← mul_assoc]
-  rw [Commute.of_eq hab]
+  rw [hab]
 
 theorem mul_left (hac : Commute a c) (hbc : Commute b c) : Commute (a * b) c :=
   Commute.symm (mul_right hac.symm hbc.symm)
@@ -68,7 +68,7 @@ theorem inv_right (h : Commute a b) : Commute a b⁻¹ := by
   rw [mul_inv_cancel_right] at h
   rw [mul_assoc] at h
   rw [inv_mul_cancel_left] at h
-  exact Commute.of_eq h.symm
+  exact Commute.symm h
 
 theorem inv_left (h : Commute a b) : Commute a⁻¹ b :=
   h |> Commute.symm |> inv_right |> Commute.symm
