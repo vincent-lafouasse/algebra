@@ -96,9 +96,15 @@ theorem pow_right_comm (g : G) (m n : Nat) : (g ^ m) ^ n = (g ^ n) ^ m := by
   rw [pow_mul]
 
 theorem inv_pow (g : G) (n : Nat) : g⁻¹ ^ n = (g ^ n)⁻¹ := by
-  apply eq_inv_of_mul_eq_one_left
-  /- i might need a^n * b^n = (a*b)^n -/
-  sorry
+  induction n with
+  | zero => rw [pow_zero, pow_zero, inv_one]
+  | succ n ih =>
+    rw [← mul_eq_one_iff_eq_inv]
+    rw [pow_succ]
+    rw [pow_succ']
+    rw [ih]
+    rw [← mul_inv_rev]
+    rw [inv_mul_cancel]
 
 /-! ### Commuting with powers -/
 
