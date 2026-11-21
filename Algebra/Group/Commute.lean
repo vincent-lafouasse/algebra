@@ -14,8 +14,9 @@ namespace My
 
 def Commute {S : Type u} [Mul S] (a b : S) : Prop := a * b = b * a
 
-theorem commute_iff_eq {S : Type u} [Mul S] (a b : S) : Commute a b ↔ a * b = b * a :=
-  sorry
+theorem commute_iff_eq {S : Type u} [Mul S] (a b : S) : Commute a b ↔ a * b = b * a := by
+  unfold Commute
+  rfl
 
 namespace Commute
 
@@ -24,7 +25,10 @@ section Mul
 variable {S : Type u} [Mul S] {a b : S}
 
 protected theorem eq (h : Commute a b) : a * b = b * a :=
-  sorry
+  (commute_iff_eq a b).1 h
+
+protected theorem of_eq (h : a * b = b * a) : Commute a b :=
+  (commute_iff_eq a b).2 h
 
 protected theorem refl (a : S) : Commute a a :=
   sorry
