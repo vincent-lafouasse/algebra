@@ -154,7 +154,6 @@ theorem inv_one : (1 : G)⁻¹ = 1 :=
 theorem inv_eq_one : a⁻¹ = 1 ↔ a = 1 := by
   rw [inv_eq_iff_mul_eq_one, mul_one]
 
-
 -- the inverse of a product reverses the order
 theorem mul_inv_rev (a b : G) : (a * b)⁻¹ = b⁻¹ * a⁻¹ :=
   sorry
