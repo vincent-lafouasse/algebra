@@ -174,8 +174,6 @@ theorem zpow_two (g : G) : g ^ (2 : Int) = g * g := by
   rw [zpow_natCast]
   rw [pow_two]
 
-#print Int.ofNat_toNat
-
 theorem one_zpow (k : Int) : (1 : G) ^ k = 1 := by
   cases k with
   | ofNat n =>
@@ -183,7 +181,9 @@ theorem one_zpow (k : Int) : (1 : G) ^ k = 1 := by
     rw [zpow_natCast]
     rw [one_pow n]
   | negSucc n =>
-    sorry
+    rw [zpow_negSucc]
+    rw[inv_eq_one]
+    exact one_pow (n + 1)
 
 -- split on k; `-(ofNat (n+1)) = negSucc n` is the Int fact you need
 theorem zpow_neg (g : G) (k : Int) : g ^ (-k) = (g ^ k)⁻¹ :=
