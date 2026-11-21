@@ -110,6 +110,6 @@ end Commute
 
 -- in a commutative group everything commutes (Mathlib states it for any `CommMagma`)
 theorem Commute.all {G : Type u} [CommGroup G] (a b : G) : Commute a b :=
-  sorry
+  mul_comm a b |> Commute.of_eq
 
 end My
