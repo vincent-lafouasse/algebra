@@ -94,12 +94,17 @@ theorem surjective_iff_hasRightInverse (f : α → β) :
     exact ⟨g b, hgb⟩
 
 -- `Nonempty α` is needed: if α is empty and β isn't, there is no `β → α` at all
+open Classical in
 theorem injective_iff_hasLeftInverse [Nonempty α] (f : α → β) :
     Function.Injective f ↔ ∃ g : β → α, Function.LeftInverse g f := by
   unfold Function.Injective
   unfold Function.LeftInverse
   constructor
   · intro h
+    let g : β → α := λ b =>
+      if hb : ∃ a, f a = b
+      then Classical.choose hb
+      else Classical.ofNonempty
     sorry
   · intro h
     obtain ⟨g, hg⟩ := h
