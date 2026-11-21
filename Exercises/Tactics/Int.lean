@@ -14,10 +14,10 @@ namespace Exercises.Int
 
 -- closed terms compute: `rfl` or `decide`
 theorem negSucc_two : Int.negSucc 2 = -3 :=
-  sorry
+  rfl
 
 theorem neg_three_add_five : (-3 : Int) + 5 = 2 :=
-  sorry
+  rfl
 
 -- with a variable, `rfl` still works when the computation does not get stuck on `n`
 theorem ofNat_add_one (n : Nat) : Int.ofNat n + 1 = Int.ofNat (n + 1) :=
