@@ -41,4 +41,7 @@ end
 theorem mul_comm {G : Type u} [CommGroup G] (a b : G) : a * b = b * a :=
   CommGroup.mul_comm a b
 
+instance CommGroup.to_isCommutative {G : Type u} [CommGroup G] :
+     Std.Commutative (λ (a b : G) => a * b) := ⟨CommGroup.mul_comm⟩
+
 end My
