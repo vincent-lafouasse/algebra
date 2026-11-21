@@ -154,13 +154,13 @@ instance : Pow G Int := ⟨fun g k => zpowRec k g⟩
 
 -- the defining equations (`rfl`)
 theorem zpow_natCast (g : G) (n : Nat) : g ^ (n : Int) = g ^ n :=
-  sorry
+  rfl
 
 theorem zpow_negSucc (g : G) (n : Nat) : g ^ (Int.negSucc n) = (g ^ (n + 1))⁻¹ :=
-  sorry
+  rfl
 
 theorem zpow_zero (g : G) : g ^ (0 : Int) = 1 :=
-  sorry
+  rfl
 
 theorem zpow_one (g : G) : g ^ (1 : Int) = g :=
   sorry
