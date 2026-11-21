@@ -93,3 +93,5 @@ The BibTeX entries are in [`references.bib`](references.bib).
 [Gou09] X. Gourdon, *Les maths en tête : Algèbre*, 2nd ed., Ellipses, Paris, 2009.
 
 [Per96] D. Perrin, *Cours d'algèbre*, Ellipses, Paris, 1996.
+
+[Tao22] T. Tao, *Analysis I*, 4th ed., Texts and Readings in Mathematics 37, Springer, Singapore, 2022.
