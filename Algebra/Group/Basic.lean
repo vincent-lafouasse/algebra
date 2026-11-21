@@ -143,10 +143,10 @@ theorem mul_eq_one_iff_inv_eq' : a * b = 1 ↔ b⁻¹ = a := by
 
 -- the same, read from the other side (handy for `rw` on a goal `a = b⁻¹`)
 theorem eq_inv_iff_mul_eq_one : a = b⁻¹ ↔ a * b = 1 :=
-  Iff.symm (mul_eq_one_iff_eq_inv)
+  Iff.symm mul_eq_one_iff_eq_inv
 
 theorem inv_eq_iff_mul_eq_one : a⁻¹ = b ↔ a * b = 1 :=
-  Iff.symm (mul_eq_one_iff_inv_eq)
+  Iff.symm mul_eq_one_iff_inv_eq
 
 theorem inv_one : (1 : G)⁻¹ = 1 :=
   inv_eq_of_mul_eq_one_right (one_mul 1)
