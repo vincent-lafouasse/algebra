@@ -187,11 +187,12 @@ theorem conj_eq_one_iff : a * b * a⁻¹ = 1 ↔ b = 1 := by
 
 /-! ### Moving a factor across an equation -/
 
-theorem eq_mul_inv_iff_mul_eq : a = b * c⁻¹ ↔ a * c = b :=
-  sorry
+theorem eq_mul_inv_iff_mul_eq : a = b * c⁻¹ ↔ a * c = b := by
+  conv => lhs; rw [← mul_left_inj c]
+  rw [inv_mul_cancel_right]
 
 theorem eq_mul_inv_of_mul_eq (h : a * c = b) : a = b * c⁻¹ :=
-  sorry
+  eq_mul_inv_iff_mul_eq.2 h
 
 theorem eq_inv_mul_iff_mul_eq : a = b⁻¹ * c ↔ b * a = c :=
   sorry
