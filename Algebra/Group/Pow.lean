@@ -28,10 +28,10 @@ instance : Pow G Nat := ⟨fun g n => npowRec n g⟩
 
 -- the two defining equations (`rfl`)
 theorem pow_zero (g : G) : g ^ (0 : Nat) = 1 :=
-  sorry
+  rfl
 
 theorem pow_succ (g : G) (n : Nat) : g ^ (n + 1) = g ^ n * g :=
-  sorry
+  rfl
 
 -- the other way round: needs induction (and `mul_assoc`)
 theorem pow_succ' (g : G) (n : Nat) : g ^ (n + 1) = g * g ^ n :=
