@@ -175,8 +175,15 @@ theorem zpow_two (g : G) : g ^ (2 : Int) = g * g := by
 
 theorem one_zpow (k : Int) : (1 : G) ^ k = 1 := by
   cases k with
-  | ofNat n => sorry
-  | negSucc n => sorry
+  | ofNat n =>
+    induction n with
+    | zero =>
+      sorry
+    | succ n ih => sorry
+  | negSucc n =>
+    induction n with
+    | zero => sorry
+    | succ n ih => sorry
 
 -- split on k; `-(ofNat (n+1)) = negSucc n` is the Int fact you need
 theorem zpow_neg (g : G) (k : Int) : g ^ (-k) = (g ^ k)⁻¹ :=
