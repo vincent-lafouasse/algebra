@@ -19,7 +19,14 @@ Only `one_mul` and `inv_mul_cancel` are given: prove the right-hand versions fro
 `mul_inv_cancel` comes first (`mul_one` needs it). -/
 
 theorem mul_inv_cancel (a : G) : a * a⁻¹ = 1 :=
-  sorry
+  calc a * a⁻¹
+   _ = 1 * (a * a⁻¹) := by rw [one_mul]
+   _ = (a⁻¹⁻¹ * a⁻¹) * (a * a⁻¹) := by rw [← inv_mul_cancel a⁻¹]
+   _ = a⁻¹⁻¹ * (a⁻¹ * a)  * a⁻¹ := by simp only [mul_assoc]
+   _ = a⁻¹⁻¹ * 1 * a⁻¹ := by rw [inv_mul_cancel]
+   _ = a⁻¹⁻¹ * (1 * a⁻¹) := by simp only [mul_assoc]
+   _ = a⁻¹⁻¹ * a⁻¹ := by rw [one_mul]
+   _ = 1 := by rw [inv_mul_cancel]
 
 theorem mul_one (a : G) : a * 1 = a :=
   sorry
