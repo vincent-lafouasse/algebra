@@ -265,7 +265,10 @@ theorem zpow_add (g : G) (k l : Int) : g ^ (k + l) = g ^ k * g ^ l := by
       rw [zpow_natCast]
       rw [pow_zero g, mul_one]
       rw [Int.natCast_zero, Int.add_zero]
-    | succ nl' ih => sorry
+    | succ nl' ih =>
+      rw [Int.ofNat_eq_natCast]
+      rw [Int.ofNat_eq_natCast] at ih
+      sorry
   | negSucc nl =>
     induction nl with
     | zero => sorry
