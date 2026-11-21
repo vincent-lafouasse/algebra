@@ -256,8 +256,16 @@ theorem zpow_sub_one (g : G) (k : Int) : g ^ (k - 1) = g ^ k * g⁻¹ := by
 
 -- the hard one: split on the sign of `l`, then induction on its size,
 -- moving one factor at a time with the two lemmas above
-theorem zpow_add (g : G) (k l : Int) : g ^ (k + l) = g ^ k * g ^ l :=
-  sorry
+theorem zpow_add (g : G) (k l : Int) : g ^ (k + l) = g ^ k * g ^ l := by
+  cases l with
+  | ofNat nl =>
+    induction nl with
+    | zero => sorry
+    | succ nl' ih => sorry
+  | negSucc nl =>
+    induction nl with
+    | zero => sorry
+    | succ nl' ih => sorry
 
 theorem zpow_mul (g : G) (k l : Int) : g ^ (k * l) = (g ^ k) ^ l :=
   sorry
