@@ -207,8 +207,9 @@ theorem zpow_neg (g : G) (k : Int) : g ^ (-k) = (g ^ k)⁻¹ := by
     rw [My.inv_inv]
     rw [zpow_natCast]
 
-theorem zpow_neg_one (g : G) : g ^ (-1 : Int) = g⁻¹ :=
-  sorry
+theorem zpow_neg_one (g : G) : g ^ (-1 : Int) = g⁻¹ := by
+  rw [zpow_neg g 1]
+  rw [zpow_one]
 
 theorem inv_zpow (g : G) (k : Int) : g⁻¹ ^ k = (g ^ k)⁻¹ :=
   sorry
