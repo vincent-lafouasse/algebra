@@ -259,8 +259,18 @@ theorem zpow_sub_one (g : G) (k : Int) : g ^ (k - 1) = g ^ k * g⁻¹ := by
 theorem zpow_add (g : G) (k l : Int) : g ^ (k + l) = g ^ k * g ^ l := by
   induction l using Int.induction_on with
   | zero => rw [Int.add_zero, zpow_zero, mul_one]
-  | succ n => sorry
-  | pred n => sorry
+  | succ n ih =>
+    rw [← Int.add_assoc]
+    rw [zpow_add_one]
+    rw [ih]
+    rw [zpow_add_one]
+    rw [mul_assoc]
+  | pred n ih =>
+    rw [zpow_sub_one]
+    rw [← Int.add_sub_assoc]
+    rw [zpow_sub_one]
+    rw [ih]
+    simp only [mul_assoc]
 
 theorem zpow_mul (g : G) (k l : Int) : g ^ (k * l) = (g ^ k) ^ l :=
   sorry
