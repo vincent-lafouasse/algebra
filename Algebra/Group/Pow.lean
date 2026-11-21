@@ -167,8 +167,10 @@ theorem zpow_one (g : G) : g ^ (1 : Int) = g := by
   rw [zpow_natCast g 1]
   rw [pow_one]
 
-theorem zpow_two (g : G) : g ^ (2 : Int) = g * g :=
-  sorry
+theorem zpow_two (g : G) : g ^ (2 : Int) = g * g := by
+  rw [← Int.ofNat_two]
+  rw [zpow_natCast]
+  rw [pow_two]
 
 theorem one_zpow (k : Int) : (1 : G) ^ k = 1 :=
   sorry
