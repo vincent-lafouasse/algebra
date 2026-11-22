@@ -20,7 +20,7 @@ namespace My
 structure MulEquiv (G : Type u) (H : Type v) [Group G] [Group H] extends G ≃ H where
   map_mul' : ∀ x y : G, toFun (x * y) = toFun x * toFun y
 
-@[inherit_doc] infixl:25 " ≃* " => MulEquiv
+infixl:25 " ≃* " => MulEquiv
 
 namespace MulEquiv
 

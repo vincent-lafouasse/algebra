@@ -26,7 +26,7 @@ abbrev HasQuotient.Quotient (A : outParam (Type u)) {B : Type v} [HasQuotient A 
     Type max u v :=
   HasQuotient.quotient' b
 
-@[inherit_doc] notation:35 G " ⧸ " H:34 => HasQuotient.Quotient G H
+notation:35 G " ⧸ " H:34 => HasQuotient.Quotient G H
 
 namespace QuotientGroup
 

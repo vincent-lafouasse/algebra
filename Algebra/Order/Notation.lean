@@ -15,8 +15,8 @@ class Bot (α : Type u) where
 class Top (α : Type u) where
   top : α
 
-@[inherit_doc] notation "⊥" => Bot.bot
-@[inherit_doc] notation "⊤" => Top.top
+notation "⊥" => Bot.bot
+notation "⊤" => Top.top
 
 end My
 

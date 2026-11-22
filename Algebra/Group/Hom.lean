@@ -19,7 +19,7 @@ structure MonoidHom (G : Type u) (H : Type v) [Group G] [Group H] where
   map_one' : toFun 1 = 1
   map_mul' : ∀ x y : G, toFun (x * y) = toFun x * toFun y
 
-@[inherit_doc] infixr:25 " →* " => MonoidHom
+infixr:25 " →* " => MonoidHom
 
 namespace MonoidHom
 
