@@ -40,7 +40,8 @@ instance : Group (MulAut G) where
     intro a
     apply MulEquiv.ext
     intro x
-    sorry
+    show a.invFun (a.toFun x) = x
+    rw [a.left_inv]
 
 theorem mul_def (e₁ e₂ : MulAut G) : e₁ * e₂ = MulEquiv.trans e₂ e₁ :=
   rfl
