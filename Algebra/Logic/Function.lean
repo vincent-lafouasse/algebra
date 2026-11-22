@@ -95,10 +95,10 @@ theorem injective_iff_ne (f : α → β) :
 
 -- a right inverse of a surjective function, picked by choice
 noncomputable def surjInv {f : α → β} (h : Function.Surjective f) (b : β) : α :=
-  sorry
+  Classical.choose (h b)
 
 theorem surjInv_eq {f : α → β} (h : Function.Surjective f) (b : β) : f (surjInv h b) = b :=
-  sorry
+  Classical.choose_spec (h b)
 
 theorem rightInverse_surjInv {f : α → β} (hf : Function.Surjective f) :
     Function.RightInverse (surjInv hf) f :=
