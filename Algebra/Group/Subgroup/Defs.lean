@@ -101,7 +101,7 @@ order; here they are stated for subgroups only. -/
 instance : LE (Subgroup G) := ⟨fun H K => ∀ ⦃x⦄, x ∈ H → x ∈ K⟩
 
 theorem le_def {H K : Subgroup G} : H ≤ K ↔ ∀ ⦃x⦄, x ∈ H → x ∈ K :=
-  sorry
+  Iff.rfl
 
 protected theorem le_refl (H : Subgroup G) : H ≤ H :=
   sorry
