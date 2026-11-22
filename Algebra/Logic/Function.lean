@@ -84,8 +84,10 @@ theorem RightInverse.surjective {f : α → β} {g : β → α} (h : Function.Ri
 theorem injective_iff_ne (f : α → β) :
     Function.Injective f ↔ ∀ a b : α, a ≠ b → f a ≠ f b := by
   refine ⟨λ h_inj _ _ hne hfne => hne (h_inj hfne), ?_⟩
-  intro h
-  sorry
+  intro h a b hfeq
+  refine Classical.byContradiction ?_
+  intro hne
+  exact (h a b hne) hfeq
 
 /-! ### Inverses by choice
 
