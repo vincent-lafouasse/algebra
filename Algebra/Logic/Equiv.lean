@@ -122,7 +122,7 @@ protected theorem surjective (e : α ≃ β) : Function.Surjective e :=
   Function.RightInverse.surjective e.right_inv
 
 protected theorem bijective (e : α ≃ β) : Function.Bijective e :=
-  sorry
+  ⟨Equiv.injective e, Equiv.surjective e⟩
 
 -- the converse: a bijective function gets an inverse, by choice (`Function.surjInv`)
 noncomputable def ofBijective (f : α → β) (hf : Function.Bijective f) : α ≃ β where
