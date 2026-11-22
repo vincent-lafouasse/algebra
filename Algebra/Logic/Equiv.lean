@@ -100,7 +100,9 @@ theorem refl_trans (e : α ≃ β) : (Equiv.refl α).trans e = e :=
 theorem self_trans_symm (e : α ≃ β) : e.trans e.symm = Equiv.refl α := by
   apply ext
   intro x
-  sorry
+  calc (e.trans e.symm) x
+   _ = e.invFun (e.toFun x) := rfl
+   _ = x := by rw [e.left_inv]
 
 theorem symm_trans_self (e : α ≃ β) : e.symm.trans e = Equiv.refl β :=
   sorry
