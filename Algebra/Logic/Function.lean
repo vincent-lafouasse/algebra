@@ -52,9 +52,8 @@ theorem Bijective.comp {g : β → γ} {f : α → β} (hg : Bijective g) (hf : 
   ⟨Injective.comp hg.1 hf.1, Surjective.comp hg.2 hf.2⟩
 
 theorem bijective_id : Bijective (@id α) :=
-  have is_inj : Function.Injective (@id α) := by
-    intro a b h
-    exact h
+  have is_inj : Function.Injective (@id α) :=
+    λ _ _ h => h
   have is_surj : Function.Surjective (@id α) := by
     intro a
     refine ⟨a, ?_⟩
