@@ -162,8 +162,9 @@ theorem bijective_iff_has_inverse (f : α → β) :
   constructor
   · rintro ⟨h_inv, h_surj⟩
     refine ⟨surjInv h_surj, ?_⟩
-    refine ⟨leftInverse_surjInv ⟨h_inv, h_surj⟩, ?_⟩
-    exact rightInverse_surjInv h_surj
+    have h_left := leftInverse_surjInv ⟨h_inv, h_surj⟩
+    have h_right := rightInverse_surjInv h_surj
+    exact ⟨h_left, h_right⟩
   · intro ⟨f_inv, h_left, h_right⟩
     have h_inj := LeftInverse.injective h_left
     have h_surj := RightInverse.surjective h_right
