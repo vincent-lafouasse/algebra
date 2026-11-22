@@ -87,8 +87,8 @@ def mk' (f : G → H) (map_mul : ∀ a b : G, f (a * b) = f a * f b) : G →* H 
   map_mul' := map_mul
 
 theorem mk'_apply (f : G → H) (map_mul : ∀ a b : G, f (a * b) = f a * f b) (x : G) :
-    mk' f map_mul x = f x :=
-  sorry
+    mk' f map_mul x = f x := by
+  rfl
 
 protected def id (G : Type u) [Group G] : G →* G where
   toFun := id
