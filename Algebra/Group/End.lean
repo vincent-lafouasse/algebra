@@ -26,7 +26,11 @@ instance : Group (MulAut G) where
   mul e₁ e₂ := MulEquiv.trans e₂ e₁
   one := MulEquiv.refl G
   inv := MulEquiv.symm
-  mul_assoc := sorry
+  mul_assoc := by
+    intro a b c
+    apply MulEquiv.ext
+    intro x
+    sorry
   one_mul := sorry
   inv_mul_cancel := sorry
 
