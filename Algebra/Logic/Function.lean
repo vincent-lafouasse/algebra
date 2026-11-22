@@ -141,8 +141,17 @@ theorem rightInverse_invFun [Nonempty α] {f : α → β} (hf : Function.Surject
 
 -- `Nonempty α` is needed: if α is empty and β isn't, there is no `β → α` at all
 theorem injective_iff_hasLeftInverse [Nonempty α] (f : α → β) :
-    Function.Injective f ↔ Function.HasLeftInverse f :=
-  sorry
+    Function.Injective f ↔ Function.HasLeftInverse f := by
+  unfold Function.HasLeftInverse
+  constructor
+  · intro h_inj
+    refine ⟨invFun f, ?_⟩
+    exact leftInverse_invFun h_inj
+  · intro h a b heq
+    obtain ⟨f_inv, hf_inv⟩ := h
+    have h := congrArg f_inv heq
+    repeat rw [hf_inv] at h
+    exact h
 
 -- no `Nonempty α` here, so `invFun` is not available: the → witness is `surjInv`
 theorem surjective_iff_hasRightInverse (f : α → β) :
