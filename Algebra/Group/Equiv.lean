@@ -75,9 +75,9 @@ theorem toMonoidHom_injective : Function.Injective (toMonoidHom : (G ≃* H) →
 protected def refl (G : Type u) [Group G] : G ≃* G where
   toFun := id
   invFun := id
-  left_inv := sorry
-  right_inv := sorry
-  map_mul' := sorry
+  left_inv := λ _ => rfl
+  right_inv := λ _ => rfl
+  map_mul' := λ _ _ => rfl
 
 -- the inverse of an isomorphism is a hom: the proof is the exercise
 protected def symm (e : G ≃* H) : H ≃* G where
