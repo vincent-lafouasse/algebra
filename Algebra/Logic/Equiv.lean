@@ -116,10 +116,10 @@ theorem trans_assoc {δ : Sort x} (ab : α ≃ β) (bc : β ≃ γ) (cd : γ ≃
   rfl
 
 protected theorem injective (e : α ≃ β) : Function.Injective e :=
-  sorry
+  Function.LeftInverse.injective e.left_inv
 
 protected theorem surjective (e : α ≃ β) : Function.Surjective e :=
-  sorry
+  Function.RightInverse.surjective e.right_inv
 
 protected theorem bijective (e : α ≃ β) : Function.Bijective e :=
   sorry
