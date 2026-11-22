@@ -89,13 +89,13 @@ theorem apply_symm_apply (e : α ≃ β) (y : β) : e (e.symm y) = y :=
    _ = y := by rw [e.right_inv]
 
 theorem symm_symm (e : α ≃ β) : e.symm.symm = e :=
-  sorry
+  rfl
 
 theorem trans_refl (e : α ≃ β) : e.trans (Equiv.refl β) = e :=
-  sorry
+  rfl
 
 theorem refl_trans (e : α ≃ β) : (Equiv.refl α).trans e = e :=
-  sorry
+  rfl
 
 theorem self_trans_symm (e : α ≃ β) : e.trans e.symm = Equiv.refl α :=
   sorry
@@ -105,7 +105,7 @@ theorem symm_trans_self (e : α ≃ β) : e.symm.trans e = Equiv.refl β :=
 
 theorem trans_assoc {δ : Sort x} (ab : α ≃ β) (bc : β ≃ γ) (cd : γ ≃ δ) :
     (ab.trans bc).trans cd = ab.trans (bc.trans cd) :=
-  sorry
+  rfl
 
 protected theorem injective (e : α ≃ β) : Function.Injective e :=
   sorry
