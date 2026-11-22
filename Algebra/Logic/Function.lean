@@ -83,8 +83,6 @@ theorem LeftInverse.injective {g : β → α} {f : α → β} (h : Function.Left
 
 theorem RightInverse.surjective {f : α → β} {g : β → α} (h : Function.RightInverse g f) :
     Function.Surjective f := by
-  unfold Function.RightInverse  at h
-  unfold Function.LeftInverse  at h
   intro b
   exact ⟨g b, h b⟩
 
