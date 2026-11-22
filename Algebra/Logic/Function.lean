@@ -23,7 +23,7 @@ def Bijective (f : α → β) : Prop := Function.Injective f ∧ Function.Surjec
 -- (not in Mathlib: there, `Bijective` unfolds by `Iff.rfl`)
 theorem bijective_iff (f : α → β) :
     Bijective f ↔ Function.Injective f ∧ Function.Surjective f :=
-  sorry
+  Iff.rfl
 
 /-! ### Composition and identity
 
