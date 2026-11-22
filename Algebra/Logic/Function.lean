@@ -105,8 +105,13 @@ theorem rightInverse_surjInv {f : α → β} (hf : Function.Surjective f) :
   λ b => surjInv_eq hf b
 
 theorem leftInverse_surjInv {f : α → β} (hf : Bijective f) :
-    Function.LeftInverse (surjInv hf.2) f :=
-  sorry
+    Function.LeftInverse (surjInv hf.2) f := by
+  unfold Function.LeftInverse 
+  obtain ⟨h_inj, h_surj⟩ := hf
+  intro a
+  let b := surjInv h_surj (f a)
+  have hfeq : f b = f a := surjInv_eq h_surj (f a)
+  exact h_inj hfeq
 
 -- an inverse of *any* f: a preimage of y if there is one, an arbitrary element if not.
 -- The `if` on a Prop needs `open Classical in` in front of the `def`, and "an arbitrary
