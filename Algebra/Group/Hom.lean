@@ -89,8 +89,8 @@ theorem mk'_apply (f : G → H) (map_mul : ∀ a b : G, f (a * b) = f a * f b) (
 
 protected def id (G : Type u) [Group G] : G →* G where
   toFun := id
-  map_one' := sorry
-  map_mul' := sorry
+  map_one' := rfl
+  map_mul' := λ _ _ => rfl
 
 theorem id_apply (G : Type u) [Group G] (x : G) : MonoidHom.id G x = x :=
   sorry
