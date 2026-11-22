@@ -67,7 +67,10 @@ def toMonoidHom (e : G ≃* H) : G →* H where
 theorem coe_toMonoidHom (e : G ≃* H) : (e.toMonoidHom : G → H) = e :=
   rfl
 
-theorem toMonoidHom_injective : Function.Injective (toMonoidHom : (G ≃* H) → (G →* H)) :=
+theorem toMonoidHom_injective : Function.Injective (toMonoidHom : (G ≃* H) → (G →* H)) := by
+  intro e e' heq
+  apply MulEquiv.ext
+  intro x
   sorry
 
 /-! ### refl, symm, trans -/
