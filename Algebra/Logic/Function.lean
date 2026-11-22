@@ -71,7 +71,7 @@ theorem Surjective.of_comp {f : α → β} {g : γ → α} (S : Function.Surject
     Function.Surjective f := by
   intro b
   obtain ⟨a, ha⟩ := S b
-  exists g a
+  exact ⟨g a, ha⟩
 
 -- a left inverse makes f injective, a right inverse makes it surjective (core has both)
 theorem LeftInverse.injective {g : β → α} {f : α → β} (h : Function.LeftInverse g f) :
@@ -86,8 +86,7 @@ theorem RightInverse.surjective {f : α → β} {g : β → α} (h : Function.Ri
   unfold Function.RightInverse  at h
   unfold Function.LeftInverse  at h
   intro b
-  exists g b
-  exact h b
+  exact ⟨g b, h b⟩
 
 -- (not in Mathlib; the closest is `not_injective_iff`)
 -- the ← direction needs classical logic: `Classical.byContradiction`
