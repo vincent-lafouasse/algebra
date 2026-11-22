@@ -129,8 +129,12 @@ theorem invFun_eq [Nonempty α] {f : α → β} {b : β} (h : ∃ a, f a = b) : 
   exact Classical.choose_spec h
 
 theorem leftInverse_invFun [Nonempty α] {f : α → β} (hf : Function.Injective f) :
-    Function.LeftInverse (invFun f) f :=
-  sorry
+    Function.LeftInverse (invFun f) f := by
+  unfold Function.LeftInverse
+  intro a
+  let b := invFun f (f a)
+  have hfeq : f b = f a := sorry
+  exact hf hfeq
 
 theorem rightInverse_invFun [Nonempty α] {f : α → β} (hf : Function.Surjective f) :
     Function.RightInverse (invFun f) f :=
