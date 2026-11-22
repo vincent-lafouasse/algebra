@@ -43,7 +43,7 @@ theorem Surjective.comp {g : β → γ} {f : α → β}
   intro (c : γ)
   obtain ⟨b, hb⟩ := hg c
   obtain ⟨a, ha⟩ := hf b
-  exists a
+  refine ⟨a, ?_⟩
   rw [← hb, ← ha]
   rfl
 
@@ -57,7 +57,8 @@ theorem bijective_id : Bijective (@id α) :=
     exact h
   have h_surj : Function.Surjective (@id α) := by
     intro a
-    exists a
+    refine ⟨a, ?_⟩
+    rfl
   ⟨h_inv, h_surj⟩
 
 -- if f ∘ g is injective, the inner g is; if f ∘ g is surjective, the outer f is
