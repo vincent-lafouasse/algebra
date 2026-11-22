@@ -65,7 +65,7 @@ def toMonoidHom (e : G ≃* H) : G →* H where
   map_mul' := e.map_mul'
 
 theorem coe_toMonoidHom (e : G ≃* H) : (e.toMonoidHom : G → H) = e :=
-  sorry
+  rfl
 
 theorem toMonoidHom_injective : Function.Injective (toMonoidHom : (G ≃* H) → (G →* H)) :=
   sorry
