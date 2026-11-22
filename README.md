@@ -31,6 +31,7 @@ comment says "(not in Mathlib)".
 | `Algebra/GroupTheory/Coset.lean` | `a • s`, `leftRel` | `GroupTheory/Coset/{Defs,Basic}` |
 | `Algebra/GroupTheory/QuotientGroup/` | `G ⧸ N`, `lift`, the first isomorphism theorem | `GroupTheory/QuotientGroup/{Defs,Basic}` |
 | `Algebra/GroupTheory/Out.lean` | `Inn G`, `Out G`, `G ⧸ center G ≃* Inn G` | (not in Mathlib; uses `MulAut.conj.range`) |
+| `Algebra/GroupTheory/GroupAction.lean` | `MulAction`, `orbit`, `stabilizer`, `orbitRel`, orbit–stabilizer | `Algebra/Group/Action/Defs`, `GroupTheory/GroupAction/{Defs,Quotient}` |
 | `Exercises/` | exercise sheets, stated with the library above | |
 
 ## Building
