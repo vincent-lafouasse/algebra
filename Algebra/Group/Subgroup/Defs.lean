@@ -148,14 +148,13 @@ instance toGroup : Group H where
 
 -- the operations of `↥H` are those of `G` (`↑x` is `x.val`; equality in `↥H` is `Subtype.ext`)
 theorem coe_mul (x y : H) : ((x * y : H) : G) = x * y := by
-  obtain ⟨xv, hx⟩ := x
-  sorry
+  rfl
 
 theorem coe_inv (x : H) : ((x⁻¹ : H) : G) = (x : G)⁻¹ :=
-  sorry
+  rfl
 
 theorem coe_one : ((1 : H) : G) = 1 :=
-  sorry
+  rfl
 
 -- the inclusion `↥H → G`, as a hom
 def subtype : H →* G where
