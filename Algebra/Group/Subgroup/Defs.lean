@@ -167,7 +167,7 @@ def subtype : H →* G where
 
 
 theorem subtype_apply {H : Subgroup G} (x : H) : H.subtype x = x :=
-  sorry
+  rfl
 
 theorem subtype_injective : Function.Injective H.subtype :=
   sorry
