@@ -80,7 +80,10 @@ protected theorem map_zpow (f : G →* H) (a : G) (k : Int) : f (a ^ k) = f a ^ 
 -- between groups, `map_mul` is enough: `f 1 = f 1 * f 1`, then cancel
 def mk' (f : G → H) (map_mul : ∀ a b : G, f (a * b) = f a * f b) : G →* H where
   toFun := f
-  map_one' := sorry
+  map_one' := by
+    rw [← mul_left_inj (f 1)]
+    rw [← map_mul]
+    rw [one_mul, one_mul]
   map_mul' := map_mul
 
 theorem mk'_apply (f : G → H) (map_mul : ∀ a b : G, f (a * b) = f a * f b) (x : G) :
