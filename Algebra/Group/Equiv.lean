@@ -109,7 +109,13 @@ protected def symm (e : G ≃* H) : H ≃* G where
 protected def trans (e : G ≃* H) (e' : H ≃* K) : G ≃* K where
   toFun := e'.toFun ∘ e.toFun
   invFun := e.invFun ∘ e'.invFun
-  left_inv := sorry
+  left_inv := by
+    have l := e.left_inv
+    have l' := e'.left_inv
+    have inj := Function.LeftInverse.injective l
+    have inj' := Function.LeftInverse.injective l'
+    have comp_inj := Function.Injective.comp inj' inj
+    sorry
   right_inv := sorry
   map_mul' := sorry
 
