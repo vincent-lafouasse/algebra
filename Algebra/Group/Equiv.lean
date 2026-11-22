@@ -61,7 +61,7 @@ protected theorem map_inv (e : G ≃* H) (x : G) : e x⁻¹ = (e x)⁻¹ := by
 
 def toMonoidHom (e : G ≃* H) : G →* H where
   toFun := e.toFun
-  map_one' := sorry
+  map_one' := MulEquiv.map_one e
   map_mul' := e.map_mul'
 
 theorem coe_toMonoidHom (e : G ≃* H) : (e.toMonoidHom : G → H) = e :=
