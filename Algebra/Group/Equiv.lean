@@ -123,7 +123,9 @@ theorem symm_apply_apply (e : G ≃* H) (x : G) : e.symm (e x) = x :=
    _ = x := by rw [e.left_inv]
 
 theorem apply_symm_apply (e : G ≃* H) (y : H) : e (e.symm y) = y :=
-  sorry
+  calc e (e.symm y)
+   _ = e.toFun (e.invFun y) := rfl
+   _ = y := by rw [e.right_inv]
 
 theorem symm_symm (e : G ≃* H) : e.symm.symm = e :=
   rfl
