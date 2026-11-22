@@ -162,13 +162,13 @@ theorem toMonoidHom_trans (e : G ≃* H) (e' : H ≃* K) :
    _ = (e'.toMonoidHom ∘* e.toMonoidHom) x := sorry
 
 protected theorem injective (e : G ≃* H) : Function.Injective e :=
-  sorry
+  Function.LeftInverse.injective e.left_inv
 
 protected theorem surjective (e : G ≃* H) : Function.Surjective e :=
-  sorry
+  Function.RightInverse.surjective e.right_inv
 
 protected theorem bijective (e : G ≃* H) : Function.Bijective e :=
-  sorry
+  ⟨MulEquiv.injective e, MulEquiv.surjective e⟩
 
 /-! ### A bijective hom is an isomorphism
 
