@@ -1,5 +1,6 @@
 import Algebra.Logic.Function
 import Algebra.Logic.Equiv
+import Algebra.Logic.SchroederBernstein
 import Algebra.Data.Set
 import Algebra.Data.Int
 import Algebra.Order.Notation

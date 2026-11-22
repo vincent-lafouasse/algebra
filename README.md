@@ -14,6 +14,7 @@ comment says "(not in Mathlib)".
 |---|---|---|
 | `Algebra/Logic/Function.lean` | injective/surjective/bijective, `surjInv`, `invFun` | `Logic/Function/{Defs,Basic}` |
 | `Algebra/Logic/Equiv.lean` | bijections `α ≃ β` | `Logic/Equiv/Defs` |
+| `Algebra/Logic/SchroederBernstein.lean` | injections both ways give a bijection | `SetTheory/Cardinal/SchroederBernstein` |
 | `Algebra/Data/Set.lean` | `Set α`, `{x \| p x}`, `⊆`, `{a}`, `univ` | `Data/Set/{Defs,Basic}` |
 | `Algebra/Data/Int.lean` | `Int.induction_on`, `negSucc` stepping facts | `Data/Int/Init` |
 | `Algebra/Order/Notation.lean` | `⊥`, `⊤`, `⊓` | `Order/Notation` |
