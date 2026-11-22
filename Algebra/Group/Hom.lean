@@ -52,8 +52,13 @@ protected theorem map_mul_inv (f : G →* H) (a b : G) : f (a * b⁻¹) = f a * 
   rw [← MonoidHom.map_inv]
   rw [MonoidHom.map_mul]
 
-protected theorem map_pow (f : G →* H) (a : G) (n : Nat) : f (a ^ n) = f a ^ n :=
-  sorry
+protected theorem map_pow (f : G →* H) (a : G) (n : Nat) : f (a ^ n) = f a ^ n := by
+  induction n with
+  | zero => rw [pow_zero, pow_zero]; exact MonoidHom.map_one f
+  | succ n ih =>
+    rw [pow_succ, pow_succ]
+    rw [MonoidHom.map_mul]
+    rw [ih]
 
 protected theorem map_zpow (f : G →* H) (a : G) (k : Int) : f (a ^ k) = f a ^ k :=
   sorry
