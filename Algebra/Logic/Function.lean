@@ -106,7 +106,6 @@ theorem rightInverse_surjInv {f : α → β} (hf : Function.Surjective f) :
 
 theorem leftInverse_surjInv {f : α → β} (hf : Bijective f) :
     Function.LeftInverse (surjInv hf.2) f := by
-  unfold Function.LeftInverse 
   obtain ⟨h_inj, h_surj⟩ := hf
   intro a
   let b := surjInv h_surj (f a)
