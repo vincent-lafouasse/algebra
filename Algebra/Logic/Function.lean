@@ -49,7 +49,7 @@ theorem Surjective.comp {g : β → γ} {f : α → β}
 
 theorem Bijective.comp {g : β → γ} {f : α → β} (hg : Bijective g) (hf : Bijective f) :
     Bijective (g ∘ f) :=
-  sorry
+  ⟨Injective.comp hg.1 hf.1, Surjective.comp hg.2 hf.2⟩
 
 theorem bijective_id : Bijective (@id α) :=
   sorry
