@@ -35,7 +35,7 @@ attribute [coe] Subgroup.carrier
 instance : CoeTC (Subgroup G) (Set G) := ⟨Subgroup.carrier⟩
 
 theorem mem_carrier {H : Subgroup G} {x : G} : x ∈ H.carrier ↔ x ∈ H :=
-  sorry
+  Iff.rfl
 
 -- (Mathlib: `SetLike.mem_coe`)
 theorem mem_coe {H : Subgroup G} {x : G} : x ∈ (H : Set G) ↔ x ∈ H :=
