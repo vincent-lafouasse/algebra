@@ -147,7 +147,7 @@ instance toGroup : Group H where
     exact inv_mul_cancel val_a
 
 -- the operations of `↥H` are those of `G` (`↑x` is `x.val`; equality in `↥H` is `Subtype.ext`)
-theorem coe_mul (x y : H) : ((x * y : H) : G) = x * y := by
+theorem coe_mul (x y : H) : ((x * y : H) : G) = x * y :=
   rfl
 
 theorem coe_inv (x : H) : ((x⁻¹ : H) : G) = (x : G)⁻¹ :=
