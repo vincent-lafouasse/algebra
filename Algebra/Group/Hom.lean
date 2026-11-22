@@ -104,7 +104,7 @@ def comp (g : H →* K) (f : G →* H) : G →* K where
   map_mul' := sorry
 
 theorem comp_apply (g : H →* K) (f : G →* H) (x : G) : g.comp f x = g (f x) :=
-  sorry
+  rfl
 
 theorem id_comp (f : G →* H) : (MonoidHom.id H).comp f = f :=
   sorry
