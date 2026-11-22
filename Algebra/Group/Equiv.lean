@@ -155,8 +155,11 @@ theorem toMonoidHom_refl : (MulEquiv.refl G).toMonoidHom = MonoidHom.id G := by
    _ = (MonoidHom.id G) x := sorry
 
 theorem toMonoidHom_trans (e : G ≃* H) (e' : H ≃* K) :
-    (e.trans e').toMonoidHom = e'.toMonoidHom ∘* e.toMonoidHom :=
-  sorry
+    (e.trans e').toMonoidHom = e'.toMonoidHom ∘* e.toMonoidHom := by
+  apply MonoidHom.ext
+  intro (x : G)
+  calc (e.trans e').toMonoidHom x
+   _ = (e'.toMonoidHom ∘* e.toMonoidHom) x := sorry
 
 protected theorem injective (e : G ≃* H) : Function.Injective e :=
   sorry
