@@ -64,14 +64,12 @@ protected theorem map_zpow (f : G →* H) (a : G) (k : Int) : f (a ^ k) = f a ^ 
   induction k using Int.induction_on with
   | zero => rw [zpow_zero, zpow_zero]; exact MonoidHom.map_one f
   | succ n ih =>
-    rw [zpow_add, zpow_add]
-    rw [MonoidHom.map_mul]
-    rw [zpow_one, zpow_one]
+    rw [zpow_add_one, zpow_add_one]
+    rw [MonoidHom.map_mul f]
     rw [ih]
   | pred n ih =>
-    rw [zpow_sub, zpow_sub]
+    rw [zpow_sub_one, zpow_sub_one]
     rw [MonoidHom.map_mul]
-    rw [zpow_one, zpow_one]
     rw [MonoidHom.map_inv]
     rw [ih]
 
