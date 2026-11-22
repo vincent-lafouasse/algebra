@@ -52,8 +52,12 @@ theorem Bijective.comp {g : β → γ} {f : α → β} (hg : Bijective g) (hf : 
   ⟨Injective.comp hg.1 hf.1, Surjective.comp hg.2 hf.2⟩
 
 theorem bijective_id : Bijective (@id α) :=
-  have h_inv : Function.Injective (@id α) := sorry
-  have h_surj : Function.Surjective (@id α) := sorry
+  have h_inv : Function.Injective (@id α) := by
+    intro a b h
+    exact h
+  have h_surj : Function.Surjective (@id α) := by
+    intro a
+    exists a
   ⟨h_inv, h_surj⟩
 
 -- if f ∘ g is injective, the inner g is; if f ∘ g is surjective, the outer f is
