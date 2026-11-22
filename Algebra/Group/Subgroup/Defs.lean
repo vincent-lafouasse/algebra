@@ -54,13 +54,13 @@ theorem ext {H K : Subgroup G} (h : ∀ x, x ∈ H ↔ x ∈ K) : H = K := by
 variable (H : Subgroup G) {x y : G}
 
 protected theorem one_mem : (1 : G) ∈ H :=
-  sorry
+  H.one_mem'
 
 protected theorem mul_mem : x ∈ H → y ∈ H → x * y ∈ H :=
-  sorry
+  H.mul_mem'
 
 protected theorem inv_mem : x ∈ H → x⁻¹ ∈ H :=
-  sorry
+  H.inv_mem'
 
 theorem inv_mem_iff : x⁻¹ ∈ H ↔ x ∈ H :=
   sorry
