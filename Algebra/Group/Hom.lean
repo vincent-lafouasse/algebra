@@ -62,7 +62,7 @@ protected theorem map_pow (f : G →* H) (a : G) (n : Nat) : f (a ^ n) = f a ^ n
 
 protected theorem map_zpow (f : G →* H) (a : G) (k : Int) : f (a ^ k) = f a ^ k := by
   induction k using Int.induction_on with
-  | zero => exact MonoidHom.map_pow f a (0 : Nat)
+  | zero => rw [zpow_zero, zpow_zero]; exact MonoidHom.map_one f
   | succ n ih =>
     rw [zpow_add, zpow_add]
     rw [MonoidHom.map_mul]
