@@ -96,10 +96,15 @@ protected def symm (e : G ≃* H) : H ≃* G where
   right_inv := e.left_inv
   map_mul' := by
     intro x y
-    calc e.invFun (x * y)
-     _ = e.invFun (e.toFun (e.invFun x) * e.toFun (e.invFun y)) := by rw [e.right_inv, e.right_inv]
-     _ = e.invFun (e.toFun (e.invFun x * e.invFun y)) := by rw [e.map_mul]
-     _ = e.invFun x * e.invFun y := by rw [e.left_inv]
+    let f : G → H := e.toFun
+    let fi : H → G := e.invFun
+    have hr : ∀ b : H, f (fi b) = b := e.right_inv
+    have hl : ∀ a : G, fi (f a) = a := e.left_inv
+    have hm : ∀ (x y : G), f (x * y) = f x * f y := e.map_mul
+    calc fi (x * y)
+     _ = fi (f (fi x) * f (fi y)) := by rw [hr, hr]
+     _ = fi (f (fi x * fi y)) := by rw [← hm]
+     _ = fi x * fi y := by rw [hl]
 
 protected def trans (e : G ≃* H) (e' : H ≃* K) : G ≃* K where
   toFun := e'.toFun ∘ e.toFun
