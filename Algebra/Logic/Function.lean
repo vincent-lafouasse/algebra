@@ -82,8 +82,12 @@ theorem RightInverse.surjective {f : α → β} {g : β → α} (h : Function.Ri
 -- (not in Mathlib; the closest is `not_injective_iff`)
 -- the ← direction needs classical logic: `Classical.byContradiction`
 theorem injective_iff_ne (f : α → β) :
-    Function.Injective f ↔ ∀ a b : α, a ≠ b → f a ≠ f b :=
-  sorry
+    Function.Injective f ↔ ∀ a b : α, a ≠ b → f a ≠ f b := by
+  constructor
+  · intro h_inj _ _ hne hfne
+    exact hne (h_inj hfne)
+  · intro h
+    sorry
 
 /-! ### Inverses by choice
 
