@@ -20,7 +20,7 @@ namespace MulAut
 
 variable {G : Type u} [Group G]
 
-instance : CoeFun (MulAut G) (fun _ => G → G) := ⟨fun e => MulEquiv.toFun e⟩
+instance : CoeFun (MulAut G) (fun _ => G → G) := ⟨fun e => (MulEquiv.toEquiv e).toFun⟩
 
 instance : Group (MulAut G) where
   mul e₁ e₂ := MulEquiv.trans e₂ e₁
