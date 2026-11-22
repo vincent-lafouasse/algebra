@@ -62,7 +62,10 @@ protected theorem mul_mem : x ∈ H → y ∈ H → x * y ∈ H :=
 protected theorem inv_mem : x ∈ H → x⁻¹ ∈ H :=
   H.inv_mem'
 
-theorem inv_mem_iff : x⁻¹ ∈ H ↔ x ∈ H :=
+theorem inv_mem_iff : x⁻¹ ∈ H ↔ x ∈ H := by
+  refine ⟨?_, Subgroup.inv_mem H⟩
+  intro (h : x⁻¹ ∈ H)
+  have h' := Subgroup.inv_mem H h -- type mismatch
   sorry
 
 theorem mul_mem_cancel_left (h : x ∈ H) : x * y ∈ H ↔ y ∈ H :=
