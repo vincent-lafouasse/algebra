@@ -133,7 +133,7 @@ noncomputable def ofBijective (f : α → β) (hf : Function.Bijective f) : α �
 
 theorem ofBijective_apply (f : α → β) (hf : Function.Bijective f) (x : α) :
     ofBijective f hf x = f x :=
-  sorry
+  rfl
 
 end Equiv
 end My
