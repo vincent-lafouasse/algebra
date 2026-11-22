@@ -99,6 +99,8 @@ The BibTeX entries are in [`references.bib`](references.bib).
 
 [Gou09] X. Gourdon, *Les maths en tête : Algèbre*, 2nd ed., Ellipses, Paris, 2009.
 
+[Jor70] C. Jordan, *Traité des substitutions et des équations algébriques*, Gauthier-Villars, Paris, 1870, <https://archive.org/details/traitdessubsti00jorduoft>.
+
 [mC20] The mathlib Community, “The Lean Mathematical Library”, in *Proceedings of the 9th ACM SIGPLAN International Conference on Certified Programs and Proofs* (CPP 2020), ACM, 2020, 367–381, <https://doi.org/10.1145/3372885.3373824>. The Lean 4 library this project tracks is at <https://github.com/leanprover-community/mathlib4>.
 
 [Per96] D. Perrin, *Cours d'algèbre*, Ellipses, Paris, 1996.
