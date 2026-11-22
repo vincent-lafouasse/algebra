@@ -43,7 +43,7 @@ theorem ext {s t : Set α} (h : ∀ x, x ∈ s ↔ x ∈ t) : s = t := by
 instance : HasSubset (Set α) := ⟨fun s t => ∀ ⦃a⦄, a ∈ s → a ∈ t⟩
 
 theorem subset_def {s t : Set α} : (s ⊆ t) = ∀ x, x ∈ s → x ∈ t :=
-  sorry
+  rfl
 
 -- `{a}`
 instance : Singleton α (Set α) := ⟨fun a => {x | x = a}⟩
