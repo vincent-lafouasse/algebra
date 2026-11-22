@@ -107,14 +107,14 @@ theorem comp_apply (g : H →* K) (f : G →* H) (x : G) : g.comp f x = g (f x) 
   rfl
 
 theorem id_comp (f : G →* H) : (MonoidHom.id H).comp f = f :=
-  sorry
+  rfl
 
 theorem comp_id (f : G →* H) : f.comp (MonoidHom.id G) = f :=
-  sorry
+  rfl
 
 theorem comp_assoc {L : Type x} [Group L] (f : G →* H) (g : H →* K) (h : K →* L) :
     (h.comp g).comp f = h.comp (g.comp f) :=
-  sorry
+  rfl
 
 end MonoidHom
 end My
