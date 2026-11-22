@@ -128,8 +128,8 @@ protected theorem bijective (e : α ≃ β) : Function.Bijective e :=
 noncomputable def ofBijective (f : α → β) (hf : Function.Bijective f) : α ≃ β where
   toFun := f
   invFun := Function.surjInv hf.2
-  left_inv := sorry
-  right_inv := sorry
+  left_inv := Function.leftInverse_surjInv hf
+  right_inv := Function.rightInverse_surjInv hf.2
 
 theorem ofBijective_apply (f : α → β) (hf : Function.Bijective f) (x : α) :
     ofBijective f hf x = f x :=
