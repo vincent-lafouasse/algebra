@@ -95,15 +95,11 @@ protected def symm (e : G ≃* H) : H ≃* G where
   left_inv := e.right_inv
   right_inv := e.left_inv
   map_mul' := by
-    have h_surj : Function.Surjective e.toFun := sorry
     intro x y
-    obtain ⟨xa, hxa⟩ := h_surj x
-    obtain ⟨ya, hya⟩ := h_surj y
     calc e.invFun (x * y)
-     _ = e.invFun (e.toFun xa * e.toFun ya) := by rw [hxa, hya]
-     _ = e.invFun (e.toFun (xa * ya)) := by rw [e.map_mul']
-     _ = xa * ya := by rw [e.left_inv]
-     _ = sorry := sorry
+     _ = e.invFun (e.toFun (e.invFun x) * e.toFun (e.invFun y)) := sorry
+     _ = e.invFun (e.toFun (e.invFun x * e.invFun y)) := sorry
+     _ = e.invFun x * e.invFun y := sorry
 
 protected def trans (e : G ≃* H) (e' : H ≃* K) : G ≃* K where
   toFun := e'.toFun ∘ e.toFun
