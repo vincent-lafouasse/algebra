@@ -102,7 +102,10 @@ protected def symm (e : G ≃* H) : H ≃* G where
 
 protected def trans (e : G ≃* H) (e' : H ≃* K) : G ≃* K where
   toEquiv := Equiv.trans e.toEquiv e'.toEquiv
-  map_mul' := sorry
+  map_mul' := by
+    intro x y
+    calc (Equiv.trans e.toEquiv e'.toEquiv).toFun (x * y)
+     _ = (Equiv.trans e.toEquiv e'.toEquiv).toFun x * (Equiv.trans e.toEquiv e'.toEquiv).toFun y := sorry
 
 theorem refl_apply (x : G) : MulEquiv.refl G x = x :=
   sorry
