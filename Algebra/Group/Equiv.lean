@@ -117,7 +117,10 @@ theorem trans_apply (e : G ≃* H) (e' : H ≃* K) (x : G) : e.trans e' x = e' (
   rfl
 
 theorem symm_apply_apply (e : G ≃* H) (x : G) : e.symm (e x) = x :=
-  sorry
+  calc e.symm (e x)
+   _ = (MulEquiv.symm e).toFun (e.toFun x) := rfl
+   _ = e.invFun (e.toFun x) := rfl
+   _ = x := by rw [e.left_inv]
 
 theorem apply_symm_apply (e : G ≃* H) (y : H) : e (e.symm y) = y :=
   sorry
