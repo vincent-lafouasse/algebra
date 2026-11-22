@@ -83,9 +83,7 @@ theorem RightInverse.surjective {f : α → β} {g : β → α} (h : Function.Ri
 -- the ← direction needs classical logic: `Classical.byContradiction`
 theorem injective_iff_ne (f : α → β) :
     Function.Injective f ↔ ∀ a b : α, a ≠ b → f a ≠ f b := by
-  refine ⟨λ h_inj _ _ hne hfne =>
-    hne (h_inj hfne),
-    ?_⟩
+  refine ⟨λ h_inj _ _ hne hfne => hne (h_inj hfne), ?_⟩
   intro h
   sorry
 
