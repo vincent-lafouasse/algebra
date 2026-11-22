@@ -18,7 +18,9 @@ variable {G : Type u} [Group G]
 
 instance : Bot (Subgroup G) := ⟨{
   carrier := {x | x = 1}
-  mul_mem' := sorry
+  mul_mem' := by
+    intro a b ha hb
+    sorry
   one_mem' := sorry
   inv_mem' := sorry }⟩
 
