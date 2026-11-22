@@ -77,7 +77,14 @@ def conj : G →* MulAut G where
       intro x
       show g * (g⁻¹ * x * g) * g⁻¹ = x
       rw [mul_assoc, mul_inv_cancel_right, mul_inv_cancel_left]
-    map_mul' := sorry }
+    map_mul' := by
+      intro x y
+      apply Eq.symm
+      calc g * x * g⁻¹ * (g * y * g⁻¹)
+       _ = g * x * (g⁻¹ * g) * y * g⁻¹ := by simp only [mul_assoc]
+       _ = g * x * y * g⁻¹ := by rw [inv_mul_cancel, mul_one]
+       _ = g * (x * y) * g⁻¹ := by simp only [mul_assoc]
+  }
   map_one' := sorry
   map_mul' := sorry
 
