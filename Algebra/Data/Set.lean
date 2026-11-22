@@ -54,7 +54,7 @@ theorem mem_singleton_iff {a b : α} : a ∈ ({b} : Set α) ↔ a = b :=
 def univ : Set α := {_x | True}
 
 theorem mem_univ (x : α) : x ∈ (univ : Set α) :=
-  sorry
+  trivial
 
 -- `∅`
 instance : EmptyCollection (Set α) := ⟨{_x | False}⟩
