@@ -30,6 +30,8 @@ notation:35 G " ⧸ " H:34 => HasQuotient.Quotient G H
 
 namespace QuotientGroup
 
+section Classes
+
 variable {α : Type u} [Group α]
 
 instance instHasQuotientSubgroup : HasQuotient α (Subgroup α) :=
@@ -57,6 +59,8 @@ theorem induction_on {C : α ⧸ s → Prop} (x : α ⧸ s) (H : ∀ z : α, C z
 theorem eq_class_eq_leftCoset (s : Subgroup α) (g : α) :
     {x : α | (x : α ⧸ s) = g} = g • (s : Set α) :=
   sorry
+
+end Classes
 
 /-! ### The group structure on `G ⧸ N` -/
 

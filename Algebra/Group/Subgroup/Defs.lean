@@ -51,6 +51,12 @@ theorem ext {H K : Subgroup G} (h : ∀ x, x ∈ H ↔ x ∈ K) : H = K := by
   subst c_eq
   rfl
 
+/-! ### Membership: the unprimed API
+
+`H` is explicit, so `H.one_mem` and `H.inv_mem h` read well with dot notation. -/
+
+section Membership
+
 variable (H : Subgroup G) {x y : G}
 
 protected theorem one_mem : (1 : G) ∈ H :=
@@ -75,6 +81,8 @@ theorem mul_mem_cancel_left (h : x ∈ H) : x * y ∈ H ↔ y ∈ H :=
 theorem mul_mem_cancel_right (h : x ∈ H) : y * x ∈ H ↔ y ∈ H :=
   sorry
 
+end Membership
+
 /-! ### Inclusion `H ≤ K`
 
 Mathlib gets `≤` from `H ⊆ K` on carriers and proves `le_refl` etc. once for every partial
@@ -85,7 +93,7 @@ instance : LE (Subgroup G) := ⟨fun H K => ∀ ⦃x⦄, x ∈ H → x ∈ K⟩
 theorem le_def {H K : Subgroup G} : H ≤ K ↔ ∀ ⦃x⦄, x ∈ H → x ∈ K :=
   sorry
 
-protected theorem le_refl : H ≤ H :=
+protected theorem le_refl (H : Subgroup G) : H ≤ H :=
   sorry
 
 protected theorem le_trans {H K L : Subgroup G} (hHK : H ≤ K) (hKL : K ≤ L) : H ≤ L :=
@@ -95,6 +103,10 @@ protected theorem le_antisymm {H K : Subgroup G} (hHK : H ≤ K) (hKH : K ≤ H)
   sorry
 
 /-! ### A subgroup as a group -/
+
+section AsGroup
+
+variable (H : Subgroup G)
 
 instance : CoeSort (Subgroup G) (Type u) := ⟨fun H => {x : G // x ∈ H}⟩
 
@@ -127,6 +139,8 @@ theorem subtype_apply {H : Subgroup G} (x : H) : H.subtype x = x :=
 
 theorem subtype_injective : Function.Injective H.subtype :=
   sorry
+
+end AsGroup
 
 end Subgroup
 end My
