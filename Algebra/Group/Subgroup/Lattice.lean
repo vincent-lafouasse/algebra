@@ -19,10 +19,16 @@ variable {G : Type u} [Group G]
 instance : Bot (Subgroup G) := ⟨{
   carrier := {x | x = 1}
   mul_mem' := by
-    intro a b ha hb
-    sorry
-  one_mem' := sorry
-  inv_mem' := sorry }⟩
+    intro a b (ha : a = 1) (hb : b = 1)
+    show a * b = 1
+    rw [ha, hb]
+    exact mul_one 1
+  one_mem' := rfl
+  inv_mem' := by
+    intro x (hx : x = 1)
+    rw [← inv_eq_one] at hx
+    exact hx
+  }⟩
 
 instance : Top (Subgroup G) := ⟨{
   carrier := Set.univ
