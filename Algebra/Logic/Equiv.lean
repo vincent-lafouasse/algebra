@@ -70,7 +70,7 @@ protected def trans (e : α ≃ β) (e' : β ≃ γ) : α ≃ γ where
     rw [e'.right_inv]
 
 theorem invFun_as_coe (e : α ≃ β) : e.invFun = e.symm :=
-  sorry
+  rfl
 
 theorem refl_apply (x : α) : Equiv.refl α x = x :=
   sorry
