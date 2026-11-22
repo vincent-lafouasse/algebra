@@ -87,9 +87,13 @@ The BibTeX entries are in [`references.bib`](references.bib).
 
 [Cal84] J. Calais, *Éléments de théorie des groupes*, Presses Universitaires de France, Paris, 1984.
 
+[Cay89] A. Cayley, “On the Theory of Groups”, *American Journal of Mathematics* **11** (1889), no. 2, 139–157, <https://doi.org/10.2307/2369415>.
+
 [DF04] D. S. Dummit and R. M. Foote, *Abstract Algebra*, 3rd ed., John Wiley & Sons, Hoboken, NJ, 2004.
 
 [DMG+21] C. Deschamps, F. Moulin, Y. Gentric et al., *Maths MPSI-MP2I : Tout-en-un*, 6th ed., Dunod, Paris, 2021.
+
+[Gal32] É. Galois, “Lettre à Auguste Chevalier” (29 May 1832), *Revue encyclopédique* **55** (1832), 568–576; reprinted in *Journal de mathématiques pures et appliquées* **11** (1846), 408–415.
 
 [Gou09] X. Gourdon, *Les maths en tête : Algèbre*, 2nd ed., Ellipses, Paris, 2009.
 
