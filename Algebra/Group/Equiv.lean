@@ -30,10 +30,10 @@ variable {G : Type u} {H : Type v} {K : Type w} [Group G] [Group H] [Group K]
 instance : CoeFun (G ≃* H) (fun _ => G → H) := ⟨fun e => e.toEquiv⟩
 
 theorem ext {e e' : G ≃* H} (h : ∀ x, e x = e' x) : e = e' := by
-  obtain ⟨inner_equiv, hf_mul⟩ := e
-  obtain ⟨inner_equiv', hf_mul'⟩ := e'
-  have heq_eq : inner_equiv = inner_equiv' := by
-    apply Equiv.ext; exact h
+  obtain ⟨inner_equiv, _hf_mul⟩ := e
+  obtain ⟨inner_equiv', _hf_mul'⟩ := e'
+  have heq_eq : inner_equiv = inner_equiv' :=
+    Equiv.ext h
   subst heq_eq
   rfl
 
