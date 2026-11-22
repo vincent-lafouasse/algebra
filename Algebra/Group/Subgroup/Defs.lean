@@ -39,7 +39,7 @@ theorem mem_carrier {H : Subgroup G} {x : G} : x ∈ H.carrier ↔ x ∈ H :=
 
 -- (Mathlib: `SetLike.mem_coe`)
 theorem mem_coe {H : Subgroup G} {x : G} : x ∈ (H : Set G) ↔ x ∈ H :=
-  sorry
+  Iff.rfl
 
 -- two subgroups with the same elements are equal (the closure proofs don't matter)
 theorem ext {H K : Subgroup G} (h : ∀ x, x ∈ H ↔ x ∈ K) : H = K :=
