@@ -32,8 +32,6 @@ Core already has `Function.Injective.comp` and `Function.Surjective.comp`: the o
 `Function.Injective.comp` names yours, but dot notation `hg.comp hf` on
 `hg : Function.Injective g` finds core's (the type is core's `Function.Injective`). -/
 
-#print Function.Injective
-
 theorem Injective.comp {g : β → γ} {f : α → β}
     (hg : Function.Injective g) (hf : Function.Injective f) : Function.Injective (g ∘ f) :=
   λ _ _ hgf => hf (hg hgf)
