@@ -29,8 +29,8 @@ instance : Group (MulAut G) where
   mul_assoc := by
     intro a b c
     apply MulEquiv.ext
-    intro x
-    sorry
+    intro _
+    rfl
   one_mul := sorry
   inv_mul_cancel := sorry
 
