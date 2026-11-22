@@ -60,8 +60,9 @@ theorem mem_univ (x : α) : x ∈ (univ : Set α) :=
 -- `∅`
 instance : EmptyCollection (Set α) := ⟨{_x | False}⟩
 
-theorem mem_empty_iff_false (x : α) : x ∈ (∅ : Set α) ↔ False :=
-  sorry
+theorem mem_empty_iff_false (x : α) : x ∈ (∅ : Set α) ↔ False := by
+  show x ∈ {_x | False} ↔ False
+  rfl
 
 end Set
 end My
