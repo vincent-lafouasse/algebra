@@ -111,10 +111,10 @@ protected def trans (e : G ≃* H) (e' : H ≃* K) : G ≃* K where
      _ = (Equiv.trans e.toEquiv e'.toEquiv).toFun x * (Equiv.trans e.toEquiv e'.toEquiv).toFun y := rfl
 
 theorem refl_apply (x : G) : MulEquiv.refl G x = x :=
-  sorry
+  rfl
 
 theorem trans_apply (e : G ≃* H) (e' : H ≃* K) (x : G) : e.trans e' x = e' (e x) :=
-  sorry
+  rfl
 
 theorem symm_apply_apply (e : G ≃* H) (x : G) : e.symm (e x) = x :=
   sorry
@@ -123,7 +123,7 @@ theorem apply_symm_apply (e : G ≃* H) (y : H) : e (e.symm y) = y :=
   sorry
 
 theorem symm_symm (e : G ≃* H) : e.symm.symm = e :=
-  sorry
+  rfl
 
 theorem self_trans_symm (e : G ≃* H) : e.trans e.symm = MulEquiv.refl G :=
   sorry
@@ -132,7 +132,7 @@ theorem symm_trans_self (e : G ≃* H) : e.symm.trans e = MulEquiv.refl H :=
   sorry
 
 theorem toMonoidHom_refl : (MulEquiv.refl G).toMonoidHom = MonoidHom.id G :=
-  sorry
+  rfl
 
 theorem toMonoidHom_trans (e : G ≃* H) (e' : H ≃* K) :
     (e.trans e').toMonoidHom = e'.toMonoidHom ∘* e.toMonoidHom :=
