@@ -115,8 +115,12 @@ theorem leftInverse_surjInv {f : α → β} (hf : Bijective f) :
 -- an inverse of *any* f: a preimage of y if there is one, an arbitrary element if not.
 -- The `if` on a Prop needs `open Classical in` in front of the `def`, and "an arbitrary
 -- element" is where `[Nonempty α]` comes in.
+open Classical in
 noncomputable def invFun [Nonempty α] (f : α → β) : β → α :=
-  sorry
+  λ b =>
+    if has_preimage : ∃ a, f a = b
+    then Classical.choose has_preimage
+    else Classical.choice ‹Nonempty α›
 
 -- the only interface lemma that looks inside `invFun`
 theorem invFun_eq [Nonempty α] {f : α → β} {b : β} (h : ∃ a, f a = b) : f (invFun f b) = b :=
