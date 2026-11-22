@@ -130,9 +130,21 @@ instance toGroup : Group H where
   mul a b := ⟨a.val * b.val, H.mul_mem a.property b.property⟩
   one := ⟨1, H.one_mem⟩
   inv a := ⟨a.val⁻¹, H.inv_mem a.property⟩
-  mul_assoc := sorry
-  one_mul := sorry
-  inv_mul_cancel := sorry
+  mul_assoc := by
+    intro a b c
+    apply Subtype.ext
+    show a.val * b.val * c.val = a.val * (b.val * c.val)
+    exact mul_assoc a.val b.val c.val
+  one_mul := by
+    rintro ⟨val_a, p_a⟩
+    apply Subtype.ext
+    show 1 * val_a = val_a
+    exact one_mul val_a
+  inv_mul_cancel := by
+    rintro ⟨val_a, p_a⟩
+    apply Subtype.ext
+    show val_a⁻¹ * val_a = 1
+    exact inv_mul_cancel val_a
 
 -- the operations of `↥H` are those of `G` (`↑x` is `x.val`; equality in `↥H` is `Subtype.ext`)
 theorem coe_mul (x y : H) : ((x * y : H) : G) = x * y :=
