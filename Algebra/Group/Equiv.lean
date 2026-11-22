@@ -68,15 +68,14 @@ theorem coe_toMonoidHom (e : G ≃* H) : (e.toMonoidHom : G → H) = e :=
   rfl
 
 theorem toMonoidHom_injective : Function.Injective (toMonoidHom : (G ≃* H) → (G →* H)) := by
-  rintro ⟨⟨f, g, hl, hr⟩, hml⟩
-  rintro ⟨⟨f', g', hl', hr'⟩, hml'⟩
-  let e : G ≃* H := ⟨⟨f, g, hl, hr⟩, hml⟩
-  let e' : G ≃* H := ⟨⟨f', g', hl', hr'⟩, hml'⟩
-  rintro heq : toMonoidHom e = toMonoidHom e'
+  rintro ⟨eq_inner, hml⟩
+  rintro ⟨eq_inner', hml'⟩
+  rintro heq
   apply MulEquiv.ext
   intro x
-  show e.toEquiv.toFun x = e'.toEquiv.toFun x
-  sorry
+  show eq_inner.toFun x = eq_inner'.toFun x
+  have h : eq_inner.toFun = eq_inner'.toFun := sorry
+  rw [h]
 
 /-! ### refl, symm, trans -/
 
