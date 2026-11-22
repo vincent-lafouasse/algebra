@@ -37,10 +37,10 @@ theorem ext {f g : G →* H} (h : ∀ x, f x = g x) : f = g := by
   rfl
 
 protected theorem map_one (f : G →* H) : f 1 = 1 :=
-  sorry
+  f.map_one'
 
 protected theorem map_mul (f : G →* H) (a b : G) : f (a * b) = f a * f b :=
-  sorry
+  f.map_mul' a b
 
 protected theorem map_inv (f : G →* H) (a : G) : f a⁻¹ = (f a)⁻¹ :=
   sorry
