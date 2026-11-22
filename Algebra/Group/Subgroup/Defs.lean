@@ -69,14 +69,19 @@ protected theorem inv_mem : x ∈ H → x⁻¹ ∈ H :=
   H.inv_mem'
 
 theorem inv_mem_iff : x⁻¹ ∈ H ↔ x ∈ H := by
-  refine ⟨?_, Subgroup.inv_mem H⟩
+  refine ⟨?_, H.inv_mem⟩
   intro (h : x⁻¹ ∈ H)
-  replace h := Subgroup.inv_mem H h
+  replace h := H.inv_mem h
   rw [inv_inv] at h
   exact h
 
-theorem mul_mem_cancel_left (h : x ∈ H) : x * y ∈ H ↔ y ∈ H :=
-  sorry
+theorem mul_mem_cancel_left (h : x ∈ H) : x * y ∈ H ↔ y ∈ H := by
+  refine ⟨?_, H.mul_mem h⟩
+  intro h'
+  replace h := H.inv_mem h
+  replace h' := H.mul_mem h h' 
+  rw [inv_mul_cancel_left] at h'
+  exact h'
 
 theorem mul_mem_cancel_right (h : x ∈ H) : y * x ∈ H ↔ y ∈ H :=
   sorry
