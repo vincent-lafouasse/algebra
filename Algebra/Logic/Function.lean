@@ -54,10 +54,8 @@ theorem Bijective.comp {g : β → γ} {f : α → β} (hg : Bijective g) (hf : 
 theorem bijective_id : Bijective (@id α) :=
   have is_inj : Function.Injective (@id α) :=
     λ _ _ h => h
-  have is_surj : Function.Surjective (@id α) := by
-    intro a
-    refine ⟨a, ?_⟩
-    rfl
+  have is_surj : Function.Surjective (@id α) :=
+    λ a => ⟨a, rfl⟩
   ⟨is_inj, is_surj⟩
 
 -- if f ∘ g is injective, the inner g is; if f ∘ g is surjective, the outer f is
