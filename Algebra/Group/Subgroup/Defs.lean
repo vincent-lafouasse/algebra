@@ -42,7 +42,13 @@ theorem mem_coe {H : Subgroup G} {x : G} : x ∈ (H : Set G) ↔ x ∈ H :=
   Iff.rfl
 
 -- two subgroups with the same elements are equal (the closure proofs don't matter)
-theorem ext {H K : Subgroup G} (h : ∀ x, x ∈ H ↔ x ∈ K) : H = K :=
+theorem ext {H K : Subgroup G} (h : ∀ x, x ∈ H ↔ x ∈ K) : H = K := by
+  obtain ⟨ch, hmh, h1h, hih⟩ := H
+  obtain ⟨ck, hmk, h1k, hik⟩ := K
+  have c_eq : ch = ck := by
+    funext x
+    have hx : ch x ↔ ck x := h x
+    exact propext (h x)
   sorry
 
 variable (H : Subgroup G) {x y : G}
