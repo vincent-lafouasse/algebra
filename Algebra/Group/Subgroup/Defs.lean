@@ -159,8 +159,12 @@ theorem coe_one : ((1 : H) : G) = 1 :=
 -- the inclusion `↥H → G`, as a hom
 def subtype : H →* G where
   toFun := Subtype.val
-  map_one' := sorry
-  map_mul' := sorry
+  map_one' := rfl
+  map_mul' := by
+    rintro ⟨xv, _⟩
+    rintro ⟨yv, _⟩
+    rfl
+
 
 theorem subtype_apply {H : Subgroup G} (x : H) : H.subtype x = x :=
   sorry
