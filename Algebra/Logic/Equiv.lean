@@ -52,8 +52,8 @@ protected def refl (α : Sort u) : α ≃ α where
 protected def symm (e : α ≃ β) : β ≃ α where
   toFun := e.invFun
   invFun := e.toFun
-  left_inv := sorry
-  right_inv := sorry
+  left_inv := e.right_inv
+  right_inv := e.left_inv
 
 protected def trans (e : α ≃ β) (e' : β ≃ γ) : α ≃ γ where
   toFun := e'.toFun ∘ e.toFun
