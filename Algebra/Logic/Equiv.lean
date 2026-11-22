@@ -97,7 +97,9 @@ theorem trans_refl (e : α ≃ β) : e.trans (Equiv.refl β) = e :=
 theorem refl_trans (e : α ≃ β) : (Equiv.refl α).trans e = e :=
   rfl
 
-theorem self_trans_symm (e : α ≃ β) : e.trans e.symm = Equiv.refl α :=
+theorem self_trans_symm (e : α ≃ β) : e.trans e.symm = Equiv.refl α := by
+  apply ext
+  intro x
   sorry
 
 theorem symm_trans_self (e : α ≃ β) : e.symm.trans e = Equiv.refl β :=
