@@ -133,7 +133,7 @@ theorem leftInverse_invFun [Nonempty α] {f : α → β} (hf : Function.Injectiv
   unfold Function.LeftInverse
   intro a
   let b := invFun f (f a)
-  have hfeq : f b = f a := sorry
+  have hfeq : f b = f a := invFun_eq ⟨a, rfl⟩
   exact hf hfeq
 
 theorem rightInverse_invFun [Nonempty α] {f : α → β} (hf : Function.Surjective f) :
