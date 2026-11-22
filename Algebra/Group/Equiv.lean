@@ -85,7 +85,9 @@ protected def symm (e : G ≃* H) : H ≃* G where
   invFun := e.toFun
   left_inv := e.right_inv
   right_inv := e.left_inv
-  map_mul' := sorry
+  map_mul' := by
+    intro x y
+    sorry
 
 protected def trans (e : G ≃* H) (e' : H ≃* K) : G ≃* K where
   toFun := e'.toFun ∘ e.toFun
