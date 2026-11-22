@@ -48,11 +48,9 @@ theorem subset_def {s t : Set α} : (s ⊆ t) = ∀ x, x ∈ s → x ∈ t :=
 -- `{a}`
 instance : Singleton α (Set α) := ⟨fun a => {x | x = a}⟩
 
-theorem mem_singleton_iff {a b : α} : a ∈ ({b} : Set α) ↔ a = b :=
-  let sb : Set α := {b}
-  calc a ∈ sb
-   _ ↔ sb a := Iff.rfl
-   _ ↔ (a = b) := sorry
+theorem mem_singleton_iff {a b : α} : a ∈ ({b} : Set α) ↔ a = b := by
+  show a ∈ {x | x = b} ↔ a = b
+  rfl
 
 def univ : Set α := {_x | True}
 
