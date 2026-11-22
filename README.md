@@ -91,11 +91,15 @@ The BibTeX entries are in [`references.bib`](references.bib).
 
 [DF04] D. S. Dummit and R. M. Foote, *Abstract Algebra*, 3rd ed., John Wiley & Sons, Hoboken, NJ, 2004.
 
+[dMU21] L. de Moura and S. Ullrich, “The Lean 4 Theorem Prover and Programming Language”, in *Automated Deduction – CADE 28*, Lecture Notes in Computer Science **12699**, Springer, 2021, 625–635, <https://doi.org/10.1007/978-3-030-79876-5_37>.
+
 [DMG+21] C. Deschamps, F. Moulin, Y. Gentric et al., *Maths MPSI-MP2I : Tout-en-un*, 6th ed., Dunod, Paris, 2021.
 
 [Gal32] É. Galois, “Lettre à Auguste Chevalier” (29 May 1832), *Revue encyclopédique* **55** (1832), 568–576; reprinted in *Journal de mathématiques pures et appliquées* **11** (1846), 408–415.
 
 [Gou09] X. Gourdon, *Les maths en tête : Algèbre*, 2nd ed., Ellipses, Paris, 2009.
+
+[mC20] The mathlib Community, “The Lean Mathematical Library”, in *Proceedings of the 9th ACM SIGPLAN International Conference on Certified Programs and Proofs* (CPP 2020), ACM, 2020, 367–381, <https://doi.org/10.1145/3372885.3373824>. The Lean 4 library this project tracks is at <https://github.com/leanprover-community/mathlib4>.
 
 [Per96] D. Perrin, *Cours d'algèbre*, Ellipses, Paris, 1996.
 
