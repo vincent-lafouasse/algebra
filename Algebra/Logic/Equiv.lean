@@ -73,7 +73,7 @@ theorem invFun_as_coe (e : α ≃ β) : e.invFun = e.symm :=
   rfl
 
 theorem refl_apply (x : α) : Equiv.refl α x = x :=
-  sorry
+  rfl
 
 theorem trans_apply (e : α ≃ β) (e' : β ≃ γ) (x : α) : e.trans e' x = e' (e x) :=
   sorry
