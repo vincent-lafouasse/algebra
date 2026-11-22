@@ -69,8 +69,14 @@ def conj : G →* MulAut G where
   toFun g := {
     toFun := fun x => g * x * g⁻¹
     invFun := fun x => g⁻¹ * x * g
-    left_inv := sorry
-    right_inv := sorry
+    left_inv := by
+      intro x
+      show g⁻¹ * (g * x * g⁻¹) * g = x
+      rw [mul_assoc, inv_mul_cancel_right, inv_mul_cancel_left]
+    right_inv := by
+      intro x
+      show g * (g⁻¹ * x * g) * g⁻¹ = x
+      rw [mul_assoc, mul_inv_cancel_right, mul_inv_cancel_left]
     map_mul' := sorry }
   map_one' := sorry
   map_mul' := sorry
