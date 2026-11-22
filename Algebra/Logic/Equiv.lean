@@ -58,8 +58,16 @@ protected def symm (e : α ≃ β) : β ≃ α where
 protected def trans (e : α ≃ β) (e' : β ≃ γ) : α ≃ γ where
   toFun := e'.toFun ∘ e.toFun
   invFun := e.invFun ∘ e'.invFun
-  left_inv := sorry
-  right_inv := sorry
+  left_inv := by
+    intro x
+    repeat rw [Function.comp_apply]
+    rw [e'.left_inv]
+    rw [e.left_inv]
+  right_inv := by
+    intro y
+    repeat rw [Function.comp_apply]
+    rw [e.right_inv]
+    rw [e'.right_inv]
 
 theorem invFun_as_coe (e : α ≃ β) : e.invFun = e.symm :=
   sorry
