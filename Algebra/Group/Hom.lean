@@ -29,8 +29,12 @@ attribute [coe] MonoidHom.toFun
 
 instance : CoeFun (G →* H) (fun _ => G → H) := ⟨MonoidHom.toFun⟩
 
-theorem ext {f g : G →* H} (h : ∀ x, f x = g x) : f = g :=
-  sorry
+theorem ext {f g : G →* H} (h : ∀ x, f x = g x) : f = g := by
+  obtain ⟨f, hf, hfmul⟩ := f
+  obtain ⟨g, hg, hgmul⟩ := g
+  have hfg : f = g := by funext x; exact h x
+  subst hfg
+  rfl
 
 protected theorem map_one (f : G →* H) : f 1 = 1 :=
   sorry
