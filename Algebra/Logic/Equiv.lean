@@ -84,7 +84,9 @@ theorem symm_apply_apply (e : α ≃ β) (x : α) : e.symm (e x) = x :=
    _ = x := by rw [e.left_inv]
 
 theorem apply_symm_apply (e : α ≃ β) (y : β) : e (e.symm y) = y :=
-  sorry
+  calc e (e.symm y)
+   _ = e.toFun (e.invFun y) := rfl
+   _ = y := by rw [e.right_inv]
 
 theorem symm_symm (e : α ≃ β) : e.symm.symm = e :=
   sorry
