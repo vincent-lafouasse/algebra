@@ -69,7 +69,11 @@ protected theorem map_zpow (f : G →* H) (a : G) (k : Int) : f (a ^ k) = f a ^ 
     rw [zpow_one, zpow_one]
     rw [ih]
   | pred n ih =>
-    sorry
+    rw [zpow_sub, zpow_sub]
+    rw [MonoidHom.map_mul]
+    rw [zpow_one, zpow_one]
+    rw [MonoidHom.map_inv]
+    rw [ih]
 
 /-! ### Building homs -/
 
