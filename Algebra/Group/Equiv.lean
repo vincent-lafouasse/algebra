@@ -26,7 +26,11 @@ namespace MulEquiv
 
 variable {G : Type u} {H : Type v} {K : Type w} [Group G] [Group H] [Group K]
 
--- `e x` goes through the underlying bijection (displayed `⇑e.toEquiv x`)
+-- `e x` goes through the underlying bijection. Tagging `toEquiv` as a coercion makes goals
+-- show `↑↑e x` (inner `↑`: `G ≃* H` to `G ≃ H`, outer: `G ≃ H` to `G → H`) instead of
+-- `↑e.toEquiv x`; display only, the term is unchanged. Mathlib shows `⇑e x`, via `EquivLike`.
+attribute [coe] MulEquiv.toEquiv
+
 instance : CoeFun (G ≃* H) (fun _ => G → H) := ⟨fun e => e.toEquiv⟩
 
 theorem ext {e e' : G ≃* H} (h : ∀ x, e x = e' x) : e = e' := by
