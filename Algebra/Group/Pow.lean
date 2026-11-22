@@ -273,8 +273,10 @@ theorem zpow_add (g : G) (k l : Int) : g ^ (k + l) = g ^ k * g ^ l := by
     simp only [mul_assoc]
 
 -- `k - l` is `k + -l` (`Int.sub_eq_add_neg`), then the two laws above
-theorem zpow_sub (g : G) (k l : Int) : g ^ (k - l) = g ^ k * (g ^ l)⁻¹ :=
-  sorry
+theorem zpow_sub (g : G) (k l : Int) : g ^ (k - l) = g ^ k * (g ^ l)⁻¹ := by
+  rw [Int.sub_eq_add_neg]
+  rw [zpow_add]
+  rw [zpow_neg]
 
 theorem zpow_mul (g : G) (k l : Int) : g ^ (k * l) = (g ^ k) ^ l := by
   induction l using Int.induction_on with
