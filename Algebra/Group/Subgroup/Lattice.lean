@@ -55,14 +55,13 @@ instance : Min (Subgroup G) := ⟨fun H K => {
   }⟩
 
 theorem mem_bot {x : G} : x ∈ (⊥ : Subgroup G) ↔ x = 1 := by
-  show x ∈ {_x | x = 1} ↔ x = 1
   rfl
 
 theorem mem_top (x : G) : x ∈ (⊤ : Subgroup G) :=
   trivial
 
-theorem mem_inf {p p' : Subgroup G} {x : G} : x ∈ p ⊓ p' ↔ x ∈ p ∧ x ∈ p' :=
-  sorry
+theorem mem_inf {p p' : Subgroup G} {x : G} : x ∈ p ⊓ p' ↔ x ∈ p ∧ x ∈ p' := by
+  rfl
 
 theorem eq_bot_iff_forall (H : Subgroup G) : H = ⊥ ↔ ∀ x, x ∈ H → x = 1 :=
   sorry
