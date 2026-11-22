@@ -97,7 +97,7 @@ protected def symm (e : G ≃* H) : H ≃* G where
   map_mul' := by
     intro x y
     calc e.invFun (x * y)
-    _ = e.invFun (e.toFun (e.invFun x) * e.toFun (e.invFun y)) := by rw [e.right_inv, e.right_inv]
+     _ = e.invFun (e.toFun (e.invFun x) * e.toFun (e.invFun y)) := by rw [e.right_inv, e.right_inv]
      _ = e.invFun (e.toFun (e.invFun x * e.invFun y)) := by rw [e.map_mul]
      _ = e.invFun x * e.invFun y := by rw [e.left_inv]
 
