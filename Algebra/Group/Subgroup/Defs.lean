@@ -103,8 +103,9 @@ instance : LE (Subgroup G) := ⟨fun H K => ∀ ⦃x⦄, x ∈ H → x ∈ K⟩
 theorem le_def {H K : Subgroup G} : H ≤ K ↔ ∀ ⦃x⦄, x ∈ H → x ∈ K :=
   Iff.rfl
 
-protected theorem le_refl (H : Subgroup G) : H ≤ H :=
-  sorry
+protected theorem le_refl (H : Subgroup G) : H ≤ H := by
+  apply le_def.mpr
+  intro _ h; exact h
 
 protected theorem le_trans {H K L : Subgroup G} (hHK : H ≤ K) (hKL : K ≤ L) : H ≤ L :=
   sorry
