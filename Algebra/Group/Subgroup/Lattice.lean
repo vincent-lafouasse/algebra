@@ -43,9 +43,16 @@ instance : Top (Subgroup G) := ⟨{
 
 instance : Min (Subgroup G) := ⟨fun H K => {
   carrier := {x | x ∈ H ∧ x ∈ K}
-  mul_mem' := sorry
-  one_mem' := sorry
-  inv_mem' := sorry }⟩
+  mul_mem' := by
+    rintro a b
+    rintro ⟨hah, hak⟩ ⟨hbh, hbk⟩
+    show (a * b) ∈ H ∧ (a * b) ∈ K
+    exact ⟨H.mul_mem hah hbh, K.mul_mem hak hbk⟩
+  one_mem' := ⟨H.one_mem, K.one_mem⟩
+  inv_mem' := by
+    rintro _ ⟨hh, hk⟩
+    exact ⟨H.inv_mem hh, K.inv_mem hk⟩
+  }⟩
 
 theorem mem_bot {x : G} : x ∈ (⊥ : Subgroup G) ↔ x = 1 :=
   sorry
