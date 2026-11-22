@@ -42,10 +42,12 @@ theorem coe_toEquiv (e : G ≃* H) : (e.toEquiv : G → H) = e :=
   rfl
 
 protected theorem map_mul (e : G ≃* H) (x y : G) : e (x * y) = e x * e y :=
-  sorry
+  e.map_mul' x y
 
-protected theorem map_one (e : G ≃* H) : e 1 = 1 :=
-  sorry
+protected theorem map_one (e : G ≃* H) : e 1 = 1 := by
+  rw [← mul_left_inj (e 1)]
+  rw [← e.map_mul]
+  rw [one_mul, one_mul]
 
 protected theorem map_inv (e : G ≃* H) (x : G) : e x⁻¹ = (e x)⁻¹ :=
   sorry
