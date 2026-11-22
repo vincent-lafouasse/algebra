@@ -136,7 +136,7 @@ theorem leftInverse_invFun [Nonempty α] {f : α → β} (hf : Function.Injectiv
   exact hf hfeq
 
 theorem rightInverse_invFun [Nonempty α] {f : α → β} (hf : Function.Surjective f) :
-    Function.RightInverse (invFun f) f := 
+    Function.RightInverse (invFun f) f :=
   λ b => invFun_eq (hf b)
 
 -- `Nonempty α` is needed: if α is empty and β isn't, there is no `β → α` at all
