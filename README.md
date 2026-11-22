@@ -30,6 +30,7 @@ comment says "(not in Mathlib)".
 | `Algebra/GroupTheory/Center.lean`, `Centralizer.lean` | `center G`, `centralizer s` | `GroupTheory/Subgroup/{Center,Centralizer}` |
 | `Algebra/GroupTheory/Coset.lean` | `a • s`, `leftRel` | `GroupTheory/Coset/{Defs,Basic}` |
 | `Algebra/GroupTheory/QuotientGroup/` | `G ⧸ N`, `lift`, the first isomorphism theorem | `GroupTheory/QuotientGroup/{Defs,Basic}` |
+| `Algebra/GroupTheory/Out.lean` | `Inn G`, `Out G`, `G ⧸ center G ≃* Inn G` | (not in Mathlib; uses `MulAut.conj.range`) |
 | `Exercises/` | exercise sheets, stated with the library above | |
 
 ## Building

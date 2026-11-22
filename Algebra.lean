@@ -23,3 +23,4 @@ import Algebra.GroupTheory.Centralizer
 import Algebra.GroupTheory.Coset
 import Algebra.GroupTheory.QuotientGroup.Defs
 import Algebra.GroupTheory.QuotientGroup.Basic
+import Algebra.GroupTheory.Out
