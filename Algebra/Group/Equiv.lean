@@ -87,10 +87,7 @@ protected def refl (G : Type u) [Group G] : G ≃* G where
 
 -- the inverse of an isomorphism is a hom: the proof is the exercise
 protected def symm (e : G ≃* H) : H ≃* G where
-  toFun := e.invFun
-  invFun := e.toFun
-  left_inv := e.right_inv
-  right_inv := e.left_inv
+  toEquiv := Equiv.symm e.toEquiv
   map_mul' := by
     intro x y
     let f : G → H := e.toFun
@@ -104,16 +101,7 @@ protected def symm (e : G ≃* H) : H ≃* G where
      _ = fi x * fi y := by rw [hl]
 
 protected def trans (e : G ≃* H) (e' : H ≃* K) : G ≃* K where
-  toFun := e'.toFun ∘ e.toFun
-  invFun := e.invFun ∘ e'.invFun
-  left_inv := by
-    have l := e.left_inv
-    have l' := e'.left_inv
-    have inj := Function.LeftInverse.injective l
-    have inj' := Function.LeftInverse.injective l'
-    have comp_inj := Function.Injective.comp inj' inj
-    sorry
-  right_inv := sorry
+  toEquiv := Equiv.trans e.toEquiv e'.toEquiv
   map_mul' := sorry
 
 theorem refl_apply (x : G) : MulEquiv.refl G x = x :=
