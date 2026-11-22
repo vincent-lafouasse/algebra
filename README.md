@@ -26,7 +26,7 @@ comment says "(not in Mathlib)".
 | `Algebra/Group/Hom.lean` | homomorphisms `G →* H` | `Algebra/Group/Hom/Defs` |
 | `Algebra/Group/Equiv.lean` | isomorphisms `G ≃* H` | `Algebra/Group/Equiv/Defs` |
 | `Algebra/Group/End.lean` | `MulAut G`, `MulAut.conj` | `Algebra/Group/End` |
-| `Algebra/Group/Subgroup/` | `Subgroup`, `≤`, `⊥ ⊤ ⊓`, `ker`, `range`, `map`, `comap`, `zpowers`, `Normal` | `Algebra/Group/Subgroup/` |
+| `Algebra/Group/Subgroup/` | `Subgroup`, `≤`, `⊥ ⊤ ⊓`, `ker`, `range`, `map`, `comap`, `zpowers`, `closure`, `Normal` | `Algebra/Group/Subgroup/` |
 | `Algebra/GroupTheory/Center.lean`, `Centralizer.lean` | `center G`, `centralizer s` | `GroupTheory/Subgroup/{Center,Centralizer}` |
 | `Algebra/GroupTheory/Coset.lean` | `a • s`, `leftRel` | `GroupTheory/Coset/{Defs,Basic}` |
 | `Algebra/GroupTheory/QuotientGroup/` | `G ⧸ N`, `lift`, the first isomorphism theorem | `GroupTheory/QuotientGroup/{Defs,Basic}` |

@@ -17,6 +17,7 @@ import Algebra.Group.Subgroup.Lattice
 import Algebra.Group.Subgroup.Ker
 import Algebra.Group.Subgroup.Map
 import Algebra.Group.Subgroup.ZPowers
+import Algebra.Group.Subgroup.Closure
 import Algebra.Group.Subgroup.Normal
 import Algebra.GroupTheory.Center
 import Algebra.GroupTheory.Centralizer

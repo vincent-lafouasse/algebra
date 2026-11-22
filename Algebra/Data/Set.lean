@@ -54,5 +54,11 @@ def univ : Set α := {_x | True}
 theorem mem_univ (x : α) : x ∈ (univ : Set α) :=
   sorry
 
+-- `∅`
+instance : EmptyCollection (Set α) := ⟨{_x | False}⟩
+
+theorem mem_empty_iff_false (x : α) : x ∈ (∅ : Set α) ↔ False :=
+  sorry
+
 end Set
 end My
