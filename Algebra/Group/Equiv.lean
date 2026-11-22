@@ -105,7 +105,10 @@ protected def trans (e : G ≃* H) (e' : H ≃* K) : G ≃* K where
   map_mul' := by
     intro (x : G) (y : G)
     calc (Equiv.trans e.toEquiv e'.toEquiv).toFun (x * y)
-     _ = (Equiv.trans e.toEquiv e'.toEquiv).toFun x * (Equiv.trans e.toEquiv e'.toEquiv).toFun y := sorry
+     _ = e'.toFun (e.toFun (x * y)) := rfl
+     _ = e'.toFun (e.toFun x * e.toFun y) := by rw [e.map_mul]
+     _ = e'.toFun (e.toFun x) * e'.toFun (e.toFun y) := by rw [e'.map_mul]
+     _ = (Equiv.trans e.toEquiv e'.toEquiv).toFun x * (Equiv.trans e.toEquiv e'.toEquiv).toFun y := rfl
 
 theorem refl_apply (x : G) : MulEquiv.refl G x = x :=
   sorry
