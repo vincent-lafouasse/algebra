@@ -107,8 +107,9 @@ protected theorem le_refl (H : Subgroup G) : H ≤ H := by
   apply le_def.mpr
   intro _ h; exact h
 
-protected theorem le_trans {H K L : Subgroup G} (hHK : H ≤ K) (hKL : K ≤ L) : H ≤ L :=
-  sorry
+protected theorem le_trans {H K L : Subgroup G} (hHK : H ≤ K) (hKL : K ≤ L) : H ≤ L := by
+  apply le_def.mpr
+  intro _ hxh; exact hKL (hHK hxh)
 
 protected theorem le_antisymm {H K : Subgroup G} (hHK : H ≤ K) (hKH : K ≤ H) : H = K :=
   sorry
