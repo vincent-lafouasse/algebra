@@ -175,15 +175,12 @@ protected theorem bijective (e : G ≃* H) : Function.Bijective e :=
 The inverse is `Function.surjInv`, picked by choice, hence `noncomputable`. -/
 
 noncomputable def ofBijective (f : G →* H) (hf : Function.Bijective f) : G ≃* H where
-  toFun := f
-  invFun := Function.surjInv hf.2
-  left_inv := sorry
-  right_inv := sorry
+  toEquiv := Equiv.ofBijective f.toFun hf
   map_mul' := sorry
 
 theorem ofBijective_apply (f : G →* H) (hf : Function.Bijective f) (x : G) :
     ofBijective f hf x = f x :=
-  sorry
+  rfl
 
 end MulEquiv
 end My
