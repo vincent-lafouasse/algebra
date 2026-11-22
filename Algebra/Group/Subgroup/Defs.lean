@@ -169,8 +169,10 @@ def subtype : H →* G where
 theorem subtype_apply {H : Subgroup G} (x : H) : H.subtype x = x :=
   rfl
 
-theorem subtype_injective : Function.Injective H.subtype :=
-  sorry
+theorem subtype_injective : Function.Injective H.subtype := by
+  intro ⟨av, ha⟩ ⟨bv, hb⟩
+  intro (he : av = bv)
+  apply Subtype.ext; exact he
 
 end AsGroup
 
