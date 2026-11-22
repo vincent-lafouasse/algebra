@@ -136,18 +136,19 @@ instance toGroup : Group H where
     show a.val * b.val * c.val = a.val * (b.val * c.val)
     exact mul_assoc a.val b.val c.val
   one_mul := by
-    rintro ⟨val_a, p_a⟩
+    rintro ⟨val_a, _⟩
     apply Subtype.ext
     show 1 * val_a = val_a
     exact one_mul val_a
   inv_mul_cancel := by
-    rintro ⟨val_a, p_a⟩
+    rintro ⟨val_a, _⟩
     apply Subtype.ext
     show val_a⁻¹ * val_a = 1
     exact inv_mul_cancel val_a
 
 -- the operations of `↥H` are those of `G` (`↑x` is `x.val`; equality in `↥H` is `Subtype.ext`)
-theorem coe_mul (x y : H) : ((x * y : H) : G) = x * y :=
+theorem coe_mul (x y : H) : ((x * y : H) : G) = x * y := by
+  obtain ⟨xv, hx⟩ := x
   sorry
 
 theorem coe_inv (x : H) : ((x⁻¹ : H) : G) = (x : G)⁻¹ :=
