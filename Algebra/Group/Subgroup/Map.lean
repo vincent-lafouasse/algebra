@@ -37,11 +37,11 @@ theorem map_id (K : Subgroup G) : map (MonoidHom.id G) K = K :=
   sorry
 
 theorem map_map (g : N →* P) (f : G →* N) (K : Subgroup G) :
-    map g (map f K) = map (g.comp f) K :=
+    map g (map f K) = map (g ∘* f) K :=
   sorry
 
 theorem comap_comap (K : Subgroup P) (g : N →* P) (f : G →* N) :
-    comap f (comap g K) = comap (g.comp f) K :=
+    comap f (comap g K) = comap (g ∘* f) K :=
   sorry
 
 -- map and comap are adjoint: f(K) ⊆ H iff K ⊆ f⁻¹(H)

@@ -96,6 +96,7 @@ protected def id (G : Type u) [Group G] : G →* G where
 theorem id_apply (G : Type u) [Group G] (x : G) : MonoidHom.id G x = x :=
   rfl
 
+/-- Composition: `g ∘* f` is `g` after `f`. -/
 def comp (g : H →* K) (f : G →* H) : G →* K where
   toFun := g.toFun ∘ f.toFun
   map_one' := by
@@ -108,17 +109,21 @@ def comp (g : H →* K) (f : G →* H) : G →* K where
     rw [MonoidHom.map_mul f]
     rw [MonoidHom.map_mul g]
 
-theorem comp_apply (g : H →* K) (f : G →* H) (x : G) : g.comp f x = g (f x) :=
+-- `g ∘* f` (typed `\o*`) for `g.comp f` (not in Mathlib, which writes `.comp`). Declared
+-- after `def comp`, since the name on the right is resolved here.
+@[inherit_doc] infixr:90 " ∘* " => MonoidHom.comp
+
+theorem comp_apply (g : H →* K) (f : G →* H) (x : G) : (g ∘* f) x = g (f x) :=
   rfl
 
-theorem id_comp (f : G →* H) : (MonoidHom.id H).comp f = f :=
+theorem id_comp (f : G →* H) : MonoidHom.id H ∘* f = f :=
   rfl
 
-theorem comp_id (f : G →* H) : f.comp (MonoidHom.id G) = f :=
+theorem comp_id (f : G →* H) : f ∘* MonoidHom.id G = f :=
   rfl
 
 theorem comp_assoc {L : Type x} [Group L] (f : G →* H) (g : H →* K) (h : K →* L) :
-    (h.comp g).comp f = h.comp (g.comp f) :=
+    (h ∘* g) ∘* f = h ∘* (g ∘* f) :=
   rfl
 
 end MonoidHom
