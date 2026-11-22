@@ -79,7 +79,9 @@ theorem trans_apply (e : α ≃ β) (e' : β ≃ γ) (x : α) : e.trans e' x = e
   rfl
 
 theorem symm_apply_apply (e : α ≃ β) (x : α) : e.symm (e x) = x :=
-  sorry
+  calc e.symm (e x)
+   _ = e.invFun (e x) := rfl
+   _ = x := by rw [e.left_inv]
 
 theorem apply_symm_apply (e : α ≃ β) (y : β) : e (e.symm y) = y :=
   sorry
