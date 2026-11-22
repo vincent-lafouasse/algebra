@@ -66,8 +66,14 @@ theorem mem_inf {p p' : Subgroup G} {x : G} : x ∈ p ⊓ p' ↔ x ∈ p ∧ x �
 theorem eq_bot_iff_forall (H : Subgroup G) : H = ⊥ ↔ ∀ x, x ∈ H → x = 1 :=
   sorry
 
-theorem eq_top_iff' (H : Subgroup G) : H = ⊤ ↔ ∀ x : G, x ∈ H :=
-  sorry
+theorem eq_top_iff' (H : Subgroup G) : H = ⊤ ↔ ∀ x : G, x ∈ H := by
+  constructor
+  · intro h; subst h
+    exact λ x => mem_top x
+  · intro h
+    apply Subgroup.ext
+    intro x
+    exact ⟨λ _ => mem_top x, λ _ => h x⟩
 
 -- (Mathlib: the general order lemmas `bot_le`, `le_top`, `inf_le_left`, `inf_le_right`, `le_inf`)
 
