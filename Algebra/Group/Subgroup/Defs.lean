@@ -83,8 +83,13 @@ theorem mul_mem_cancel_left (h : x ∈ H) : x * y ∈ H ↔ y ∈ H := by
   rw [inv_mul_cancel_left] at h'
   exact h'
 
-theorem mul_mem_cancel_right (h : x ∈ H) : y * x ∈ H ↔ y ∈ H :=
-  sorry
+theorem mul_mem_cancel_right (h : x ∈ H) : y * x ∈ H ↔ y ∈ H := by
+  refine ⟨?_, λ h' => H.mul_mem h' h⟩
+  intro h'
+  replace h := H.inv_mem h
+  replace h' := H.mul_mem h' h
+  rw [mul_inv_cancel_right] at h'
+  exact h'
 
 end Membership
 
