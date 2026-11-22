@@ -78,9 +78,8 @@ theorem LeftInverse.injective {g : β → α} {f : α → β} (h : Function.Left
   exact he
 
 theorem RightInverse.surjective {f : α → β} {g : β → α} (h : Function.RightInverse g f) :
-    Function.Surjective f := by
-  intro b
-  exact ⟨g b, h b⟩
+    Function.Surjective f :=
+  λ b => ⟨g b, h b⟩
 
 -- (not in Mathlib; the closest is `not_injective_iff`)
 -- the ← direction needs classical logic: `Classical.byContradiction`
