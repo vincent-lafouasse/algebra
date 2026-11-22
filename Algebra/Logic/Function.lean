@@ -142,9 +142,9 @@ theorem rightInverse_invFun [Nonempty α] {f : α → β} (hf : Function.Surject
 -- `Nonempty α` is needed: if α is empty and β isn't, there is no `β → α` at all
 theorem injective_iff_hasLeftInverse [Nonempty α] (f : α → β) :
     Function.Injective f ↔ Function.HasLeftInverse f := by
-  have lhs : Function.Injective f → Function.HasLeftInverse f :=
+  have mp : Function.Injective f → Function.HasLeftInverse f :=
     λ h_inj => ⟨invFun f, leftInverse_invFun h_inj⟩
-  refine ⟨lhs, ?_⟩
+  refine ⟨mp, ?_⟩
   rintro ⟨f_inv, hf_inv⟩
   exact LeftInverse.injective hf_inv
 
