@@ -176,7 +176,9 @@ The inverse is `Function.surjInv`, picked by choice, hence `noncomputable`. -/
 
 noncomputable def ofBijective (f : G →* H) (hf : Function.Bijective f) : G ≃* H where
   toEquiv := Equiv.ofBijective f.toFun hf
-  map_mul' := sorry
+  map_mul' := by
+    intro x y
+    sorry
 
 theorem ofBijective_apply (f : G →* H) (hf : Function.Bijective f) (x : G) :
     ofBijective f hf x = f x :=
