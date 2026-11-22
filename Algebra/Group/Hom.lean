@@ -96,7 +96,7 @@ protected def id (G : Type u) [Group G] : G →* G where
   map_mul' := λ _ _ => rfl
 
 theorem id_apply (G : Type u) [Group G] (x : G) : MonoidHom.id G x = x :=
-  sorry
+  rfl
 
 def comp (g : H →* K) (f : G →* H) : G →* K where
   toFun := g.toFun ∘ f.toFun
