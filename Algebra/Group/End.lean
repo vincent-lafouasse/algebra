@@ -31,22 +31,22 @@ instance : Group (MulAut G) where
   inv_mul_cancel := sorry
 
 theorem mul_def (e₁ e₂ : MulAut G) : e₁ * e₂ = MulEquiv.trans e₂ e₁ :=
-  sorry
+  rfl
 
 theorem one_def : (1 : MulAut G) = MulEquiv.refl G :=
-  sorry
+  rfl
 
 theorem inv_def (e : MulAut G) : e⁻¹ = MulEquiv.symm e :=
-  sorry
+  rfl
 
 theorem mul_apply (e₁ e₂ : MulAut G) (x : G) : (e₁ * e₂) x = e₁ (e₂ x) :=
-  sorry
+  rfl
 
 theorem one_apply (x : G) : (1 : MulAut G) x = x :=
-  sorry
+  rfl
 
 theorem inv_apply (e : MulAut G) (x : G) : e⁻¹ x = MulEquiv.symm e x :=
-  sorry
+  rfl
 
 /-! ### Conjugation
 
@@ -63,13 +63,13 @@ def conj : G →* MulAut G where
   map_mul' := sorry
 
 theorem conj_apply (g x : G) : conj g x = g * x * g⁻¹ :=
-  sorry
+  rfl
 
 theorem conj_symm_apply (g x : G) : MulEquiv.symm (conj g) x = g⁻¹ * x * g :=
-  sorry
+  rfl
 
 theorem conj_inv_apply (g x : G) : (conj g)⁻¹ x = g⁻¹ * x * g :=
-  sorry
+  rfl
 
 end MulAut
 end My
