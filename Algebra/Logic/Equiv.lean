@@ -29,8 +29,8 @@ instance : CoeFun (α ≃ β) (fun _ => α → β) := ⟨Equiv.toFun⟩
 
 -- two equivalences with the same forward function are equal (the inverse is determined)
 theorem ext {e e' : α ≃ β} (h : ∀ x, e x = e' x) : e = e' := by
-  obtain ⟨f, g, hl, hr⟩ := e
-  obtain ⟨f', g', hl', hr'⟩ := e'
+  obtain ⟨f, g, hl, _⟩ := e
+  obtain ⟨f', g', _, hr'⟩ := e'
   have hfe : f = f' := by
     funext x
     exact h x
