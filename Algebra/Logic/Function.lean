@@ -158,8 +158,15 @@ theorem surjective_iff_hasRightInverse (f : α → β) :
   exact RightInverse.surjective hf_inv
 
 theorem bijective_iff_has_inverse (f : α → β) :
-    Bijective f ↔ ∃ g : β → α, Function.LeftInverse g f ∧ Function.RightInverse g f :=
-  sorry
+    Bijective f ↔ ∃ g : β → α, Function.LeftInverse g f ∧ Function.RightInverse g f := by
+  constructor
+  · rintro ⟨h_inv, h_surj⟩
+    refine ⟨surjInv h_surj, ?_⟩
+    refine ⟨leftInverse_surjInv ⟨h_inv, h_surj⟩, ?_⟩
+    exact rightInverse_surjInv h_surj
+  · intro ⟨f_inv, h_left, h_right⟩
+    have h_surj : Function.Surjective f := sorry
+    sorry
 
 end Function
 end My
