@@ -54,11 +54,12 @@ instance : Min (Subgroup G) := ⟨fun H K => {
     exact ⟨H.inv_mem hh, K.inv_mem hk⟩
   }⟩
 
-theorem mem_bot {x : G} : x ∈ (⊥ : Subgroup G) ↔ x = 1 :=
-  sorry
+theorem mem_bot {x : G} : x ∈ (⊥ : Subgroup G) ↔ x = 1 := by
+  show x ∈ {_x | x = 1} ↔ x = 1
+  rfl
 
 theorem mem_top (x : G) : x ∈ (⊤ : Subgroup G) :=
-  sorry
+  trivial
 
 theorem mem_inf {p p' : Subgroup G} {x : G} : x ∈ p ⊓ p' ↔ x ∈ p ∧ x ∈ p' :=
   sorry
