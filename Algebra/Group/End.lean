@@ -85,8 +85,19 @@ def conj : G →* MulAut G where
        _ = g * x * y * g⁻¹ := by rw [inv_mul_cancel, mul_one]
        _ = g * (x * y) * g⁻¹ := by simp only [mul_assoc]
   }
-  map_one' := sorry
-  map_mul' := sorry
+  map_one' := by
+    apply MulEquiv.ext
+    intro x
+    show 1 * x * 1⁻¹ = x
+    rw [one_mul, inv_one, mul_one]
+  map_mul' := by
+    intro x y
+    apply MulEquiv.ext
+    intro a
+    show x * y * a * (x * y)⁻¹ = x * (y * a * y⁻¹) * x⁻¹
+    calc x * y * a * (x * y)⁻¹
+     _ = x * y * a * (y⁻¹ * x⁻¹) := by rw [mul_inv_rev]
+     _ = x * (y * a * y⁻¹) * x⁻¹ := by simp only [mul_assoc]
 
 theorem conj_apply (g x : G) : conj g x = g * x * g⁻¹ :=
   rfl
