@@ -139,8 +139,14 @@ theorem self_trans_symm (e : G ≃* H) : e.trans e.symm = MulEquiv.refl G := by
    _ = x := by rw [e.left_inv]
    _ = (MulEquiv.refl G) x := rfl
 
-theorem symm_trans_self (e : G ≃* H) : e.symm.trans e = MulEquiv.refl H :=
-  sorry
+theorem symm_trans_self (e : G ≃* H) : e.symm.trans e = MulEquiv.refl H := by
+  apply ext
+  intro (y : H)
+  calc e.symm.trans e y
+   _ = (MulEquiv.trans e.symm e) y := rfl
+   _ = e.toFun (e.invFun y) := rfl
+   _ = y := by rw [e.right_inv]
+   _ = (MulEquiv.refl H) y := rfl
 
 theorem toMonoidHom_refl : (MulEquiv.refl G).toMonoidHom = MonoidHom.id G :=
   rfl
