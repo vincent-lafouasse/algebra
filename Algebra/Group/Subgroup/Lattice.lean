@@ -32,9 +32,14 @@ instance : Bot (Subgroup G) := ⟨{
 
 instance : Top (Subgroup G) := ⟨{
   carrier := Set.univ
-  mul_mem' := sorry
-  one_mem' := sorry
-  inv_mem' := sorry }⟩
+  mul_mem' := by
+    intro _ _ _ _
+    trivial
+  one_mem' := trivial
+  inv_mem' := by
+    intro _ _
+    trivial
+  }⟩
 
 instance : Min (Subgroup G) := ⟨fun H K => {
   carrier := {x | x ∈ H ∧ x ∈ K}
