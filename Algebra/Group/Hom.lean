@@ -42,11 +42,15 @@ protected theorem map_one (f : G →* H) : f 1 = 1 :=
 protected theorem map_mul (f : G →* H) (a b : G) : f (a * b) = f a * f b :=
   f.map_mul' a b
 
-protected theorem map_inv (f : G →* H) (a : G) : f a⁻¹ = (f a)⁻¹ :=
-  sorry
+protected theorem map_inv (f : G →* H) (a : G) : f a⁻¹ = (f a)⁻¹ := by
+  refine eq_inv_iff_mul_eq_one.mpr ?_
+  rw [← MonoidHom.map_mul]
+  rw [inv_mul_cancel]
+  exact MonoidHom.map_one f
 
-protected theorem map_mul_inv (f : G →* H) (a b : G) : f (a * b⁻¹) = f a * (f b)⁻¹ :=
-  sorry
+protected theorem map_mul_inv (f : G →* H) (a b : G) : f (a * b⁻¹) = f a * (f b)⁻¹ := by
+  rw [← MonoidHom.map_inv]
+  rw [MonoidHom.map_mul]
 
 protected theorem map_pow (f : G →* H) (a : G) (n : Nat) : f (a ^ n) = f a ^ n :=
   sorry
