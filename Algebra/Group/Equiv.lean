@@ -162,7 +162,8 @@ theorem toMonoidHom_trans (e : G ≃* H) (e' : H ≃* K) :
   apply MonoidHom.ext
   intro (x : G)
   calc (e.trans e').toMonoidHom x
-   _ = (e'.toMonoidHom ∘* e.toMonoidHom) x := sorry
+   _ = e'.toFun (e.toFun x) := rfl
+   _ = (e'.toMonoidHom ∘* e.toMonoidHom) x := rfl
 
 protected theorem injective (e : G ≃* H) : Function.Injective e :=
   Function.LeftInverse.injective e.left_inv
