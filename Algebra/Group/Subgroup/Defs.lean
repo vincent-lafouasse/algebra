@@ -111,8 +111,12 @@ protected theorem le_trans {H K L : Subgroup G} (hHK : H ≤ K) (hKL : K ≤ L) 
   apply le_def.mpr
   intro _ hxh; exact hKL (hHK hxh)
 
-protected theorem le_antisymm {H K : Subgroup G} (hHK : H ≤ K) (hKH : K ≤ H) : H = K :=
-  sorry
+protected theorem le_antisymm {H K : Subgroup G} (hHK : H ≤ K) (hKH : K ≤ H) : H = K := by
+  apply ext
+  intro h
+  constructor
+  · intro hh; exact hHK hh
+  · intro hk; exact hKH hk
 
 /-! ### A subgroup as a group -/
 
