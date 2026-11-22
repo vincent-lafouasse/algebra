@@ -123,8 +123,10 @@ noncomputable def invFun [Nonempty α] (f : α → β) : β → α :=
     else Classical.choice ‹Nonempty α›
 
 -- the only interface lemma that looks inside `invFun`
-theorem invFun_eq [Nonempty α] {f : α → β} {b : β} (h : ∃ a, f a = b) : f (invFun f b) = b :=
-  sorry
+theorem invFun_eq [Nonempty α] {f : α → β} {b : β} (h : ∃ a, f a = b) : f (invFun f b) = b := by
+  unfold invFun
+  rw [dite_eq_left h]
+  exact Classical.choose_spec h
 
 theorem leftInverse_invFun [Nonempty α] {f : α → β} (hf : Function.Injective f) :
     Function.LeftInverse (invFun f) f :=
