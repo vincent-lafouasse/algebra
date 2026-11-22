@@ -165,8 +165,9 @@ theorem bijective_iff_has_inverse (f : α → β) :
     refine ⟨leftInverse_surjInv ⟨h_inv, h_surj⟩, ?_⟩
     exact rightInverse_surjInv h_surj
   · intro ⟨f_inv, h_left, h_right⟩
-    have h_surj : Function.Surjective f := sorry
-    sorry
+    have h_inj := LeftInverse.injective h_left
+    have h_surj := RightInverse.surjective h_right
+    exact ⟨h_inj, h_surj⟩
 
 end Function
 end My
