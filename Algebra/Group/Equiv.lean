@@ -182,7 +182,9 @@ noncomputable def ofBijective (f : G →* H) (hf : Function.Bijective f) : G ≃
   toEquiv := Equiv.ofBijective f.toFun hf
   map_mul' := by
     intro x y
-    sorry
+    let bij := Equiv.ofBijective f.toFun hf
+    calc bij.toFun (x * y)
+     _ = bij.toFun x * bij.toFun y := sorry
 
 theorem ofBijective_apply (f : G →* H) (hf : Function.Bijective f) (x : G) :
     ofBijective f hf x = f x :=
