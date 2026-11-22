@@ -153,9 +153,6 @@ theorem injective_iff_hasLeftInverse [Nonempty α] (f : α → β) :
 -- no `Nonempty α` here, so `invFun` is not available: the → witness is `surjInv`
 theorem surjective_iff_hasRightInverse (f : α → β) :
     Function.Surjective f ↔ Function.HasRightInverse f := by
-  unfold Function.HasRightInverse 
-  unfold Function.RightInverse 
-  unfold Function.LeftInverse 
   have lhs : Function.Surjective f → Function.HasRightInverse f :=
     λ h_surj => ⟨surjInv h_surj, surjInv_eq h_surj⟩
   refine ⟨lhs, ?_⟩
