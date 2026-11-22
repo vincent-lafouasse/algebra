@@ -74,8 +74,12 @@ theorem Surjective.of_comp {f : α → β} {g : γ → α} (S : Function.Surject
 
 -- a left inverse makes f injective, a right inverse makes it surjective (core has both)
 theorem LeftInverse.injective {g : β → α} {f : α → β} (h : Function.LeftInverse g f) :
-    Function.Injective f :=
-  sorry
+    Function.Injective f := by
+  unfold Function.LeftInverse at h
+  intro a b he
+  replace he := congrArg g he
+  rw [h a, h b] at he
+  exact he
 
 theorem RightInverse.surjective {f : α → β} {g : β → α} (h : Function.RightInverse g f) :
     Function.Surjective f :=
