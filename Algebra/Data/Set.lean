@@ -33,7 +33,7 @@ macro_rules
 
 -- the defining property of `{x | p x}` (an `=` of Props, so it `rw`s like an iff)
 theorem mem_setOf_eq {a : α} {p : α → Prop} : (a ∈ {x | p x}) = p a :=
-  sorry
+  rfl
 
 theorem ext {s t : Set α} (h : ∀ x, x ∈ s ↔ x ∈ t) : s = t :=
   sorry
