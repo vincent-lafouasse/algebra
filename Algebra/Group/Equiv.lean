@@ -130,8 +130,14 @@ theorem apply_symm_apply (e : G ≃* H) (y : H) : e (e.symm y) = y :=
 theorem symm_symm (e : G ≃* H) : e.symm.symm = e :=
   rfl
 
-theorem self_trans_symm (e : G ≃* H) : e.trans e.symm = MulEquiv.refl G :=
-  sorry
+theorem self_trans_symm (e : G ≃* H) : e.trans e.symm = MulEquiv.refl G := by
+  apply ext
+  intro (x : G)
+  calc (e.trans e.symm) x
+   _ = (MulEquiv.trans e e.symm) x := rfl
+   _ = e.invFun (e.toFun x) := rfl
+   _ = x := by rw [e.left_inv]
+   _ = (MulEquiv.refl G) x := rfl
 
 theorem symm_trans_self (e : G ≃* H) : e.symm.trans e = MulEquiv.refl H :=
   sorry
