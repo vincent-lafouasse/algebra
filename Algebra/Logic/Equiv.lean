@@ -46,8 +46,8 @@ theorem ext {e e' : α ≃ β} (h : ∀ x, e x = e' x) : e = e' := by
 protected def refl (α : Sort u) : α ≃ α where
   toFun := id
   invFun := id
-  left_inv := sorry
-  right_inv := sorry
+  left_inv := by intro x; rfl
+  right_inv := by intro x; rfl
 
 protected def symm (e : α ≃ β) : β ≃ α where
   toFun := e.invFun
