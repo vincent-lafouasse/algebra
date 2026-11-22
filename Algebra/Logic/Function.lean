@@ -60,9 +60,8 @@ theorem bijective_id : Bijective (@id α) :=
 
 -- if f ∘ g is injective, the inner g is; if f ∘ g is surjective, the outer f is
 theorem Injective.of_comp {f : α → β} {g : γ → α} (I : Function.Injective (f ∘ g)) :
-    Function.Injective g := by
-  intro _ _ h
-  exact I (congrArg f h)
+    Function.Injective g :=
+  λ _ _ h => I (congrArg f h)
 
 theorem Surjective.of_comp {f : α → β} {g : γ → α} (S : Function.Surjective (f ∘ g)) :
     Function.Surjective f := by
