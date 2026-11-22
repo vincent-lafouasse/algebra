@@ -100,8 +100,15 @@ theorem id_apply (G : Type u) [Group G] (x : G) : MonoidHom.id G x = x :=
 
 def comp (g : H →* K) (f : G →* H) : G →* K where
   toFun := g.toFun ∘ f.toFun
-  map_one' := sorry
-  map_mul' := sorry
+  map_one' := by
+    rw [Function.comp_apply]
+    rw [MonoidHom.map_one f]
+    rw [MonoidHom.map_one g]
+  map_mul' := by
+    intro x y
+    rw [Function.comp_apply, Function.comp_apply, Function.comp_apply]
+    rw [MonoidHom.map_mul f]
+    rw [MonoidHom.map_mul g]
 
 theorem comp_apply (g : H →* K) (f : G →* H) (x : G) : g.comp f x = g (f x) :=
   rfl
