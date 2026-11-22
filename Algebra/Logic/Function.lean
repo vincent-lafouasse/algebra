@@ -39,8 +39,13 @@ theorem Injective.comp {g : β → γ} {f : α → β}
   λ _ _ hgf => hf (hg hgf)
 
 theorem Surjective.comp {g : β → γ} {f : α → β}
-    (hg : Function.Surjective g) (hf : Function.Surjective f) : Function.Surjective (g ∘ f) :=
-  sorry
+    (hg : Function.Surjective g) (hf : Function.Surjective f) : Function.Surjective (g ∘ f) := by
+  intro (c : γ)
+  obtain ⟨b, hb⟩ := hg c
+  obtain ⟨a, ha⟩ := hf b
+  exists a
+  rw [← hb, ← ha]
+  rfl
 
 theorem Bijective.comp {g : β → γ} {f : α → β} (hg : Bijective g) (hf : Bijective f) :
     Bijective (g ∘ f) :=
