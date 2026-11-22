@@ -47,9 +47,9 @@ theorem ext {H K : Subgroup G} (h : ∀ x, x ∈ H ↔ x ∈ K) : H = K := by
   obtain ⟨ck, hmk, h1k, hik⟩ := K
   have c_eq : ch = ck := by
     funext x
-    have hx : ch x ↔ ck x := h x
     exact propext (h x)
-  sorry
+  subst c_eq
+  rfl
 
 variable (H : Subgroup G) {x y : G}
 
