@@ -31,8 +31,16 @@ instance : Group (MulAut G) where
     apply MulEquiv.ext
     intro _
     rfl
-  one_mul := sorry
-  inv_mul_cancel := sorry
+  one_mul := by
+    intro a
+    apply MulEquiv.ext
+    intro x
+    rfl
+  inv_mul_cancel := by
+    intro a
+    apply MulEquiv.ext
+    intro x
+    sorry
 
 theorem mul_def (e₁ e₂ : MulAut G) : e₁ * e₂ = MulEquiv.trans e₂ e₁ :=
   rfl
