@@ -65,8 +65,9 @@ protected theorem inv_mem : x ∈ H → x⁻¹ ∈ H :=
 theorem inv_mem_iff : x⁻¹ ∈ H ↔ x ∈ H := by
   refine ⟨?_, Subgroup.inv_mem H⟩
   intro (h : x⁻¹ ∈ H)
-  have h' := Subgroup.inv_mem H h -- type mismatch
-  sorry
+  replace h := Subgroup.inv_mem H h
+  rw [inv_inv] at h
+  exact h
 
 theorem mul_mem_cancel_left (h : x ∈ H) : x * y ∈ H ↔ y ∈ H :=
   sorry
