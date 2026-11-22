@@ -53,8 +53,11 @@ protected theorem map_one (e : G ≃* H) : e 1 = 1 := by
   rw [← e.map_mul]
   rw [one_mul, one_mul]
 
-protected theorem map_inv (e : G ≃* H) (x : G) : e x⁻¹ = (e x)⁻¹ :=
-  sorry
+protected theorem map_inv (e : G ≃* H) (x : G) : e x⁻¹ = (e x)⁻¹ := by
+  apply eq_inv_of_mul_eq_one_left
+  rw [← MulEquiv.map_mul]
+  rw [inv_mul_cancel]
+  exact MulEquiv.map_one e
 
 def toMonoidHom (e : G ≃* H) : G →* H where
   toFun := e.toFun
