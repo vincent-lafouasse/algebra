@@ -31,13 +31,7 @@ theorem idem_el_iff_eq_one (e : G) : e * e = e ↔ e = 1 := by
     rw [one_mul]
 
 theorem mul_inv_cancel (a : G) : a * a⁻¹ = 1 := by
-  have key : ∀ e : G, e * e = e → e = 1 := by
-    intro e he
-    replace he := congrArg (e⁻¹ * ·) he
-    rw [← mul_assoc] at he
-    rw [inv_mul_cancel, one_mul] at he
-    exact he
-  apply key
+  rw [← idem_el_iff_eq_one]
   calc
     (a * a⁻¹) * (a * a⁻¹)
     _ = a * (a⁻¹ * a * a⁻¹) := by simp only [mul_assoc]
