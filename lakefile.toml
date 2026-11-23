@@ -20,3 +20,8 @@ name = "Exercises"
 name = "batteries"
 git = "https://github.com/leanprover-community/batteries"
 rev = "v4.35.0"
+
+[[require]]
+name = "lean-fmt"
+git = "https://github.com/jcreinhold/lean-fmt"
+rev = "v4.35.0"
