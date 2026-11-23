@@ -36,8 +36,7 @@ theorem mem_comap {K : Subgroup N} {f : G →* N} {x : G} : x ∈ comap f K ↔ 
 theorem map_id (K : Subgroup G) : map (MonoidHom.id G) K = K :=
   sorry
 
-theorem map_map (g : N →* P) (f : G →* N) (K : Subgroup G) :
-    map g (map f K) = map (g ∘* f) K :=
+theorem map_map (g : N →* P) (f : G →* N) (K : Subgroup G) : map g (map f K) = map (g ∘* f) K :=
   sorry
 
 theorem comap_comap (K : Subgroup P) (g : N →* P) (f : G →* N) :
@@ -60,4 +59,5 @@ theorem range_eq_map (f : G →* N) : f.range = Subgroup.map f ⊤ :=
   sorry
 
 end MonoidHom
+
 end My

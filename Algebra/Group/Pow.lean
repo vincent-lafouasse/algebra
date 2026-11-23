@@ -25,7 +25,8 @@ def npowRec : Nat → G → G
   | 0, _ => 1
   | n + 1, g => npowRec n g * g
 
-instance : Pow G Nat := ⟨fun g n => npowRec n g⟩
+instance : Pow G Nat :=
+  ⟨fun g n => npowRec n g⟩
 
 -- the two defining equations (`rfl`)
 theorem pow_zero (g : G) : g ^ (0 : Nat) = 1 :=
@@ -111,7 +112,8 @@ variable {a b : G}
 
 theorem pow_left (h : Commute a b) (n : Nat) : Commute (a ^ n) b := by
   induction n with
-  | zero => rw [pow_zero]; exact one_left b
+  | zero =>
+    rw [pow_zero]; exact one_left b
   | succ n ih =>
     rw [pow_succ]
     exact mul_left ih h
@@ -130,13 +132,14 @@ protected theorem mul_pow (h : Commute a b) (n : Nat) : (a * b) ^ n = a ^ n * b 
   induction n with
   | zero => rw [pow_zero, pow_zero, pow_zero, one_mul]
   | succ n ih =>
-    calc (a * b) ^ (n + 1)
-     _ = (a * b) ^ n * (a * b) := by rw [pow_succ]
-     _ = a ^ n * b ^ n * (a * b) := by rw [ih]
-     _ = a ^ n * (b ^ n * a) * b := by simp only [mul_assoc]
-     _ = a ^ n * (a * b ^ n) * b := by rw [← pow_right h n |> Commute.eq]
-     _ = (a ^ n * a) * (b ^ n * b) := by simp only [mul_assoc]
-     _ = a ^ (n + 1) * b ^ (n + 1) := by rw [← pow_succ, ← pow_succ]
+    calc
+      (a * b) ^ (n + 1)
+      _ = (a * b) ^ n * (a * b) := by rw [pow_succ]
+      _ = a ^ n * b ^ n * (a * b) := by rw [ih]
+      _ = a ^ n * (b ^ n * a) * b := by simp only [mul_assoc]
+      _ = a ^ n * (a * b ^ n) * b := by rw [← pow_right h n |> Commute.eq]
+      _ = (a ^ n * a) * (b ^ n * b) := by simp only [mul_assoc]
+      _ = a ^ (n + 1) * b ^ (n + 1) := by rw [← pow_succ, ← pow_succ]
 
 end Commute
 
@@ -150,7 +153,8 @@ def zpowRec : Int → G → G
   | Int.ofNat n, g => g ^ n
   | Int.negSucc n, g => (g ^ (n + 1))⁻¹
 
-instance : Pow G Int := ⟨fun g k => zpowRec k g⟩
+instance : Pow G Int :=
+  ⟨fun g k => zpowRec k g⟩
 
 -- the defining equations (`rfl`)
 theorem zpow_natCast (g : G) (n : Nat) : g ^ (n : Int) = g ^ n :=
@@ -180,7 +184,7 @@ theorem one_zpow (k : Int) : (1 : G) ^ k = 1 := by
     rw [one_pow n]
   | negSucc n =>
     rw [zpow_negSucc]
-    rw[inv_eq_one]
+    rw [inv_eq_one]
     exact one_pow (n + 1)
 
 -- split on k; `-(ofNat (n+1)) = negSucc n` is the Int fact you need
@@ -195,8 +199,10 @@ theorem zpow_neg (g : G) (k : Int) : g ^ (-k) = (g ^ k)⁻¹ := by
       rw [zpow_zero]
       rw [pow_zero]
       exact Eq.symm inv_one
-    | succ n =>
-      conv => lhs; rw [Nat.add_one]
+    | succ
+      n =>
+      conv =>
+        lhs; rw [Nat.add_one]
       rw [Int.neg_ofNat_succ]
       rw [zpow_negSucc]
   | negSucc n =>
@@ -243,7 +249,8 @@ theorem zpow_add_one (g : G) (k : Int) : g ^ (k + 1) = g ^ k * g := by
     rw [zpow_negSucc]
     rw [zpow_negSucc]
     rw [pow_succ' g (n + 1)]
-    conv => rhs; rw [mul_inv_rev]
+    conv =>
+      rhs; rw [mul_inv_rev]
     rw [inv_mul_cancel_right]
 
 theorem zpow_sub_one (g : G) (k : Int) : g ^ (k - 1) = g ^ k * g⁻¹ := by

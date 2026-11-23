@@ -24,8 +24,7 @@ theorem rev_rev (l : List α) : rev (rev l) = l :=
   sorry
 
 -- core's `List.map`; `simp only [List.map, Function.comp]` unfolds one step
-theorem map_map' (f : α → β) (g : β → γ) (l : List α) :
-    (l.map f).map g = l.map (g ∘ f) :=
+theorem map_map' (f : α → β) (g : β → γ) (l : List α) : (l.map f).map g = l.map (g ∘ f) :=
   sorry
 
 theorem rev_map (f : α → β) (l : List α) : rev (l.map f) = (rev l).map f :=

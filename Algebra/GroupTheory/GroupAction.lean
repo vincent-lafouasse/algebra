@@ -128,7 +128,7 @@ The orbit is a set, so its type is the subtype `{b // b ∈ orbit G a}` (Mathlib
 variable (G)
 
 noncomputable def orbitEquivQuotientStabilizer (a : α) :
-    {b // b ∈ orbit G a} ≃ G ⧸ stabilizer G a :=
+    { b // b ∈ orbit G a } ≃ G ⧸ stabilizer G a :=
   sorry
 
 end MulAction

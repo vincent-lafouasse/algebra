@@ -38,17 +38,19 @@ theorem mul_inv_cancel (a : G) : a * a⁻¹ = 1 := by
     rw [inv_mul_cancel, one_mul] at he
     exact he
   apply key
-  calc (a * a⁻¹) * (a * a⁻¹)
-   _ = a * (a⁻¹ * a * a⁻¹) := by simp only [mul_assoc]
-   _ = a * (1 * a⁻¹) := by rw [inv_mul_cancel]
-   _ = a * a⁻¹ := by rw [one_mul]
+  calc
+    (a * a⁻¹) * (a * a⁻¹)
+    _ = a * (a⁻¹ * a * a⁻¹) := by simp only [mul_assoc]
+    _ = a * (1 * a⁻¹) := by rw [inv_mul_cancel]
+    _ = a * a⁻¹ := by rw [one_mul]
 
 theorem mul_one (a : G) : a * 1 = a :=
-  calc a * 1
-   _ = a * (a⁻¹ * a) := by rw [← inv_mul_cancel a]
-   _ = (a * a⁻¹) * a := by rw [mul_assoc]
-   _ = 1 * a := by rw [mul_inv_cancel]
-   _ = a := by rw [one_mul]
+  calc
+    a * 1
+    _ = a * (a⁻¹ * a) := by rw [← inv_mul_cancel a]
+    _ = (a * a⁻¹) * a := by rw [mul_assoc]
+    _ = 1 * a := by rw [mul_inv_cancel]
+    _ = a := by rw [one_mul]
 
 /-! ### Cancelling a factor and its inverse -/
 
@@ -163,16 +165,16 @@ theorem inv_eq_iff_mul_eq_one : a⁻¹ = b ↔ a * b = 1 :=
 theorem inv_one : (1 : G)⁻¹ = 1 :=
   inv_eq_of_mul_eq_one_right (one_mul 1)
 
-theorem inv_eq_one : a⁻¹ = 1 ↔ a = 1 := by
-  rw [inv_eq_iff_mul_eq_one, mul_one]
+theorem inv_eq_one : a⁻¹ = 1 ↔ a = 1 := by rw [inv_eq_iff_mul_eq_one, mul_one]
 
 -- the inverse of a product reverses the order
 theorem mul_inv_rev (a b : G) : (a * b)⁻¹ = b⁻¹ * a⁻¹ := by
   apply inv_eq_of_mul_eq_one_left
-  calc b⁻¹ * a⁻¹ * (a * b)
-   _ = b⁻¹ * (a⁻¹ * a) * b := by simp only [mul_assoc]
-   _ = b⁻¹ * b := by rw [inv_mul_cancel, mul_one]
-   _ = 1 := by rw [inv_mul_cancel]
+  calc
+    b⁻¹ * a⁻¹ * (a * b)
+    _ = b⁻¹ * (a⁻¹ * a) * b := by simp only [mul_assoc]
+    _ = b⁻¹ * b := by rw [inv_mul_cancel, mul_one]
+    _ = 1 := by rw [inv_mul_cancel]
 
 theorem inv_injective : Function.Injective (Inv.inv : G → G) := by
   intro a b he
@@ -194,7 +196,8 @@ theorem inv_mul_eq_one : a⁻¹ * b = 1 ↔ a = b := by
 -- a conjugate of b is trivial only if b is
 theorem conj_eq_one_iff : a * b * a⁻¹ = 1 ↔ b = 1 := by
   rw [mul_inv_eq_one]
-  conv => rhs; rw [← mul_right_inj a]
+  conv =>
+    rhs; rw [← mul_right_inj a]
   rw [mul_one]
 
 /-! ### Moving a factor across an equation -/
@@ -234,12 +237,14 @@ section CommGroup
 variable {G : Type u} [CommGroup G]
 
 theorem inv_mul_cancel_comm (a b : G) : a⁻¹ * b * a = b :=
-  calc a⁻¹ * b * a
-   _ = b * a⁻¹ * a := by rw [mul_comm a⁻¹ b]
-   _ = b := by rw [inv_mul_cancel_right]
+  calc
+    a⁻¹ * b * a
+    _ = b * a⁻¹ * a := by rw [mul_comm a⁻¹ b]
+    _ = b := by rw [inv_mul_cancel_right]
 
 theorem mul_inv_cancel_comm (a b : G) : a * b * a⁻¹ = b := by
-  conv => lhs; left; rw [← inv_inv a]
+  conv =>
+    lhs; left; rw [← inv_inv a]
   exact inv_mul_cancel_comm a⁻¹ b
 
 theorem inv_mul_cancel_comm_assoc (a b : G) : a⁻¹ * (b * a) = b := by

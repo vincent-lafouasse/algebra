@@ -11,6 +11,7 @@ factored map is injective (`kerLift`), and onto its range (`rangeKerLift`): so
 universe u v
 
 namespace My
+
 namespace QuotientGroup
 
 variable {G : Type u} {M : Type v} [Group G] [Group M]
@@ -57,4 +58,5 @@ noncomputable def quotientKerEquivOfSurjective (hφ : Function.Surjective φ) : 
   MulEquiv.ofBijective (kerLift φ) ⟨kerLift_injective φ, sorry⟩
 
 end QuotientGroup
+
 end My

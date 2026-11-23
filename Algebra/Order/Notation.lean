@@ -16,6 +16,7 @@ class Top (α : Type u) where
   top : α
 
 notation "⊥" => Bot.bot
+
 notation "⊤" => Top.top
 
 end My

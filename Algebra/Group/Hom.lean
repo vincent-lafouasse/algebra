@@ -27,12 +27,14 @@ variable {G : Type u} {H : Type v} {K : Type w} [Group G] [Group H] [Group K]
 
 attribute [coe] MonoidHom.toFun
 
-instance : CoeFun (G →* H) (fun _ => G → H) := ⟨MonoidHom.toFun⟩
+instance : CoeFun (G →* H) (fun _ => G → H) :=
+  ⟨MonoidHom.toFun⟩
 
 theorem ext {f g : G →* H} (h : ∀ x, f x = g x) : f = g := by
   obtain ⟨f, hf, hfmul⟩ := f
   obtain ⟨g, hg, hgmul⟩ := g
-  have hfg : f = g := by funext x; exact h x
+  have hfg : f = g := by
+    funext x; exact h x
   subst hfg
   rfl
 
@@ -54,7 +56,8 @@ protected theorem map_mul_inv (f : G →* H) (a b : G) : f (a * b⁻¹) = f a * 
 
 protected theorem map_pow (f : G →* H) (a : G) (n : Nat) : f (a ^ n) = f a ^ n := by
   induction n with
-  | zero => rw [pow_zero, pow_zero]; exact MonoidHom.map_one f
+  | zero =>
+    rw [pow_zero, pow_zero]; exact MonoidHom.map_one f
   | succ n ih =>
     rw [pow_succ, pow_succ]
     rw [MonoidHom.map_mul]
@@ -62,7 +65,8 @@ protected theorem map_pow (f : G →* H) (a : G) (n : Nat) : f (a ^ n) = f a ^ n
 
 protected theorem map_zpow (f : G →* H) (a : G) (k : Int) : f (a ^ k) = f a ^ k := by
   induction k using Int.induction_on with
-  | zero => rw [zpow_zero, zpow_zero]; exact MonoidHom.map_one f
+  | zero =>
+    rw [zpow_zero, zpow_zero]; exact MonoidHom.map_one f
   | succ n ih =>
     rw [zpow_add_one, zpow_add_one]
     rw [MonoidHom.map_mul f]
@@ -127,4 +131,5 @@ theorem comp_assoc {L : Type x} [Group L] (f : G →* H) (g : H →* K) (h : K �
   rfl
 
 end MonoidHom
+
 end My

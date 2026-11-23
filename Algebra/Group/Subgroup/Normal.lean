@@ -14,6 +14,7 @@ you write `nH.mem_comm h`. -/
 universe u v
 
 namespace My
+
 namespace Subgroup
 
 variable {G : Type u} [Group G]
@@ -26,12 +27,10 @@ theorem Normal.conj_mem' {H : Subgroup G} (nH : H.Normal) (n : G) (hn : n ∈ H)
     g⁻¹ * n * g ∈ H :=
   sorry
 
-theorem Normal.mem_comm {H : Subgroup G} (nH : H.Normal) {a b : G} (h : a * b ∈ H) :
-    b * a ∈ H :=
+theorem Normal.mem_comm {H : Subgroup G} (nH : H.Normal) {a b : G} (h : a * b ∈ H) : b * a ∈ H :=
   sorry
 
-theorem Normal.mem_comm_iff {H : Subgroup G} (nH : H.Normal) {a b : G} :
-    a * b ∈ H ↔ b * a ∈ H :=
+theorem Normal.mem_comm_iff {H : Subgroup G} (nH : H.Normal) {a b : G} : a * b ∈ H ↔ b * a ∈ H :=
   sorry
 
 instance normal_bot : (⊥ : Subgroup G).Normal :=

@@ -28,11 +28,13 @@ namespace Subgroup
 
 variable {G : Type u} [Group G]
 
-instance : Membership G (Subgroup G) := ⟨fun H x => x ∈ H.carrier⟩
+instance : Membership G (Subgroup G) :=
+  ⟨fun H x => x ∈ H.carrier⟩
 
 attribute [coe] Subgroup.carrier
 
-instance : CoeTC (Subgroup G) (Set G) := ⟨Subgroup.carrier⟩
+instance : CoeTC (Subgroup G) (Set G) :=
+  ⟨Subgroup.carrier⟩
 
 theorem mem_carrier {H : Subgroup G} {x : G} : x ∈ H.carrier ↔ x ∈ H :=
   Iff.rfl
@@ -98,7 +100,8 @@ end Membership
 Mathlib gets `≤` from `H ⊆ K` on carriers and proves `le_refl` etc. once for every partial
 order; here they are stated for subgroups only. -/
 
-instance : LE (Subgroup G) := ⟨fun H K => ∀ ⦃x⦄, x ∈ H → x ∈ K⟩
+instance : LE (Subgroup G) :=
+  ⟨fun H K => ∀ ⦃x⦄, x ∈ H → x ∈ K⟩
 
 theorem le_def {H K : Subgroup G} : H ≤ K ↔ ∀ ⦃x⦄, x ∈ H → x ∈ K :=
   Iff.rfl
@@ -124,7 +127,8 @@ section AsGroup
 
 variable (H : Subgroup G)
 
-instance : CoeSort (Subgroup G) (Type u) := ⟨fun H => {x : G // x ∈ H}⟩
+instance : CoeSort (Subgroup G) (Type u) :=
+  ⟨fun H => { x : G // x ∈ H }⟩
 
 instance toGroup : Group H where
   mul a b := ⟨a.val * b.val, H.mul_mem a.property b.property⟩
@@ -165,7 +169,6 @@ def subtype : H →* G where
     rintro ⟨yv, _⟩
     rfl
 
-
 theorem subtype_apply {H : Subgroup G} (x : H) : H.subtype x = x :=
   rfl
 
@@ -177,4 +180,5 @@ theorem subtype_injective : Function.Injective H.subtype := by
 end AsGroup
 
 end Subgroup
+
 end My

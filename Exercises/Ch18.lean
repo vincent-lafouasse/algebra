@@ -12,8 +12,7 @@ open My
 Soit X un ensemble possédant au moins deux éléments distincts a et b. Construire deux
 applications f_a et f_b de X dans X telles que f_a ∘ f_b ≠ f_b ∘ f_a. -/
 
-theorem ex_18_1 {X : Type u} {a b : X} (hab : a ≠ b) :
-    ∃ fa fb : X → X, fa ∘ fb ≠ fb ∘ fa := by
+theorem ex_18_1 {X : Type u} {a b : X} (hab : a ≠ b) : ∃ fa fb : X → X, fa ∘ fb ≠ fb ∘ fa := by
   refine ⟨λ _ => a, λ _ => b, ?_⟩
   intro eq
   have falsity := congrFun eq a
@@ -37,8 +36,7 @@ seulement si, H est non vide et : ∀ (x, y) ∈ H², xy⁻¹ ∈ H.
 "H is a subgroup" = some `Subgroup G` has exactly H as its members. -/
 
 theorem ex_18_3 {G : Type u} [Group G] (H : Set G) :
-    (∃ S : Subgroup G, ∀ x, x ∈ S ↔ x ∈ H) ↔
-      (∃ x, x ∈ H) ∧ ∀ x y, x ∈ H → y ∈ H → x * y⁻¹ ∈ H :=
+    (∃ S : Subgroup G, ∀ x, x ∈ S ↔ x ∈ H) ↔ (∃ x, x ∈ H) ∧ ∀ x y, x ∈ H → y ∈ H → x * y⁻¹ ∈ H :=
   sorry
 
 /-! ## 18.4

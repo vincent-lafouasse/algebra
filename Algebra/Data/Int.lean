@@ -30,19 +30,19 @@ theorem induction_on {motive : Int → Prop} (i : Int) (zero : motive 0)
   cases i with
   | ofNat n =>
     induction n with
-      | zero => exact zero
-      | succ n ih => exact succ n ih
+    | zero => exact zero
+    | succ n ih => exact succ n ih
   | negSucc n =>
     induction n with
-      | zero => exact pred 0 zero
-      | succ n ih => exact pred n.succ ih
+    | zero => exact pred 0 zero
+    | succ n ih => exact pred n.succ ih
 
 -- one step up from a negative number (not in Mathlib; `Int.negSucc_sub_one` read backwards)
 theorem negSucc_succ_add_one (n : Nat) : Int.negSucc (n + 1) + 1 = Int.negSucc n := by
-  rw [Int.negSucc_eq]    -- ⊢ -(↑(n + 1) + 1) + 1 = Int.negSucc n
-  rw [Int.negSucc_eq]    -- ⊢ -(↑(n + 1) + 1) + 1 = -(↑n + 1)
-  rw [← Int.ofNat_one]   -- ⊢ -(↑(n + 1) + ↑1) + ↑1 = -(↑n + ↑1)
-  rw [Int.neg_add]       -- ⊢ -↑(n + 1) + -↑1 + ↑1 = -(↑n + ↑1)
+  rw [Int.negSucc_eq] -- ⊢ -(↑(n + 1) + 1) + 1 = Int.negSucc n
+  rw [Int.negSucc_eq] -- ⊢ -(↑(n + 1) + 1) + 1 = -(↑n + 1)
+  rw [← Int.ofNat_one] -- ⊢ -(↑(n + 1) + ↑1) + ↑1 = -(↑n + ↑1)
+  rw [Int.neg_add] -- ⊢ -↑(n + 1) + -↑1 + ↑1 = -(↑n + ↑1)
   rw [Int.neg_add_cancel_right]
   rw [Int.natCast_add]
 

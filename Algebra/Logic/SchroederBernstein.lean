@@ -21,8 +21,8 @@ universe u v
 namespace My
 
 open Classical in
-theorem Function.Embedding.schroeder_bernstein {α : Type u} {β : Type v} {f : α → β}
-    {g : β → α} (hf : _root_.Function.Injective f) (hg : _root_.Function.Injective g) :
+theorem Function.Embedding.schroeder_bernstein {α : Type u} {β : Type v} {f : α → β} {g : β → α}
+    (hf : _root_.Function.Injective f) (hg : _root_.Function.Injective g) :
     ∃ h : α → β, Function.Bijective h :=
   sorry
 

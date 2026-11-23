@@ -69,7 +69,8 @@ theorem fib_le_pow (n : Nat) : fib n ≤ 2 ^ n :=
 
 /-! ## Definitions with an `∃` -/
 
-def Even (n : Nat) : Prop := ∃ k, n = 2 * k
+def Even (n : Nat) : Prop :=
+  ∃ k, n = 2 * k
 
 -- unfold by `obtain ⟨k, hk⟩ := ha`; prove with `exact ⟨witness, by omega⟩`
 theorem even_add {a b : Nat} (ha : Even a) (hb : Even b) : Even (a + b) :=

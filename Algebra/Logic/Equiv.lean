@@ -25,7 +25,8 @@ variable {α : Sort u} {β : Sort v} {γ : Sort w}
 
 attribute [coe] Equiv.toFun
 
-instance : CoeFun (α ≃ β) (fun _ => α → β) := ⟨Equiv.toFun⟩
+instance : CoeFun (α ≃ β) (fun _ => α → β) :=
+  ⟨Equiv.toFun⟩
 
 -- two equivalences with the same forward function are equal (the inverse is determined)
 theorem ext {e e' : α ≃ β} (h : ∀ x, e x = e' x) : e = e' := by
@@ -37,17 +38,20 @@ theorem ext {e e' : α ≃ β} (h : ∀ x, e x = e' x) : e = e' := by
   subst hfe
   have hge : g = g' := by
     funext y
-    calc g y
-     _ = g (f (g' y)) := by rw [hr']
-     _ = g' y := by rw [hl]
+    calc
+      g y
+      _ = g (f (g' y)) := by rw [hr']
+      _ = g' y := by rw [hl]
   subst hge
   rfl
 
 protected def refl (α : Sort u) : α ≃ α where
   toFun := id
   invFun := id
-  left_inv := by intro x; rfl
-  right_inv := by intro x; rfl
+  left_inv := by
+    intro x; rfl
+  right_inv := by
+    intro x; rfl
 
 protected def symm (e : α ≃ β) : β ≃ α where
   toFun := e.invFun
@@ -79,14 +83,16 @@ theorem trans_apply (e : α ≃ β) (e' : β ≃ γ) (x : α) : e.trans e' x = e
   rfl
 
 theorem symm_apply_apply (e : α ≃ β) (x : α) : e.symm (e x) = x :=
-  calc e.symm (e x)
-   _ = e.invFun (e x) := rfl
-   _ = x := by rw [e.left_inv]
+  calc
+    e.symm (e x)
+    _ = e.invFun (e x) := rfl
+    _ = x := by rw [e.left_inv]
 
 theorem apply_symm_apply (e : α ≃ β) (y : β) : e (e.symm y) = y :=
-  calc e (e.symm y)
-   _ = e.toFun (e.invFun y) := rfl
-   _ = y := by rw [e.right_inv]
+  calc
+    e (e.symm y)
+    _ = e.toFun (e.invFun y) := rfl
+    _ = y := by rw [e.right_inv]
 
 theorem symm_symm (e : α ≃ β) : e.symm.symm = e :=
   rfl
@@ -100,16 +106,18 @@ theorem refl_trans (e : α ≃ β) : (Equiv.refl α).trans e = e :=
 theorem self_trans_symm (e : α ≃ β) : e.trans e.symm = Equiv.refl α := by
   apply ext
   intro x
-  calc (e.trans e.symm) x
-   _ = e.invFun (e.toFun x) := rfl
-   _ = x := by rw [e.left_inv]
+  calc
+    (e.trans e.symm) x
+    _ = e.invFun (e.toFun x) := rfl
+    _ = x := by rw [e.left_inv]
 
 theorem symm_trans_self (e : α ≃ β) : e.symm.trans e = Equiv.refl β := by
   apply ext
   intro y
-  calc (e.symm.trans e) y
-   _ = e.toFun (e.invFun y) := rfl
-   _ = y := by rw [e.right_inv]
+  calc
+    (e.symm.trans e) y
+    _ = e.toFun (e.invFun y) := rfl
+    _ = y := by rw [e.right_inv]
 
 theorem trans_assoc {δ : Sort x} (ab : α ≃ β) (bc : β ≃ γ) (cd : γ ≃ δ) :
     (ab.trans bc).trans cd = ab.trans (bc.trans cd) :=
@@ -136,4 +144,5 @@ theorem ofBijective_apply (f : α → β) (hf : Function.Bijective f) (x : α) :
   rfl
 
 end Equiv
+
 end My

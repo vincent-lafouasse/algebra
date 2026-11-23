@@ -11,6 +11,7 @@ The centralizer of one element `g` is `centralizer {g}`. -/
 universe u
 
 namespace My
+
 namespace Subgroup
 
 variable {G : Type u} [Group G]
@@ -34,4 +35,5 @@ theorem centralizer_univ : centralizer (Set.univ : Set G) = center G :=
   sorry
 
 end Subgroup
+
 end My

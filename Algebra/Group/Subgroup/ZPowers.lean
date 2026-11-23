@@ -10,6 +10,7 @@ Mathlib: `Mathlib/Algebra/Group/Subgroup/ZPowers/Basic.lean` (and `pow_mem`/`zpo
 universe u
 
 namespace My
+
 namespace Subgroup
 
 variable {G : Type u} [Group G]
@@ -44,4 +45,5 @@ theorem zpowers_one_eq_bot : zpowers (1 : G) = ⊥ :=
   sorry
 
 end Subgroup
+
 end My

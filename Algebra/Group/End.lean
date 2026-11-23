@@ -14,13 +14,15 @@ universe u
 
 namespace My
 
-def MulAut (G : Type u) [Group G] : Type u := G ≃* G
+def MulAut (G : Type u) [Group G] : Type u :=
+  G ≃* G
 
 namespace MulAut
 
 variable {G : Type u} [Group G]
 
-instance : CoeFun (MulAut G) (fun _ => G → G) := ⟨fun e => (MulEquiv.toEquiv e).toFun⟩
+instance : CoeFun (MulAut G) (fun _ => G → G) :=
+  ⟨fun e => (MulEquiv.toEquiv e).toFun⟩
 
 instance : Group (MulAut G) where
   mul e₁ e₂ := MulEquiv.trans e₂ e₁
@@ -66,25 +68,25 @@ theorem inv_apply (e : MulAut G) (x : G) : e⁻¹ x = MulEquiv.symm e x :=
 `conj g` is the inner automorphism `x ↦ g * x * g⁻¹`, and `conj` itself is a hom. -/
 
 def conj : G →* MulAut G where
-  toFun g := {
-    toFun := fun x => g * x * g⁻¹
-    invFun := fun x => g⁻¹ * x * g
-    left_inv := by
-      intro x
-      show g⁻¹ * (g * x * g⁻¹) * g = x
-      rw [mul_assoc, inv_mul_cancel_right, inv_mul_cancel_left]
-    right_inv := by
-      intro x
-      show g * (g⁻¹ * x * g) * g⁻¹ = x
-      rw [mul_assoc, mul_inv_cancel_right, mul_inv_cancel_left]
-    map_mul' := by
-      intro x y
-      apply Eq.symm
-      calc g * x * g⁻¹ * (g * y * g⁻¹)
-       _ = g * x * (g⁻¹ * g) * y * g⁻¹ := by simp only [mul_assoc]
-       _ = g * x * y * g⁻¹ := by rw [inv_mul_cancel, mul_one]
-       _ = g * (x * y) * g⁻¹ := by simp only [mul_assoc]
-  }
+  toFun g :=
+    { toFun := fun x => g * x * g⁻¹
+      invFun := fun x => g⁻¹ * x * g
+      left_inv := by
+        intro x
+        show g⁻¹ * (g * x * g⁻¹) * g = x
+        rw [mul_assoc, inv_mul_cancel_right, inv_mul_cancel_left]
+      right_inv := by
+        intro x
+        show g * (g⁻¹ * x * g) * g⁻¹ = x
+        rw [mul_assoc, mul_inv_cancel_right, mul_inv_cancel_left]
+      map_mul' := by
+        intro x y
+        apply Eq.symm
+        calc
+          g * x * g⁻¹ * (g * y * g⁻¹)
+          _ = g * x * (g⁻¹ * g) * y * g⁻¹ := by simp only [mul_assoc]
+          _ = g * x * y * g⁻¹ := by rw [inv_mul_cancel, mul_one]
+          _ = g * (x * y) * g⁻¹ := by simp only [mul_assoc] }
   map_one' := by
     apply MulEquiv.ext
     intro x
@@ -95,9 +97,10 @@ def conj : G →* MulAut G where
     apply MulEquiv.ext
     intro a
     show x * y * a * (x * y)⁻¹ = x * (y * a * y⁻¹) * x⁻¹
-    calc x * y * a * (x * y)⁻¹
-     _ = x * y * a * (y⁻¹ * x⁻¹) := by rw [mul_inv_rev]
-     _ = x * (y * a * y⁻¹) * x⁻¹ := by simp only [mul_assoc]
+    calc
+      x * y * a * (x * y)⁻¹
+      _ = x * y * a * (y⁻¹ * x⁻¹) := by rw [mul_inv_rev]
+      _ = x * (y * a * y⁻¹) * x⁻¹ := by simp only [mul_assoc]
 
 theorem conj_apply (g x : G) : conj g x = g * x * g⁻¹ :=
   rfl
@@ -109,4 +112,5 @@ theorem conj_inv_apply (g x : G) : (conj g)⁻¹ x = g⁻¹ * x * g :=
   rfl
 
 end MulAut
+
 end My

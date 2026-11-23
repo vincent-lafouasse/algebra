@@ -31,13 +31,13 @@ variable {G : Type u} {H : Type v} {K : Type w} [Group G] [Group H] [Group K]
 -- `↑e.toEquiv x`; display only, the term is unchanged. Mathlib shows `⇑e x`, via `EquivLike`.
 attribute [coe] MulEquiv.toEquiv
 
-instance : CoeFun (G ≃* H) (fun _ => G → H) := ⟨fun e => e.toEquiv⟩
+instance : CoeFun (G ≃* H) (fun _ => G → H) :=
+  ⟨fun e => e.toEquiv⟩
 
 theorem ext {e e' : G ≃* H} (h : ∀ x, e x = e' x) : e = e' := by
   obtain ⟨inner_equiv, _hf_mul⟩ := e
   obtain ⟨inner_equiv', _hf_mul'⟩ := e'
-  have he : inner_equiv = inner_equiv' :=
-    Equiv.ext h
+  have he : inner_equiv = inner_equiv' := Equiv.ext h
   subst he
   rfl
 
@@ -70,7 +70,7 @@ theorem coe_toMonoidHom (e : G ≃* H) : (e.toMonoidHom : G → H) = e :=
 theorem toMonoidHom_injective : Function.Injective (toMonoidHom : (G ≃* H) → (G →* H)) := by
   rintro ⟨e₁, _⟩ ⟨e₂, _⟩ heq
   have h : e₁.toFun = e₂.toFun := by
-    unfold toMonoidHom  at heq
+    unfold toMonoidHom at heq
     injection heq
   apply MulEquiv.ext
   intro x
@@ -93,20 +93,23 @@ protected def symm (e : G ≃* H) : H ≃* G where
     have hr : ∀ b : H, f (fi b) = b := e.right_inv
     have hl : ∀ a : G, fi (f a) = a := e.left_inv
     have hm : ∀ (x y : G), f (x * y) = f x * f y := e.map_mul
-    calc fi (x * y)
-     _ = fi (f (fi x) * f (fi y)) := by rw [hr, hr]
-     _ = fi (f (fi x * fi y)) := by rw [← hm]
-     _ = fi x * fi y := by rw [hl]
+    calc
+      fi (x * y)
+      _ = fi (f (fi x) * f (fi y)) := by rw [hr, hr]
+      _ = fi (f (fi x * fi y)) := by rw [← hm]
+      _ = fi x * fi y := by rw [hl]
 
 protected def trans (e : G ≃* H) (e' : H ≃* K) : G ≃* K where
   toEquiv := Equiv.trans e.toEquiv e'.toEquiv
   map_mul' := by
     intro (x : G) (y : G)
-    calc (Equiv.trans e.toEquiv e'.toEquiv).toFun (x * y)
-     _ = e'.toFun (e.toFun (x * y)) := rfl
-     _ = e'.toFun (e.toFun x * e.toFun y) := by rw [e.map_mul]
-     _ = e'.toFun (e.toFun x) * e'.toFun (e.toFun y) := by rw [e'.map_mul]
-     _ = (Equiv.trans e.toEquiv e'.toEquiv).toFun x * (Equiv.trans e.toEquiv e'.toEquiv).toFun y := rfl
+    calc
+      (Equiv.trans e.toEquiv e'.toEquiv).toFun (x * y)
+      _ = e'.toFun (e.toFun (x * y)) := rfl
+      _ = e'.toFun (e.toFun x * e.toFun y) := by rw [e.map_mul]
+      _ = e'.toFun (e.toFun x) * e'.toFun (e.toFun y) := by rw [e'.map_mul]
+      _ = (Equiv.trans e.toEquiv e'.toEquiv).toFun x * (Equiv.trans e.toEquiv e'.toEquiv).toFun y :=
+        rfl
 
 theorem refl_apply (x : G) : MulEquiv.refl G x = x :=
   rfl
@@ -115,15 +118,17 @@ theorem trans_apply (e : G ≃* H) (e' : H ≃* K) (x : G) : e.trans e' x = e' (
   rfl
 
 theorem symm_apply_apply (e : G ≃* H) (x : G) : e.symm (e x) = x :=
-  calc e.symm (e x)
-   _ = (MulEquiv.symm e).toFun (e.toFun x) := rfl
-   _ = e.invFun (e.toFun x) := rfl
-   _ = x := by rw [e.left_inv]
+  calc
+    e.symm (e x)
+    _ = (MulEquiv.symm e).toFun (e.toFun x) := rfl
+    _ = e.invFun (e.toFun x) := rfl
+    _ = x := by rw [e.left_inv]
 
 theorem apply_symm_apply (e : G ≃* H) (y : H) : e (e.symm y) = y :=
-  calc e (e.symm y)
-   _ = e.toFun (e.invFun y) := rfl
-   _ = y := by rw [e.right_inv]
+  calc
+    e (e.symm y)
+    _ = e.toFun (e.invFun y) := rfl
+    _ = y := by rw [e.right_inv]
 
 theorem symm_symm (e : G ≃* H) : e.symm.symm = e :=
   rfl
@@ -131,37 +136,41 @@ theorem symm_symm (e : G ≃* H) : e.symm.symm = e :=
 theorem self_trans_symm (e : G ≃* H) : e.trans e.symm = MulEquiv.refl G := by
   apply ext
   intro (x : G)
-  calc (e.trans e.symm) x
-   _ = (MulEquiv.trans e e.symm) x := rfl
-   _ = e.invFun (e.toFun x) := rfl
-   _ = x := by rw [e.left_inv]
-   _ = (MulEquiv.refl G) x := rfl
+  calc
+    (e.trans e.symm) x
+    _ = (MulEquiv.trans e e.symm) x := rfl
+    _ = e.invFun (e.toFun x) := rfl
+    _ = x := by rw [e.left_inv]
+    _ = (MulEquiv.refl G) x := rfl
 
 theorem symm_trans_self (e : G ≃* H) : e.symm.trans e = MulEquiv.refl H := by
   apply ext
   intro (y : H)
-  calc e.symm.trans e y
-   _ = (MulEquiv.trans e.symm e) y := rfl
-   _ = e.toFun (e.invFun y) := rfl
-   _ = y := by rw [e.right_inv]
-   _ = (MulEquiv.refl H) y := rfl
+  calc
+    e.symm.trans e y
+    _ = (MulEquiv.trans e.symm e) y := rfl
+    _ = e.toFun (e.invFun y) := rfl
+    _ = y := by rw [e.right_inv]
+    _ = (MulEquiv.refl H) y := rfl
 
 theorem toMonoidHom_refl : (MulEquiv.refl G).toMonoidHom = MonoidHom.id G := by
   let auto := MulEquiv.refl G
   apply MonoidHom.ext
   intro (x : G)
-  calc auto.toMonoidHom x
-   _ = auto.toFun x := rfl
-   _ = id x := rfl
-   _ = (MonoidHom.id G) x := rfl
+  calc
+    auto.toMonoidHom x
+    _ = auto.toFun x := rfl
+    _ = id x := rfl
+    _ = (MonoidHom.id G) x := rfl
 
 theorem toMonoidHom_trans (e : G ≃* H) (e' : H ≃* K) :
     (e.trans e').toMonoidHom = e'.toMonoidHom ∘* e.toMonoidHom := by
   apply MonoidHom.ext
   intro (x : G)
-  calc (e.trans e').toMonoidHom x
-   _ = e'.toFun (e.toFun x) := rfl
-   _ = (e'.toMonoidHom ∘* e.toMonoidHom) x := rfl
+  calc
+    (e.trans e').toMonoidHom x
+    _ = e'.toFun (e.toFun x) := rfl
+    _ = (e'.toMonoidHom ∘* e.toMonoidHom) x := rfl
 
 protected theorem injective (e : G ≃* H) : Function.Injective e :=
   Function.LeftInverse.injective e.left_inv
@@ -181,14 +190,16 @@ noncomputable def ofBijective (f : G →* H) (hf : Function.Bijective f) : G ≃
   map_mul' := by
     intro x y
     let bij := Equiv.ofBijective f.toFun hf
-    calc bij.toFun (x * y)
-     _ = f (x * y) := rfl
-     _ = f x * f y := by rw [f.map_mul]
-     _ = bij.toFun x * bij.toFun y := rfl
+    calc
+      bij.toFun (x * y)
+      _ = f (x * y) := rfl
+      _ = f x * f y := by rw [f.map_mul]
+      _ = bij.toFun x * bij.toFun y := rfl
 
 theorem ofBijective_apply (f : G →* H) (hf : Function.Bijective f) (x : G) :
     ofBijective f hf x = f x :=
   rfl
 
 end MulEquiv
+
 end My

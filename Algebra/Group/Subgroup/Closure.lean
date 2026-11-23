@@ -19,6 +19,7 @@ relative to it? -/
 universe u
 
 namespace My
+
 namespace Subgroup
 
 variable {G : Type u} [Group G]
@@ -53,8 +54,8 @@ theorem closure_eq (K : Subgroup G) : closure (K : Set G) = K :=
 -- To prove `p x` for every `x ∈ closure s`: check it on `s`, at `1`, and under `*` and `⁻¹`.
 -- (Mathlib's `p` also takes the proof `x ∈ closure s`; this is the simpler version.)
 theorem closure_induction {s : Set G} {p : G → Prop} (mem : ∀ x ∈ s, p x) (one : p 1)
-    (mul : ∀ x y, p x → p y → p (x * y)) (inv : ∀ x, p x → p x⁻¹) {x : G}
-    (hx : x ∈ closure s) : p x :=
+    (mul : ∀ x y, p x → p y → p (x * y)) (inv : ∀ x, p x → p x⁻¹) {x : G} (hx : x ∈ closure s) :
+    p x :=
   sorry
 
 /-! ### Small sets -/
@@ -70,4 +71,5 @@ theorem zpowers_eq_closure (g : G) : zpowers g = closure {g} :=
   sorry
 
 end Subgroup
+
 end My

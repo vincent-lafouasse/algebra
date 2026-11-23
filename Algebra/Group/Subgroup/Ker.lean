@@ -7,6 +7,7 @@ Mathlib: `Mathlib/Algebra/Group/Subgroup/Ker.lean`. -/
 universe u v
 
 namespace My
+
 namespace MonoidHom
 
 variable {G : Type u} {H : Type v} [Group G] [Group H]
@@ -59,4 +60,5 @@ theorem ker_rangeRestrict (f : G →* H) : f.rangeRestrict.ker = f.ker :=
   sorry
 
 end MonoidHom
+
 end My

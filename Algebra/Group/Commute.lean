@@ -13,7 +13,8 @@ universe u
 namespace My
 
 @[irreducible]
-def Commute {S : Type u} [Mul S] (a b : S) : Prop := a * b = b * a
+def Commute {S : Type u} [Mul S] (a b : S) : Prop :=
+  a * b = b * a
 
 theorem commute_iff_eq {S : Type u} [Mul S] (a b : S) : Commute a b ↔ a * b = b * a := by
   unfold Commute
@@ -88,14 +89,14 @@ theorem inv_inv (h : Commute a b) : Commute a⁻¹ b⁻¹ :=
   h |> inv_left |> inv_right
 
 -- oriented like Mathlib's: the inverses are on the left, so `rw` removes them
-theorem inv_inv_iff : Commute a⁻¹ b⁻¹ ↔ Commute a b := by
-  rw [inv_left_iff, inv_right_iff]
+theorem inv_inv_iff : Commute a⁻¹ b⁻¹ ↔ Commute a b := by rw [inv_left_iff, inv_right_iff]
 
 -- conjugating b by an element it commutes with does nothing
 protected theorem inv_mul_cancel (h : Commute a b) : a⁻¹ * b * a = b :=
-  calc a⁻¹ * b * a
-   _ = b * a⁻¹ * a := by rw [Commute.eq (inv_left h)]
-   _ = b := by rw [inv_mul_cancel_right]
+  calc
+    a⁻¹ * b * a
+    _ = b * a⁻¹ * a := by rw [Commute.eq (inv_left h)]
+    _ = b := by rw [inv_mul_cancel_right]
 
 protected theorem mul_inv_cancel (h : Commute a b) : a * b * a⁻¹ = b := by
   rw [mul_inv_eq_iff_eq_mul]

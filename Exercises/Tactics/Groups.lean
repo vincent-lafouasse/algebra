@@ -8,7 +8,6 @@ import Algebra
 namespace Exercises.Groups
 
 open My
-
 variable {G : Type} [Group G]
 
 -- `simp only [mul_assoc]` rewrites everywhere, as often as it can: brackets go to the right
@@ -63,13 +62,13 @@ theorem inf_bot (S : Subgroup G) : S ⊓ ⊥ = ⊥ :=
 variable {H K : Type} [Group H] [Group K]
 
 -- the image of a commutative group is commutative: `obtain ⟨a, rfl⟩ := hx`, then `← map_mul`
-theorem range_comm (f : G →* H) (hG : ∀ a b : G, a * b = b * a) {x y : H}
-    (hx : x ∈ f.range) (hy : y ∈ f.range) : x * y = y * x :=
+theorem range_comm (f : G →* H) (hG : ∀ a b : G, a * b = b * a) {x y : H} (hx : x ∈ f.range)
+    (hy : y ∈ f.range) : x * y = y * x :=
   sorry
 
 -- `(g.comp f) a` *is* `g (f a)` by definition, so `apply hg` works on it directly
-theorem comp_injective {f : G →* H} {g : H →* K}
-    (hf : Function.Injective f) (hg : Function.Injective g) : Function.Injective (g.comp f) :=
+theorem comp_injective {f : G →* H} {g : H →* K} (hf : Function.Injective f)
+    (hg : Function.Injective g) : Function.Injective (g.comp f) :=
   sorry
 
 -- a hom is trivial iff its kernel is everything

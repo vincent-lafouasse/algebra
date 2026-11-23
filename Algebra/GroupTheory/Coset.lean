@@ -18,7 +18,8 @@ namespace My
 
 /-! ### `a • s` -/
 
-instance Set.smulSet {α : Type u} [Mul α] : SMul α (Set α) := ⟨fun a s => {x | ∃ y, y ∈ s ∧ a * y = x}⟩
+instance Set.smulSet {α : Type u} [Mul α] : SMul α (Set α) :=
+  ⟨fun a s => {x | ∃ y, y ∈ s ∧ a * y = x}⟩
 
 theorem Set.mem_smul_set {α : Type u} [Mul α] {a : α} {s : Set α} {x : α} :
     x ∈ a • s ↔ ∃ y ∈ s, a * y = x :=
@@ -55,4 +56,5 @@ theorem rightRel_apply {s : Subgroup α} {x y : α} : (rightRel s).r x y ↔ y *
   sorry
 
 end QuotientGroup
+
 end My

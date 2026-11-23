@@ -12,56 +12,59 @@ for free; here they are proved by hand. -/
 universe u
 
 namespace My
+
 namespace Subgroup
 
 variable {G : Type u} [Group G]
 
-instance : Bot (Subgroup G) := ⟨{
-  carrier := {x | x = 1}
-  mul_mem' := by
-    intro a b (ha : a = 1) (hb : b = 1)
-    show a * b = 1
-    rw [ha, hb]
-    exact mul_one 1
-  one_mem' := rfl
-  inv_mem' := by
-    intro x (hx : x = 1)
-    rw [← inv_eq_one] at hx
-    exact hx
-  }⟩
+instance : Bot (Subgroup G) :=
+  ⟨{
+      carrier := {x | x = 1}
+      mul_mem' := by
+        intro a b (ha : a = 1) (hb : b = 1)
+        show a * b = 1
+        rw [ha, hb]
+        exact mul_one 1
+      one_mem' := rfl
+      inv_mem' := by
+        intro x (hx : x = 1)
+        rw [← inv_eq_one] at hx
+        exact hx
+      }⟩
 
-instance : Top (Subgroup G) := ⟨{
-  carrier := Set.univ
-  mul_mem' := by
-    intro _ _ _ _
-    trivial
-  one_mem' := trivial
-  inv_mem' := by
-    intro _ _
-    trivial
-  }⟩
+instance : Top (Subgroup G) :=
+  ⟨{
+      carrier := Set.univ
+      mul_mem' := by
+        intro _ _ _ _
+        trivial
+      one_mem' := trivial
+      inv_mem' := by
+        intro _ _
+        trivial
+      }⟩
 
-instance : Min (Subgroup G) := ⟨fun H K => {
-  carrier := {x | x ∈ H ∧ x ∈ K}
-  mul_mem' := by
-    rintro a b
-    rintro ⟨hah, hak⟩ ⟨hbh, hbk⟩
-    show (a * b) ∈ H ∧ (a * b) ∈ K
-    exact ⟨H.mul_mem hah hbh, K.mul_mem hak hbk⟩
-  one_mem' := ⟨H.one_mem, K.one_mem⟩
-  inv_mem' := by
-    rintro _ ⟨hh, hk⟩
-    exact ⟨H.inv_mem hh, K.inv_mem hk⟩
-  }⟩
+instance : Min (Subgroup G) :=
+  ⟨fun H K =>
+    {
+      carrier := {x | x ∈ H ∧ x ∈ K}
+      mul_mem' := by
+        rintro a b
+        rintro ⟨hah, hak⟩ ⟨hbh, hbk⟩
+        show (a * b) ∈ H ∧ (a * b) ∈ K
+        exact ⟨H.mul_mem hah hbh, K.mul_mem hak hbk⟩
+      one_mem' := ⟨H.one_mem, K.one_mem⟩
+      inv_mem' := by
+        rintro _ ⟨hh, hk⟩
+        exact ⟨H.inv_mem hh, K.inv_mem hk⟩
+      }⟩
 
-theorem mem_bot {x : G} : x ∈ (⊥ : Subgroup G) ↔ x = 1 := by
-  rfl
+theorem mem_bot {x : G} : x ∈ (⊥ : Subgroup G) ↔ x = 1 := by rfl
 
 theorem mem_top (x : G) : x ∈ (⊤ : Subgroup G) :=
   trivial
 
-theorem mem_inf {p p' : Subgroup G} {x : G} : x ∈ p ⊓ p' ↔ x ∈ p ∧ x ∈ p' := by
-  rfl
+theorem mem_inf {p p' : Subgroup G} {x : G} : x ∈ p ⊓ p' ↔ x ∈ p ∧ x ∈ p' := by rfl
 
 theorem eq_bot_iff_forall (H : Subgroup G) : H = ⊥ ↔ ∀ x, x ∈ H → x = 1 := by
   constructor
@@ -105,4 +108,5 @@ protected theorem le_inf {H K L : Subgroup G} (hK : L ≤ H) (hL : L ≤ K) : L 
   sorry
 
 end Subgroup
+
 end My

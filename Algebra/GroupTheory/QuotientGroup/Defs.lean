@@ -37,10 +37,12 @@ variable {α : Type u} [Group α]
 instance instHasQuotientSubgroup : HasQuotient α (Subgroup α) :=
   ⟨fun s => Quotient (leftRel s)⟩
 
-@[coe] def mk {s : Subgroup α} (a : α) : α ⧸ s :=
+@[coe]
+def mk {s : Subgroup α} (a : α) : α ⧸ s :=
   Quotient.mk (leftRel s) a
 
-instance {s : Subgroup α} : CoeTC α (α ⧸ s) := ⟨mk⟩
+instance {s : Subgroup α} : CoeTC α (α ⧸ s) :=
+  ⟨mk⟩
 
 variable {s : Subgroup α}
 
@@ -102,4 +104,5 @@ theorem ker_mk' : (mk' N).ker = N :=
   sorry
 
 end QuotientGroup
+
 end My
