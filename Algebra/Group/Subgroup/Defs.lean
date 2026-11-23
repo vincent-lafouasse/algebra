@@ -79,7 +79,7 @@ theorem mul_mem_cancel_left (h : x ∈ H) : x * y ∈ H ↔ y ∈ H := by
   refine ⟨?_, H.mul_mem h⟩
   intro h'
   replace h := H.inv_mem h
-  replace h' := H.mul_mem h h' 
+  replace h' := H.mul_mem h h'
   rw [inv_mul_cancel_left] at h'
   exact h'
 
