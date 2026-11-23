@@ -37,8 +37,8 @@ theorem mem_setOf_eq {a : α} {p : α → Prop} : (a ∈ {x | p x}) = p a :=
 
 theorem ext {s t : Set α} (h : ∀ x, x ∈ s ↔ x ∈ t) : s = t := by
   funext x
-  have hx : s x ↔ t x := h x
-  rw [hx]
+  apply propext
+  exact h x
 
 instance : HasSubset (Set α) := ⟨fun s t => ∀ ⦃a⦄, a ∈ s → a ∈ t⟩
 
