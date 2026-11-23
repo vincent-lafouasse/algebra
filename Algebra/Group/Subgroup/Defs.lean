@@ -113,7 +113,7 @@ protected theorem le_trans {H K L : Subgroup G} (hHK : H ≤ K) (hKL : K ≤ L) 
 
 protected theorem le_antisymm {H K : Subgroup G} (hHK : H ≤ K) (hKH : K ≤ H) : H = K := by
   apply ext
-  intro h
+  intro _
   constructor
   · intro hh; exact hHK hh
   · intro hk; exact hKH hk
