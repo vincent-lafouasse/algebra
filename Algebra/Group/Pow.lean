@@ -1,8 +1,6 @@
 import Algebra.Group.Commute
 import Algebra.Data.Int
 
-set_option pp.numericTypes true
-
 /-! # Powers
 
 Mathlib: `Mathlib/Algebra/Group/Defs.lean` (`npowRec`, `zpowRec`, `pow_succ`, …),
