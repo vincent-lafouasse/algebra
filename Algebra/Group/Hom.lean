@@ -83,9 +83,8 @@ protected theorem map_zpow (f : G →* H) (a : G) (k : Int) : f (a ^ k) = f a ^ 
 def mk' (f : G → H) (map_mul : ∀ a b : G, f (a * b) = f a * f b) : G →* H where
   toFun := f
   map_one' := by
-    rw [← mul_left_inj (f 1)]
-    rw [← map_mul]
-    rw [one_mul, one_mul]
+    rw [← idem_el_iff_eq_one]
+    rw [← map_mul, mul_one]
   map_mul' := map_mul
 
 theorem mk'_apply (f : G → H) (map_mul : ∀ a b : G, f (a * b) = f a * f b) (x : G) :
