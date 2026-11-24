@@ -295,10 +295,8 @@ theorem zpow_mul (g : G) (k l : Int) : g ^ (k * l) = (g ^ k) ^ l := by
   | pred n ih =>
     rw [Int.mul_sub]
     rw [Int.mul_one]
+    rw [zpow_sub]
     rw [zpow_sub_one]
-    rw [Int.sub_eq_add_neg]
-    rw [zpow_add]
     rw [ih]
-    rw [← zpow_neg]
 
 end My
