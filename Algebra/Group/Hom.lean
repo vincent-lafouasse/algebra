@@ -33,8 +33,7 @@ instance : CoeFun (G →* H) (fun _ => G → H) :=
 theorem ext {f g : G →* H} (h : ∀ x, f x = g x) : f = g := by
   obtain ⟨f, hf, hfmul⟩ := f
   obtain ⟨g, hg, hgmul⟩ := g
-  have hfg : f = g := by
-    funext x; exact h x
+  have hfg : f = g := funext h
   subst hfg
   rfl
 
