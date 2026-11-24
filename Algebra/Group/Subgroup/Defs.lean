@@ -47,9 +47,7 @@ theorem mem_coe {H : Subgroup G} {x : G} : x ∈ (H : Set G) ↔ x ∈ H :=
 theorem ext {H K : Subgroup G} (h : ∀ x, x ∈ H ↔ x ∈ K) : H = K := by
   obtain ⟨ch, hmh, h1h, hih⟩ := H
   obtain ⟨ck, hmk, h1k, hik⟩ := K
-  have c_eq : ch = ck := by
-    funext x
-    exact propext (h x)
+  have c_eq : ch = ck := Set.ext h
   subst c_eq
   rfl
 
