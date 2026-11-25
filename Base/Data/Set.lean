@@ -48,8 +48,12 @@ theorem ext {s t : Set α} (h : ∀ x, x ∈ s ↔ x ∈ t) : s = t := by
   apply propext
   exact h x
 
+-- named, as in Mathlib, so that `⊆` has a definition of its own (`Subset.refl` etc. are about it)
+protected def Subset (s₁ s₂ : Set α) : Prop :=
+  ∀ ⦃a⦄, a ∈ s₁ → a ∈ s₂
+
 instance : HasSubset (Set α) :=
-  ⟨fun s t => ∀ ⦃a⦄, a ∈ s → a ∈ t⟩
+  ⟨Set.Subset⟩
 
 theorem subset_def {s t : Set α} : (s ⊆ t) = ∀ x, x ∈ s → x ∈ t :=
   rfl
