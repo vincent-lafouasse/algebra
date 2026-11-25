@@ -104,8 +104,10 @@ protected theorem Subset.trans {s t u : Set α} (hst : s ⊆ t) (htu : t ⊆ u) 
   λ _ h => h |> hst |> htu
 
 -- the way to prove two sets equal by double inclusion
-protected theorem Subset.antisymm {s t : Set α} (hst : s ⊆ t) (hts : t ⊆ s) : s = t :=
-  sorry
+protected theorem Subset.antisymm {s t : Set α} (hst : s ⊆ t) (hts : t ⊆ s) : s = t := by
+  apply ext
+  intro x
+  exact Iff.intro (λ h => hst h) (λ h => hts h)
 
 theorem subset_univ (s : Set α) : s ⊆ univ :=
   sorry
