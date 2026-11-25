@@ -83,8 +83,9 @@ theorem image_preimage_subset (f : α → β) (t : Set β) : f '' (f ⁻¹' t) �
   subst hfx
   exact hxs
 
-theorem subset_preimage_image (f : α → β) (s : Set α) : s ⊆ f ⁻¹' (f '' s) :=
-  sorry
+theorem subset_preimage_image (f : α → β) (s : Set α) : s ⊆ f ⁻¹' (f '' s) := by
+  intro x hx
+  exact ⟨x, ⟨hx, rfl⟩⟩
 
 -- the two inclusions above become equalities under the right hypothesis on `f`.
 -- Find a counterexample to each without it.
