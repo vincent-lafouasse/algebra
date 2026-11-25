@@ -70,8 +70,13 @@ theorem preimage_mono {f : α → β} {s t : Set β} (h : s ⊆ t) : f ⁻¹' s 
   exact h hfs
 
 -- the image is the smallest set whose preimage contains `s`
-theorem image_subset_iff {f : α → β} {s : Set α} {t : Set β} : f '' s ⊆ t ↔ s ⊆ f ⁻¹' t :=
-  sorry
+theorem image_subset_iff {f : α → β} {s : Set α} {t : Set β} : f '' s ⊆ t ↔ s ⊆ f ⁻¹' t := by
+  apply Iff.intro
+  · intro h _ h'
+    exact h (mem_image_of_mem f h')
+  · intro h y ⟨x, ⟨hxs, hfx⟩⟩
+    subst hfx
+    exact h hxs
 
 theorem image_preimage_subset (f : α → β) (t : Set β) : f '' (f ⁻¹' t) ⊆ t :=
   sorry
