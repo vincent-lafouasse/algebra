@@ -22,6 +22,12 @@ variable {α : Sort u} {β : Sort v} {γ : Sort w}
 def Bijective (f : α → β) : Prop :=
   Function.Injective f ∧ Function.Surjective f
 
+theorem Bijective.injective {f : α → β} (hf : Bijective f) : Function.Injective f :=
+  And.left hf
+
+theorem Bijective.surjective {f : α → β} (hf : Bijective f) : Function.Surjective f :=
+  And.right hf
+
 -- (not in Mathlib: there, `Bijective` unfolds by `Iff.rfl`)
 theorem bijective_iff (f : α → β) : Bijective f ↔ Function.Injective f ∧ Function.Surjective f :=
   Iff.rfl
