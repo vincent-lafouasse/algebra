@@ -98,7 +98,7 @@ There is no dot notation on `h : s ⊆ t` (its head is `HasSubset.Subset`, not `
 `Subset.trans h h'`. -/
 
 protected theorem Subset.refl (s : Set α) : s ⊆ s :=
-  sorry
+  λ _ => (λ h => h)
 
 protected theorem Subset.trans {s t u : Set α} (hst : s ⊆ t) (htu : t ⊆ u) : s ⊆ u :=
   sorry
