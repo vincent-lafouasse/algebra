@@ -43,10 +43,8 @@ macro_rules
 theorem mem_setOf_eq {a : α} {p : α → Prop} : (a ∈ {x | p x}) = p a :=
   rfl
 
-theorem ext {s t : Set α} (h : ∀ x, x ∈ s ↔ x ∈ t) : s = t := by
-  funext x
-  apply propext
-  exact h x
+theorem ext {s t : Set α} (h : ∀ x, x ∈ s ↔ x ∈ t) : s = t :=
+  funext λ x => propext (h x)
 
 -- named, as in Mathlib, so that `⊆` has a definition of its own (`Subset.refl` etc. are about it)
 protected def Subset (s₁ s₂ : Set α) : Prop :=
