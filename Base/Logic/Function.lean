@@ -105,7 +105,7 @@ theorem rightInverse_surjInv {f : α → β} (hf : Function.Surjective f) :
     Function.RightInverse (surjInv hf) f := λ b => surjInv_eq hf b
 
 theorem leftInverse_surjInv {f : α → β} (hf : Bijective f) :
-    Function.LeftInverse (surjInv hf.2) f := by
+    Function.LeftInverse (surjInv hf.surjective) f := by
   intro a
   let b := surjInv hf.surjective (f a)
   have hfeq : f b = f a := surjInv_eq hf.surjective (f a)

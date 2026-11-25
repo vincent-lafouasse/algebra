@@ -135,9 +135,9 @@ protected theorem bijective (e : α ≃ β) : Function.Bijective e :=
 -- the converse: a bijective function gets an inverse, by choice (`Function.surjInv`)
 noncomputable def ofBijective (f : α → β) (hf : Function.Bijective f) : α ≃ β where
   toFun := f
-  invFun := Function.surjInv hf.2
+  invFun := Function.surjInv hf.surjective
   left_inv := Function.leftInverse_surjInv hf
-  right_inv := Function.rightInverse_surjInv hf.2
+  right_inv := Function.rightInverse_surjInv hf.surjective
 
 theorem ofBijective_apply (f : α → β) (hf : Function.Bijective f) (x : α) :
     ofBijective f hf x = f x :=
