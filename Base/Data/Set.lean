@@ -130,7 +130,7 @@ instance : SDiff (Set α) :=
 
 -- the interface: membership in `∩`, `∪`, `\`
 theorem mem_inter_iff (x : α) (s t : Set α) : x ∈ s ∩ t ↔ x ∈ s ∧ x ∈ t :=
-  sorry
+  Iff.intro id id
 
 theorem mem_union (x : α) (s t : Set α) : x ∈ s ∪ t ↔ x ∈ s ∨ x ∈ t :=
   sorry
