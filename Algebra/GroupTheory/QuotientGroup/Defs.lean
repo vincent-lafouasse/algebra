@@ -36,7 +36,7 @@ instance instHasQuotientSubgroup : HasQuotient α (Subgroup α) :=
 
 @[coe]
 def mk {s : Subgroup α} (a : α) : α ⧸ s :=
-  Quotient.mk (leftRel s) a
+  sorry
 
 instance {s : Subgroup α} : CoeTC α (α ⧸ s) :=
   ⟨mk⟩
@@ -68,9 +68,9 @@ variable {G : Type u} [Group G] (N : Subgroup G) [N.Normal]
 -- `Quotient.lift₂ f h` defines a function on two classes from `f` on representatives;
 -- `h` says `f` doesn't depend on the choice of representatives: that is where normality is used
 instance Quotient.group : Group (G ⧸ N) where
-  mul := Quotient.lift₂ (fun a b => mk (a * b)) sorry
-  one := mk 1
-  inv := Quotient.lift (fun a => mk a⁻¹) sorry
+  mul := sorry
+  one := sorry
+  inv := sorry
   mul_assoc := sorry
   one_mul := sorry
   inv_mul_cancel := sorry
@@ -89,7 +89,7 @@ theorem eq_one_iff {N : Subgroup G} [N.Normal] (x : G) : (x : G ⧸ N) = 1 ↔ x
 
 -- the quotient map, as a hom
 def mk' : G →* G ⧸ N :=
-  MonoidHom.mk' mk sorry
+  sorry
 
 theorem mk'_apply (x : G) : mk' N x = x :=
   sorry
