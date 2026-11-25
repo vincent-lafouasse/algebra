@@ -26,7 +26,8 @@ protected def Mem (s : Set α) (a : α) : Prop :=
 instance : Membership α (Set α) :=
   ⟨Set.Mem⟩
 
-def setOf (p : α → Prop) : Set α :=
+-- (Mathlib renamed `setOf` to `ofPred` in 2026; older texts say `setOf`)
+def ofPred (p : α → Prop) : Set α :=
   p
 
 /-- `{x | p x}` -/
@@ -36,11 +37,11 @@ syntax "{" ident " | " term "}" : term
 syntax "{" ident " : " term " | " term "}" : term
 
 macro_rules
-  | `({$x:ident | $p}) => `(setOf fun $x:ident => $p)
-  | `({$x:ident : $t | $p}) => `(setOf fun $x:ident : $t => $p)
+  | `({$x:ident | $p}) => `(ofPred fun $x:ident => $p)
+  | `({$x:ident : $t | $p}) => `(ofPred fun $x:ident : $t => $p)
 
 -- the defining property of `{x | p x}` (an `=` of Props, so it `rw`s like an iff)
-theorem mem_setOf_eq {a : α} {p : α → Prop} : (a ∈ {x | p x}) = p a :=
+theorem mem_ofPred_eq {x : α} {p : α → Prop} : (x ∈ {y | p y}) = p x :=
   rfl
 
 theorem ext {s t : Set α} (h : ∀ x, x ∈ s ↔ x ∈ t) : s = t :=
@@ -131,7 +132,8 @@ theorem mem_inter_iff (x : α) (s t : Set α) : x ∈ s ∩ t ↔ x ∈ s ∧ x 
 theorem mem_union (x : α) (s t : Set α) : x ∈ s ∪ t ↔ x ∈ s ∨ x ∈ t :=
   Iff.rfl
 
-theorem mem_diff {s t : Set α} (x : α) : x ∈ s \ t ↔ x ∈ s ∧ x ∉ t :=
+-- (`mem_diff` until 2026)
+theorem mem_sdiff {s t : Set α} (x : α) : x ∈ s \ t ↔ x ∈ s ∧ x ∉ t :=
   Iff.rfl
 
 -- `s ∩ t` is the largest set inside both
@@ -165,7 +167,8 @@ theorem union_comm (s t : Set α) : s ∪ t = t ∪ s :=
   have h (a b: Set α) : a ∪ b ⊆ b ∪ a := union_subset subset_union_right subset_union_left
   Subset.antisymm (h s t) (h t s)
 
-theorem diff_subset {s t : Set α} : s \ t ⊆ s :=
+-- (`diff_subset` until 2026)
+theorem sdiff_subset {s t : Set α} : s \ t ⊆ s :=
   λ _ ⟨hs, _⟩ => hs
 
 end Set

@@ -37,7 +37,7 @@ def comap (f : G →* N) (K : Subgroup N) : Subgroup G where
   one_mem' := sorry
   inv_mem' := sorry
 
-theorem coe_comap (f : G →* N) (K : Subgroup N) : (comap f K : Set G) = f ⁻¹' (K : Set N) :=
+theorem coe_comap (K : Subgroup N) (f : G →* N) : (comap f K : Set G) = f ⁻¹' (K : Set N) :=
   rfl
 
 theorem mem_comap {K : Subgroup N} {f : G →* N} {x : G} : x ∈ comap f K ↔ f x ∈ K :=
@@ -46,7 +46,7 @@ theorem mem_comap {K : Subgroup N} {f : G →* N} {x : G} : x ∈ comap f K ↔ 
 theorem map_id (K : Subgroup G) : map (MonoidHom.id G) K = K :=
   sorry
 
-theorem map_map (g : N →* P) (f : G →* N) (K : Subgroup G) : map g (map f K) = map (g ∘* f) K :=
+theorem map_map (K : Subgroup G) (g : N →* P) (f : G →* N) : map g (map f K) = map (g ∘* f) K :=
   sorry
 
 theorem comap_comap (K : Subgroup P) (g : N →* P) (f : G →* N) :

@@ -41,7 +41,7 @@ theorem subset_closure {s : Set G} : s ⊆ (closure s : Set G) :=
   sorry
 
 -- the universal property: `closure s` is the smallest subgroup containing `s`
-theorem closure_le {s : Set G} {K : Subgroup G} : closure s ≤ K ↔ s ⊆ (K : Set G) :=
+theorem closure_le {s : Set G} (K : Subgroup G) : closure s ≤ K ↔ s ⊆ (K : Set G) :=
   sorry
 
 theorem closure_mono {s t : Set G} (h : s ⊆ t) : closure s ≤ closure t :=

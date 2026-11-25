@@ -21,7 +21,7 @@ variable {G : Type u} {M : Type v} [Group G] [Group M]
 def lift (N : Subgroup G) [N.Normal] (φ : G →* M) (HN : N ≤ φ.ker) : G ⧸ N →* M :=
   MonoidHom.mk' (Quotient.lift φ sorry) sorry
 
-theorem lift_mk {N : Subgroup G} [N.Normal] {φ : G →* M} (HN : N ≤ φ.ker) (g : G) :
+theorem lift_mk (N : Subgroup G) [N.Normal] {φ : G →* M} (HN : N ≤ φ.ker) (g : G) :
     lift N φ HN g = φ g :=
   sorry
 

@@ -42,6 +42,8 @@ section
 variable {G : Type u} {α : Type v} [Group G] [MulAction G α]
 
 -- the axioms, as theorems outside the `MulAction` namespace (as in Mathlib)
+-- `G` explicit (as in Mathlib): `one_smul G a`, since nothing in `a` tells Lean which group
+variable (G) in
 theorem one_smul (a : α) : (1 : G) • a = a :=
   MulAction.one_smul a
 
@@ -152,6 +154,7 @@ theorem smul_eq_mul (g x : G) : g • x = g * x :=
 theorem MulAction.orbit_self_eq_univ (a : G) : MulAction.orbit G a = Set.univ :=
   sorry
 
+-- (not in Mathlib in this form: `IsCancelSMul.stabilizer_eq_bot`)
 theorem MulAction.stabilizer_self_eq_bot (a : G) : MulAction.stabilizer G a = ⊥ :=
   sorry
 

@@ -55,7 +55,7 @@ theorem mem_preimage {f : α → β} {t : Set β} {a : α} : a ∈ f ⁻¹' t �
 theorem mem_range {f : α → β} {y : β} : y ∈ range f ↔ ∃ x, f x = y :=
   Iff.rfl
 
-theorem mem_range_self (f : α → β) (x : α) : f x ∈ range f :=
+theorem mem_range_self {f : α → β} (x : α) : f x ∈ range f :=
   ⟨x, rfl⟩
 
 /-! ### Monotonicity and the adjunction -/

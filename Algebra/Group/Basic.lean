@@ -19,7 +19,7 @@ Only `one_mul` and `inv_mul_cancel` are given: prove the right-hand versions fro
 `mul_inv_cancel` comes first (`mul_one` needs it). -/
 
 /-- a special case of mul_eq_left : a * b = a ↔ b = 1
-but mul_eq_left needs mul_one --/
+but mul_eq_left needs mul_one (not in Mathlib) --/
 theorem idem_el_iff_eq_one (e : G) : e * e = e ↔ e = 1 := by
   apply Iff.intro
   · intro h

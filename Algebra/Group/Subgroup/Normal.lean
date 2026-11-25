@@ -42,8 +42,8 @@ instance normal_top : (⊤ : Subgroup G).Normal :=
 instance normal_inf_normal (H K : Subgroup G) [H.Normal] [K.Normal] : (H ⊓ K).Normal :=
   sorry
 
--- in a commutative group every subgroup is normal
-theorem normal_of_comm {G : Type u} [CommGroup G] (H : Subgroup G) : H.Normal :=
+-- in a commutative group every subgroup is normal (Mathlib: for `[IsMulCommutative G]`)
+theorem normal_of_isMulCommutative {G : Type u} [CommGroup G] (H : Subgroup G) : H.Normal :=
   sorry
 
 -- normal = invariant under every inner automorphism

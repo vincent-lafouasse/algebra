@@ -136,7 +136,7 @@ theorem rightInverse_invFun [Nonempty α] {f : α → β} (hf : Function.Surject
     Function.RightInverse (invFun f) f := λ b => invFun_eq (hf b)
 
 -- `Nonempty α` is needed: if α is empty and β isn't, there is no `β → α` at all
-theorem injective_iff_hasLeftInverse [Nonempty α] (f : α → β) :
+theorem injective_iff_hasLeftInverse [Nonempty α] {f : α → β} :
     Function.Injective f ↔ Function.HasLeftInverse f := by
   have mp : Function.Injective f → Function.HasLeftInverse f := λ h_inj =>
     ⟨invFun f, leftInverse_invFun h_inj⟩
@@ -145,7 +145,7 @@ theorem injective_iff_hasLeftInverse [Nonempty α] (f : α → β) :
   exact LeftInverse.injective hf_inv
 
 -- no `Nonempty α` here, so `invFun` is not available: the → witness is `surjInv`
-theorem surjective_iff_hasRightInverse (f : α → β) :
+theorem surjective_iff_hasRightInverse {f : α → β} :
     Function.Surjective f ↔ Function.HasRightInverse f := by
   have mp : Function.Surjective f → Function.HasRightInverse f := λ h_surj =>
     ⟨surjInv h_surj, surjInv_eq h_surj⟩
@@ -153,7 +153,7 @@ theorem surjective_iff_hasRightInverse (f : α → β) :
   rintro ⟨f_inv, hf_inv⟩
   exact RightInverse.surjective hf_inv
 
-theorem bijective_iff_has_inverse (f : α → β) :
+theorem bijective_iff_has_inverse {f : α → β} :
     Bijective f ↔ ∃ g : β → α, Function.LeftInverse g f ∧ Function.RightInverse g f := by
   constructor
   · intro h_bij

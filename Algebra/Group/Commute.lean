@@ -29,6 +29,7 @@ variable {S : Type u} [Mul S] {a b : S}
 protected theorem eq (h : Commute a b) : a * b = b * a :=
   (commute_iff_eq a b).1 h
 
+-- (not in Mathlib: there `Commute` is transparent, so `h` itself proves `Commute a b`)
 protected theorem of_eq (h : a * b = b * a) : Commute a b :=
   (commute_iff_eq a b).2 h
 

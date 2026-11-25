@@ -20,11 +20,8 @@ namespace My
 /-- `A ⧸ b`: the quotient of `A` by `b` (Mathlib uses one notation for groups, rings,
 modules, …) -/
 class HasQuotient (A : outParam (Type u)) (B : Type v) where
-  quotient' : B → Type max u v
-
-abbrev HasQuotient.Quotient (A : outParam (Type u)) {B : Type v} [HasQuotient A B] (b : B) :
-    Type max u v :=
-  HasQuotient.quotient' b
+  -- `(A)` makes `A` explicit in the projection: `HasQuotient.Quotient A b`
+  Quotient (A) : B → Type max u v
 
 notation:35 G " ⧸ " H:34 => HasQuotient.Quotient G H
 

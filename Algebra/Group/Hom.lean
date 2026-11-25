@@ -86,8 +86,9 @@ def mk' (f : G → H) (map_mul : ∀ a b : G, f (a * b) = f a * f b) : G →* H 
     rw [← map_mul, mul_one]
   map_mul' := map_mul
 
-theorem mk'_apply (f : G → H) (map_mul : ∀ a b : G, f (a * b) = f a * f b) (x : G) :
-    mk' f map_mul x = f x :=
+-- an equation of functions, not of values (Mathlib's form); `congrFun` it to get `mk' f _ x = f x`
+theorem mk'_apply (f : G → H) (map_mul : ∀ a b : G, f (a * b) = f a * f b) :
+    (mk' f map_mul : G → H) = f :=
   rfl
 
 protected def id (G : Type u) [Group G] : G →* G where

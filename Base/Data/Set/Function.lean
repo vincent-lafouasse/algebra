@@ -98,7 +98,7 @@ theorem LeftInvOn.injOn {f' : β → α} {f : α → β} {s : Set α} (h : LeftI
 
 /-! ### `SurjOn` -/
 
-theorem surjective_iff_surjOn_univ {f : α → β} : Function.Surjective f ↔ SurjOn f univ univ :=
+theorem surjOn_univ {f : α → β} : SurjOn f univ univ ↔ Function.Surjective f :=
   sorry
 
 theorem SurjOn.comp {g : β → γ} {f : α → β} {s : Set α} {t : Set β} {p : Set γ}
@@ -118,7 +118,7 @@ theorem BijOn.comp {g : β → γ} {f : α → β} {s : Set α} {t : Set β} {p 
     (hg : BijOn g t p) (hf : BijOn f s t) : BijOn (g ∘ f) s p :=
   sorry
 
-theorem bijective_iff_bijOn_univ {f : α → β} : Function.Bijective f ↔ BijOn f univ univ :=
+theorem bijOn_univ {f : α → β} : BijOn f univ univ ↔ Function.Bijective f :=
   sorry
 
 -- inverses on sets give a bijection (compare `Function.bijective_iff_has_inverse`)
