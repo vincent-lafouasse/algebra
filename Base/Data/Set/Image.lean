@@ -103,7 +103,7 @@ theorem image_preimage_eq {f : α → β} (t : Set β) (hf : Function.Surjective
 /-! ### Identity and composition -/
 
 theorem preimage_id {s : Set α} : id ⁻¹' s = s :=
-  Set.Subset.antisymm (λ _ h => h) (λ _ h => h) -- kite
+  Set.Subset.antisymm (λ _ h => h) (λ _ h => h) -- the KI combinator
 
 theorem image_id (s : Set α) : id '' s = s :=
   calc
