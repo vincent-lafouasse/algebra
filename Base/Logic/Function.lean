@@ -53,7 +53,7 @@ theorem Surjective.comp {g : β → γ} {f : α → β} (hg : Function.Surjectiv
 
 theorem Bijective.comp {g : β → γ} {f : α → β} (hg : Bijective g) (hf : Bijective f) :
     Bijective (g ∘ f) :=
-  ⟨Injective.comp hg.1 hf.1, Surjective.comp hg.2 hf.2⟩
+  ⟨Injective.comp hg.injective hf.injective, Surjective.comp hg.surjective hf.surjective⟩
 
 theorem bijective_id : Bijective (@id α) :=
   have is_inj : Function.Injective (@id α) := λ _ _ h => h
@@ -106,11 +106,10 @@ theorem rightInverse_surjInv {f : α → β} (hf : Function.Surjective f) :
 
 theorem leftInverse_surjInv {f : α → β} (hf : Bijective f) :
     Function.LeftInverse (surjInv hf.2) f := by
-  obtain ⟨h_inj, h_surj⟩ := hf
   intro a
-  let b := surjInv h_surj (f a)
-  have hfeq : f b = f a := surjInv_eq h_surj (f a)
-  exact h_inj hfeq
+  let b := surjInv hf.surjective (f a)
+  have hfeq : f b = f a := surjInv_eq hf.surjective (f a)
+  exact hf.injective hfeq
 
 -- an inverse of *any* f: a preimage of y if there is one, an arbitrary element if not.
 -- The `if` on a Prop needs `open Classical in` in front of the `def`, and "an arbitrary
@@ -158,9 +157,9 @@ theorem bijective_iff_has_inverse (f : α → β) :
     Bijective f ↔ ∃ g : β → α, Function.LeftInverse g f ∧ Function.RightInverse g f := by
   constructor
   · intro h_bij
-    refine ⟨surjInv h_bij.2, ?_⟩
+    refine ⟨surjInv h_bij.surjective, ?_⟩
     have h_left := leftInverse_surjInv h_bij
-    have h_right := rightInverse_surjInv h_bij.2
+    have h_right := rightInverse_surjInv h_bij.surjective
     exact ⟨h_left, h_right⟩
   · intro ⟨f_inv, h_left, h_right⟩
     have h_inj := LeftInverse.injective h_left
