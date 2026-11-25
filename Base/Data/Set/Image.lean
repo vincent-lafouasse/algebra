@@ -64,9 +64,8 @@ theorem mem_range_self (f : α → β) (x : α) : f x ∈ range f :=
 theorem image_subset {s t : Set α} (f : α → β) (h : s ⊆ t) : f '' s ⊆ f '' t :=
   λ _ ⟨x, ⟨hxs, hfx⟩⟩ => ⟨x, ⟨h hxs, hfx⟩⟩
 
-theorem preimage_mono {f : α → β} {s t : Set β} (h : s ⊆ t) : f ⁻¹' s ⊆ f ⁻¹' t := by
-  intro x (hfs : f x ∈ s)
-  exact h hfs
+theorem preimage_mono {f : α → β} {s t : Set β} (h : s ⊆ t) : f ⁻¹' s ⊆ f ⁻¹' t :=
+  λ x (hfs : f x ∈ s) => h hfs
 
 -- the image is the smallest set whose preimage contains `s`
 theorem image_subset_iff {f : α → β} {s : Set α} {t : Set β} : f '' s ⊆ t ↔ s ⊆ f ⁻¹' t := by
