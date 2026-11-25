@@ -167,8 +167,8 @@ theorem union_comm (s t : Set α) : s ∪ t = t ∪ s :=
   have h (a b: Set α) : a ∪ b ⊆ b ∪ a := union_subset subset_union_right subset_union_left
   Subset.antisymm (h s t) (h t s)
 
-theorem diff_subset {s t : Set α} : s \ t ⊆ s :=
-  sorry
+theorem diff_subset {s t : Set α} : s \ t ⊆ s := 
+  λ _ ⟨hs, _⟩ => hs
 
 end Set
 
