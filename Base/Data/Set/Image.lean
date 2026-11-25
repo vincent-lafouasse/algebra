@@ -47,7 +47,7 @@ theorem mem_image (f : α → β) (s : Set α) (y : β) : y ∈ f '' s ↔ ∃ x
   Iff.rfl
 
 theorem mem_image_of_mem (f : α → β) {x : α} {s : Set α} (h : x ∈ s) : f x ∈ f '' s :=
-  sorry
+  ⟨x, ⟨h, rfl⟩⟩
 
 theorem mem_preimage {f : α → β} {t : Set β} {a : α} : a ∈ f ⁻¹' t ↔ f a ∈ t :=
   Iff.rfl
