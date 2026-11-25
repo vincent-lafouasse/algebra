@@ -70,14 +70,14 @@ theorem image_subset_iff {f : α → β} {s : Set α} {t : Set β} : f '' s ⊆ 
     exact h hxs
 
 theorem subset_preimage_image (f : α → β) (s : Set α) : s ⊆ f ⁻¹' (f '' s) :=
-  image_subset_iff.mp (Set.Subset.refl (f '' s))
+  image_subset_iff.mp (Subset.refl (f '' s))
 
 theorem image_mono {s t : Set α} (f : α → β) (h : s ⊆ t) : f '' s ⊆ f '' t := by
   rw [image_subset_iff (s := s) (t := f '' t)]
   exact Subset.trans h (subset_preimage_image f t)
 
 theorem image_preimage_subset (f : α → β) (t : Set β) : f '' (f ⁻¹' t) ⊆ t :=
-  image_subset_iff.mpr (Set.Subset.refl (f ⁻¹' t))
+  image_subset_iff.mpr (Subset.refl (f ⁻¹' t))
 
 theorem preimage_mono {f : α → β} {s t : Set β} (h : s ⊆ t) : f ⁻¹' s ⊆ f ⁻¹' t := by
   rw [← image_subset_iff (s := f ⁻¹' s) (t := t)]
@@ -87,7 +87,7 @@ theorem preimage_mono {f : α → β} {s t : Set β} (h : s ⊆ t) : f ⁻¹' s 
 -- Find a counterexample to each without it.
 theorem preimage_image_eq {f : α → β} (s : Set α) (hf : Function.Injective f) :
     f ⁻¹' (f '' s) = s := by
-  refine Set.Subset.antisymm ?_ (subset_preimage_image f s)
+  refine Subset.antisymm ?_ (subset_preimage_image f s)
   intro x ⟨x', ⟨h, he⟩⟩
   replace he := hf he
   subst he
@@ -95,7 +95,7 @@ theorem preimage_image_eq {f : α → β} (s : Set α) (hf : Function.Injective 
 
 theorem image_preimage_eq {f : α → β} (t : Set β) (hf : Function.Surjective f) :
     f '' (f ⁻¹' t) = t := by
-  refine Set.Subset.antisymm (image_preimage_subset f t) ?_
+  refine Subset.antisymm (image_preimage_subset f t) ?_
   intro y h
   obtain ⟨x, hx⟩ := hf y
   subst hx
@@ -104,7 +104,7 @@ theorem image_preimage_eq {f : α → β} (t : Set β) (hf : Function.Surjective
 /-! ### Identity and composition -/
 
 theorem preimage_id {s : Set α} : id ⁻¹' s = s :=
-  Set.Subset.antisymm (λ _ h => h) (λ _ h => h) -- the KI combinator
+  Subset.antisymm (λ _ h => h) (λ _ h => h) -- the KI combinator
 
 theorem image_id (s : Set α) : id '' s = s :=
   calc
