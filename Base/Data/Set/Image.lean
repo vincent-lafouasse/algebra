@@ -60,12 +60,6 @@ theorem mem_range_self (f : α → β) (x : α) : f x ∈ range f :=
 
 /-! ### Monotonicity and the adjunction -/
 
-theorem image_mono {s t : Set α} (f : α → β) (h : s ⊆ t) : f '' s ⊆ f '' t :=
-  λ _ ⟨x, ⟨hxs, hfx⟩⟩ => ⟨x, ⟨h hxs, hfx⟩⟩
-
-theorem preimage_mono {f : α → β} {s t : Set β} (h : s ⊆ t) : f ⁻¹' s ⊆ f ⁻¹' t :=
-  λ x (hfs : f x ∈ s) => h hfs
-
 -- the image is the smallest set whose preimage contains `s`
 theorem image_subset_iff {f : α → β} {s : Set α} {t : Set β} : f '' s ⊆ t ↔ s ⊆ f ⁻¹' t := by
   apply Iff.intro
@@ -75,11 +69,19 @@ theorem image_subset_iff {f : α → β} {s : Set α} {t : Set β} : f '' s ⊆ 
     subst hfx
     exact h hxs
 
+theorem subset_preimage_image (f : α → β) (s : Set α) : s ⊆ f ⁻¹' (f '' s) :=
+  image_subset_iff.mp (Set.Subset.refl (f '' s))
+
+theorem image_mono {s t : Set α} (f : α → β) (h : s ⊆ t) : f '' s ⊆ f '' t := by
+  rw [image_subset_iff (s := s) (t := f '' t)]
+  exact Subset.trans h (subset_preimage_image f t)
+
 theorem image_preimage_subset (f : α → β) (t : Set β) : f '' (f ⁻¹' t) ⊆ t :=
   image_subset_iff.mpr (Set.Subset.refl (f ⁻¹' t))
 
-theorem subset_preimage_image (f : α → β) (s : Set α) : s ⊆ f ⁻¹' (f '' s) :=
-  image_subset_iff.mp (Set.Subset.refl (f '' s))
+theorem preimage_mono {f : α → β} {s t : Set β} (h : s ⊆ t) : f ⁻¹' s ⊆ f ⁻¹' t := by
+  rw [← image_subset_iff (s := f ⁻¹' s) (t := t)]
+  exact Subset.trans (image_preimage_subset f s) h
 
 -- the two inclusions above become equalities under the right hypothesis on `f`.
 -- Find a counterexample to each without it.
