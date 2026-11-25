@@ -153,8 +153,11 @@ theorem subset_union_left {s t : Set α} : s ⊆ s ∪ t :=
 theorem subset_union_right {s t : Set α} : t ⊆ s ∪ t :=
   λ _ hs => Or.inr hs
 
-theorem union_subset {r s t : Set α} (hsr : s ⊆ r) (htr : t ⊆ r) : s ∪ t ⊆ r :=
-  sorry
+theorem union_subset {r s t : Set α} (hsr : s ⊆ r) (htr : t ⊆ r) : s ∪ t ⊆ r := by
+  intro x hst
+  cases hst with
+  | inl hs => exact hsr hs
+  | inr ht => exact htr ht
 
 theorem inter_comm (s t : Set α) : s ∩ t = t ∩ s :=
   sorry
