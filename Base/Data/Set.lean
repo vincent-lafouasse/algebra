@@ -106,7 +106,7 @@ protected theorem Subset.antisymm {s t : Set α} (hst : s ⊆ t) (hts : t ⊆ s)
   Set.ext λ _ => Iff.intro (λ h => hst h) (λ h => hts h)
 
 theorem subset_univ (s : Set α) : s ⊆ univ :=
-  λ _ _ => trivial
+  λ x _ => mem_univ x
 
 theorem empty_subset (s : Set α) : ∅ ⊆ s :=
   λ _ h_in_empty => False.elim h_in_empty
@@ -165,7 +165,7 @@ theorem union_comm (s t : Set α) : s ∪ t = t ∪ s :=
   have h (a b: Set α) : a ∪ b ⊆ b ∪ a := union_subset subset_union_right subset_union_left
   Subset.antisymm (h s t) (h t s)
 
-theorem diff_subset {s t : Set α} : s \ t ⊆ s := 
+theorem diff_subset {s t : Set α} : s \ t ⊆ s :=
   λ _ ⟨hs, _⟩ => hs
 
 end Set
