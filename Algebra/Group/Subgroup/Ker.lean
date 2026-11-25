@@ -1,8 +1,12 @@
 import Algebra.Group.Subgroup.Lattice
+import Base.Data.Set.Image
 
 /-! # Kernel and range
 
-Mathlib: `Mathlib/Algebra/Group/Subgroup/Ker.lean`. -/
+Mathlib: `Mathlib/Algebra/Group/Subgroup/Ker.lean`.
+
+The carrier of `f.range` is `Set.range f`, so the set lemmas (`Set.mem_range`, …) apply to it
+through `coe_range`. -/
 
 universe u v
 
@@ -22,10 +26,13 @@ theorem mem_ker {f : G →* H} {x : G} : x ∈ f.ker ↔ f x = 1 :=
   sorry
 
 def range (f : G →* H) : Subgroup H where
-  carrier := {y | ∃ x, f x = y}
+  carrier := Set.range f
   mul_mem' := sorry
   one_mem' := sorry
   inv_mem' := sorry
+
+theorem coe_range (f : G →* H) : (f.range : Set H) = Set.range f :=
+  rfl
 
 theorem mem_range {f : G →* H} {y : H} : y ∈ f.range ↔ ∃ x, f x = y :=
   sorry

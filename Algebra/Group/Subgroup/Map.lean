@@ -5,7 +5,11 @@ import Algebra.Group.Subgroup.Ker
 Mathlib: `Mathlib/Algebra/Group/Subgroup/Map.lean`.
 
 `map f H` is the image `f(H)`, `comap f K` the preimage `f⁻¹(K)`. Both live in the
-`Subgroup` namespace and take the hom first. -/
+`Subgroup` namespace and take the hom first.
+
+Their carriers are the set image `f '' H` and preimage `f ⁻¹' K`, so the set lemmas of
+`Base/Data/Set/Image.lean` apply through `coe_map` and `coe_comap`. In particular,
+`map_le_iff_le_comap` is `Set.image_subset_iff` read through `coe_subset_coe`. -/
 
 universe u v w
 
@@ -16,19 +20,25 @@ variable {G : Type u} {N : Type v} {P : Type w} [Group G] [Group N] [Group P]
 namespace Subgroup
 
 def map (f : G →* N) (H : Subgroup G) : Subgroup N where
-  carrier := {y | ∃ x, x ∈ H ∧ f x = y}
+  carrier := f '' (H : Set G)
   mul_mem' := sorry
   one_mem' := sorry
   inv_mem' := sorry
+
+theorem coe_map (f : G →* N) (K : Subgroup G) : (map f K : Set N) = f '' (K : Set G) :=
+  rfl
 
 theorem mem_map {f : G →* N} {K : Subgroup G} {y : N} : y ∈ map f K ↔ ∃ x ∈ K, f x = y :=
   sorry
 
 def comap (f : G →* N) (K : Subgroup N) : Subgroup G where
-  carrier := {x | f x ∈ K}
+  carrier := f ⁻¹' (K : Set N)
   mul_mem' := sorry
   one_mem' := sorry
   inv_mem' := sorry
+
+theorem coe_comap (f : G →* N) (K : Subgroup N) : (comap f K : Set G) = f ⁻¹' (K : Set N) :=
+  rfl
 
 theorem mem_comap {K : Subgroup N} {f : G →* N} {x : G} : x ∈ comap f K ↔ f x ∈ K :=
   sorry
