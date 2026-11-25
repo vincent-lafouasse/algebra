@@ -136,7 +136,7 @@ theorem mem_union (x : α) (s t : Set α) : x ∈ s ∪ t ↔ x ∈ s ∨ x ∈ 
   Iff.rfl
 
 theorem mem_diff {s t : Set α} (x : α) : x ∈ s \ t ↔ x ∈ s ∧ x ∉ t :=
-  sorry
+  Iff.rfl
 
 -- `s ∩ t` is the largest set inside both
 theorem inter_subset_left {s t : Set α} : s ∩ t ⊆ s :=
