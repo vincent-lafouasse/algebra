@@ -102,6 +102,9 @@ theorem image_preimage_eq {f : α → β} (t : Set β) (hf : Function.Surjective
 
 /-! ### Identity and composition -/
 
+theorem preimage_id (t : Set β) : id ⁻¹' t = t := by
+  apply Set.Subset.antisymm (λ _ h => h) (λ _ h => h)
+
 theorem image_id (s : Set α) : id '' s = s := by
   apply Set.ext
   intro x
