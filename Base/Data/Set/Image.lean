@@ -106,19 +106,13 @@ theorem preimage_id (s : Set α) : id ⁻¹' s = s :=
   Set.Subset.antisymm (λ _ h => h) (λ _ h => h)
 
 theorem image_id (s : Set α) : id '' s = s := by
-  apply Set.ext
-  intro x
-  apply Iff.intro
-  · intro ⟨_, ⟨h, h'⟩⟩
-    subst h'
-    exact h
-  · intro h
-    exact ⟨x, ⟨h, rfl⟩⟩
+  refine Set.Subset.antisymm ?_ ?_
+  · conv => lhs; rw [← preimage_id s]
+    exact image_preimage_subset id s
+  · rw [← preimage_id (id '' s)]
+    exact subset_preimage_image id s
 
 theorem image_comp (g : β → γ) (f : α → β) (s : Set α) : g ∘ f '' s = g '' (f '' s) :=
-  sorry
-
-theorem preimage_id {s : Set α} : id ⁻¹' s = s :=
   sorry
 
 theorem preimage_comp {g : β → γ} {f : α → β} {u : Set γ} : g ∘ f ⁻¹' u = f ⁻¹' (g ⁻¹' u) :=
