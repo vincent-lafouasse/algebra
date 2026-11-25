@@ -87,10 +87,10 @@ theorem subset_preimage_image (f : α → β) (s : Set α) : s ⊆ f ⁻¹' (f '
 theorem preimage_image_eq {f : α → β} (s : Set α) (hf : Function.Injective f) :
     f ⁻¹' (f '' s) = s := by
   refine Set.Subset.antisymm ?_ (subset_preimage_image f s)
-  intro x ⟨x', ⟨hx, he⟩⟩
+  intro x ⟨x', ⟨h, he⟩⟩
   replace he := hf he
   subst he
-  exact hx
+  exact h
 
 theorem image_preimage_eq {f : α → β} (t : Set β) (hf : Function.Surjective f) :
     f '' (f ⁻¹' t) = t := by
