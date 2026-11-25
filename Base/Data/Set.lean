@@ -138,13 +138,13 @@ theorem mem_diff {s t : Set α} (x : α) : x ∈ s \ t ↔ x ∈ s ∧ x ∉ t :
 
 -- `s ∩ t` is the largest set inside both
 theorem inter_subset_left {s t : Set α} : s ∩ t ⊆ s :=
-  sorry
+  λ _ hst => hst.left
 
 theorem inter_subset_right {s t : Set α} : s ∩ t ⊆ t :=
-  sorry
+  λ _ hst => hst.right
 
 theorem subset_inter {r s t : Set α} (hrs : r ⊆ s) (hrt : r ⊆ t) : r ⊆ s ∩ t :=
-  sorry
+  λ _ hr => And.intro (hrs hr) (hrt hr)
 
 -- `s ∪ t` is the smallest set containing both
 theorem subset_union_left {s t : Set α} : s ⊆ s ∪ t :=
