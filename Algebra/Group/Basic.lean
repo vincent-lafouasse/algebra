@@ -18,18 +18,8 @@ variable {G : Type u} [Group G] {a b c : G}
 Only `one_mul` and `inv_mul_cancel` are given: prove the right-hand versions from them.
 `mul_inv_cancel` comes first (`mul_one` needs it). -/
 
-theorem mul_eq_left {a b : G} : a * b = a ↔ b = 1 := by
-  apply Iff.intro
-  · intro h
-    replace h := congrArg (a⁻¹ * .) h
-    rw [← mul_assoc] at h
-    rw [inv_mul_cancel] at h
-    rw [one_mul] at h
-    exact h
-  · intro h
-    subst h
-    sorry
-
+/-- a special case of mul_eq_left : a * b = a ↔ b = 1
+but mul_eq_left needs mul_one --/
 theorem idem_el_iff_eq_one (e : G) : e * e = e ↔ e = 1 := by
   apply Iff.intro
   · intro h
