@@ -90,8 +90,13 @@ theorem subset_preimage_image (f : α → β) (s : Set α) : s ⊆ f ⁻¹' (f '
 -- the two inclusions above become equalities under the right hypothesis on `f`.
 -- Find a counterexample to each without it.
 theorem preimage_image_eq {f : α → β} (s : Set α) (hf : Function.Injective f) :
-    f ⁻¹' (f '' s) = s :=
-  sorry
+    f ⁻¹' (f '' s) = s := by
+  apply Set.Subset.antisymm
+  · intro x ⟨x', ⟨hx, he⟩⟩
+    replace he := hf he
+    subst he
+    exact hx
+  · exact subset_preimage_image f s
 
 theorem image_preimage_eq {f : α → β} (t : Set β) (hf : Function.Surjective f) :
     f '' (f ⁻¹' t) = t :=
