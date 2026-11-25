@@ -81,9 +81,8 @@ theorem image_subset_iff {f : α → β} {s : Set α} {t : Set β} : f '' s ⊆ 
 theorem image_preimage_subset (f : α → β) (t : Set β) : f '' (f ⁻¹' t) ⊆ t :=
   image_subset_iff.mpr (Set.Subset.refl (f ⁻¹' t))
 
-theorem subset_preimage_image (f : α → β) (s : Set α) : s ⊆ f ⁻¹' (f '' s) := by
-  intro x hx
-  exact ⟨x, ⟨hx, rfl⟩⟩
+theorem subset_preimage_image (f : α → β) (s : Set α) : s ⊆ f ⁻¹' (f '' s) :=
+  image_subset_iff.mp (Set.Subset.refl (f '' s))
 
 -- the two inclusions above become equalities under the right hypothesis on `f`.
 -- Find a counterexample to each without it.
