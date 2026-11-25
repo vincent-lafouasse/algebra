@@ -103,14 +103,13 @@ theorem image_preimage_eq {f : α → β} (t : Set β) (hf : Function.Surjective
 /-! ### Identity and composition -/
 
 theorem preimage_id (s : Set α) : id ⁻¹' s = s :=
-  Set.Subset.antisymm (λ _ h => h) (λ _ h => h)
+  Set.Subset.antisymm (λ _ h => h) (λ _ h => h) -- kite
 
-theorem image_id (s : Set α) : id '' s = s := by
-  refine Set.Subset.antisymm ?_ ?_
-  · conv => lhs; rw [← preimage_id s]
-    exact image_preimage_subset id s
-  · rw [← preimage_id (id '' s)]
-    exact subset_preimage_image id s
+theorem image_id (s : Set α) : id '' s = s :=
+  calc
+    id '' s
+    _ = id '' (id ⁻¹' s) := by rw [preimage_id]
+    _ = s := by rw [image_preimage_eq s Function.bijective_id.surjective]
 
 theorem image_comp (g : β → γ) (f : α → β) (s : Set α) : g ∘ f '' s = g '' (f '' s) :=
   sorry
