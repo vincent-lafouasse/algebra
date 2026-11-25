@@ -17,7 +17,7 @@ namespace Subgroup
 variable {G : Type u} [Group G]
 
 def centralizer (s : Set G) : Subgroup G where
-  carrier := {g | ∀ h, h ∈ s → h * g = g * h}
+  carrier := sorry
   mul_mem' := sorry
   one_mem' := sorry
   inv_mem' := sorry

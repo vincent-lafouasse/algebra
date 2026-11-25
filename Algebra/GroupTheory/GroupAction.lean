@@ -45,10 +45,10 @@ variable {G : Type u} {α : Type v} [Group G] [MulAction G α]
 -- `G` explicit (as in Mathlib): `one_smul G a`, since nothing in `a` tells Lean which group
 variable (G) in
 theorem one_smul (a : α) : (1 : G) • a = a :=
-  MulAction.one_smul a
+  sorry
 
 theorem mul_smul (g h : G) (a : α) : (g * h) • a = g • h • a :=
-  MulAction.mul_smul g h a
+  sorry
 
 -- `mul_smul` read backwards, the direction you usually rewrite in
 theorem smul_smul (g h : G) (a : α) : g • h • a = (g * h) • a :=
@@ -99,7 +99,7 @@ variable (G α)
 
 -- `a ~ b` when `a ∈ orbit G b`: reflexive by `one_smul`, symmetric by `⁻¹`, transitive by `*`
 def orbitRel : Setoid α where
-  r a b := a ∈ orbit G b
+  r a b := sorry
   iseqv := sorry
 
 variable {G α}
@@ -112,7 +112,7 @@ theorem orbitRel_apply {a b : α} : (orbitRel G α).r a b ↔ a ∈ orbit G b :=
 variable (G)
 
 def stabilizer (a : α) : Subgroup G where
-  carrier := {g | g • a = a}
+  carrier := sorry
   mul_mem' := sorry
   one_mem' := sorry
   inv_mem' := sorry
@@ -143,12 +143,12 @@ variable {G : Type u} [Group G]
 
 -- `G` acts on itself by left multiplication (Mathlib: `Monoid.toMulAction`)
 instance Group.toMulAction : MulAction G G where
-  smul g x := g * x
+  smul g x := sorry
   one_smul := sorry
   mul_smul := sorry
 
 theorem smul_eq_mul (g x : G) : g • x = g * x :=
-  rfl
+  sorry
 
 -- one orbit, and nothing but `1` fixes anything (not in Mathlib in this form)
 theorem MulAction.orbit_self_eq_univ (a : G) : MulAction.orbit G a = Set.univ :=
@@ -160,23 +160,23 @@ theorem MulAction.stabilizer_self_eq_bot (a : G) : MulAction.stabilizer G a = �
 
 -- automorphisms act on `G` by evaluation (Mathlib: `MulAut.applyMulAction`)
 instance MulAut.applyMulAction : MulAction (MulAut G) G where
-  smul φ x := φ x
+  smul φ x := sorry
   one_smul := sorry
   mul_smul := sorry
 
 theorem MulAut.smul_def (φ : MulAut G) (x : G) : φ • x = φ x :=
-  rfl
+  sorry
 
 -- a subgroup acts wherever `G` does, by restriction. With `G` acting on itself, the orbit of
 -- `x` under `H` is the right coset `H x`.
 instance Subgroup.mulAction {α : Type v} [MulAction G α] (H : Subgroup G) : MulAction H α where
-  smul h a := h.val • a
+  smul h a := sorry
   one_smul := sorry
   mul_smul := sorry
 
 theorem Subgroup.smul_def {α : Type v} [MulAction G α] {H : Subgroup G} (h : H) (a : α) :
     h • a = h.val • a :=
-  rfl
+  sorry
 
 end Examples
 

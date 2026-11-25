@@ -42,7 +42,7 @@ theorem leftCoset_eq_iff (s : Subgroup α) {x y : α} :
 namespace QuotientGroup
 
 def leftRel (s : Subgroup α) : Setoid α where
-  r x y := x⁻¹ * y ∈ s
+  r x y := sorry
   iseqv := sorry
 
 theorem leftRel_apply {s : Subgroup α} {x y : α} : (leftRel s).r x y ↔ x⁻¹ * y ∈ s :=
