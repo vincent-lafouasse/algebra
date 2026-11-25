@@ -19,7 +19,7 @@ variable {G : Type u} {M : Type v} [Group G] [Group M]
 /-! ### The universal property -/
 
 def lift (N : Subgroup G) [N.Normal] (φ : G →* M) (HN : N ≤ φ.ker) : G ⧸ N →* M :=
-  MonoidHom.mk' (Quotient.lift φ sorry) sorry
+  sorry
 
 theorem lift_mk (N : Subgroup G) [N.Normal] {φ : G →* M} (HN : N ≤ φ.ker) (g : G) :
     lift N φ HN g = φ g :=
@@ -40,7 +40,7 @@ theorem kerLift_injective : Function.Injective (kerLift φ) :=
 
 -- the same map, with its codomain cut down to the range
 def rangeKerLift : G ⧸ φ.ker →* φ.range :=
-  lift φ.ker φ.rangeRestrict sorry
+  sorry
 
 theorem rangeKerLift_injective : Function.Injective (rangeKerLift φ) :=
   sorry
