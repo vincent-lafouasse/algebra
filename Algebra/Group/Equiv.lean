@@ -122,22 +122,16 @@ theorem symm_symm (e : G ≃* H) : e.symm.symm = e :=
 theorem self_trans_symm (e : G ≃* H) : e.trans e.symm = MulEquiv.refl G := by
   apply ext
   intro (x : G)
-  calc
-    (e.trans e.symm) x
-    _ = (MulEquiv.trans e e.symm) x := rfl
-    _ = e.invFun (e.toFun x) := rfl
-    _ = x := by rw [e.left_inv]
-    _ = (MulEquiv.refl G) x := rfl
+  rw [trans_apply]
+  rw [symm_apply_apply]
+  rw [refl_apply] -- or just rfl, i don't care
 
 theorem symm_trans_self (e : G ≃* H) : e.symm.trans e = MulEquiv.refl H := by
   apply ext
   intro (y : H)
-  calc
-    e.symm.trans e y
-    _ = (MulEquiv.trans e.symm e) y := rfl
-    _ = e.toFun (e.invFun y) := rfl
-    _ = y := by rw [e.right_inv]
-    _ = (MulEquiv.refl H) y := rfl
+  rw [trans_apply]
+  rw [apply_symm_apply]
+  rfl
 
 theorem toMonoidHom_refl : (MulEquiv.refl G).toMonoidHom = MonoidHom.id G := by
   let auto := MulEquiv.refl G
