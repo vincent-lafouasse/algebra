@@ -1,11 +1,16 @@
 name = "algebra"
 version = "0.1.0"
-defaultTargets = ["Algebra"]
-# defaultTargets = ["Algebra", "Exercises"]
+defaultTargets = ["Base", "Algebra"]
+# defaultTargets = ["Base", "Algebra", "Exercises"]
 
 [leanOptions]
 linter.all = true
 linter.missingDocs = false
+
+# foundations: logic, functions, bijections, sets, order. Imports nothing but core.
+# Its own lib (and module prefix) so it can move to its own repo without renaming imports.
+[[lean_lib]]
+name = "Base"
 
 # the from-scratch library: never imports Mathlib
 [[lean_lib]]

@@ -1,5 +1,5 @@
-import Algebra.Logic.Function
-import Algebra.Data.Set
+import Base.Logic.Function
+import Base.Data.Set
 
 /-! # The Schröder–Bernstein theorem
 

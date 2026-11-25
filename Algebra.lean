@@ -1,9 +1,3 @@
-import Algebra.Logic.Function
-import Algebra.Logic.Equiv
-import Algebra.Logic.SchroederBernstein
-import Algebra.Data.Set
-import Algebra.Data.Int
-import Algebra.Order.Notation
 import Algebra.Group.Defs
 import Algebra.Group.Basic
 import Algebra.Group.Ext

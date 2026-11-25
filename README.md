@@ -10,14 +10,18 @@ comment says "(not in Mathlib)".
 
 ## Layout
 
+Two libraries. `Base` holds the foundations that are not algebra (functions, bijections,
+sets, order) and imports nothing but core; `Algebra` is built on it. `Base` has its own
+module prefix so that it can later move to its own repository without changing any import.
+
 | File | Contents | Mathlib |
 |---|---|---|
-| `Algebra/Logic/Function.lean` | injective/surjective/bijective, `surjInv`, `invFun` | `Logic/Function/{Defs,Basic}` |
-| `Algebra/Logic/Equiv.lean` | bijections `α ≃ β` | `Logic/Equiv/Defs` |
-| `Algebra/Logic/SchroederBernstein.lean` | injections both ways give a bijection | `SetTheory/Cardinal/SchroederBernstein` |
-| `Algebra/Data/Set.lean` | `Set α`, `{x \| p x}`, `⊆`, `{a}`, `univ` | `Data/Set/{Defs,Basic}` |
-| `Algebra/Data/Int.lean` | `Int.induction_on`, `negSucc` stepping facts | `Data/Int/Init` |
-| `Algebra/Order/Notation.lean` | `⊥`, `⊤`, `⊓` | `Order/Notation` |
+| `Base/Logic/Function.lean` | injective/surjective/bijective, `surjInv`, `invFun` | `Logic/Function/{Defs,Basic}` |
+| `Base/Logic/Equiv.lean` | bijections `α ≃ β` | `Logic/Equiv/Defs` |
+| `Base/Logic/SchroederBernstein.lean` | injections both ways give a bijection | `SetTheory/Cardinal/SchroederBernstein` |
+| `Base/Data/Set.lean` | `Set α`, `{x \| p x}`, `⊆`, `{a}`, `univ` | `Data/Set/{Defs,Basic}` |
+| `Base/Data/Int.lean` | `Int.induction_on`, `negSucc` stepping facts | `Data/Int/Init` |
+| `Base/Order/Notation.lean` | `⊥`, `⊤`, `⊓` | `Order/Notation` |
 | `Algebra/Group/Defs.lean` | `Group`, `CommGroup` | `Algebra/Group/Defs` |
 | `Algebra/Group/Basic.lean` | cancellation, inverses | `Algebra/Group/{Defs,Basic}` |
 | `Algebra/Group/Ext.lean` | `Group.ext` | `Algebra/Group/Ext` |

@@ -1,5 +1,5 @@
 #!/bin/bash
-# Run the Batteries environment linters on `Algebra`, ignoring missing docstrings
+# Run the Batteries environment linters on `Base` and `Algebra`, ignoring missing docstrings
 # (`docBlame`: this project documents with `--` comments). Bash 3.2 compatible.
 #
 #     scripts/lint.sh
@@ -8,8 +8,12 @@
 
 cd "$(dirname "$0")/.." || exit 1
 
-out=$(lake exe runLinter Algebra 2>&1)
+out=$(lake exe runLinter Base 2>&1)
 status=$?
+out2=$(lake exe runLinter Algebra 2>&1)
+status2=$?
+out=$(printf '%s\n%s' "$out" "$out2")
+[ "$status" -eq 0 ] && status=$status2
 
 ignored=$(printf '%s\n' "$out" | grep -c 'missing documentation string')
 errors=$(printf '%s\n' "$out" | grep 'error:' | grep -v 'missing documentation string')

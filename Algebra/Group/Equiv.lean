@@ -1,5 +1,5 @@
 import Algebra.Group.Hom
-import Algebra.Logic.Equiv
+import Base.Logic.Equiv
 
 /-! # Isomorphisms `G ≃* H`
 

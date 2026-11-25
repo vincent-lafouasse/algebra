@@ -1,4 +1,4 @@
-import Algebra.Logic.Function
+import Base.Logic.Function
 
 /-! # Bijections `α ≃ β`
 

@@ -1,5 +1,5 @@
 #!/bin/bash
-# Report which declarations in `Algebra` rest on `sorry` (the axiom `sorryAx`). Bash 3.2 compatible.
+# Report which declarations in `Base` and `Algebra` rest on `sorry` (the axiom `sorryAx`). Bash 3.2 compatible.
 #
 #     scripts/axioms.sh        # summary + the dangerous ones
 #     scripts/axioms.sh -v     # also list every stub
@@ -21,13 +21,14 @@ cd "$(dirname "$0")/.." || exit 1
 verbose=false
 [ "$1" = "-v" ] && verbose=true
 
-lake build Algebra >/dev/null 2>&1 || { echo "axioms: build failed, run 'lake build'"; exit 1; }
+lake build Base Algebra >/dev/null 2>&1 || { echo "axioms: build failed, run 'lake build'"; exit 1; }
 
 tmp=$(mktemp -d)
 trap 'rm -rf "$tmp"' EXIT
 
 cat > "$tmp/Axioms.lean" <<'EOF'
 import Lean
+import Base
 import Algebra
 open Lean Elab Command in
 #eval show CommandElabM Unit from do

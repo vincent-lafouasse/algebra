@@ -1,5 +1,5 @@
 import Algebra.Group.Subgroup.Defs
-import Algebra.Order.Notation
+import Base.Order.Notation
 
 /-! # `⊥`, `⊤` and `⊓` for subgroups
 
