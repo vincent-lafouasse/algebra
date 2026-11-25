@@ -65,17 +65,17 @@ theorem mapsTo_iff_subset_preimage {f : α → β} {s : Set α} {t : Set β} :
     MapsTo f s t ↔ s ⊆ f ⁻¹' t :=
   sorry
 
-theorem MapsTo.comp {g : β → γ} {f : α → β} {s : Set α} {t : Set β} {p : Set γ}
-    (hg : MapsTo g t p) (hf : MapsTo f s t) : MapsTo (g ∘ f) s p :=
+theorem MapsTo.comp {g : β → γ} {f : α → β} {s : Set α} {t : Set β} {p : Set γ} (hg : MapsTo g t p)
+    (hf : MapsTo f s t) : MapsTo (g ∘ f) s p :=
   sorry
 
 /-- `f`, seen as a function `↥s → ↥t`. -/
-def MapsTo.restrict (f : α → β) (s : Set α) (t : Set β) (h : MapsTo f s t) : s → t :=
-  fun x => ⟨f x.val, h x.property⟩
+def MapsTo.restrict (f : α → β) (s : Set α) (t : Set β) (h : MapsTo f s t) : s → t := fun x =>
+  ⟨f x.val, h x.property⟩
 
 -- (Mathlib: `MapsTo.val_restrict_apply`)
-theorem MapsTo.val_restrict_apply {f : α → β} {s : Set α} {t : Set β} (h : MapsTo f s t)
-    (x : s) : (MapsTo.restrict f s t h x).val = f x.val :=
+theorem MapsTo.val_restrict_apply {f : α → β} {s : Set α} {t : Set β} (h : MapsTo f s t) (x : s) :
+    (MapsTo.restrict f s t h x).val = f x.val :=
   sorry
 
 /-! ### `InjOn` -/
@@ -87,13 +87,12 @@ theorem InjOn.mono {f : α → β} {s₁ s₂ : Set α} (h : s₁ ⊆ s₂) (ht 
 theorem injOn_univ {f : α → β} : InjOn f univ ↔ Function.Injective f :=
   sorry
 
-theorem InjOn.comp {g : β → γ} {f : α → β} {s : Set α} {t : Set β} (hg : InjOn g t)
-    (hf : InjOn f s) (h : MapsTo f s t) : InjOn (g ∘ f) s :=
+theorem InjOn.comp {g : β → γ} {f : α → β} {s : Set α} {t : Set β} (hg : InjOn g t) (hf : InjOn f s)
+    (h : MapsTo f s t) : InjOn (g ∘ f) s :=
   sorry
 
 -- a left inverse on `s` makes `f` injective on `s` (compare `LeftInverse.injective`)
-theorem LeftInvOn.injOn {f' : β → α} {f : α → β} {s : Set α} (h : LeftInvOn f' f s) :
-    InjOn f s :=
+theorem LeftInvOn.injOn {f' : β → α} {f : α → β} {s : Set α} (h : LeftInvOn f' f s) : InjOn f s :=
   sorry
 
 /-! ### `SurjOn` -/
@@ -101,8 +100,8 @@ theorem LeftInvOn.injOn {f' : β → α} {f : α → β} {s : Set α} (h : LeftI
 theorem surjOn_univ {f : α → β} : SurjOn f univ univ ↔ Function.Surjective f :=
   sorry
 
-theorem SurjOn.comp {g : β → γ} {f : α → β} {s : Set α} {t : Set β} {p : Set γ}
-    (hg : SurjOn g t p) (hf : SurjOn f s t) : SurjOn (g ∘ f) s p :=
+theorem SurjOn.comp {g : β → γ} {f : α → β} {s : Set α} {t : Set β} {p : Set γ} (hg : SurjOn g t p)
+    (hf : SurjOn f s t) : SurjOn (g ∘ f) s p :=
   sorry
 
 /-! ### `BijOn` -/
@@ -114,8 +113,8 @@ theorem BijOn.mk {f : α → β} {s : Set α} {t : Set β} (h₁ : MapsTo f s t)
 theorem BijOn.image_eq {f : α → β} {s : Set α} {t : Set β} (h : BijOn f s t) : f '' s = t :=
   sorry
 
-theorem BijOn.comp {g : β → γ} {f : α → β} {s : Set α} {t : Set β} {p : Set γ}
-    (hg : BijOn g t p) (hf : BijOn f s t) : BijOn (g ∘ f) s p :=
+theorem BijOn.comp {g : β → γ} {f : α → β} {s : Set α} {t : Set β} {p : Set γ} (hg : BijOn g t p)
+    (hf : BijOn f s t) : BijOn (g ∘ f) s p :=
   sorry
 
 theorem bijOn_univ {f : α → β} : BijOn f univ univ ↔ Function.Bijective f :=

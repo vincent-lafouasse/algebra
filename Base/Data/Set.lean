@@ -86,7 +86,7 @@ theorem mem_empty_iff_false (x : α) : x ∈ (∅ : Set α) ↔ False := by
 
 -- (Mathlib: `Set.Elem`, with the same coercion)
 def Elem (s : Set α) : Type u :=
-  {x : α // x ∈ s}
+  { x : α // x ∈ s }
 
 instance : CoeSort (Set α) (Type u) :=
   ⟨Elem⟩
@@ -96,21 +96,18 @@ instance : CoeSort (Set α) (Type u) :=
 There is no dot notation on `h : s ⊆ t` (its head is `HasSubset.Subset`, not `Set`): write
 `Subset.trans h h'`. -/
 
-protected theorem Subset.refl (s : Set α) : s ⊆ s :=
-  λ _ h => h
+protected theorem Subset.refl (s : Set α) : s ⊆ s := λ _ h => h
 
-protected theorem Subset.trans {s t u : Set α} (hst : s ⊆ t) (htu : t ⊆ u) : s ⊆ u :=
-  λ _ h => h |> hst |> htu
+protected theorem Subset.trans {s t u : Set α} (hst : s ⊆ t) (htu : t ⊆ u) : s ⊆ u := λ _ h =>
+  h |> hst |> htu
 
 -- the way to prove two sets equal by double inclusion
 protected theorem Subset.antisymm {s t : Set α} (hst : s ⊆ t) (hts : t ⊆ s) : s = t :=
   Set.ext λ _ => Iff.intro (λ h => hst h) (λ h => hts h)
 
-theorem subset_univ (s : Set α) : s ⊆ univ :=
-  λ x _ => mem_univ x
+theorem subset_univ (s : Set α) : s ⊆ univ := λ x _ => mem_univ x
 
-theorem empty_subset (s : Set α) : ∅ ⊆ s :=
-  λ _ h_in_empty => False.elim h_in_empty
+theorem empty_subset (s : Set α) : ∅ ⊆ s := λ _ h_in_empty => False.elim h_in_empty
 
 /-! ### `∩`, `∪`, `\`
 
@@ -137,21 +134,17 @@ theorem mem_sdiff {s t : Set α} (x : α) : x ∈ s \ t ↔ x ∈ s ∧ x ∉ t 
   Iff.rfl
 
 -- `s ∩ t` is the largest set inside both
-theorem inter_subset_left {s t : Set α} : s ∩ t ⊆ s :=
-  λ _ hst => hst.left
+theorem inter_subset_left {s t : Set α} : s ∩ t ⊆ s := λ _ hst => hst.left
 
-theorem inter_subset_right {s t : Set α} : s ∩ t ⊆ t :=
-  λ _ hst => hst.right
+theorem inter_subset_right {s t : Set α} : s ∩ t ⊆ t := λ _ hst => hst.right
 
-theorem subset_inter {r s t : Set α} (hrs : r ⊆ s) (hrt : r ⊆ t) : r ⊆ s ∩ t :=
-  λ _ hr => And.intro (hrs hr) (hrt hr)
+theorem subset_inter {r s t : Set α} (hrs : r ⊆ s) (hrt : r ⊆ t) : r ⊆ s ∩ t := λ _ hr =>
+  And.intro (hrs hr) (hrt hr)
 
 -- `s ∪ t` is the smallest set containing both
-theorem subset_union_left {s t : Set α} : s ⊆ s ∪ t :=
-  λ _ hs => Or.inl hs
+theorem subset_union_left {s t : Set α} : s ⊆ s ∪ t := λ _ hs => Or.inl hs
 
-theorem subset_union_right {s t : Set α} : t ⊆ s ∪ t :=
-  λ _ hs => Or.inr hs
+theorem subset_union_right {s t : Set α} : t ⊆ s ∪ t := λ _ hs => Or.inr hs
 
 theorem union_subset {r s t : Set α} (hsr : s ⊆ r) (htr : t ⊆ r) : s ∪ t ⊆ r := by
   intro x hst
@@ -164,12 +157,11 @@ theorem inter_comm (s t : Set α) : s ∩ t = t ∩ s :=
   Subset.antisymm (h s t) (h t s)
 
 theorem union_comm (s t : Set α) : s ∪ t = t ∪ s :=
-  have h (a b: Set α) : a ∪ b ⊆ b ∪ a := union_subset subset_union_right subset_union_left
+  have h (a b : Set α) : a ∪ b ⊆ b ∪ a := union_subset subset_union_right subset_union_left
   Subset.antisymm (h s t) (h t s)
 
 -- (`diff_subset` until 2026)
-theorem sdiff_subset {s t : Set α} : s \ t ⊆ s :=
-  λ _ ⟨hs, _⟩ => hs
+theorem sdiff_subset {s t : Set α} : s \ t ⊆ s := λ _ ⟨hs, _⟩ => hs
 
 end Set
 

@@ -104,8 +104,8 @@ def orbitRel : Setoid α where
 
 variable {G α}
 
-theorem orbitRel_apply {a b : α} : (orbitRel G α).r a b ↔ a ∈ orbit G b :=
-  sorry
+-- theorem orbitRel_apply {a b : α} : (orbitRel G α).r a b ↔ a ∈ orbit G b :=
+-- sorry
 
 /-! ### Stabilizers -/
 
