@@ -99,8 +99,15 @@ theorem preimage_image_eq {f : α → β} (s : Set α) (hf : Function.Injective 
   · exact subset_preimage_image f s
 
 theorem image_preimage_eq {f : α → β} (t : Set β) (hf : Function.Surjective f) :
-    f '' (f ⁻¹' t) = t :=
-  sorry
+    f '' (f ⁻¹' t) = t := by
+  apply Set.Subset.antisymm
+  · intro y ⟨x, ⟨hx, he⟩⟩
+    subst he
+    exact hx
+  · intro y h
+    obtain ⟨x, hx⟩ := hf y
+    subst hx
+    exact ⟨x, ⟨h, rfl⟩⟩
 
 /-! ### Identity and composition -/
 
