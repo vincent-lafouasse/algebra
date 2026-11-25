@@ -47,7 +47,7 @@ theorem ker_eq_bot_iff (f : G →* H) : f.ker = ⊥ ↔ Function.Injective f :=
 theorem ker_eq_bot (f : G →* H) (hf : Function.Injective f) : f.ker = ⊥ :=
   sorry
 
-theorem range_eq_top (f : G →* H) : f.range = ⊤ ↔ Function.Surjective f :=
+theorem range_eq_top {f : G →* H} : f.range = ⊤ ↔ Function.Surjective f :=
   sorry
 
 /-! ### Restricting the codomain to the range -/

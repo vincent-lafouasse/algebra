@@ -72,7 +72,7 @@ theorem image_subset_iff {f : α → β} {s : Set α} {t : Set β} : f '' s ⊆ 
 theorem subset_preimage_image (f : α → β) (s : Set α) : s ⊆ f ⁻¹' (f '' s) :=
   image_subset_iff.mp (Subset.refl (f '' s))
 
-theorem image_mono {s t : Set α} (f : α → β) (h : s ⊆ t) : f '' s ⊆ f '' t := by
+theorem image_mono {f : α → β} {s t : Set α} (h : s ⊆ t) : f '' s ⊆ f '' t := by
   rw [image_subset_iff (s := s) (t := f '' t)]
   exact Subset.trans h (subset_preimage_image f t)
 
