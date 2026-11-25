@@ -78,10 +78,8 @@ theorem image_subset_iff {f : α → β} {s : Set α} {t : Set β} : f '' s ⊆ 
     subst hfx
     exact h hxs
 
-theorem image_preimage_subset (f : α → β) (t : Set β) : f '' (f ⁻¹' t) ⊆ t := by
-  intro y ⟨x, ⟨hxs, hfx⟩⟩
-  subst hfx
-  exact hxs
+theorem image_preimage_subset (f : α → β) (t : Set β) : f '' (f ⁻¹' t) ⊆ t :=
+  image_subset_iff.mpr (Set.Subset.refl (f ⁻¹' t))
 
 theorem subset_preimage_image (f : α → β) (s : Set α) : s ⊆ f ⁻¹' (f '' s) := by
   intro x hx
