@@ -98,10 +98,10 @@ There is no dot notation on `h : s ⊆ t` (its head is `HasSubset.Subset`, not `
 `Subset.trans h h'`. -/
 
 protected theorem Subset.refl (s : Set α) : s ⊆ s :=
-  λ _ => (λ h => h)
+  λ _ h => h
 
 protected theorem Subset.trans {s t u : Set α} (hst : s ⊆ t) (htu : t ⊆ u) : s ⊆ u :=
-  sorry
+  λ _ h => h |> hst |> htu
 
 -- the way to prove two sets equal by double inclusion
 protected theorem Subset.antisymm {s t : Set α} (hst : s ⊆ t) (hts : t ⊆ s) : s = t :=
