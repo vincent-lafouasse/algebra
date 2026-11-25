@@ -28,11 +28,7 @@ instance : Group (MulAut G) where
   mul e₁ e₂ := MulEquiv.trans e₂ e₁
   one := MulEquiv.refl G
   inv := MulEquiv.symm
-  mul_assoc := by
-    intro a b c
-    apply MulEquiv.ext
-    intro _
-    rfl
+  mul_assoc := λ _ _ _ => rfl
   one_mul := by
     intro a
     show a.trans (MulEquiv.refl G) = a
