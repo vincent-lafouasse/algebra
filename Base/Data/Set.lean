@@ -110,10 +110,10 @@ protected theorem Subset.antisymm {s t : Set α} (hst : s ⊆ t) (hts : t ⊆ s)
   exact Iff.intro (λ h => hst h) (λ h => hts h)
 
 theorem subset_univ (s : Set α) : s ⊆ univ :=
-  sorry
+  λ _ _ => trivial
 
 theorem empty_subset (s : Set α) : ∅ ⊆ s :=
-  sorry
+  λ _ h_in_empty => False.elim h_in_empty
 
 /-! ### `∩`, `∪`, `\`
 
