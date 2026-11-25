@@ -19,7 +19,9 @@ module prefix so that it can later move to its own repository without changing a
 | `Base/Logic/Function.lean` | injective/surjective/bijective, `surjInv`, `invFun` | `Logic/Function/{Defs,Basic}` |
 | `Base/Logic/Equiv.lean` | bijections `α ≃ β` | `Logic/Equiv/Defs` |
 | `Base/Logic/SchroederBernstein.lean` | injections both ways give a bijection | `SetTheory/Cardinal/SchroederBernstein` |
-| `Base/Data/Set.lean` | `Set α`, `{x \| p x}`, `⊆`, `{a}`, `univ` | `Data/Set/{Defs,Basic}` |
+| `Base/Data/Set.lean` | `Set α`, `{x \| p x}`, `⊆`, `{a}`, `univ`, `∅`, `∩ ∪ \`, `↥s` | `Data/Set/{Defs,Basic}` |
+| `Base/Data/Set/Image.lean` | images `f '' s`, preimages `f ⁻¹' t`, `range f` | `Data/Set/{Defs,Operations,Image}` |
+| `Base/Data/Set/Function.lean` | `MapsTo`, `InjOn`, `SurjOn`, `BijOn`, `EqOn`, `InvOn`, `BijOn.equiv` | `Data/Set/Function` |
 | `Base/Data/Int.lean` | `Int.induction_on`, `negSucc` stepping facts | `Data/Int/Init` |
 | `Base/Order/Notation.lean` | `⊥`, `⊤`, `⊓` | `Order/Notation` |
 | `Algebra/Group/Defs.lean` | `Group`, `CommGroup` | `Algebra/Group/Defs` |

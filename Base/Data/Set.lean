@@ -4,7 +4,10 @@ Mathlib: `Mathlib/Data/Set/Defs.lean`, `Mathlib/Data/Set/Basic.lean`.
 
 A set of elements of `α` is a predicate on `α`: `Set α := α → Prop`. Membership `a ∈ s`
 means `s a`, and `{x | p x}` is the set of those `x` with `p x`. Everything else is defined
-through these two, so use the `mem_` lemmas rather than unfolding. -/
+through these two, so use the `mem_` lemmas rather than unfolding.
+
+Images and preimages are in `Base/Data/Set/Image.lean`, functions between sets (`MapsTo`,
+`InjOn`, `BijOn`, …) in `Base/Data/Set/Function.lean`. -/
 
 universe u
 
@@ -72,6 +75,91 @@ instance : EmptyCollection (Set α) :=
 theorem mem_empty_iff_false (x : α) : x ∈ (∅ : Set α) ↔ False := by
   show x ∈ {_x | False} ↔ False
   rfl
+
+/-! ### A set as a type
+
+`↥s` is the subtype `{x // x ∈ s}`: an element is a value with a proof that it lies in `s`
+(the same move as `↥H` for a subgroup). -/
+
+-- (Mathlib: `Set.Elem`, with the same coercion)
+def Elem (s : Set α) : Type u :=
+  {x : α // x ∈ s}
+
+instance : CoeSort (Set α) (Type u) :=
+  ⟨Elem⟩
+
+/-! ### `⊆` is a partial order
+
+There is no dot notation on `h : s ⊆ t` (its head is `HasSubset.Subset`, not `Set`): write
+`Subset.trans h h'`. -/
+
+protected theorem Subset.refl (s : Set α) : s ⊆ s :=
+  sorry
+
+protected theorem Subset.trans {s t u : Set α} (hst : s ⊆ t) (htu : t ⊆ u) : s ⊆ u :=
+  sorry
+
+-- the way to prove two sets equal by double inclusion
+protected theorem Subset.antisymm {s t : Set α} (hst : s ⊆ t) (hts : t ⊆ s) : s = t :=
+  sorry
+
+theorem subset_univ (s : Set α) : s ⊆ univ :=
+  sorry
+
+theorem empty_subset (s : Set α) : ∅ ⊆ s :=
+  sorry
+
+/-! ### `∩`, `∪`, `\`
+
+Core provides the notation classes `Inter`, `Union` and `SDiff`. -/
+
+instance : Inter (Set α) :=
+  ⟨fun s t => {x | x ∈ s ∧ x ∈ t}⟩
+
+instance : Union (Set α) :=
+  ⟨fun s t => {x | x ∈ s ∨ x ∈ t}⟩
+
+instance : SDiff (Set α) :=
+  ⟨fun s t => {x | x ∈ s ∧ x ∉ t}⟩
+
+-- the interface: membership in `∩`, `∪`, `\`
+theorem mem_inter_iff (x : α) (s t : Set α) : x ∈ s ∩ t ↔ x ∈ s ∧ x ∈ t :=
+  sorry
+
+theorem mem_union (x : α) (s t : Set α) : x ∈ s ∪ t ↔ x ∈ s ∨ x ∈ t :=
+  sorry
+
+theorem mem_diff {s t : Set α} (x : α) : x ∈ s \ t ↔ x ∈ s ∧ x ∉ t :=
+  sorry
+
+-- `s ∩ t` is the largest set inside both
+theorem inter_subset_left {s t : Set α} : s ∩ t ⊆ s :=
+  sorry
+
+theorem inter_subset_right {s t : Set α} : s ∩ t ⊆ t :=
+  sorry
+
+theorem subset_inter {r s t : Set α} (hrs : r ⊆ s) (hrt : r ⊆ t) : r ⊆ s ∩ t :=
+  sorry
+
+-- `s ∪ t` is the smallest set containing both
+theorem subset_union_left {s t : Set α} : s ⊆ s ∪ t :=
+  sorry
+
+theorem subset_union_right {s t : Set α} : t ⊆ s ∪ t :=
+  sorry
+
+theorem union_subset {r s t : Set α} (hsr : s ⊆ r) (htr : t ⊆ r) : s ∪ t ⊆ r :=
+  sorry
+
+theorem inter_comm (s t : Set α) : s ∩ t = t ∩ s :=
+  sorry
+
+theorem union_comm (s t : Set α) : s ∪ t = t ∪ s :=
+  sorry
+
+theorem diff_subset {s t : Set α} : s \ t ⊆ s :=
+  sorry
 
 end Set
 
