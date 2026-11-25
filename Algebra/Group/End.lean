@@ -35,8 +35,7 @@ instance : Group (MulAut G) where
     rfl
   one_mul := by
     intro a
-    apply MulEquiv.ext
-    intro x
+    show a.trans (MulEquiv.refl G) = a
     rfl
   inv_mul_cancel := MulEquiv.self_trans_symm
 
