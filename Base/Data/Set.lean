@@ -148,10 +148,10 @@ theorem subset_inter {r s t : Set α} (hrs : r ⊆ s) (hrt : r ⊆ t) : r ⊆ s 
 
 -- `s ∪ t` is the smallest set containing both
 theorem subset_union_left {s t : Set α} : s ⊆ s ∪ t :=
-  sorry
+  λ _ hs => Or.inl hs
 
 theorem subset_union_right {s t : Set α} : t ⊆ s ∪ t :=
-  sorry
+  λ _ hs => Or.inr hs
 
 theorem union_subset {r s t : Set α} (hsr : s ⊆ r) (htr : t ⊆ r) : s ∪ t ⊆ r :=
   sorry
