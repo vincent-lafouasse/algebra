@@ -30,7 +30,7 @@ theorem lift_mk (N : Subgroup G) [N.Normal] {φ : G →* M} (HN : N ≤ φ.ker) 
 variable (φ : G →* M)
 
 def kerLift : G ⧸ φ.ker →* M :=
-  lift φ.ker φ (Subgroup.le_refl _)
+  sorry
 
 theorem kerLift_mk (g : G) : kerLift φ g = φ g :=
   sorry
@@ -51,11 +51,11 @@ theorem rangeKerLift_surjective : Function.Surjective (rangeKerLift φ) :=
 /-! ### The theorem -/
 
 noncomputable def quotientKerEquivRange : G ⧸ φ.ker ≃* φ.range :=
-  MulEquiv.ofBijective (rangeKerLift φ) ⟨rangeKerLift_injective φ, rangeKerLift_surjective φ⟩
+  sorry
 
 -- a surjective hom: G ⧸ ker φ ≃* M
 noncomputable def quotientKerEquivOfSurjective (hφ : Function.Surjective φ) : G ⧸ φ.ker ≃* M :=
-  MulEquiv.ofBijective (kerLift φ) ⟨kerLift_injective φ, sorry⟩
+  sorry
 
 end QuotientGroup
 
