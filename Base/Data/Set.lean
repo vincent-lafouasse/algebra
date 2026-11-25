@@ -160,11 +160,11 @@ theorem union_subset {r s t : Set α} (hsr : s ⊆ r) (htr : t ⊆ r) : s ∪ t 
   | inr ht => exact htr ht
 
 theorem inter_comm (s t : Set α) : s ∩ t = t ∩ s :=
-  have h (a b: Set α) : a ∩ b ⊆ b ∩ a := sorry
+  have h (a b : Set α) : a ∩ b ⊆ b ∩ a := subset_inter inter_subset_right inter_subset_left
   Subset.antisymm (h s t) (h t s)
 
 theorem union_comm (s t : Set α) : s ∪ t = t ∪ s :=
-  have h (a b: Set α) : a ∪ b ⊆ b ∪ a := sorry
+  have h (a b: Set α) : a ∪ b ⊆ b ∪ a := union_subset subset_union_right subset_union_left
   Subset.antisymm (h s t) (h t s)
 
 theorem diff_subset {s t : Set α} : s \ t ⊆ s :=
