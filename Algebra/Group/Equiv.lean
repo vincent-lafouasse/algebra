@@ -134,23 +134,15 @@ theorem symm_trans_self (e : G ≃* H) : e.symm.trans e = MulEquiv.refl H := by
   rfl
 
 theorem toMonoidHom_refl : (MulEquiv.refl G).toMonoidHom = MonoidHom.id G := by
-  let auto := MulEquiv.refl G
   apply MonoidHom.ext
-  intro (x : G)
-  calc
-    auto.toMonoidHom x
-    _ = auto.toFun x := rfl
-    _ = id x := rfl
-    _ = (MonoidHom.id G) x := rfl
+  intro x
+  rfl
 
 theorem toMonoidHom_trans (e : G ≃* H) (e' : H ≃* K) :
     (e.trans e').toMonoidHom = e'.toMonoidHom ∘* e.toMonoidHom := by
   apply MonoidHom.ext
   intro (x : G)
-  calc
-    (e.trans e').toMonoidHom x
-    _ = e'.toFun (e.toFun x) := rfl
-    _ = (e'.toMonoidHom ∘* e.toMonoidHom) x := rfl
+  rfl
 
 protected theorem injective (e : G ≃* H) : Function.Injective e :=
   Function.LeftInverse.injective e.left_inv
