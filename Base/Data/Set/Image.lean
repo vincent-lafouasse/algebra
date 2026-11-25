@@ -44,16 +44,16 @@ infixl:80 " ⁻¹' " => preimage
 
 -- `∃ x ∈ s, P` is `∃ x, x ∈ s ∧ P`
 theorem mem_image (f : α → β) (s : Set α) (y : β) : y ∈ f '' s ↔ ∃ x ∈ s, f x = y :=
-  sorry
+  Iff.rfl
 
 theorem mem_image_of_mem (f : α → β) {x : α} {s : Set α} (h : x ∈ s) : f x ∈ f '' s :=
   sorry
 
 theorem mem_preimage {f : α → β} {t : Set β} {a : α} : a ∈ f ⁻¹' t ↔ f a ∈ t :=
-  sorry
+  Iff.rfl
 
 theorem mem_range {f : α → β} {y : β} : y ∈ range f ↔ ∃ x, f x = y :=
-  sorry
+  Iff.rfl
 
 theorem mem_range_self (f : α → β) (x : α) : f x ∈ range f :=
   sorry
