@@ -60,8 +60,7 @@ theorem mem_range_self (f : α → β) (x : α) : f x ∈ range f :=
 
 /-! ### Monotonicity and the adjunction -/
 
--- (Mathlib may have renamed this `image_mono`)
-theorem image_subset {s t : Set α} (f : α → β) (h : s ⊆ t) : f '' s ⊆ f '' t :=
+theorem image_mono {s t : Set α} (f : α → β) (h : s ⊆ t) : f '' s ⊆ f '' t :=
   λ _ ⟨x, ⟨hxs, hfx⟩⟩ => ⟨x, ⟨h hxs, hfx⟩⟩
 
 theorem preimage_mono {f : α → β} {s t : Set β} (h : s ⊆ t) : f ⁻¹' s ⊆ f ⁻¹' t :=
@@ -98,7 +97,7 @@ theorem image_preimage_eq {f : α → β} (t : Set β) (hf : Function.Surjective
   intro y h
   obtain ⟨x, hx⟩ := hf y
   subst hx
-  exact ⟨x, ⟨h, rfl⟩⟩
+  exact mem_image_of_mem f h
 
 /-! ### Identity and composition -/
 
