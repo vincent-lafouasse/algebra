@@ -53,8 +53,7 @@ theorem ker_apply_mk_out {f : α → β} (a : α) :
 theorem piecewise_constant (f : α → β) : ∀ (a b : α), ker f a b → f a = f b := by
   intro _ _
   rw [ker_def]
-  intro h
-  exact h
+  exact id
 
 /-- `f` on classes: well defined, since related elements have the same image by definition. -/
 def kerLift (f : α → β) : Quotient (ker f) → β :=
