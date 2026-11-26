@@ -54,7 +54,6 @@ variable {sa : Setoid α} {sb : Setoid β}
 
 /-! ### Equality and induction -/
 
--- the two directions `Quotient.exact` and `Quotient.sound` as one iff
 theorem eq {r : Setoid α} {x y : α} : Quotient.mk r x = ⟦y⟧ ↔ r x y :=
   Iff.intro Quotient.exact Quotient.sound
 
