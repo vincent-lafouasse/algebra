@@ -32,13 +32,15 @@ variable {α : Sort u} {β : Sort v}
 
 /-! ### Notation -/
 
--- `s x y` for `s.r x y`. Registered by hand, as in Mathlib: a plain `attribute [coe]` guesses
--- the wrong argument as the one being coerced (goals then print `↑x y`); here it is the
--- setoid, argument 1 of `@Setoid.r α s` (`numArgs := 2`: `α` and `s`). This is the only reason
--- the file imports Lean's metaprogramming library.
+-- `s x y` for `s.r x y`; goals print it `↑s x y`, so you can see a setoid is being used as a
+-- relation. Registered by hand: `Setoid` is a class, so in `@Setoid.r α s x y` the setoid `s`
+-- is instance-implicit, and a plain `attribute [coe]` takes the first explicit argument (`x`)
+-- as the one coerced, printing `↑x y`. Here it is argument 1 (`numArgs := 2`: `α` and `s`).
+-- Mathlib registers it as `.coeFun`, which prints `s x y` with no arrow (not in Mathlib: `.coe`,
+-- for the arrow). This is the only reason the file imports Lean's metaprogramming library.
 run_cmd Lean.Elab.Command.liftTermElabM do
   Lean.Meta.registerCoercion ``Setoid.r
-    (some { numArgs := 2, coercee := 1, type := .coeFun })
+    (some { numArgs := 2, coercee := 1, type := .coe })
 
 instance {α : Sort u} : CoeFun (Setoid α) (λ _ => α → α → Prop) :=
   ⟨@Setoid.r _⟩
