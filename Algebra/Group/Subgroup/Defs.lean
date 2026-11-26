@@ -104,7 +104,6 @@ instance : LE (Subgroup G) :=
 theorem le_def {H K : Subgroup G} : H ≤ K ↔ ∀ ⦃x⦄, x ∈ H → x ∈ K :=
   Iff.rfl
 
--- the bridge to `⊆` on carriers: facts about `≤` can come from `Set.Subset.refl`, `.trans`, …
 -- (Mathlib: `SetLike.coe_subset_coe`)
 theorem coe_subset_coe {H K : Subgroup G} : (H : Set G) ⊆ (K : Set G) ↔ H ≤ K :=
   sorry
