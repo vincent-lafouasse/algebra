@@ -72,8 +72,11 @@ theorem IsConj.symm {a b : α} : IsConj a b → IsConj b a := by
 theorem isConj_comm {g h : α} : IsConj g h ↔ IsConj h g :=
   Iff.intro IsConj.symm IsConj.symm
 
-theorem IsConj.trans {a b c : α} : IsConj a b → IsConj b c → IsConj a c :=
-  sorry
+theorem IsConj.trans {a b c : α} : IsConj a b → IsConj b c → IsConj a c := by
+  intro ⟨x, hab⟩ ⟨x', hbc⟩
+  subst hab
+  have h : (x' * x) * a * (x' * x)⁻¹ = c := sorry
+  exact ⟨x' * x, h⟩
 
 /-! ### Conjugates of special elements -/
 
