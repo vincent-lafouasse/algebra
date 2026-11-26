@@ -29,8 +29,8 @@ theorem Group.ext {G : Type u} ⦃g₁ g₂ : Group G⦄
   sorry
 
 theorem Group.ext_iff {G : Type u} {g₁ g₂ : Group G} :
-    g₁ = g₂ ↔ (letI := g₁; HMul.hMul : G → G → G) = (letI := g₂; HMul.hMul : G → G → G) := by
-  refine Iff.intro (λ (he : g₁ = g₂) => by subst he; rfl)
-                   (λ h_mul => Group.ext h_mul)
+    g₁ = g₂ ↔ (letI := g₁; HMul.hMul : G → G → G) = (letI := g₂; HMul.hMul : G → G → G) :=
+  Iff.intro (λ (he : g₁ = g₂) => by subst he; rfl)
+            (λ h_mul => Group.ext h_mul)
 
 end My
