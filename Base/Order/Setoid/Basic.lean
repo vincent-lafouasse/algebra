@@ -65,10 +65,11 @@ theorem kerLift_mk (f : α → β) (x : α) : kerLift f ⟦x⟧ = f x :=
 -- the point of quotienting by the kernel
 theorem kerLift_injective (f : α → β) : Function.Injective (kerLift f) := by
   intro qa qb he
-  rw [← Quotient.out_eq qa] at he
-  rw [← Quotient.out_eq qb] at he
+  obtain ⟨a, rfl⟩ := Quotient.exists_rep qa
+  obtain ⟨b, rfl⟩ := Quotient.exists_rep qb
   rw [kerLift_mk, kerLift_mk] at he
-  exact Quotient.out_equiv_out.mp he
+  rw [Quotient.sound]
+  exact he
 
 theorem range_kerLift_eq_range (f : α → β) : Set.range (kerLift f) = Set.range f := by
   apply Set.Subset.antisymm
