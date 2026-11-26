@@ -51,6 +51,20 @@ abbrev Group.ofLeftAxioms {G : Type u} [Mul G] [Inv G] [One G]
       _ = a * (1 * a⁻¹) := by rw [inv_mul_cancel]
       _ = a * a⁻¹ := by rw [one_mul]
 
+theorem idem_el_iff_eq_one_right_axioms {G : Type u} [Mul G] [Inv G] [One G]
+    (assoc : ∀ a b c : G, (a * b) * c = a * (b * c)) (mul_one : ∀ a : G, a * 1 = a)
+    (mul_inv_cancel : ∀ a : G, a * a⁻¹ = 1) (e : G) : e * e = e ↔ e = 1 := by
+  apply Iff.intro
+  · intro h
+    replace h := congrArg (. * e⁻¹) h
+    rw [assoc] at h
+    rw [mul_inv_cancel] at h
+    rw [mul_one] at h
+    exact h
+  · intro h
+    subst h
+    rw [mul_one]
+
 /-- A group from associativity, a right identity and a right inverse: the mirror image.
 The work is `one_mul` and `inv_mul_cancel`; which one comes first? -/
 abbrev Group.ofRightAxioms {G : Type u} [Mul G] [Inv G] [One G]
@@ -60,7 +74,14 @@ abbrev Group.ofRightAxioms {G : Type u} [Mul G] [Inv G] [One G]
   mul_assoc := assoc
   one_mul := sorry
   mul_one := mul_one
-  inv_mul_cancel := sorry
+  inv_mul_cancel := by
+    intro a
+    rw [← idem_el_iff_eq_one_right_axioms assoc mul_one mul_inv_cancel]
+    calc
+      (a⁻¹ * a) * (a⁻¹ * a)
+      _ = a⁻¹ * (a * a⁻¹) * a := by simp only [assoc]
+      _ = a⁻¹ * 1 * a := by rw [mul_inv_cancel]
+      _ = a⁻¹ * a := by rw [mul_one]
   mul_inv_cancel := sorry
 
 /- Exercise (no stub): what about a left identity `1 * a = a` with a *right* inverse
