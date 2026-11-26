@@ -99,10 +99,8 @@ theorem lift_comp_mk (f : α → β) (h : ∀ a b : α, a ≈ b → f a = f b) :
 /-- A map between quotients, from a map `f` that sends related elements to related elements. -/
 protected def map (f : α → β) (h : ∀ ⦃a b : α⦄, a ≈ b → f a ≈ f b) : Quotient sa → Quotient sb := by
   intro (q : Quotient sa)
-  let g : α → Quotient sb :=
-    λ a => Quotient.mk sb (f a)
-  have hg : ∀ ⦃a b : α⦄, a ≈ b → g a = g b :=
-    λ _ _ hab => Quotient.sound (h hab)
+  let g : α → Quotient sb := λ a => Quotient.mk sb (f a)
+  have hg : ∀ ⦃a b : α⦄, a ≈ b → g a = g b := λ _ _ hab => Quotient.sound (h hab)
   exact Quotient.lift g hg q
 
 theorem map_mk (f : α → β) (h : ∀ ⦃a b : α⦄, a ≈ b → f a ≈ f b) (x : α) :
@@ -115,14 +113,12 @@ protected def map₂ {γ : Sort w} {sc : Setoid γ} (f : α → β → γ)
     (h : ∀ ⦃a₁ a₂⦄, a₁ ≈ a₂ → ∀ ⦃b₁ b₂⦄, b₁ ≈ b₂ → f a₁ b₁ ≈ f a₂ b₂) :
     Quotient sa → Quotient sb → Quotient sc := by
   intro qα qβ
-  let g : α → β → Quotient sc :=
-    λ a b => Quotient.mk sc (f a b)
-  have hg : ∀ (a₁ : α) (b₁ : β) (a₂ : α) (b₂ : β), a₁ ≈ a₂ → b₁ ≈ b₂ → g a₁ b₁ = g a₂ b₂ :=
-    by
-      intro a₁ b₁ a₂ b₂ ha hb
-      have hf : f a₁ b₁ ≈ f a₂ b₂ := h ha hb
-      have hg : g a₁ b₁ = g a₂ b₂ := Quotient.sound hf
-      exact hg
+  let g : α → β → Quotient sc := λ a b => Quotient.mk sc (f a b)
+  have hg : ∀ (a₁ : α) (b₁ : β) (a₂ : α) (b₂ : β), a₁ ≈ a₂ → b₁ ≈ b₂ → g a₁ b₁ = g a₂ b₂ := by
+    intro a₁ b₁ a₂ b₂ ha hb
+    have hf : f a₁ b₁ ≈ f a₂ b₂ := h ha hb
+    have hg : g a₁ b₁ = g a₂ b₂ := Quotient.sound hf
+    exact hg
   exact Quotient.lift₂ g hg qα qβ
 
 theorem map₂_mk {γ : Sort w} {sc : Setoid γ} (f : α → β → γ)
@@ -150,13 +146,14 @@ theorem mk_eq_iff_out {s : Setoid α} {a : α} {q : Quotient s} : ⟦a⟧ = q �
   rw [out_eq q]
 
 theorem eq_mk_iff_out {s : Setoid α} {q : Quotient s} {a : α} : q = ⟦a⟧ ↔ Quotient.out q ≈ a :=
-  Iff.intro (s.iseqv.symm ∘ mk_eq_iff_out.mp ∘ Eq.symm)
-            (Eq.symm ∘ mk_eq_iff_out.mpr ∘ s.iseqv.symm)
+  Iff.intro (s.iseqv.symm ∘ mk_eq_iff_out.mp ∘ Eq.symm) (Eq.symm ∘ mk_eq_iff_out.mpr ∘ s.iseqv.symm)
 
 theorem out_equiv_out {s : Setoid α} {q₁ q₂ : Quotient s} :
     Quotient.out q₁ ≈ Quotient.out q₂ ↔ q₁ = q₂ := by
-  conv => rhs; rw [← out_eq q₁]
-  conv => rhs; rw [← out_eq q₂]
+  conv =>
+    rhs; rw [← out_eq q₁]
+  conv =>
+    rhs; rw [← out_eq q₂]
   rw [eq]
 
 theorem out_injective {s : Setoid α} : Function.Injective (@Quotient.out α s) := by

@@ -69,8 +69,8 @@ instance : twoZ.Normal :=
 
 -- two integers have the same class mod 2 exactly when their difference is even
 theorem mk_eq_mk_iff_two_dvd {a b : Int} :
-    ((ofAdd a : Multiplicative Int) : Multiplicative Int ⧸ twoZ) = (ofAdd b : Multiplicative Int)
-      ↔ (2 : Int) ∣ b - a :=
+    ((ofAdd a : Multiplicative Int) : Multiplicative Int ⧸ twoZ) = (ofAdd b : Multiplicative Int) ↔
+      (2 : Int) ∣ b - a :=
   sorry
 
 -- exactly two classes: the evens and the odds

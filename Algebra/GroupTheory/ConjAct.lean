@@ -29,7 +29,6 @@ def ConjAct (G : Type u) : Type u :=
 namespace ConjAct
 
 open MulAction Subgroup
-
 variable {G : Type u} [Group G]
 
 -- the same group, under another name
@@ -107,12 +106,10 @@ theorem mem_orbit_conjAct {g h : G} : g ∈ orbit (ConjAct G) h ↔ IsConj g h :
 -- "conjugate"). It is left out until `orbitRel`'s relation is filled in: with `r a b := sorry`
 -- its statement doesn't mention `G`, so `orbitRel G α` doesn't typecheck yet.
 
-theorem orbit_eq_carrier_conjClasses (g : G) :
-    orbit (ConjAct G) g = (ConjClasses.mk g).carrier :=
+theorem orbit_eq_carrier_conjClasses (g : G) : orbit (ConjAct G) g = (ConjClasses.mk g).carrier :=
   sorry
 
-theorem stabilizer_eq_centralizer (g : G) :
-    stabilizer (ConjAct G) g = centralizer {toConjAct g} :=
+theorem stabilizer_eq_centralizer (g : G) : stabilizer (ConjAct G) g = centralizer {toConjAct g} :=
   sorry
 
 end ConjAct

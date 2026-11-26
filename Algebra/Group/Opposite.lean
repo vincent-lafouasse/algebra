@@ -19,8 +19,7 @@ universe u
 
 namespace My
 
-structure MulOpposite (α : Type u) where
-  op ::
+structure MulOpposite (α : Type u) where op ::
   unop : α
 
 postfix:max "ᵐᵒᵖ" => MulOpposite

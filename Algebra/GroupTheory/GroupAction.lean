@@ -190,8 +190,8 @@ end MulAction
 
 /-- **Cayley's theorem**, for any faithful action: `G` is isomorphic to a group of
 permutations of `H`. With `H = G` acting on itself, the textbook statement. -/
-noncomputable def Equiv.Perm.subgroupOfMulAction (G : Type u) (H : Type v) [Group G]
-    [MulAction G H] [FaithfulSMul G H] : G ≃* (MulAction.toPermHom G H).range :=
+noncomputable def Equiv.Perm.subgroupOfMulAction (G : Type u) (H : Type v) [Group G] [MulAction G H]
+    [FaithfulSMul G H] : G ≃* (MulAction.toPermHom G H).range :=
   sorry
 
 /-! ### Examples -/
