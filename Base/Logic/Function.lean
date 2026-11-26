@@ -97,13 +97,13 @@ variable {f : α → α} (h : Involutive f)
 include h
 
 theorem comp_self : f ∘ f = id :=
-  sorry
+  funext h
 
 protected theorem leftInverse : Function.LeftInverse f f :=
-  sorry
+  h
 
 protected theorem rightInverse : Function.RightInverse f f :=
-  sorry
+  h
 
 protected theorem injective : Function.Injective f :=
   sorry
