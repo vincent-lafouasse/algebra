@@ -354,8 +354,11 @@ theorem conj_mul {a b c : G} : b * a * b⁻¹ * (b * c * b⁻¹) = b * (a * c) *
     _ = b * (a * 1 * c) * b⁻¹ := by rw [inv_mul_cancel]
     _ = b * (a * c) * b⁻¹ := by rw [mul_one]
 
-theorem conj_injective {x : G} : Function.Injective λ g : G => x * g * x⁻¹ :=
-  sorry
+theorem conj_injective {x : G} : Function.Injective λ g : G => x * g * x⁻¹ := by
+  intro a b h
+  replace h := mul_right_cancel h
+  replace h := mul_left_cancel h
+  exact h
 
 /-! ### Commutative groups -/
 
