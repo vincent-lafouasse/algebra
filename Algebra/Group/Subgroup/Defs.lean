@@ -191,10 +191,7 @@ theorem coe_one : ((1 : H) : G) = 1 :=
 def subtype : H →* G where
   toFun := Subtype.val
   map_one' := rfl
-  map_mul' := by
-    rintro ⟨xv, _⟩
-    rintro ⟨yv, _⟩
-    rfl
+  map_mul' := λ _ _ => rfl
 
 theorem subtype_apply {H : Subgroup G} (x : H) : H.subtype x = x :=
   rfl
