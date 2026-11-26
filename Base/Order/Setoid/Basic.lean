@@ -74,9 +74,9 @@ theorem kerLift_injective (f : α → β) : Function.Injective (kerLift f) := by
 theorem range_kerLift_eq_range (f : α → β) : Set.range (kerLift f) = Set.range f := by
   apply Set.Subset.antisymm
   · intro y ⟨q, hx⟩
-    rw [← Quotient.out_eq q] at hx
+    obtain ⟨x, rfl⟩ := Quotient.exists_rep q
     rw [kerLift_mk] at hx
-    exact ⟨Quotient.out q, hx⟩
+    exact Exists.intro x hx
   · intro y ⟨x, hx⟩
     rw [← kerLift_mk f x] at hx
     exact ⟨⟦x⟧, hx⟩
