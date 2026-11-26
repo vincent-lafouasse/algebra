@@ -63,7 +63,7 @@ theorem coe_range (f : G →* H) : (f.range : Set H) = Set.range f :=
   rfl
 
 theorem mem_range {f : G →* H} {y : H} : y ∈ f.range ↔ ∃ x, f x = y :=
-  sorry
+  Iff.rfl
 
 -- f identifies x and y exactly when they differ by an element of the kernel
 theorem eq_iff (f : G →* H) {x y : G} : f x = f y ↔ y⁻¹ * x ∈ f.ker :=
