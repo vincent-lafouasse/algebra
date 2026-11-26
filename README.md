@@ -25,6 +25,7 @@ module prefix so that it can later move to its own repository without changing a
 | `Base/Data/Int.lean` | `Int.induction_on`, `negSucc` stepping facts | `Data/Int/Init` |
 | `Base/Order/Notation.lean` | `⊥`, `⊤`, `⊓` | `Order/Notation` |
 | `Algebra/Group/Defs.lean` | `Group`, `CommGroup` | `Algebra/Group/Defs` |
+| `Algebra/Group/MinimalAxioms.lean` | `Group.ofLeftAxioms`, `Group.ofRightAxioms` | `Algebra/Group/MinimalAxioms` |
 | `Algebra/Group/Basic.lean` | cancellation, inverses | `Algebra/Group/{Defs,Basic}` |
 | `Algebra/Group/Ext.lean` | `Group.ext` | `Algebra/Group/Ext` |
 | `Algebra/Group/Commute.lean` | `Commute a b` | `Algebra/Group/Commute/{Defs,Basic}` |

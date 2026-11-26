@@ -73,6 +73,7 @@ instance Quotient.group : Group (G ⧸ N) where
   inv := sorry
   mul_assoc := sorry
   one_mul := sorry
+  mul_one := sorry
   inv_mul_cancel := sorry
 
 theorem mk_mul (a b : G) : ((a * b : G) : G ⧸ N) = (a : G ⧸ N) * (b : G ⧸ N) :=

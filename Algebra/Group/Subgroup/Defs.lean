@@ -146,6 +146,11 @@ instance toGroup : Group H where
     apply Subtype.ext
     show 1 * val_a = val_a
     exact one_mul val_a
+  mul_one := by
+    rintro ⟨val_a, _⟩
+    apply Subtype.ext
+    show val_a * 1 = val_a
+    exact mul_one val_a
   inv_mul_cancel := by
     rintro ⟨val_a, _⟩
     apply Subtype.ext

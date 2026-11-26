@@ -1,4 +1,5 @@
 import Algebra.Group.Defs
+import Algebra.Group.MinimalAxioms
 import Algebra.Group.Basic
 import Algebra.Group.Ext
 import Algebra.Group.Commute
