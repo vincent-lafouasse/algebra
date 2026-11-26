@@ -33,7 +33,9 @@ theorem Group.one_eq_of_mul_eq {G : Type u} ⦃g₁ g₂ : Group G⦄ (h_mul : g
     inv_mul_cancel₁, mul_inv_cancel₁⟩ := g₁
   obtain @⟨⟨mul₂⟩, ⟨one₂⟩, ⟨inv₂⟩, assoc₂, one_mul₂, mul_one₂,
     inv_mul_cancel₂, mul_inv_cancel₂⟩ := g₂
-  sorry
+
+  subst h_mul
+  exact (one_mul₂ one₁).symm.trans (mul_one₁ one₂)
 
 /-- Same multiplication, same inverses (not in Mathlib). With one multiplication and, by
 `Group.one_eq_of_mul_eq`, one identity, `a⁻¹₁` is an inverse of `a` in `g₂` too: uniqueness
