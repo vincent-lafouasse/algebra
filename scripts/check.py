@@ -30,6 +30,7 @@ Unlike `api.py` this needs Lean: whether a proof leans on a `sorry` elsewhere is
 from the compiled terms (`collectAxioms`), not from the source.
 """
 
+import hashlib
 import os
 import subprocess
 import sys
@@ -85,7 +86,29 @@ Row = tuple[str, str, str, str, int, list[str]]
 STANDARD = ["propext", "Quot.sound", "Classical.choice"]
 
 
-def run_lean() -> list[Row]:
+# The Lean output depends only on these, so it is cached under their hash: an unchanged tree
+# skips the build check and the Lean run (about 3 s, mostly `import Lean`). In `.lake/`, which
+# git ignores and `lake clean` removes.
+CACHE = ROOT / ".lake" / "check-cache.tsv"
+
+
+def source_hash() -> str:
+    h = hashlib.sha256(LEAN.encode())
+    files = [ROOT / n for n in ("lean-toolchain", "lakefile.toml", "Base.lean", "Algebra.lean")]
+    files += sorted(p for d in ("Base", "Algebra") for p in (ROOT / d).rglob("*.lean"))
+    for p in files:
+        h.update(str(p.relative_to(ROOT)).encode() + b"\0" + p.read_bytes() + b"\0")
+    return h.hexdigest()
+
+
+def lean_output() -> str:
+    key = source_hash()
+    try:
+        cached_key, cached = CACHE.read_text().split("\n", 1)
+        if cached_key == key:
+            return cached
+    except (OSError, ValueError):
+        pass
     # build first, straight to the terminal (so lake keeps its colors and progress bar): after
     # an edit low in the import graph this is most of the running time. `--log-level=error`
     # hides the `sorry` warnings, which this report counts anyway.
@@ -100,8 +123,14 @@ def run_lean() -> list[Row]:
         )
     if res.returncode != 0:
         sys.exit(res.stdout + res.stderr)
+    CACHE.parent.mkdir(exist_ok=True)
+    CACHE.write_text(key + "\n" + res.stdout)
+    return res.stdout
+
+
+def run_lean() -> list[Row]:
     rows = []
-    for line in res.stdout.splitlines():
+    for line in lean_output().splitlines():
         status, kind, name, path, lineno, axioms = line.split("\t")
         rows.append((status, kind, name, path, int(lineno), axioms.split(",") if axioms else []))
     # Base first: it comes first in the import graph

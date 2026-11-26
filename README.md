@@ -97,6 +97,9 @@ It prints, per file, proved / total for theorems and for definitions (stubs and 
 count in the total), with a ✓ on finished files. A declaration is *tainted* if it has no
 `sorry` of its own but depends on one: a proof that looks finished but isn't.
 
+The result is cached in `.lake/check-cache.tsv` under a hash of the sources, the toolchain
+and the lakefile, so a run on an unchanged tree is instant.
+
 For a single declaration, `#print axioms My.QuotientGroup.quotientKerEquivRange` in any file importing `Algebra`.
 
 ## References
