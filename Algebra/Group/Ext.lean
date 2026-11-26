@@ -28,7 +28,11 @@ namespace My
 `MulOneClass.ext`). `1₁ = 1₁ * 1₂ = 1₂`: one step is `g₂`'s `mul_one`, the other `g₁`'s
 `one_mul`, and they chain because the two multiplications are one. -/
 theorem Group.one_eq_of_mul_eq {G : Type u} ⦃g₁ g₂ : Group G⦄ (h_mul : g₁.mul = g₂.mul) :
-    g₁.one = g₂.one :=
+    g₁.one = g₂.one := by
+  obtain @⟨⟨mul₁⟩, ⟨one₁⟩, ⟨inv₁⟩, assoc₁, one_mul₁, mul_one₁,
+    inv_mul_cancel₁, mul_inv_cancel₁⟩ := g₁
+  obtain @⟨⟨mul₂⟩, ⟨one₂⟩, ⟨inv₂⟩, assoc₂, one_mul₂, mul_one₂,
+    inv_mul_cancel₂, mul_inv_cancel₂⟩ := g₂
   sorry
 
 /-- Same multiplication, same inverses (not in Mathlib). With one multiplication and, by
