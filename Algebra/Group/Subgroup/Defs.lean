@@ -53,6 +53,9 @@ theorem ext {H K : Subgroup G} (h : ∀ x, x ∈ H ↔ x ∈ K) : H = K := by
   subst c_eq
   rfl
 
+theorem ext_iff {H K : Subgroup G} : H = K ↔ ∀ x, x ∈ H ↔ x ∈ K :=
+  sorry
+
 /-! ### Membership: the unprimed API
 
 `H` is explicit, so `H.one_mem` and `H.inv_mem h` read well with dot notation. -/

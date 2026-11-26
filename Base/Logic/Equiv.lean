@@ -48,6 +48,10 @@ theorem ext {e e' : α ≃ β} (h : ∀ x, e x = e' x) : e = e' := by
   subst hge
   rfl
 
+-- `ext` and its converse (Mathlib generates it from `@[ext]`)
+theorem ext_iff {e e' : α ≃ β} : e = e' ↔ ∀ x, e x = e' x :=
+  sorry
+
 protected def refl (α : Sort u) : α ≃ α where
   toFun := id
   invFun := id

@@ -49,6 +49,10 @@ theorem mem_ofPred_eq {x : α} {p : α → Prop} : (x ∈ {y | p y}) = p x :=
 theorem ext {s t : Set α} (h : ∀ x, x ∈ s ↔ x ∈ t) : s = t :=
   funext λ x => propext (h x)
 
+-- `ext` and its converse: two sets are equal exactly when they have the same elements
+theorem ext_iff {s t : Set α} : s = t ↔ ∀ x, x ∈ s ↔ x ∈ t :=
+  sorry
+
 -- named, as in Mathlib, so that `⊆` has a definition of its own (`Subset.refl` etc. are about it)
 protected def Subset (s₁ s₂ : Set α) : Prop :=
   ∀ ⦃a⦄, a ∈ s₁ → a ∈ s₂

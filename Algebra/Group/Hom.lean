@@ -37,6 +37,9 @@ theorem ext {f g : G →* H} (h : ∀ x, f x = g x) : f = g := by
   subst hfg
   rfl
 
+theorem ext_iff {f g : G →* H} : f = g ↔ ∀ x, f x = g x :=
+  sorry
+
 protected theorem map_one (f : G →* H) : f 1 = 1 :=
   f.map_one'
 
