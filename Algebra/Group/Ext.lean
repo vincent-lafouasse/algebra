@@ -52,6 +52,9 @@ theorem Group.ext {G : Type u} ⦃g₁ g₂ : Group G⦄ (h_mul : g₁.mul = g�
     inv_mul_cancel₁, mul_inv_cancel₁⟩ := g₁
   obtain @⟨⟨mul₂⟩, ⟨one₂⟩, ⟨inv₂⟩, assoc₂, one_mul₂, mul_one₂,
     inv_mul_cancel₂, mul_inv_cancel₂⟩ := g₂
+  subst same_unit
+  subst same_inv
+  subst h_mul
   sorry -- subst into rfl?
 
 theorem Group.ext_iff {G : Type u} {g₁ g₂ : Group G} : g₁ = g₂ ↔ g₁.mul = g₂.mul :=
