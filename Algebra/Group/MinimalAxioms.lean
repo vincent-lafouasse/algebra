@@ -18,6 +18,20 @@ universe u
 
 namespace My
 
+theorem idem_el_iff_eq_one_left_axioms {G : Type u} [Mul G] [Inv G] [One G]
+    (assoc : ∀ a b c : G, (a * b) * c = a * (b * c)) (one_mul : ∀ a : G, 1 * a = a)
+    (inv_mul_cancel : ∀ a : G, a⁻¹ * a = 1) (e : G) : e * e = e ↔ e = 1 := by
+  apply Iff.intro
+  · intro h
+    replace h := congrArg (e⁻¹ * .) h
+    rw [← assoc] at h
+    rw [inv_mul_cancel] at h
+    rw [one_mul] at h
+    exact h
+  · intro h
+    subst h
+    rw [one_mul]
+
 /-- A group from associativity, a left identity and a left inverse. The work is `mul_one`;
 you will probably want `a * a⁻¹ = 1` on the way (a local `have`). -/
 abbrev Group.ofLeftAxioms {G : Type u} [Mul G] [Inv G] [One G]
@@ -28,7 +42,14 @@ abbrev Group.ofLeftAxioms {G : Type u} [Mul G] [Inv G] [One G]
   one_mul := one_mul
   mul_one := sorry
   inv_mul_cancel := inv_mul_cancel
-  mul_inv_cancel := sorry
+  mul_inv_cancel := by
+    intro a
+    rw [← idem_el_iff_eq_one_left_axioms assoc one_mul inv_mul_cancel]
+    calc
+      (a * a⁻¹) * (a * a⁻¹)
+      _ = a * (a⁻¹ * a * a⁻¹) := by simp only [assoc]
+      _ = a * (1 * a⁻¹) := by rw [inv_mul_cancel]
+      _ = a * a⁻¹ := by rw [one_mul]
 
 /-- A group from associativity, a right identity and a right inverse: the mirror image.
 The work is `one_mul` and `inv_mul_cancel`; which one comes first? -/
