@@ -99,8 +99,16 @@ theorem preimage_mul_right_singleton : (· * a) ⁻¹' {b} = {b * a⁻¹} := by
 
 end Set
 
-theorem mem_leftCoset_iff {s : Set α} {x : α} (a : α) : x ∈ a • s ↔ a⁻¹ * x ∈ s :=
-  sorry
+theorem mem_leftCoset_iff {s : Set α} {x : α} (a : α) : x ∈ a • s ↔ a⁻¹ * x ∈ s := by
+  rw [Set.mem_smul_set]
+  apply Iff.intro
+  · intro ⟨y, ⟨hs, h⟩⟩
+    rw [← eq_inv_mul_iff_mul_eq] at h
+    subst h
+    exact hs
+  · intro h
+    refine ⟨a⁻¹ * x, h, ?_⟩
+    rw [mul_inv_cancel_left]
 
 theorem mem_own_leftCoset (s : Subgroup α) (a : α) : a ∈ a • (s : Set α) :=
   sorry
