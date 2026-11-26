@@ -32,6 +32,27 @@ theorem idem_el_iff_eq_one_left_axioms {G : Type u} [Mul G] [Inv G] [One G]
     subst h
     rw [one_mul]
 
+theorem left_axioms {G : Type u} [Mul G] [Inv G] [One G]
+    (assoc : ∀ a b c : G, (a * b) * c = a * (b * c)) (one_mul : ∀ a : G, 1 * a = a)
+    (inv_mul_cancel : ∀ a : G, a⁻¹ * a = 1) :
+    (∀ (a : G), a * a⁻¹ = 1) ∧ (∀ (a : G), a * 1 = a) := by
+  have mul_inv_cancel : ∀ (a : G), a * a⁻¹ = 1 := by
+    intro a
+    rw [← idem_el_iff_eq_one_left_axioms assoc one_mul inv_mul_cancel]
+    calc
+      (a * a⁻¹) * (a * a⁻¹)
+      _ = a * (a⁻¹ * a * a⁻¹) := by simp only [assoc]
+      _ = a * (1 * a⁻¹) := by rw [inv_mul_cancel]
+      _ = a * a⁻¹ := by rw [one_mul]
+  have mul_one : ∀ (a : G), a * 1 = a := λ a =>
+    calc
+      a * 1
+      _ = a * (a⁻¹ * a) := by rw [← inv_mul_cancel a]
+      _ = (a * a⁻¹) * a := by rw [assoc]
+      _ = 1 * a := by rw [mul_inv_cancel]
+      _ = a := by rw [one_mul]
+  exact And.intro mul_inv_cancel mul_one
+
 /-- A group from associativity, a left identity and a left inverse. The work is `mul_one`;
 you will probably want `a * a⁻¹ = 1` on the way (a local `have`). -/
 abbrev Group.ofLeftAxioms {G : Type u} [Mul G] [Inv G] [One G]
@@ -42,14 +63,7 @@ abbrev Group.ofLeftAxioms {G : Type u} [Mul G] [Inv G] [One G]
   one_mul := one_mul
   mul_one := sorry
   inv_mul_cancel := inv_mul_cancel
-  mul_inv_cancel := by
-    intro a
-    rw [← idem_el_iff_eq_one_left_axioms assoc one_mul inv_mul_cancel]
-    calc
-      (a * a⁻¹) * (a * a⁻¹)
-      _ = a * (a⁻¹ * a * a⁻¹) := by simp only [assoc]
-      _ = a * (1 * a⁻¹) := by rw [inv_mul_cancel]
-      _ = a * a⁻¹ := by rw [one_mul]
+  mul_inv_cancel := sorry
 
 theorem idem_el_iff_eq_one_right_axioms {G : Type u} [Mul G] [Inv G] [One G]
     (assoc : ∀ a b c : G, (a * b) * c = a * (b * c)) (mul_one : ∀ a : G, a * 1 = a)
