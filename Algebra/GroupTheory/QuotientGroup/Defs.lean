@@ -1,5 +1,6 @@
 import Algebra.GroupTheory.Coset
 import Algebra.Group.Subgroup.Normal
+import Algebra.Group.MinimalAxioms
 
 /-! # Quotient groups `G ⧸ N`
 
@@ -67,15 +68,18 @@ variable {G : Type u} [Group G] (N : Subgroup G) [N.Normal]
 
 -- `Quotient.lift₂ f h` defines a function on two classes from `f` on representatives;
 -- `h` says `f` doesn't depend on the choice of representatives: that is where normality is used
-instance Quotient.group : Group (G ⧸ N) where
-  mul := sorry
-  one := sorry
-  inv := sorry
-  mul_assoc := sorry
-  one_mul := sorry
-  mul_one := sorry
-  inv_mul_cancel := sorry
-  mul_inv_cancel := sorry
+instance : Mul (G ⧸ N) :=
+  sorry
+
+instance : One (G ⧸ N) :=
+  sorry
+
+instance : Inv (G ⧸ N) :=
+  sorry
+
+-- the three left axioms; `Group.ofLeftAxioms` proves `mul_one` and `mul_inv_cancel`
+instance Quotient.group : Group (G ⧸ N) :=
+  Group.ofLeftAxioms sorry sorry sorry
 
 theorem mk_mul (a b : G) : ((a * b : G) : G ⧸ N) = (a : G ⧸ N) * (b : G ⧸ N) :=
   sorry
