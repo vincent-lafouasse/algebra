@@ -106,10 +106,10 @@ protected theorem rightInverse : Function.RightInverse f f :=
   h
 
 protected theorem injective : Function.Injective f :=
-  LeftInverse.injective h.leftInverse
+  h.leftInverse.injective
 
 protected theorem surjective : Function.Surjective f :=
-  RightInverse.surjective h.rightInverse
+  h.rightInverse.surjective
 
 protected theorem bijective : Bijective f :=
   And.intro h.injective h.surjective
