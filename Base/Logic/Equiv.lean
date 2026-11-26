@@ -28,6 +28,11 @@ attribute [coe] Equiv.toFun
 instance : CoeFun (α ≃ β) (λ _ => α → β) :=
   ⟨Equiv.toFun⟩
 
+/-- The permutations of `α`: bijections from `α` to itself. They form a group under
+composition (`Algebra/Group/End.lean`). -/
+abbrev Perm (α : Sort u) :=
+  Equiv α α
+
 -- two equivalences with the same forward function are equal (the inverse is determined)
 theorem ext {e e' : α ≃ β} (h : ∀ x, e x = e' x) : e = e' := by
   obtain ⟨f, g, hl, _⟩ := e
