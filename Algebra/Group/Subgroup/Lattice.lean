@@ -47,7 +47,7 @@ instance : Top (Subgroup G) :=
 instance : Min (Subgroup G) :=
   ⟨fun H K =>
     {
-      carrier := {x | x ∈ H ∧ x ∈ K}
+      carrier := H ∩ K
       mul_mem' := by
         rintro a b
         rintro ⟨hah, hak⟩ ⟨hbh, hbk⟩
