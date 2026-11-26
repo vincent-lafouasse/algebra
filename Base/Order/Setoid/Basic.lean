@@ -61,7 +61,9 @@ theorem piecewise_constant (f : α → β) : ∀ (a b : α), ker f a b → f a =
 def kerLift (f : α → β) : Quotient (ker f) → β :=
   λ qa => Quotient.lift f (piecewise_constant f) qa
 
-theorem kerLift_mk (f : α → β) (x : α) : kerLift f ⟦x⟧ = f x :=
+theorem kerLift_mk (f : α → β) (x : α) : kerLift f ⟦x⟧ = f x := by
+  let kl := kerLift f
+  let bar := kl ⟦x⟧
   sorry
 
 -- the point of quotienting by the kernel
