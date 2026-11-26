@@ -91,6 +91,18 @@ theorem pow_mul_comm (g : G) (m n : Nat) : g ^ m * g ^ n = g ^ n * g ^ m := by
   rw [Nat.add_comm]
   rw [pow_add]
 
+-- the case `n = 1` of the above, on one side
+theorem pow_mul_comm' (g : G) (n : Nat) : g ^ n * g = g * g ^ n :=
+  sorry
+
+-- (ab)ⁿa = a(ba)ⁿ: slide the extra `a` through, no commutativity needed
+theorem mul_pow_mul (a b : G) (n : Nat) : (a * b) ^ n * a = a * (b * a) ^ n :=
+  sorry
+
+-- `m - n` is truncated subtraction on `Nat`, hence `h`
+theorem pow_sub (g : G) {m n : Nat} (h : n ≤ m) : g ^ (m - n) = g ^ m * (g ^ n)⁻¹ :=
+  sorry
+
 theorem pow_right_comm (g : G) (m n : Nat) : (g ^ m) ^ n = (g ^ n) ^ m := by
   rw [← pow_mul]
   rw [Nat.mul_comm]
@@ -126,6 +138,12 @@ theorem pow_pow (h : Commute a b) (m n : Nat) : Commute (a ^ m) (b ^ n) :=
 
 theorem self_pow (g : G) (n : Nat) : Commute g (g ^ n) :=
   pow_right (Commute.refl g) n
+
+theorem pow_self (g : G) (n : Nat) : Commute (g ^ n) g :=
+  sorry
+
+theorem pow_pow_self (g : G) (m n : Nat) : Commute (g ^ m) (g ^ n) :=
+  sorry
 
 -- (ab)^n = a^n b^n needs a and b to commute: false in general (try n = 2)
 protected theorem mul_pow (h : Commute a b) (n : Nat) : (a * b) ^ n = a ^ n * b ^ n := by
@@ -298,5 +316,50 @@ theorem zpow_mul (g : G) (k l : Int) : g ^ (k * l) = (g ^ k) ^ l := by
     rw [zpow_sub]
     rw [zpow_sub_one]
     rw [ih]
+
+/-! ### More integer-power laws: the `Nat` ones, again over `Int` -/
+
+theorem zpow_mul' (g : G) (k l : Int) : g ^ (k * l) = (g ^ l) ^ k :=
+  sorry
+
+theorem zpow_comm (g : G) (k l : Int) : (g ^ k) ^ l = (g ^ l) ^ k :=
+  sorry
+
+theorem zpow_one_add (g : G) (k : Int) : g ^ (1 + k) = g * g ^ k :=
+  sorry
+
+theorem mul_self_zpow (g : G) (k : Int) : g * g ^ k = g ^ (k + 1) :=
+  sorry
+
+theorem mul_zpow_self (g : G) (k : Int) : g ^ k * g = g ^ (k + 1) :=
+  sorry
+
+-- powers of the same element commute
+theorem zpow_mul_comm (g : G) (k l : Int) : g ^ k * g ^ l = g ^ l * g ^ k :=
+  sorry
+
+theorem mul_zpow_mul (a b : G) (k : Int) : (a * b) ^ k * a = a * (b * a) ^ k :=
+  sorry
+
+namespace Commute
+
+variable {a b : G}
+
+theorem zpow_right (h : Commute a b) (k : Int) : Commute a (b ^ k) :=
+  sorry
+
+theorem zpow_left (h : Commute a b) (k : Int) : Commute (a ^ k) b :=
+  sorry
+
+theorem zpow_zpow (h : Commute a b) (k l : Int) : Commute (a ^ k) (b ^ l) :=
+  sorry
+
+protected theorem mul_zpow (h : Commute a b) (k : Int) : (a * b) ^ k = a ^ k * b ^ k :=
+  sorry
+
+end Commute
+
+theorem mul_zpow {G : Type u} [CommGroup G] (a b : G) (k : Int) : (a * b) ^ k = a ^ k * b ^ k :=
+  sorry
 
 end My

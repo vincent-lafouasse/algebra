@@ -66,6 +66,17 @@ theorem mul_right (hab : Commute a b) (hac : Commute a c) : Commute a (b * c) :=
 theorem mul_left (hac : Commute a c) (hbc : Commute b c) : Commute (a * b) c :=
   Commute.symm (mul_right hac.symm hbc.symm)
 
+-- swapping two neighbours that commute, inside a longer product
+protected theorem right_comm (h : Commute b c) (a : G) : a * b * c = a * c * b :=
+  sorry
+
+protected theorem left_comm (h : Commute a b) (c : G) : a * (b * c) = b * (a * c) :=
+  sorry
+
+protected theorem mul_mul_mul_comm (hbc : Commute b c) (a d : G) :
+    a * b * (c * d) = a * c * (b * d) :=
+  sorry
+
 theorem inv_right (h : Commute a b) : Commute a b⁻¹ := by
   apply Commute.of_eq
   rw [eq_inv_mul_iff_mul_eq]
@@ -88,6 +99,12 @@ theorem inv_left_iff : Commute a⁻¹ b ↔ Commute a b := by
   rw [inv_right_iff]
   rw [Commute.symm_iff]
 
+theorem inv_left_self (a : G) : Commute a⁻¹ a :=
+  sorry
+
+theorem inv_right_self (a : G) : Commute a a⁻¹ :=
+  sorry
+
 theorem inv_inv (h : Commute a b) : Commute a⁻¹ b⁻¹ :=
   h |> inv_left |> inv_right
 
@@ -104,6 +121,24 @@ protected theorem inv_mul_cancel (h : Commute a b) : a⁻¹ * b * a = b :=
 protected theorem mul_inv_cancel (h : Commute a b) : a * b * a⁻¹ = b := by
   rw [mul_inv_eq_iff_eq_mul]
   exact h |> Commute.eq
+
+-- the same two, bracketed the other way
+theorem inv_mul_cancel_assoc (h : Commute a b) : a⁻¹ * (b * a) = b :=
+  sorry
+
+theorem mul_inv_cancel_assoc (h : Commute a b) : a * (b * a⁻¹) = b :=
+  sorry
+
+-- `(ab)⁻¹ = b⁻¹a⁻¹` always; `a⁻¹b⁻¹` when they commute (Mathlib also calls it `Commute.inv`)
+protected theorem mul_inv (hab : Commute a b) : (a * b)⁻¹ = a⁻¹ * b⁻¹ :=
+  sorry
+
+-- conjugating by the same `h` preserves commuting, both ways (`h` is an element here)
+protected theorem conj_iff (h : G) : Commute (h * a * h⁻¹) (h * b * h⁻¹) ↔ Commute a b :=
+  sorry
+
+protected theorem conj (comm : Commute a b) (h : G) : Commute (h * a * h⁻¹) (h * b * h⁻¹) :=
+  sorry
 
 end Commute
 

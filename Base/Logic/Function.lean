@@ -81,6 +81,45 @@ theorem LeftInverse.injective {g : β → α} {f : α → β} (h : Function.Left
 theorem RightInverse.surjective {f : α → β} {g : β → α} (h : Function.RightInverse g f) :
     Function.Surjective f := λ b => ⟨g b, h b⟩
 
+/-! ### Involutions
+
+`f : α → α` is an involution if doing it twice does nothing: `f (f x) = x`. Example: `x ↦ x⁻¹`
+in a group (`inv_involutive`). An involution is its own inverse on both sides, so everything
+below follows from `leftInverse`, `rightInverse` and the two lemmas just above. -/
+
+-- (Mathlib: `Mathlib/Logic/Function/Basic.lean`)
+def Involutive {α : Sort u} (f : α → α) : Prop :=
+  ∀ x, f (f x) = x
+
+namespace Involutive
+
+variable {f : α → α} (h : Involutive f)
+include h
+
+theorem comp_self : f ∘ f = id :=
+  sorry
+
+protected theorem leftInverse : Function.LeftInverse f f :=
+  sorry
+
+protected theorem rightInverse : Function.RightInverse f f :=
+  sorry
+
+protected theorem injective : Function.Injective f :=
+  sorry
+
+protected theorem surjective : Function.Surjective f :=
+  sorry
+
+protected theorem bijective : Bijective f :=
+  sorry
+
+-- an involution moves across `=` (compare `Function.Injective.eq_iff`)
+protected theorem eq_iff {x y : α} : f x = y ↔ x = f y :=
+  sorry
+
+end Involutive
+
 -- (not in Mathlib; the closest is `not_injective_iff`)
 -- the ← direction needs classical logic: `Classical.byContradiction`
 theorem injective_iff_ne (f : α → β) : Function.Injective f ↔ ∀ a b : α, a ≠ b → f a ≠ f b := by

@@ -1,4 +1,5 @@
 import Algebra.Group.Defs
+import Base.Logic.Function
 
 /-! # Basic group lemmas
 
@@ -18,8 +19,8 @@ variable {G : Type u} [Group G] {a b c : G}
 Only `one_mul` and `inv_mul_cancel` are given: prove the right-hand versions from them.
 `mul_inv_cancel` comes first (`mul_one` needs it). -/
 
-/-- a special case of mul_eq_left : a * b = a ↔ b = 1
-but mul_eq_left needs mul_one (not in Mathlib) --/
+/-- (not in Mathlib) the special case `a = b` of `mul_eq_left : a * b = a ↔ b = 1`, which
+comes later because it needs `mul_one`, and `mul_one` needs this --/
 theorem idem_el_iff_eq_one (e : G) : e * e = e ↔ e = 1 := by
   apply Iff.intro
   · intro h
@@ -66,6 +67,13 @@ theorem inv_mul_cancel_right (a b : G) : a * b⁻¹ * b = a := by
   rw [mul_assoc]
   rw [inv_mul_cancel, mul_one]
 
+-- the same cancellation in the middle of a product
+theorem mul_mul_inv_mul_cancel (a b c : G) : a * b * (b⁻¹ * c) = a * c :=
+  sorry
+
+theorem mul_inv_mul_mul_cancel (a b c : G) : a * b⁻¹ * (b * c) = a * c :=
+  sorry
+
 /-! ### Cancellation -/
 
 theorem mul_left_cancel (h : a * b = a * c) : b = c := by
@@ -108,6 +116,55 @@ theorem mul_ne_mul_right (a : G) {b c : G} : a * b ≠ a * c ↔ b ≠ c :=
 theorem mul_ne_mul_left (a : G) {b c : G} : b * a ≠ c * a ↔ b ≠ c :=
   Function.Injective.ne_iff (mul_left_injective a)
 
+-- every `x` is `a * _` and `_ * a`: name the `_`
+theorem mul_left_surjective (a : G) : Function.Surjective (a * ·) :=
+  sorry
+
+theorem mul_right_surjective (a : G) : Function.Surjective fun x => x * a :=
+  sorry
+
+-- multiplying by `y`, then by `x`, is multiplying by `x * y` (on the right: by `y * x`)
+theorem comp_mul_left (x y : G) : (x * ·) ∘ (y * ·) = (x * y * ·) :=
+  sorry
+
+theorem comp_mul_right (x y : G) : (· * x) ∘ (· * y) = (· * (y * x)) :=
+  sorry
+
+theorem one_mul_eq_id : ((1 : G) * ·) = id :=
+  sorry
+
+theorem mul_one_eq_id : (· * (1 : G)) = id :=
+  sorry
+
+/-! ### A product equal to one of its factors
+
+The other factor is `1`. Mathlib also states each one flipped (`left_eq_mul`) and negated
+(`mul_ne_left`): same content, but `rw` needs the goal's exact shape. -/
+
+theorem mul_eq_left : a * b = a ↔ b = 1 :=
+  sorry
+
+theorem left_eq_mul : a = a * b ↔ b = 1 :=
+  sorry
+
+theorem mul_ne_left : a * b ≠ a ↔ b ≠ 1 :=
+  sorry
+
+theorem left_ne_mul : a ≠ a * b ↔ b ≠ 1 :=
+  sorry
+
+theorem mul_eq_right : a * b = b ↔ a = 1 :=
+  sorry
+
+theorem right_eq_mul : b = a * b ↔ a = 1 :=
+  sorry
+
+theorem mul_ne_right : a * b ≠ b ↔ a ≠ 1 :=
+  sorry
+
+theorem right_ne_mul : b ≠ a * b ↔ a ≠ 1 :=
+  sorry
+
 /-! ### Inverses -/
 
 -- an element with a right inverse: that inverse is the inverse
@@ -128,6 +185,18 @@ theorem inv_eq_of_mul_eq_one_right (h : a * b = 1) : a⁻¹ = b :=
 theorem inv_inv (a : G) : a⁻¹⁻¹ = a := by
   apply inv_eq_of_mul_eq_one_left
   exact mul_inv_cancel a
+
+-- `inv_inv` says exactly this; Mathlib then gets `inv_injective`, `inv_surjective`, … from it
+theorem inv_involutive : Function.Involutive (Inv.inv : G → G) :=
+  sorry
+
+-- two right inverses of `x` are equal (Mathlib: for commutative monoids, where one-sided is enough)
+theorem inv_unique {x y z : G} (hy : x * y = 1) (hz : x * z = 1) : y = z :=
+  sorry
+
+-- if `a * b = 1`, one factor is trivial exactly when the other is
+theorem eq_one_iff_eq_one_of_mul_eq_one (h : a * b = 1) : a = 1 ↔ b = 1 :=
+  sorry
 
 -- `a * b = 1` four ways: solve for `a` or for `b`, inverse on either side of the `=`
 theorem mul_eq_one_iff_eq_inv : a * b = 1 ↔ a = b⁻¹ := by
@@ -163,6 +232,12 @@ theorem inv_one : (1 : G)⁻¹ = 1 :=
 
 theorem inv_eq_one : a⁻¹ = 1 ↔ a = 1 := by rw [inv_eq_iff_mul_eq_one, mul_one]
 
+theorem one_eq_inv : 1 = a⁻¹ ↔ a = 1 :=
+  sorry
+
+theorem inv_ne_one : a⁻¹ ≠ 1 ↔ a ≠ 1 :=
+  sorry
+
 -- the inverse of a product reverses the order
 theorem mul_inv_rev (a b : G) : (a * b)⁻¹ = b⁻¹ * a⁻¹ := by
   apply inv_eq_of_mul_eq_one_left
@@ -181,6 +256,31 @@ theorem inv_injective : Function.Injective (Inv.inv : G → G) := by
 theorem inv_inj : a⁻¹ = b⁻¹ ↔ a = b :=
   Function.Injective.eq_iff inv_injective
 
+theorem inv_surjective : Function.Surjective (Inv.inv : G → G) :=
+  sorry
+
+theorem inv_bijective : Function.Bijective (Inv.inv : G → G) :=
+  sorry
+
+-- `⁻¹` moves across `=`
+theorem inv_eq_iff_eq_inv : a⁻¹ = b ↔ a = b⁻¹ :=
+  sorry
+
+section
+
+variable (G)
+
+theorem inv_comp_inv : Inv.inv ∘ Inv.inv = @id G :=
+  sorry
+
+theorem leftInverse_inv : Function.LeftInverse (fun a : G => a⁻¹) fun a => a⁻¹ :=
+  sorry
+
+theorem rightInverse_inv : Function.RightInverse (fun a : G => a⁻¹) fun a => a⁻¹ :=
+  sorry
+
+end
+
 theorem mul_inv_eq_one : a * b⁻¹ = 1 ↔ a = b := by
   rw [mul_eq_one_iff_inv_eq]
   exact inv_inj
@@ -188,6 +288,13 @@ theorem mul_inv_eq_one : a * b⁻¹ = 1 ↔ a = b := by
 theorem inv_mul_eq_one : a⁻¹ * b = 1 ↔ a = b := by
   rw [mul_eq_one_iff_eq_inv]
   exact inv_inj
+
+-- the `→` halves, for when you have the hypothesis in hand
+theorem eq_of_inv_mul_eq_one (h : a⁻¹ * b = 1) : a = b :=
+  sorry
+
+theorem eq_of_mul_inv_eq_one (h : a * b⁻¹ = 1) : a = b :=
+  sorry
 
 -- a conjugate of b is trivial only if b is
 theorem conj_eq_one_iff : a * b * a⁻¹ = 1 ↔ b = 1 := by
@@ -226,6 +333,19 @@ theorem inv_mul_eq_iff_eq_mul : a⁻¹ * b = c ↔ b = a * c := by
 theorem inv_mul_eq_of_eq_mul (h : b = a * c) : a⁻¹ * b = c :=
   inv_mul_eq_iff_eq_mul.2 h
 
+-- the same four moves, the other way: an inverse in the hypothesis, none in the conclusion
+theorem eq_mul_of_mul_inv_eq (h : a * c⁻¹ = b) : a = b * c :=
+  sorry
+
+theorem eq_mul_of_inv_mul_eq (h : b⁻¹ * a = c) : a = b * c :=
+  sorry
+
+theorem mul_eq_of_eq_inv_mul (h : b = a⁻¹ * c) : a * b = c :=
+  sorry
+
+theorem mul_eq_of_eq_mul_inv (h : a = c * b⁻¹) : a * b = c :=
+  sorry
+
 /-! ### Commutative groups -/
 
 section CommGroup
@@ -254,6 +374,32 @@ theorem mul_inv_cancel_comm_assoc (a b : G) : a * (b * a⁻¹) = b := by
 theorem mul_inv (a b : G) : (a * b)⁻¹ = a⁻¹ * b⁻¹ := by
   rw [mul_inv_rev]
   exact mul_comm b⁻¹ a⁻¹
+
+-- rearranging products (Mathlib: for any commutative semigroup)
+theorem mul_left_comm (a b c : G) : a * (b * c) = b * (a * c) :=
+  sorry
+
+theorem mul_right_comm (a b c : G) : a * b * c = a * c * b :=
+  sorry
+
+theorem mul_mul_mul_comm (a b c d : G) : a * b * (c * d) = a * c * (b * d) :=
+  sorry
+
+theorem mul_mul_mul_comm' (a b c d : G) : a * b * c * d = a * c * b * d :=
+  sorry
+
+theorem mul_rotate (a b c : G) : a * b * c = b * c * a :=
+  sorry
+
+theorem mul_rotate' (a b c : G) : a * (b * c) = b * (c * a) :=
+  sorry
+
+-- `a b⁻¹ = c d⁻¹` is "cross-multiplying" (Mathlib states it via `a / b = c / d`)
+theorem mul_inv_eq_mul_inv_iff_mul_eq_mul {a b c d : G} : a * b⁻¹ = c * d⁻¹ ↔ a * d = c * b :=
+  sorry
+
+theorem inv_mul_eq_inv_mul_iff_mul_eq_mul {a b c d : G} : b⁻¹ * a = d⁻¹ * c ↔ a * d = c * b :=
+  sorry
 
 end CommGroup
 
