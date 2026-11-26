@@ -132,8 +132,10 @@ theorem mul_inv_cancel_assoc (h : Commute a b) : a * (b * a⁻¹) = b := by
   rw [Commute.mul_inv_cancel h]
 
 -- `(ab)⁻¹ = b⁻¹a⁻¹` always; `a⁻¹b⁻¹` when they commute (Mathlib also calls it `Commute.inv`)
-protected theorem mul_inv (hab : Commute a b) : (a * b)⁻¹ = a⁻¹ * b⁻¹ :=
-  sorry
+protected theorem mul_inv (hab : Commute a b) : (a * b)⁻¹ = a⁻¹ * b⁻¹ := by
+  rw [← mul_inv_rev]
+  rw [inv_inj]
+  exact Commute.eq hab
 
 -- conjugating by the same `h` preserves commuting, both ways (`h` is an element here)
 protected theorem conj_iff (h : G) : Commute (h * a * h⁻¹) (h * b * h⁻¹) ↔ Commute a b :=
