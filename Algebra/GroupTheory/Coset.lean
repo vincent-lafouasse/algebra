@@ -116,8 +116,16 @@ theorem mem_own_leftCoset (H : Subgroup G) (a : G) : a ∈ a • (H : Set G) := 
   exact H.one_mem
 
 theorem leftCoset_eq_iff (H : Subgroup G) {x y : G} :
-    x • (H : Set G) = y • (H : Set G) ↔ x⁻¹ * y ∈ H :=
-  sorry
+    x • (H : Set G) = y • (H : Set G) ↔ x⁻¹ * y ∈ H := by
+  apply Iff.intro
+  · intro h
+    sorry
+  · intro h
+    have solve_side (α β γ : G) : γ ∈ α • (H : Set G) → γ ∈ β • (H : Set G) :=
+      sorry
+    apply Set.ext
+    intro γ
+    exact Iff.intro (solve_side x y γ) (solve_side y x γ)
 
 /-! ### The relation "same left coset" -/
 
