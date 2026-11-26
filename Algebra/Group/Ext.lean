@@ -16,6 +16,8 @@ universe u
 
 namespace My
 
+#check congrFun
+
 /-- Two group structures on `G` with the same multiplication are equal.
 
 Plan: show the identities agree (`1₁` is a left identity for `*₁ = *₂`, and `1₂` is a
@@ -24,10 +26,15 @@ structure), then destructure both instances and substitute. -/
 theorem Group.ext {G : Type u} ⦃g₁ g₂ : Group G⦄
     (h_mul : (letI := g₁; HMul.hMul : G → G → G) = (letI := g₂; HMul.hMul : G → G → G)) :
     g₁ = g₂ :=
+  have h_one := congrFun h_mul g₁.one
+  have h_one := congrFun h_one g₂.one
   sorry
 
 theorem Group.ext_iff {G : Type u} {g₁ g₂ : Group G} :
-    g₁ = g₂ ↔ (letI := g₁; HMul.hMul : G → G → G) = (letI := g₂; HMul.hMul : G → G → G) :=
-  sorry
+    g₁ = g₂ ↔ (letI := g₁; HMul.hMul : G → G → G) = (letI := g₂; HMul.hMul : G → G → G) := by
+  refine Iff.intro ?_ (λ h_mul => Group.ext h_mul)
+  intro (h : g₁ = g₂)
+  subst h
+  rfl
 
 end My
