@@ -141,8 +141,8 @@ theorem mk_eq_iff_out {s : Setoid α} {a : α} {q : Quotient s} : ⟦a⟧ = q �
   rw [out_eq q]
 
 theorem eq_mk_iff_out {s : Setoid α} {q : Quotient s} {a : α} : q = ⟦a⟧ ↔ Quotient.out q ≈ a :=
-  Iff.intro (λ h => h |> Eq.symm |> mk_eq_iff_out.mp |> s.iseqv.symm)
-            (λ h => h |> s.iseqv.symm |> mk_eq_iff_out.mpr |> Eq.symm)
+  Iff.intro (s.iseqv.symm ∘ mk_eq_iff_out.mp ∘ Eq.symm)
+            (Eq.symm ∘ mk_eq_iff_out.mpr ∘ s.iseqv.symm)
 
 theorem out_equiv_out {s : Setoid α} {q₁ q₂ : Quotient s} :
     Quotient.out q₁ ≈ Quotient.out q₂ ↔ q₁ = q₂ :=
