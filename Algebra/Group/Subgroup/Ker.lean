@@ -51,8 +51,7 @@ def range (f : G →* H) : Subgroup H where
       f (x₁ * x₂)
       _ = f x₁ * f x₂ := by rw [f.map_mul]
       _ = y₁ * y₂ := by rw [h₁, h₂]
-  one_mem' :=
-    Exists.intro 1 f.map_one
+  one_mem' := Exists.intro 1 f.map_one
   inv_mem' := by
     intro y ⟨x, h⟩
     refine Exists.intro x⁻¹ ?_
@@ -105,7 +104,7 @@ theorem range_eq_top {f : G →* H} : f.range = ⊤ ↔ Function.Surjective f :=
 /-! ### Restricting the codomain to the range -/
 
 def rangeRestrict (f : G →* H) : G →* f.range where
-  toFun x := ⟨f x, x, rfl⟩ 
+  toFun x := ⟨f x, x, rfl⟩
   map_one' := Subtype.ext f.map_one
   map_mul' := λ a b => Subtype.ext (f.map_mul a b)
 
