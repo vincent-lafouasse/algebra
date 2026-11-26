@@ -116,8 +116,18 @@ theorem rangeRestrict_surjective (f : G →* H) : Function.Surjective f.rangeRes
   obtain ⟨x, hx⟩ := hy
   exact Exists.intro x (Subtype.ext hx)
 
-theorem ker_rangeRestrict (f : G →* H) : f.rangeRestrict.ker = f.ker :=
-  sorry
+theorem ker_rangeRestrict (f : G →* H) : f.rangeRestrict.ker = f.ker := by
+  apply Subgroup.le_antisymm
+  · intro x h
+    rw [mem_ker]
+    rw [mem_ker] at h
+    rw [Subtype.ext_iff] at h
+    exact h
+  · intro x h
+    rw [mem_ker]
+    rw [mem_ker] at h
+    rw [← coe_rangeRestrict] at h
+    exact h |> Eq.symm |> Subtype.ext |> Eq.symm
 
 end MonoidHom
 
