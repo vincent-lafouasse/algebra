@@ -1,4 +1,5 @@
 import Algebra.Group.Subgroup.Defs
+import Base.Data.Set.Image
 
 /-! # Cosets
 
@@ -25,7 +26,44 @@ theorem Set.mem_smul_set {α : Type u} [Mul α] {a : α} {s : Set α} {x : α} :
     x ∈ a • s ↔ ∃ y ∈ s, a * y = x :=
   sorry
 
+-- `a • s` is the image of `s` under left translation by `a` (Mathlib: `Set.image_smul`,
+-- `(a • ·) '' t = a • t`, for any action; here `•` on sets is defined through `*`)
+theorem Set.image_mul_left_eq_smul_set {α : Type u} [Mul α] {a : α} {s : Set α} :
+    (a * ·) '' s = a • s :=
+  sorry
+
 variable {α : Type u} [Group α]
+
+/-! ### Translating sets
+
+Mathlib: `Mathlib/Algebra/Group/Pointwise/Set/Basic.lean`. Translating by `a` is a bijection with
+inverse translation by `a⁻¹`, so an image under one is a preimage under the other. -/
+
+namespace Set
+
+variable {t : Set α} {a b : α}
+
+theorem image_mul_left : (a * ·) '' t = (a⁻¹ * ·) ⁻¹' t :=
+  sorry
+
+theorem image_mul_right : (· * b) '' t = (· * b⁻¹) ⁻¹' t :=
+  sorry
+
+theorem image_mul_left' : (a⁻¹ * ·) '' t = (a * ·) ⁻¹' t :=
+  sorry
+
+theorem image_mul_right' : (· * b⁻¹) '' t = (· * b) ⁻¹' t :=
+  sorry
+
+-- the one `x` with `a * x = b`
+theorem preimage_mul_left_singleton : (a * ·) ⁻¹' {b} = {a⁻¹ * b} :=
+  sorry
+
+theorem preimage_mul_right_singleton : (· * a) ⁻¹' {b} = {b * a⁻¹} :=
+  sorry
+
+end Set
+
 
 theorem mem_leftCoset_iff {s : Set α} {x : α} (a : α) : x ∈ a • s ↔ a⁻¹ * x ∈ s :=
   sorry

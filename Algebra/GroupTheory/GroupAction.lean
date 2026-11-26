@@ -135,6 +135,55 @@ noncomputable def orbitEquivQuotientStabilizer (a : α) :
 
 end MulAction
 
+/-! ### Each `g` as a permutation; Cayley's theorem
+
+Mathlib: `Mathlib/Algebra/Group/Action/Basic.lean` (`toPerm`), `…/Action/End.lean`
+(`toPermHom`), `…/Action/Faithful.lean` (`FaithfulSMul`), `Mathlib/GroupTheory/Perm/Subgroup.lean`
+(`subgroupOfMulAction`).
+
+`g • ·` is a bijection of `α` (inverse `g⁻¹ • ·`): `toPerm g`. The axioms `one_smul`, `mul_smul`
+say exactly that `g ↦ toPerm g` is a hom `G →* Perm α`. It is injective when the action is
+*faithful*: different elements act differently. Then `G` is isomorphic to its image, a group
+of permutations: Cayley's theorem, for `G` acting on itself by left multiplication. -/
+
+/-- Different elements act differently. -/
+class FaithfulSMul (M : Type u) (α : Type v) [SMul M α] : Prop where
+  eq_of_smul_eq_smul : ∀ {m₁ m₂ : M}, (∀ a : α, m₁ • a = m₂ • a) → m₁ = m₂
+
+namespace MulAction
+
+variable {G : Type u} {α : Type v} [Group G] [MulAction G α]
+
+/-- `g`, seen as a permutation of `α`. -/
+def toPerm (g : G) : Equiv.Perm α where
+  toFun := (g • ·)
+  invFun := (g⁻¹ • ·)
+  left_inv := sorry
+  right_inv := sorry
+
+theorem toPerm_injective [FaithfulSMul G α] :
+    Function.Injective (MulAction.toPerm : G → Equiv.Perm α) :=
+  sorry
+
+variable (G α)
+
+/-- `toPerm` as a hom: `one_smul` and `mul_smul`, read as equations of permutations. -/
+def toPermHom : G →* Equiv.Perm α where
+  toFun := MulAction.toPerm
+  map_one' := sorry
+  map_mul' := sorry
+
+theorem coe_toPermHom : (MulAction.toPermHom G α : G → Equiv.Perm α) = MulAction.toPerm :=
+  sorry
+
+end MulAction
+
+/-- **Cayley's theorem**, for any faithful action: `G` is isomorphic to a group of
+permutations of `H`. With `H = G` acting on itself, the textbook statement. -/
+noncomputable def Equiv.Perm.subgroupOfMulAction (G : Type u) (H : Type v) [Group G]
+    [MulAction G H] [FaithfulSMul G H] : G ≃* (MulAction.toPermHom G H).range :=
+  sorry
+
 /-! ### Examples -/
 
 section Examples
@@ -148,6 +197,10 @@ instance Group.toMulAction : MulAction G G where
   mul_smul := sorry
 
 theorem smul_eq_mul (g x : G) : g • x = g * x :=
+  sorry
+
+-- the action on itself is faithful: compare at `1` (Mathlib: for any `MulOneClass`)
+instance : FaithfulSMul G G :=
   sorry
 
 -- one orbit, and nothing but `1` fixes anything (not in Mathlib in this form)

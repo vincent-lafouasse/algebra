@@ -18,7 +18,7 @@ module prefix so that it can later move to its own repository without changing a
 | File | Contents | Mathlib |
 |---|---|---|
 | `Base/Logic/Function.lean` | injective/surjective/bijective, `surjInv`, `invFun` | `Logic/Function/{Defs,Basic}` |
-| `Base/Logic/Equiv.lean` | bijections `α ≃ β` | `Logic/Equiv/Defs` |
+| `Base/Logic/Equiv.lean` | bijections `α ≃ β`, permutations `Equiv.Perm α` | `Logic/Equiv/Defs` |
 | `Base/Logic/SchroederBernstein.lean` | injections both ways give a bijection | `SetTheory/Cardinal/SchroederBernstein` |
 | `Base/Data/Set.lean` | `Set α`, `{x \| p x}`, `⊆` (= `≤`, a partial order), `{a}`, `univ`, `∅`, `∩ ∪ \`, `↥s` | `Data/Set/{Defs,Basic}` |
 | `Base/Data/Set/Image.lean` | images `f '' s`, preimages `f ⁻¹' t`, `range f`, `Set.image_preimage` | `Data/Set/{Defs,Operations,Image,Lattice/Image}` |
@@ -39,14 +39,14 @@ module prefix so that it can later move to its own repository without changing a
 | `Algebra/Group/Pow.lean` | `g ^ n` (Nat and Int) | `Algebra/Group/Defs`, `…/Basic` |
 | `Algebra/Group/Hom.lean` | homomorphisms `G →* H` | `Algebra/Group/Hom/Defs` |
 | `Algebra/Group/Equiv.lean` | isomorphisms `G ≃* H` | `Algebra/Group/Equiv/Defs` |
-| `Algebra/Group/End.lean` | `MulAut G`, `MulAut.conj` | `Algebra/Group/End` |
+| `Algebra/Group/End.lean` | the group `Perm α`, `MulAut G`, `MulAut.conj`, translations `Equiv.mulLeft`/`mulRight` | `Algebra/Group/{End,Units/Equiv}` |
 | `Algebra/Group/Conj.lean` | `IsConj`, `ConjClasses`, `conjugatesOf` | `Algebra/Group/Conj` |
 | `Algebra/Group/Subgroup/` | `Subgroup`, `≤`, `⊥ ⊤ ⊓ ⊔`, `ker`, `range`, `map`, `comap`, `subgroupOf`, `zpowers`, `closure`, `Normal` | `Algebra/Group/Subgroup/` |
 | `Algebra/GroupTheory/Center.lean`, `Centralizer.lean` | `center G`, `centralizer s` | `GroupTheory/Subgroup/{Center,Centralizer}` |
-| `Algebra/GroupTheory/Coset.lean` | `a • s`, `leftRel` | `GroupTheory/Coset/{Defs,Basic}` |
+| `Algebra/GroupTheory/Coset.lean` | `a • s`, translating sets, `leftRel` | `GroupTheory/Coset/{Defs,Basic}`, `Algebra/Group/Pointwise/Set/Basic` |
 | `Algebra/GroupTheory/QuotientGroup/` | `G ⧸ N`, `lift`, `map`, the three isomorphism theorems, the correspondence theorem | `GroupTheory/QuotientGroup/{Defs,Basic}` |
 | `Algebra/GroupTheory/Out.lean` | `Inn G`, `Out G`, `G ⧸ center G ≃* Inn G` | (not in Mathlib; uses `MulAut.conj.range`) |
-| `Algebra/GroupTheory/GroupAction.lean` | `MulAction`, `orbit`, `stabilizer`, `orbitRel`, orbit–stabilizer | `Algebra/Group/Action/Defs`, `GroupTheory/GroupAction/{Defs,Quotient}` |
+| `Algebra/GroupTheory/GroupAction.lean` | `MulAction`, `orbit`, `stabilizer`, `orbitRel`, orbit–stabilizer, `toPerm`, Cayley | `Algebra/Group/Action/{Defs,Basic,End,Faithful}`, `GroupTheory/GroupAction/{Defs,Quotient}`, `GroupTheory/Perm/Subgroup` |
 | `Exercises/` | exercise sheets, stated with the library above | |
 
 ## Building
