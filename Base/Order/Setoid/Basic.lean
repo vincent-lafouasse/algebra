@@ -45,7 +45,9 @@ theorem ker_iff_mem_preimage {f : α → β} {x y : α} : ker f x y ↔ x ∈ f 
   rw [Set.mem_singleton_iff]
 
 theorem ker_apply_mk_out {f : α → β} (a : α) :
-    f (Quotient.out (⟦a⟧ : Quotient (Setoid.ker f))) = f a :=
+    f (Quotient.out (⟦a⟧ : Quotient (Setoid.ker f))) = f a := by
+  let qa : Quotient (Setoid.ker f) := ⟦a⟧
+  let a' : α := Quotient.out qa
   sorry
 
 /-! ### `f`, on the quotient by its kernel -/
