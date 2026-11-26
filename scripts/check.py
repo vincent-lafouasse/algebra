@@ -148,12 +148,16 @@ def paint(text: str, code: str) -> str:
 GREEN, YELLOW, RED, BOLD, DIM = "32", "33", "31", "1", "2"
 
 
+def progress_color(done: int, total: int) -> str:
+    """Green when finished, yellow when started, dim when not started."""
+    return GREEN if done == total else YELLOW if done else DIM
+
+
 def frac(done: int, total: int) -> str:
-    """`done / total`, green when finished, yellow when started, dim when not started."""
+    """`done / total`, colored by `progress_color`."""
     if not total:
         return " " * 9
-    text = f"{done:>3} / {total:<3}"
-    return paint(text, GREEN if done == total else YELLOW if done else DIM)
+    return paint(f"{done:>3} / {total:<3}", progress_color(done, total))
 
 
 def main() -> None:
@@ -191,7 +195,9 @@ def main() -> None:
             mark += paint(f"  {ntainted[path]} tainted", RED)
         if nchoice[path]:
             mark += paint(f"  {nchoice[path]} use choice", DIM)
-        print(f"{path:<{width}}   {frac(*t)}   {frac(*d)}{mark}")
+        # the file name takes the color of its whole score, theorems and defs together
+        name = paint(f"{path:<{width}}", progress_color(t[0] + d[0], t[1] + d[1]))
+        print(f"{name}   {frac(*t)}   {frac(*d)}{mark}")
         for k in totals:
             totals[k][0] += kinds[k][0]
             totals[k][1] += kinds[k][1]
