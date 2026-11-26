@@ -105,9 +105,9 @@ theorem range_eq_top {f : G →* H} : f.range = ⊤ ↔ Function.Surjective f :=
 /-! ### Restricting the codomain to the range -/
 
 def rangeRestrict (f : G →* H) : G →* f.range where
-  toFun x := ⟨f x, sorry⟩
-  map_one' := sorry
-  map_mul' := sorry
+  toFun x := ⟨f x, x, rfl⟩ 
+  map_one' := Subtype.ext f.map_one
+  map_mul' := λ a b => Subtype.ext (f.map_mul a b)
 
 theorem coe_rangeRestrict (f : G →* H) (x : G) : (f.rangeRestrict x : H) = f x :=
   sorry
