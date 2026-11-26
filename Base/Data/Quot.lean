@@ -113,7 +113,16 @@ theorem map_mk (f : α → β) (h : ∀ ⦃a b : α⦄, a ≈ b → f a ≈ f b)
 classes. -/
 protected def map₂ {γ : Sort w} {sc : Setoid γ} (f : α → β → γ)
     (h : ∀ ⦃a₁ a₂⦄, a₁ ≈ a₂ → ∀ ⦃b₁ b₂⦄, b₁ ≈ b₂ → f a₁ b₁ ≈ f a₂ b₂) :
-    Quotient sa → Quotient sb → Quotient sc :=
+    Quotient sa → Quotient sb → Quotient sc := by
+  intro qα qβ
+  let g : α → β → Quotient sc :=
+    λ a b => Quotient.mk sc (f a b)
+  have hg : ∀ ⦃a₁ a₂ : α⦄, a₁ ≈ a₂ → ∀ ⦃b₁ b₂ : β⦄, b₁ ≈ b₂ → g a₁ b₁ ≈ g a₂ b₂ :=
+    by
+      intro a1 a2 ha b1 b2 hb
+      have hf : f a₁ b₁ ≈ f a₂ b₂ := h a1 a2 ha b1 b2 hb
+      have hg : g a₁ b₁ ≈ g a₂ b₂ := congrArg (Quotient.mk sc)
+      exact hg
   sorry
 
 theorem map₂_mk {γ : Sort w} {sc : Setoid γ} (f : α → β → γ)
