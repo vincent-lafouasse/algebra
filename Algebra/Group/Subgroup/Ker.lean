@@ -89,7 +89,7 @@ theorem ker_eq_bot_iff (f : G →* H) : f.ker = ⊥ ↔ Function.Injective f := 
     exact h_inj hx
 
 theorem ker_eq_bot (f : G →* H) (hf : Function.Injective f) : f.ker = ⊥ :=
-  sorry
+  (ker_eq_bot_iff f).mpr hf
 
 theorem range_eq_top {f : G →* H} : f.range = ⊤ ↔ Function.Surjective f :=
   sorry
