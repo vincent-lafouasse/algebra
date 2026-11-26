@@ -44,9 +44,20 @@ theorem mem_ker {f : G →* H} {x : G} : x ∈ f.ker ↔ f x = 1 := by
 
 def range (f : G →* H) : Subgroup H where
   carrier := Set.range f
-  mul_mem' := sorry
-  one_mem' := sorry
-  inv_mem' := sorry
+  mul_mem' := by
+    intro y₁ y₂ ⟨x₁, h₁⟩ ⟨x₂, h₂⟩
+    refine Exists.intro (x₁ * x₂) ?_
+    calc
+      f (x₁ * x₂)
+      _ = f x₁ * f x₂ := by rw [f.map_mul]
+      _ = y₁ * y₂ := by rw [h₁, h₂]
+  one_mem' :=
+    Exists.intro 1 f.map_one
+  inv_mem' := by
+    intro y ⟨x, h⟩
+    refine Exists.intro x⁻¹ ?_
+    rw [f.map_inv]
+    exact inv_inj.mpr h
 
 theorem coe_range (f : G →* H) : (f.range : Set H) = Set.range f :=
   rfl
