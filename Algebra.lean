@@ -7,6 +7,7 @@ import Algebra.Group.Pow
 import Algebra.Group.Hom
 import Algebra.Group.Equiv
 import Algebra.Group.End
+import Algebra.Group.Conj
 import Algebra.Group.Subgroup.Defs
 import Algebra.Group.Subgroup.Lattice
 import Algebra.Group.Subgroup.Ker

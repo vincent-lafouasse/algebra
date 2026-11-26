@@ -344,7 +344,13 @@ theorem conj_eq_one_iff : a * b * a⁻¹ = 1 ↔ b = 1 := by
 Mathlib: `Mathlib/Algebra/Group/Conj.lean`. These say that conjugation by `b` is a hom and is
 injective. `MulAut.conj b` packages the same map as an automorphism, but it lives in
 `Algebra/Group/End.lean`, which imports `Commute.lean`: so `Commute` lemmas about conjugates
-use these instead. -/
+use these instead. For the same reason they are here and not in `Algebra/Group/Conj.lean`
+(which, like Mathlib's, imports `End.lean`), where the rest of conjugacy is: `IsConj`,
+`ConjClasses`, `conj_pow`. -/
+
+-- the inverse of a conjugate is the conjugate of the inverse (`map_inv` for conjugation by `b`)
+theorem conj_inv {a b : G} : (b * a * b⁻¹)⁻¹ = b * a⁻¹ * b⁻¹ :=
+  sorry
 
 -- conjugating a product is the product of the conjugates (`map_mul` for conjugation by `b`)
 theorem conj_mul {a b c : G} : b * a * b⁻¹ * (b * c * b⁻¹) = b * (a * c) * b⁻¹ :=
