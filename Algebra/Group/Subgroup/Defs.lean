@@ -197,9 +197,9 @@ theorem subtype_apply {H : Subgroup G} (x : H) : H.subtype x = x :=
   rfl
 
 theorem subtype_injective : Function.Injective H.subtype := by
-  intro ⟨av, ha⟩ ⟨bv, hb⟩
+  intro ⟨av, _⟩ ⟨bv, _⟩
   intro (he : av = bv)
-  apply Subtype.ext; exact he
+  exact Subtype.ext he
 
 end AsGroup
 
