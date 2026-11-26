@@ -184,28 +184,36 @@ The other factor is `1`. Mathlib also states each one flipped (`left_eq_mul`) an
 (`mul_ne_left`): same content, but `rw` needs the goal's exact shape. -/
 
 theorem mul_eq_left : a * b = a ↔ b = 1 := by
-  sorry
+  rw [← eq_inv_mul_iff_mul_eq]
+  rw [inv_mul_cancel]
 
-theorem left_eq_mul : a = a * b ↔ b = 1 :=
-  sorry
+theorem left_eq_mul : a = a * b ↔ b = 1 := by
+  rw [eq_comm]
+  rw [mul_eq_left]
 
-theorem mul_ne_left : a * b ≠ a ↔ b ≠ 1 :=
-  sorry
+theorem mul_ne_left : a * b ≠ a ↔ b ≠ 1 := by
+  rw [ne_eq, ne_eq]
+  rw [mul_eq_left]
 
-theorem left_ne_mul : a ≠ a * b ↔ b ≠ 1 :=
-  sorry
+theorem left_ne_mul : a ≠ a * b ↔ b ≠ 1 := by
+  rw [ne_eq, ne_eq]
+  rw [left_eq_mul]
 
-theorem mul_eq_right : a * b = b ↔ a = 1 :=
-  sorry
+theorem mul_eq_right : a * b = b ↔ a = 1 := by
+  rw [← eq_mul_inv_iff_mul_eq]
+  rw [mul_inv_cancel]
 
-theorem right_eq_mul : b = a * b ↔ a = 1 :=
-  sorry
+theorem right_eq_mul : b = a * b ↔ a = 1 := by
+  rw [eq_comm]
+  rw [mul_eq_right]
 
-theorem mul_ne_right : a * b ≠ b ↔ a ≠ 1 :=
-  sorry
+theorem mul_ne_right : a * b ≠ b ↔ a ≠ 1 := by
+  rw [ne_eq, ne_eq]
+  rw [mul_eq_right]
 
-theorem right_ne_mul : b ≠ a * b ↔ a ≠ 1 :=
-  sorry
+theorem right_ne_mul : b ≠ a * b ↔ a ≠ 1 := by
+  rw [ne_eq, ne_eq]
+  rw [right_eq_mul]
 
 /-! ### Inverses -/
 
