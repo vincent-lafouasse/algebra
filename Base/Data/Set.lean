@@ -64,7 +64,7 @@ protected def Subset (s₁ s₂ : Set α) : Prop :=
 -- `≤` first, then `⊆` as the same relation (Mathlib's order: it helps the unifier when lattice
 -- lemmas meet subset hypotheses). `s ≤ t` and `s ⊆ t` are interchangeable by `Iff.rfl`.
 instance : LE (Set α) :=
-  sorry
+  ⟨Set.Subset⟩
 
 instance : HasSubset (Set α) :=
   ⟨Set.Subset⟩
@@ -73,10 +73,10 @@ theorem subset_def {s t : Set α} : (s ⊆ t) = ∀ x, x ∈ s → x ∈ t :=
   rfl
 
 theorem le_eq_subset : ((· ≤ ·) : Set α → Set α → Prop) = (· ⊆ ·) :=
-  sorry
+  rfl
 
 theorem le_iff_subset {s t : Set α} : s ≤ t ↔ s ⊆ t :=
-  sorry
+  Iff.rfl
 
 -- so the general order lemmas (`le_trans`, `le_antisymm`, `GaloisConnection`, …) apply to sets
 -- (Mathlib: from `Set.instBooleanAlgebra`, in `Mathlib/Order/BooleanAlgebra/Set.lean`)
