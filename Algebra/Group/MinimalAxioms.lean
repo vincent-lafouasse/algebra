@@ -82,7 +82,7 @@ abbrev Group.ofRightAxioms {G : Type u} [Mul G] [Inv G] [One G]
       _ = a⁻¹ * (a * a⁻¹) * a := by simp only [assoc]
       _ = a⁻¹ * 1 * a := by rw [mul_inv_cancel]
       _ = a⁻¹ * a := by rw [mul_one]
-  mul_inv_cancel := sorry
+  mul_inv_cancel := mul_inv_cancel
 
 /- Exercise (no stub): what about a left identity `1 * a = a` with a *right* inverse
 `a * a⁻¹ = 1`? Either build `Group.ofMixedAxioms`, or find a type with `*`, `1`, `⁻¹`
