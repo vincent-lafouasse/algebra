@@ -133,8 +133,15 @@ theorem out_eq {s : Setoid α} (q : Quotient s) : ⟦Quotient.out q⟧ = q :=
 theorem mk_out {s : Setoid α} (a : α) : s (Quotient.out (⟦a⟧ : Quotient s)) a :=
   Quotient.exact (out_eq (Quotient.mk s a))
 
-theorem mk_eq_iff_out {s : Setoid α} {a : α} {q : Quotient s} : ⟦a⟧ = q ↔ a ≈ Quotient.out q :=
-  sorry
+theorem mk_eq_iff_out {s : Setoid α} {a : α} {q : Quotient s} : ⟦a⟧ = q ↔ a ≈ Quotient.out q := by
+  apply Iff.intro
+  · intro h
+    rw [← out_eq q] at h
+    exact Quotient.exact h
+  · intro h
+    replace h := Quotient.sound h
+    rw [out_eq q] at h
+    exact h
 
 theorem eq_mk_iff_out {s : Setoid α} {q : Quotient s} {a : α} : q = ⟦a⟧ ↔ Quotient.out q ≈ a :=
   sorry
