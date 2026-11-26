@@ -95,7 +95,7 @@ theorem lift_mk (f : α → β) (h : ∀ a b : α, a ≈ b → f a = f b) (x : �
 
 theorem lift_comp_mk (f : α → β) (h : ∀ a b : α, a ≈ b → f a = f b) :
     Quotient.lift f h ∘ Quotient.mk sa = f :=
-  sorry
+  funext λ _ => rfl
 
 /-- A map between quotients, from a map `f` that sends related elements to related elements. -/
 protected def map (f : α → β) (h : ∀ ⦃a b : α⦄, a ≈ b → f a ≈ f b) : Quotient sa → Quotient sb :=
