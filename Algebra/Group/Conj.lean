@@ -78,7 +78,8 @@ theorem IsConj.trans {a b c : α} : IsConj a b → IsConj b c → IsConj a c := 
   have h :=
     calc
       x' * (x * a * x⁻¹) * x'⁻¹
-      _ = (x' * x) * a * (x' * x)⁻¹ := sorry
+      _ = (x' * x) * a * (x⁻¹ * x'⁻¹) := by simp only [mul_assoc]
+      _ = (x' * x) * a * (x' * x)⁻¹ := by rw [mul_inv_rev]
   rw [h] at hbc
   exact Exists.intro (x' * x) hbc
 
