@@ -34,12 +34,15 @@ def ker (f : α → β) : Setoid α where
       trans := Eq.trans }
 
 -- the interface: the only lemma that looks inside `ker`
-theorem ker_def {f : α → β} {x y : α} : ker f x y ↔ f x = f y :=
-  sorry
+theorem ker_def {f : α → β} {x y : α} : ker f x y ↔ f x = f y := by
+  unfold ker
+  rfl
 
 -- the class of `y` is the fiber of `f` over `f y`
-theorem ker_iff_mem_preimage {f : α → β} {x y : α} : ker f x y ↔ x ∈ f ⁻¹' {f y} :=
-  sorry
+theorem ker_iff_mem_preimage {f : α → β} {x y : α} : ker f x y ↔ x ∈ f ⁻¹' {f y} := by
+  rw [ker_def]
+  rw [Set.mem_preimage]
+  rw [Set.mem_singleton_iff]
 
 theorem ker_apply_mk_out {f : α → β} (a : α) :
     f (Quotient.out (⟦a⟧ : Quotient (Setoid.ker f))) = f a :=
