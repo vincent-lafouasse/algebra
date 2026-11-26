@@ -5,11 +5,11 @@ import Algebra.Group.MinimalAxioms
 /-! # Quotient groups `G ⧸ N`
 
 Mathlib: `Mathlib/Algebra/Quotient.lean` (the `⧸` notation),
-`Mathlib/GroupTheory/Coset/Defs.lean` (`G ⧸ s` for any subgroup),
+`Mathlib/GroupTheory/Coset/Defs.lean` (`G ⧸ H` for any subgroup),
 `Mathlib/GroupTheory/QuotientGroup/Defs.lean` (the group structure when `N` is normal).
 
-`G ⧸ s` is core's `Quotient (leftRel s)`: the set of left cosets. Every element is `↑a`
-(`QuotientGroup.mk a`) for some `a : G`, and `↑a = ↑b ↔ a⁻¹ * b ∈ s`. Those two facts
+`G ⧸ H` is core's `Quotient (leftRel H)`: the set of left cosets. Every element is `↑a`
+(`QuotientGroup.mk a`) for some `a : G`, and `↑a = ↑b ↔ a⁻¹ * b ∈ H`. Those two facts
 (`mk_surjective` / `induction_on` and `eq`) are all you should need about it.
 
 When `N` is normal, `↑a * ↑b := ↑(a * b)` is well defined, and `G ⧸ N` is a group. -/
@@ -30,34 +30,35 @@ namespace QuotientGroup
 
 section Classes
 
-variable {α : Type u} [Group α]
+variable {G : Type u} [Group G]
 
-instance instHasQuotientSubgroup : HasQuotient α (Subgroup α) :=
-  ⟨λ s => Quotient (leftRel s)⟩
+instance instHasQuotientSubgroup : HasQuotient G (Subgroup G) :=
+  ⟨λ H => Quotient (leftRel H)⟩
 
 @[coe]
-def mk {s : Subgroup α} (a : α) : α ⧸ s :=
+def mk {H : Subgroup G} (a : G) : G ⧸ H :=
   sorry
 
-instance {s : Subgroup α} : CoeTC α (α ⧸ s) :=
+instance {H : Subgroup G} : CoeTC G (G ⧸ H) :=
   ⟨mk⟩
 
-variable {s : Subgroup α}
+variable {H : Subgroup G}
 
--- two cosets are equal iff the representatives differ by an element of s
-protected theorem eq {a b : α} : (a : α ⧸ s) = b ↔ a⁻¹ * b ∈ s :=
+-- two cosets are equal iff the representatives differ by an element of `H`
+protected theorem eq {a b : G} : (a : G ⧸ H) = b ↔ a⁻¹ * b ∈ H :=
   sorry
 
-theorem mk_surjective : Function.Surjective (mk : α → α ⧸ s) :=
+theorem mk_surjective : Function.Surjective (mk : G → G ⧸ H) :=
   sorry
 
--- to prove something for every element of the quotient, prove it for every `↑z`
-theorem induction_on {C : α ⧸ s → Prop} (q : α ⧸ s) (H : ∀ a : α, C a) : C q :=
+-- to prove something for every element of the quotient, prove it for every `↑a`
+-- (Mathlib calls the hypothesis `H`; here that is the subgroup)
+theorem induction_on {C : G ⧸ H → Prop} (q : G ⧸ H) (h : ∀ a : G, C a) : C q :=
   sorry
 
--- the class of g is the coset g • s
-theorem eq_class_eq_leftCoset (s : Subgroup α) (g : α) :
-    {x : α | (x : α ⧸ s) = g} = g • (s : Set α) :=
+-- the class of `g` is the coset `g • H`
+theorem eq_class_eq_leftCoset (H : Subgroup G) (g : G) :
+    {x : G | (x : G ⧸ H) = g} = g • (H : Set G) :=
   sorry
 
 end Classes
