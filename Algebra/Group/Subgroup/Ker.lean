@@ -66,8 +66,12 @@ theorem mem_range {f : G →* H} {y : H} : y ∈ f.range ↔ ∃ x, f x = y :=
   Iff.rfl
 
 -- f identifies x and y exactly when they differ by an element of the kernel
-theorem eq_iff (f : G →* H) {x y : G} : f x = f y ↔ y⁻¹ * x ∈ f.ker :=
-  sorry
+theorem eq_iff (f : G →* H) {x y : G} : f x = f y ↔ y⁻¹ * x ∈ f.ker := by
+  rw [mem_ker]
+  rw [f.map_mul]
+  rw [f.map_inv]
+  rw [inv_mul_eq_one]
+  rw [eq_comm]
 
 theorem ker_eq_bot_iff (f : G →* H) : f.ker = ⊥ ↔ Function.Injective f :=
   sorry
