@@ -17,8 +17,17 @@ namespace MonoidHom
 variable {G : Type u} {H : Type v} [Group G] [Group H]
 
 def ker (f : G →* H) : Subgroup G where
-  carrier := {x | f x = 1}
-  mul_mem' := sorry
+  carrier := f ⁻¹' {1}
+  mul_mem' := by
+    intro a b ha hb
+    rw [Set.mem_preimage, Set.mem_singleton_iff]
+    rw [Set.mem_preimage, Set.mem_singleton_iff] at ha
+    rw [Set.mem_preimage, Set.mem_singleton_iff] at hb
+    calc
+      f (a * b)
+      _ = f a * f b := by rw [f.map_mul]
+      _ = 1 * 1 := by rw [ha, hb]
+      _ = 1 := by rw [one_mul]
   one_mem' := sorry
   inv_mem' := sorry
 
