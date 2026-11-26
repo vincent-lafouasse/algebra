@@ -32,7 +32,7 @@ theorem Set.image_mul_left_eq_smul_set {α : Type u} [Mul α] {a : α} {s : Set 
     (a * ·) '' s = a • s :=
   rfl
 
-variable {α : Type u} [Group α]
+variable {G : Type u} [Group G]
 
 /-! ### Translating sets
 
@@ -41,7 +41,7 @@ inverse translation by `a⁻¹`, so an image under one is a preimage under the o
 
 namespace Set
 
-variable {t : Set α} {a b : α}
+variable {t : Set G} {a b : G}
 
 theorem image_mul_left : (a * ·) '' t = (a⁻¹ * ·) ⁻¹' t := by
   apply Set.ext
@@ -99,40 +99,40 @@ theorem preimage_mul_right_singleton : (· * a) ⁻¹' {b} = {b * a⁻¹} := by
 
 end Set
 
-theorem leftCoset_eq_image_mul_left {s : Set α} : a • s = (a * ·) '' s := by
+theorem leftCoset_eq_image_mul_left {s : Set G} : a • s = (a * ·) '' s := by
   apply Set.ext
   intro x
   rw [Set.mem_smul_set]
   rw [Set.mem_image]
 
-theorem mem_leftCoset_iff {s : Set α} {x : α} (a : α) : x ∈ a • s ↔ a⁻¹ * x ∈ s := by
+theorem mem_leftCoset_iff {s : Set G} {x : G} (a : G) : x ∈ a • s ↔ a⁻¹ * x ∈ s := by
   rw [leftCoset_eq_image_mul_left]
   rw [Set.image_mul_left]
   rw [Set.mem_preimage]
 
-theorem mem_own_leftCoset (s : Subgroup α) (a : α) : a ∈ a • (s : Set α) :=
+theorem mem_own_leftCoset (H : Subgroup G) (a : G) : a ∈ a • (H : Set G) :=
   sorry
 
-theorem leftCoset_eq_iff (s : Subgroup α) {x y : α} :
-    x • (s : Set α) = y • (s : Set α) ↔ x⁻¹ * y ∈ s :=
+theorem leftCoset_eq_iff (H : Subgroup G) {x y : G} :
+    x • (H : Set G) = y • (H : Set G) ↔ x⁻¹ * y ∈ H :=
   sorry
 
 /-! ### The relation "same left coset" -/
 
 namespace QuotientGroup
 
-def leftRel (s : Subgroup α) : Setoid α where
+def leftRel (H : Subgroup G) : Setoid G where
   r x y := sorry
   iseqv := sorry
 
-theorem leftRel_apply {s : Subgroup α} {x y : α} : (leftRel s).r x y ↔ x⁻¹ * y ∈ s :=
+theorem leftRel_apply {H : Subgroup G} {x y : G} : (leftRel H).r x y ↔ x⁻¹ * y ∈ H :=
   sorry
 
-def rightRel (s : Subgroup α) : Setoid α where
-  r x y := y * x⁻¹ ∈ s
+def rightRel (H : Subgroup G) : Setoid G where
+  r x y := y * x⁻¹ ∈ H
   iseqv := sorry
 
-theorem rightRel_apply {s : Subgroup α} {x y : α} : (rightRel s).r x y ↔ y * x⁻¹ ∈ s :=
+theorem rightRel_apply {H : Subgroup G} {x y : G} : (rightRel H).r x y ↔ y * x⁻¹ ∈ H :=
   sorry
 
 end QuotientGroup
