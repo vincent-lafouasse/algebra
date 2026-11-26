@@ -44,20 +44,17 @@ namespace Set
 variable {t : Set α} {a b : α}
 
 theorem image_mul_left : (a * ·) '' t = (a⁻¹ * ·) ⁻¹' t := by
-  show {y : α | ∃ x, x ∈ t ∧ a * x = y} = {x : α | a⁻¹ * x ∈ t}
-  apply Subset.antisymm
-  · intro β h
-    show a⁻¹ * β ∈ t
-    change ∃ x, x ∈ t ∧ a * x = β at h
-    obtain ⟨α, hα⟩ := h
-    obtain ⟨hαt, h⟩ := hα
+  apply Set.ext
+  intro x
+  rw [mem_image]
+  rw [mem_preimage]
+  apply Iff.intro
+  · intro ⟨b, ⟨htb, h⟩⟩
     rw [← eq_inv_mul_iff_mul_eq] at h
     subst h
-    exact hαt
-  · intro α h
-    show ∃ x, x ∈ t ∧ a * x = α
-    change a⁻¹ * α ∈ t at h
-    refine ⟨a⁻¹ * α, ?_⟩
+    exact htb
+  · intro h
+    refine ⟨a⁻¹ * x, ?_⟩
     refine ⟨h, ?_⟩
     rw [mul_inv_cancel_left]
 
