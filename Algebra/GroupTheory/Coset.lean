@@ -117,17 +117,17 @@ theorem mem_own_leftCoset (H : Subgroup G) (a : G) : a ∈ a • (H : Set G) := 
 
 theorem leftCoset_eq_iff (H : Subgroup G) {a b : G} :
     a • (H : Set G) = b • (H : Set G) ↔ a⁻¹ * b ∈ H := by
+  rw [Set.ext_iff]
+  simp only [mem_leftCoset_iff a]
+  simp only [mem_leftCoset_iff b]
+  simp only [Subgroup.mem_coe]
   apply Iff.intro
   · intro h
-    sorry
+    apply (h b).mpr
+    rw [inv_mul_cancel]
+    exact H.one_mem
   · intro h
-    apply Set.ext
-    intro x
-    apply Iff.intro
-    · intro h_xa
-      sorry
-    · intro h_xb
-      sorry
+    sorry
 
 
 /-! ### The relation "same left coset" -/
