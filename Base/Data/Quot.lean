@@ -132,7 +132,10 @@ theorem out_eq {s : Setoid α} (q : Quotient s) : ⟦Quotient.out q⟧ = q :=
   Classical.choose_spec (Quotient.exists_rep q)
 
 -- the chosen representative of `⟦a⟧` is related to `a`, not necessarily `a` itself
-theorem mk_out {s : Setoid α} (a : α) : s (Quotient.out (⟦a⟧ : Quotient s)) a :=
+theorem mk_out {s : Setoid α} (a : α) : s (Quotient.out (⟦a⟧ : Quotient s)) a := by
+  let qa := Quotient.mk s a
+  have a' := out qa
+  have ha : ⟦out qa⟧ = qa := out_eq qa
   sorry
 
 theorem mk_eq_iff_out {s : Setoid α} {a : α} {q : Quotient s} : ⟦a⟧ = q ↔ a ≈ Quotient.out q :=
