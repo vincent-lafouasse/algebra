@@ -24,13 +24,13 @@ instance Set.smulSet {α : Type u} [Mul α] : SMul α (Set α) :=
 
 theorem Set.mem_smul_set {α : Type u} [Mul α] {a : α} {s : Set α} {x : α} :
     x ∈ a • s ↔ ∃ y ∈ s, a * y = x :=
-  sorry
+  Iff.rfl
 
 -- `a • s` is the image of `s` under left translation by `a` (Mathlib: `Set.image_smul`,
 -- `(a • ·) '' t = a • t`, for any action; here `•` on sets is defined through `*`)
 theorem Set.image_mul_left_eq_smul_set {α : Type u} [Mul α] {a : α} {s : Set α} :
     (a * ·) '' s = a • s :=
-  sorry
+  rfl
 
 variable {α : Type u} [Group α]
 
