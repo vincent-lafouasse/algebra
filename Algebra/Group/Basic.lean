@@ -121,11 +121,15 @@ theorem comp_mul_left (x y : G) : (x * ·) ∘ (y * ·) = (x * y * ·) :=
 theorem comp_mul_right (x y : G) : (· * x) ∘ (· * y) = (· * (y * x)) :=
   sorry
 
-theorem one_mul_eq_id : ((1 : G) * ·) = id :=
-  sorry
+theorem one_mul_eq_id : ((1 : G) * ·) = id := by
+  funext x
+  rw [one_mul]
+  rfl
 
-theorem mul_one_eq_id : (· * (1 : G)) = id :=
-  sorry
+theorem mul_one_eq_id : (· * (1 : G)) = id := by
+  funext x
+  rw [mul_one]
+  rfl
 
 /-! ### A product equal to one of its factors
 
