@@ -81,8 +81,12 @@ theorem ker_eq_bot_iff (f : G →* H) : f.ker = ⊥ ↔ Function.Injective f := 
     rw [← mem_ker, h] at he
     rw [Subgroup.mem_bot] at he
     exact eq_of_inv_mul_eq_one he
-  · intro h
-    sorry
+  · intro h_inj
+    rw [Subgroup.eq_bot_iff_forall]
+    intro x hx
+    rw [mem_ker] at hx
+    rw [← f.map_one] at hx
+    exact h_inj hx
 
 theorem ker_eq_bot (f : G →* H) (hf : Function.Injective f) : f.ker = ⊥ :=
   sorry
