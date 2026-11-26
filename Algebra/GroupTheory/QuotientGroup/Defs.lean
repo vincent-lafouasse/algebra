@@ -52,7 +52,7 @@ theorem mk_surjective : Function.Surjective (mk : α → α ⧸ s) :=
   sorry
 
 -- to prove something for every element of the quotient, prove it for every `↑z`
-theorem induction_on {C : α ⧸ s → Prop} (x : α ⧸ s) (H : ∀ z : α, C z) : C x :=
+theorem induction_on {C : α ⧸ s → Prop} (q : α ⧸ s) (H : ∀ a : α, C a) : C q :=
   sorry
 
 -- the class of g is the coset g • s

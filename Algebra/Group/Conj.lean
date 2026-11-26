@@ -138,13 +138,13 @@ theorem mk_eq_mk_iff_isConj {a b : α} : ConjClasses.mk a = ConjClasses.mk b ↔
   sorry
 
 -- to prove something for every class, prove it for every `mk a`
-theorem forall_isConj {p : ConjClasses α → Prop} : (∀ a, p a) ↔ ∀ a, p (ConjClasses.mk a) :=
+theorem forall_isConj {p : ConjClasses α → Prop} : (∀ q, p q) ↔ ∀ a, p (ConjClasses.mk a) :=
   sorry
 
 theorem mk_surjective : Function.Surjective (@ConjClasses.mk α _) :=
   sorry
 
-theorem exists_rep (a : ConjClasses α) : ∃ a0 : α, ConjClasses.mk a0 = a :=
+theorem exists_rep (q : ConjClasses α) : ∃ a : α, ConjClasses.mk a = q :=
   sorry
 
 /-- A hom maps conjugacy classes to conjugacy classes: `MonoidHom.map_isConj` is what makes
@@ -194,10 +194,10 @@ def carrier : ConjClasses α → Set α :=
 theorem mem_carrier_mk {a : α} : a ∈ carrier (ConjClasses.mk a) :=
   sorry
 
-theorem mem_carrier_iff_mk_eq {a : α} {b : ConjClasses α} : a ∈ carrier b ↔ ConjClasses.mk a = b :=
+theorem mem_carrier_iff_mk_eq {a : α} {q : ConjClasses α} : a ∈ carrier q ↔ ConjClasses.mk a = q :=
   sorry
 
-theorem carrier_eq_preimage_mk {a : ConjClasses α} : a.carrier = ConjClasses.mk ⁻¹' {a} :=
+theorem carrier_eq_preimage_mk {q : ConjClasses α} : q.carrier = ConjClasses.mk ⁻¹' {q} :=
   sorry
 
 end ConjClasses

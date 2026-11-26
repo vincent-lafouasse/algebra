@@ -20,6 +20,10 @@ Core already has the primitives; `#print` them before starting:
   class, prove it for every `⟦a⟧`;
 - `Quotient.exists_rep : ∃ a, ⟦a⟧ = q`.
 
+Naming, in this library: `a b : α` are elements (representatives), `q q₁ q₂` classes, and
+`qa` the class of a given `a` (`hqa : ⟦a⟧ = qa`). Mathlib is less consistent (`x`, `y`, `a` for
+classes too), so named arguments can differ from Mathlib's.
+
 The lemmas here are `My.Quotient.eq` etc. Inside `namespace My`, `Quotient.eq` names this one,
 but dot notation on `q : Quotient s` looks in core's namespace: write `Quotient.out q`, not
 `q.out`. -/
@@ -57,10 +61,10 @@ variable {sa : Setoid α} {sb : Setoid β}
 theorem eq {r : Setoid α} {x y : α} : Quotient.mk r x = ⟦y⟧ ↔ r x y :=
   Iff.intro Quotient.exact Quotient.sound
 
-theorem «forall» {p : Quotient sa → Prop} : (∀ a, p a) ↔ ∀ a : α, p ⟦a⟧ :=
+theorem «forall» {p : Quotient sa → Prop} : (∀ q, p q) ↔ ∀ a : α, p ⟦a⟧ :=
   sorry
 
-theorem «exists» {p : Quotient sa → Prop} : (∃ a, p a) ↔ ∃ a : α, p ⟦a⟧ :=
+theorem «exists» {p : Quotient sa → Prop} : (∃ q, p q) ↔ ∃ a : α, p ⟦a⟧ :=
   sorry
 
 -- every class has a representative
@@ -112,19 +116,21 @@ theorem out_eq {s : Setoid α} (q : Quotient s) : ⟦Quotient.out q⟧ = q :=
 theorem mk_out {s : Setoid α} (a : α) : s (Quotient.out (⟦a⟧ : Quotient s)) a :=
   sorry
 
-theorem mk_eq_iff_out {s : Setoid α} {x : α} {y : Quotient s} : ⟦x⟧ = y ↔ x ≈ Quotient.out y :=
+theorem mk_eq_iff_out {s : Setoid α} {a : α} {q : Quotient s} : ⟦a⟧ = q ↔ a ≈ Quotient.out q :=
   sorry
 
-theorem eq_mk_iff_out {s : Setoid α} {x : Quotient s} {y : α} : x = ⟦y⟧ ↔ Quotient.out x ≈ y :=
+theorem eq_mk_iff_out {s : Setoid α} {q : Quotient s} {a : α} : q = ⟦a⟧ ↔ Quotient.out q ≈ a :=
   sorry
 
-theorem out_equiv_out {s : Setoid α} {x y : Quotient s} : Quotient.out x ≈ Quotient.out y ↔ x = y :=
+theorem out_equiv_out {s : Setoid α} {q₁ q₂ : Quotient s} :
+    Quotient.out q₁ ≈ Quotient.out q₂ ↔ q₁ = q₂ :=
   sorry
 
 theorem out_injective {s : Setoid α} : Function.Injective (@Quotient.out α s) :=
   sorry
 
-theorem out_inj {s : Setoid α} {x y : Quotient s} : Quotient.out x = Quotient.out y ↔ x = y :=
+theorem out_inj {s : Setoid α} {q₁ q₂ : Quotient s} :
+    Quotient.out q₁ = Quotient.out q₂ ↔ q₁ = q₂ :=
   sorry
 
 end Quotient
