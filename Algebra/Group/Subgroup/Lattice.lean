@@ -66,6 +66,7 @@ theorem mem_top (x : G) : x ∈ (⊤ : Subgroup G) :=
 
 theorem mem_inf {p p' : Subgroup G} {x : G} : x ∈ p ⊓ p' ↔ x ∈ p ∧ x ∈ p' := by rfl
 
+-- bot_le might come in handy. refactor later
 theorem eq_bot_iff_forall (H : Subgroup G) : H = ⊥ ↔ ∀ x, x ∈ H → x = 1 := by
   constructor
   · intro h _ hx
