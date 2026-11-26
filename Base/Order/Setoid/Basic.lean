@@ -80,7 +80,7 @@ theorem range_kerLift_eq_range (f : α → β) : Set.range (kerLift f) = Set.ran
     exact Exists.intro x hx
   · intro y ⟨x, hx⟩
     rw [← kerLift_mk f x] at hx
-    exact ⟨⟦x⟧, hx⟩
+    exact Exists.intro ⟦x⟧ hx
 
 /-! ### The first isomorphism theorem for sets -/
 
