@@ -77,7 +77,11 @@ protected theorem left_comm (h : Commute a b) (c : G) : a * (b * c) = b * (a * c
 
 protected theorem mul_mul_mul_comm (hbc : Commute b c) (a d : G) :
     a * b * (c * d) = a * c * (b * d) :=
-  sorry
+  calc
+    a * b * (c * d)
+    _ = a * (b * c) * d := by simp only [mul_assoc]
+    _ = a * (c * b) * d := by rw [Commute.eq hbc]
+    _ = a * c * (b * d) := by simp only [mul_assoc]
 
 theorem inv_right (h : Commute a b) : Commute a b⁻¹ := by
   apply Commute.of_eq
