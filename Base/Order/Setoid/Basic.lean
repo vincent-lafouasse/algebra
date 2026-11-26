@@ -70,8 +70,15 @@ theorem kerLift_injective (f : α → β) : Function.Injective (kerLift f) := by
   rw [kerLift_mk, kerLift_mk] at he
   exact Quotient.out_equiv_out.mp he
 
-theorem range_kerLift_eq_range (f : α → β) : Set.range (kerLift f) = Set.range f :=
-  sorry
+theorem range_kerLift_eq_range (f : α → β) : Set.range (kerLift f) = Set.range f := by
+  apply le_antisymm
+  · intro y ⟨q, hx⟩
+    have hq := Quotient.out_eq q
+    rw [← hq] at hx
+    rw [kerLift_mk] at hx
+    exact ⟨Quotient.out q, hx⟩
+  · intro y ⟨x, hx⟩
+    sorry
 
 /-! ### The first isomorphism theorem for sets -/
 
