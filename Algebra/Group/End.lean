@@ -36,8 +36,7 @@ instance : Inv (MulAut G) :=
 
 -- the three left axioms; `Group.ofLeftAxioms` proves `mul_one` and `mul_inv_cancel`
 instance : Group (MulAut G) :=
-  Group.ofLeftAxioms
-    (λ _ _ _ => rfl)
+  Group.ofLeftAxioms (λ _ _ _ => rfl)
     (by
       intro a
       show a.trans (MulEquiv.refl G) = a

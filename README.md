@@ -77,11 +77,14 @@ while the build warning only marks the declaration where the `sorry` is written.
 that no proof you consider finished leans on a stub:
 
 ```
-scripts/axioms.sh        # exits 1 and lists any finished-looking declaration that depends on sorry
-scripts/axioms.sh -v     # also lists every stub
+uv run scripts/check.py                 # per-file progress; exits 1 and lists anything tainted
+uv run scripts/check.py Algebra/Group   # only files under a path
+uv run scripts/check.py -v              # also lists every stub
 ```
 
-It also prints a progress count, for example `theorems: 151 / 211 done (60 stubs, 0 tainted)`, and the same for definitions.
+It prints, per file, proved / total for theorems and for definitions (stubs and tainted ones
+count in the total), with a ✓ on finished files. A declaration is *tainted* if it has no
+`sorry` of its own but depends on one: a proof that looks finished but isn't.
 
 For a single declaration, `#print axioms My.QuotientGroup.quotientKerEquivRange` in any file importing `Algebra`.
 
