@@ -348,7 +348,11 @@ use these instead. -/
 
 -- conjugating a product is the product of the conjugates (`map_mul` for conjugation by `b`)
 theorem conj_mul {a b c : G} : b * a * b⁻¹ * (b * c * b⁻¹) = b * (a * c) * b⁻¹ :=
-  sorry
+  calc
+    b * a * b⁻¹ * (b * c * b⁻¹)
+    _ = b * (a * (b⁻¹ * b) * c) * b⁻¹ := by simp only [mul_assoc]
+    _ = b * (a * 1 * c) * b⁻¹ := by rw [inv_mul_cancel]
+    _ = b * (a * c) * b⁻¹ := by rw [mul_one]
 
 theorem conj_injective {x : G} : Function.Injective λ g : G => x * g * x⁻¹ :=
   sorry
