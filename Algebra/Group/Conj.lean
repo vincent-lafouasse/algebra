@@ -44,7 +44,7 @@ def conj (c a : α) : α :=
 
 -- the interface: the only lemma that looks inside `conj`
 theorem conj_apply (c a : α) : conj c a = c * a * c⁻¹ :=
-  sorry
+  rfl
 
 -- the packaged version is the same map
 theorem MulAut.conj_apply_eq_conj (c a : α) : MulAut.conj c a = conj c a :=
