@@ -47,9 +47,16 @@ theorem Group.inv_eq_of_mul_eq {G : Type u} ⦃g₁ g₂ : Group G⦄ (h_mul : g
   obtain @⟨⟨mul₂⟩, ⟨one₂⟩, ⟨inv₂⟩, assoc₂, one_mul₂, mul_one₂,
     inv_mul_cancel₂, mul_inv_cancel₂⟩ := g₂
 
+  subst h_one
   subst h_mul
   funext x
-  sorry
+  calc
+    inv₁ x
+    _ = inv₁ x * 1 := by rw [← mul_one₁ (inv₁ x)]
+    _ = inv₁ x * (x * inv₂ x) := by rw [← mul_inv_cancel₂]
+    _ = (inv₁ x * x) * inv₂ x := by simp only [mul_assoc] -- unsure if assoc1 or assoc2
+    _ = 1 * inv₂ x := by rw [inv_mul_cancel₁]
+    _ = inv₂ x := by rw [one_mul₂]
 
 /-- Two group structures on `G` with the same multiplication are equal (not in Mathlib in this
 form: Mathlib's hypothesis is the `letI` spelling of `h_mul`).
