@@ -6,3 +6,5 @@ import Base.Data.Int
 import Base.Order.Notation
 import Base.Data.Set.Image
 import Base.Data.Set.Function
+import Base.Data.Quot
+import Base.Order.Setoid.Basic

@@ -24,7 +24,9 @@ module prefix so that it can later move to its own repository without changing a
 | `Base/Data/Set/Image.lean` | images `f '' s`, preimages `f ⁻¹' t`, `range f` | `Data/Set/{Defs,Operations,Image}` |
 | `Base/Data/Set/Function.lean` | `MapsTo`, `InjOn`, `SurjOn`, `BijOn`, `EqOn`, `InvOn`, `BijOn.equiv` | `Data/Set/Function` |
 | `Base/Data/Int.lean` | `Int.induction_on`, `negSucc` stepping facts | `Data/Int/Init` |
+| `Base/Data/Quot.lean` | `⟦a⟧`, `Quotient.eq`, `Quotient.map₂`, `Quotient.out` | `Data/Quot` |
 | `Base/Order/Notation.lean` | `⊥`, `⊤`, `⊓` | `Order/Notation` |
+| `Base/Order/Setoid/Basic.lean` | `Setoid.ker f`, the first isomorphism theorem for sets | `Order/Setoid/Basic` |
 | `Algebra/Group/Defs.lean` | `Group`, `CommGroup` | `Algebra/Group/Defs` |
 | `Algebra/Group/MinimalAxioms.lean` | `Group.ofLeftAxioms`, `Group.ofRightAxioms` | `Algebra/Group/MinimalAxioms` |
 | `Algebra/Group/Basic.lean` | cancellation, inverses | `Algebra/Group/{Defs,Basic}` |
