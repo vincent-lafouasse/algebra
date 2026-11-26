@@ -48,10 +48,16 @@ theorem inv_mul_cancel_right (a b : G) : a * b⁻¹ * b = a := by
 
 -- the same cancellation in the middle of a product
 theorem mul_mul_inv_mul_cancel (a b c : G) : a * b * (b⁻¹ * c) = a * c :=
-  sorry
+  calc
+    a * b * (b⁻¹ * c)
+    _ = a * (b * (b⁻¹ * c)) := by simp only [mul_assoc]
+    _ = a * c := by rw [mul_inv_cancel_left]
 
 theorem mul_inv_mul_mul_cancel (a b c : G) : a * b⁻¹ * (b * c) = a * c :=
-  sorry
+  calc
+    a * b⁻¹ * (b * c)
+    _ = a * (b⁻¹ * (b * c)) := by simp only [mul_assoc]
+    _ = a * c := by rw [inv_mul_cancel_left]
 
 /-! ### Cancellation -/
 
