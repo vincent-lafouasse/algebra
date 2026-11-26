@@ -21,4 +21,4 @@ notation "⊤" => Top.top
 
 end My
 
-@[inherit_doc] infixl:69 " ⊓ " => Min.min
+infixl:69 " ⊓ " => Min.min
