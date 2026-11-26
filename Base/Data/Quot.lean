@@ -117,18 +117,18 @@ protected def map₂ {γ : Sort w} {sc : Setoid γ} (f : α → β → γ)
   intro qα qβ
   let g : α → β → Quotient sc :=
     λ a b => Quotient.mk sc (f a b)
-  have hg : ∀ ⦃a₁ a₂ : α⦄, a₁ ≈ a₂ → ∀ ⦃b₁ b₂ : β⦄, b₁ ≈ b₂ → g a₁ b₁ ≈ g a₂ b₂ :=
+  have hg : ∀ (a₁ : α) (b₁ : β) (a₂ : α) (b₂ : β), a₁ ≈ a₂ → b₁ ≈ b₂ → g a₁ b₁ = g a₂ b₂ :=
     by
-      intro a1 a2 ha b1 b2 hb
-      have hf : f a₁ b₁ ≈ f a₂ b₂ := h a1 a2 ha b1 b2 hb
-      have hg : g a₁ b₁ ≈ g a₂ b₂ := congrArg (Quotient.mk sc)
+      intro a₁ b₁ a₂ b₂ ha hb
+      have hf : f a₁ b₁ ≈ f a₂ b₂ := h ha hb
+      have hg : g a₁ b₁ = g a₂ b₂ := Quotient.sound hf
       exact hg
-  sorry
+  exact Quotient.lift₂ g hg qα qβ
 
 theorem map₂_mk {γ : Sort w} {sc : Setoid γ} (f : α → β → γ)
     (h : ∀ ⦃a₁ a₂⦄, a₁ ≈ a₂ → ∀ ⦃b₁ b₂⦄, b₁ ≈ b₂ → f a₁ b₁ ≈ f a₂ b₂) (x : α) (y : β) :
     Quotient.map₂ f h (⟦x⟧ : Quotient sa) (⟦y⟧ : Quotient sb) = (⟦f x y⟧ : Quotient sc) :=
-  sorry
+  rfl
 
 /-! ### A chosen representative
 
