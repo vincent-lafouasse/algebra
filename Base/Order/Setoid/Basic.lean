@@ -46,7 +46,7 @@ theorem ker_iff_mem_preimage {f : α → β} {x y : α} : ker f x y ↔ x ∈ f 
 
 theorem ker_apply_mk_out {f : α → β} (a : α) :
     f (Quotient.out (⟦a⟧ : Quotient (Setoid.ker f))) = f a :=
-  Quotient.mk_out (s := Setoid.ker f) a
+  Quotient.mk_out (s := Setoid.ker f) a |> ker_def.mp
 
 /-! ### `f`, on the quotient by its kernel -/
 
@@ -64,7 +64,8 @@ theorem kerLift_mk (f : α → β) (x : α) : kerLift f ⟦x⟧ = f x :=
   rfl
 
 -- the point of quotienting by the kernel
-theorem kerLift_injective (f : α → β) : Function.Injective (kerLift f) :=
+theorem kerLift_injective (f : α → β) : Function.Injective (kerLift f) := by
+  intro qa qb he
   sorry
 
 theorem range_kerLift_eq_range (f : α → β) : Set.range (kerLift f) = Set.range f :=
