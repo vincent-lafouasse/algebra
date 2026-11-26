@@ -1,4 +1,6 @@
 import Base.Logic.Function
+import Lean.Meta.CoeAttr
+import Lean.Elab.Command
 
 /-! # Quotients
 
@@ -30,8 +32,13 @@ variable {α : Sort u} {β : Sort v}
 
 /-! ### Notation -/
 
--- `s x y` for `s.r x y` (Mathlib has the same coercion, and prints `s x y`)
-attribute [coe] Setoid.r
+-- `s x y` for `s.r x y`. Registered by hand, as in Mathlib: a plain `attribute [coe]` guesses
+-- the wrong argument as the one being coerced (goals then print `↑x y`); here it is the
+-- setoid, argument 1 of `@Setoid.r α s` (`numArgs := 2`: `α` and `s`). This is the only reason
+-- the file imports Lean's metaprogramming library.
+run_cmd Lean.Elab.Command.liftTermElabM do
+  Lean.Meta.registerCoercion ``Setoid.r
+    (some { numArgs := 2, coercee := 1, type := .coeFun })
 
 instance {α : Sort u} : CoeFun (Setoid α) (λ _ => α → α → Prop) :=
   ⟨@Setoid.r _⟩
