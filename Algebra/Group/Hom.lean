@@ -69,7 +69,9 @@ protected theorem map_zpow (f : G →* H) (a : G) (k : Int) : f (a ^ k) = f a ^ 
     rw [zpow_natCast, zpow_natCast]
     exact MonoidHom.map_pow f a n
   | negSucc n =>
-    sorry
+    rw [zpow_negSucc, zpow_negSucc]
+    rw [MonoidHom.map_inv]
+    rw [MonoidHom.map_pow]
 
 /-! ### Building homs -/
 
