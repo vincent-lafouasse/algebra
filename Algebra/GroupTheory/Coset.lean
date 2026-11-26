@@ -126,8 +126,9 @@ theorem leftCoset_eq_iff (H : Subgroup G) {a b : G} :
     apply (h b).mpr
     rw [inv_mul_cancel]
     exact H.one_mem
-  · intro h
-    sorry
+  · intro h x
+    rw [← mul_mul_inv_mul_cancel a⁻¹ b x]
+    rw [Subgroup.mul_mem_cancel_left H h]
 
 
 /-! ### The relation "same left coset" -/
