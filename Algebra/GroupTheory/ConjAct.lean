@@ -24,7 +24,7 @@ universe u
 namespace My
 
 def ConjAct (G : Type u) : Type u :=
-  G
+  sorry
 
 namespace ConjAct
 
@@ -33,19 +33,15 @@ variable {G : Type u} [Group G]
 
 -- the same group, under another name
 instance : Group (ConjAct G) :=
-  ‹Group G›
+  sorry
 
 /-- An element of the copy, seen in `G`. -/
-def ofConjAct : ConjAct G ≃* G where
-  toFun x := x
-  invFun x := x
-  left_inv := sorry
-  right_inv := sorry
-  map_mul' := sorry
+def ofConjAct : ConjAct G ≃* G :=
+  sorry
 
 /-- An element of `G`, seen in the copy. -/
 def toConjAct : G ≃* ConjAct G :=
-  MulEquiv.symm ofConjAct
+  sorry
 
 theorem «forall» (p : ConjAct G → Prop) : (∀ x : ConjAct G, p x) ↔ ∀ x : G, p (toConjAct x) :=
   sorry
@@ -76,10 +72,8 @@ theorem toConjAct_mul (x y : G) : toConjAct (x * y) = toConjAct x * toConjAct y 
 
 /-! ### The action -/
 
-instance : MulAction (ConjAct G) G where
-  smul g h := ofConjAct g * h * (ofConjAct g)⁻¹
-  one_smul := sorry
-  mul_smul := sorry
+instance : MulAction (ConjAct G) G :=
+  sorry
 
 theorem smul_def (g : ConjAct G) (h : G) : g • h = ofConjAct g * h * (ofConjAct g)⁻¹ :=
   sorry

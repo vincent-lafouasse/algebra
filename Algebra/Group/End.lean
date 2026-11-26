@@ -27,17 +27,17 @@ namespace Equiv.Perm
 variable {α : Type u}
 
 instance : Mul (Perm α) :=
-  ⟨λ f g => Equiv.trans g f⟩
+  sorry
 
 instance : One (Perm α) :=
-  ⟨Equiv.refl α⟩
+  sorry
 
 instance : Inv (Perm α) :=
-  ⟨Equiv.symm⟩
+  sorry
 
 -- the three left axioms; `Group.ofLeftAxioms` proves the rest (as for `MulAut`)
 instance permGroup : Group (Perm α) :=
-  Group.ofLeftAxioms sorry sorry sorry
+  sorry
 
 theorem mul_apply (f g : Perm α) (x : α) : (f * g) x = f (g x) :=
   sorry
@@ -183,11 +183,8 @@ namespace Equiv
 variable {G : Type u} [Group G]
 
 /-- Left multiplication by `a`, as a permutation of `G`. -/
-protected def mulLeft (a : G) : Perm G where
-  toFun := (a * ·)
-  invFun := (a⁻¹ * ·)
-  left_inv := sorry
-  right_inv := sorry
+protected def mulLeft (a : G) : Perm G :=
+  sorry
 
 theorem coe_mulLeft (a : G) : ((Equiv.mulLeft a : Perm G) : G → G) = (a * ·) :=
   sorry
@@ -199,11 +196,8 @@ theorem mulLeft_symm (a : G) : (Equiv.mulLeft a).symm = Equiv.mulLeft a⁻¹ :=
   sorry
 
 /-- Right multiplication by `a`, as a permutation of `G`. -/
-protected def mulRight (a : G) : Perm G where
-  toFun := (· * a)
-  invFun := (· * a⁻¹)
-  left_inv := sorry
-  right_inv := sorry
+protected def mulRight (a : G) : Perm G :=
+  sorry
 
 theorem coe_mulRight (a : G) : ((Equiv.mulRight a : Perm G) : G → G) = (· * a) :=
   sorry

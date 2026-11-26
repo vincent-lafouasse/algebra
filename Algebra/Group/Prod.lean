@@ -20,16 +20,16 @@ namespace Prod
 variable {G : Type u} {H : Type v} [Group G] [Group H]
 
 instance : Mul (G × H) :=
-  ⟨λ p q => (p.1 * q.1, p.2 * q.2)⟩
+  sorry
 
 instance : One (G × H) :=
-  ⟨(1, 1)⟩
+  sorry
 
 instance : Inv (G × H) :=
-  ⟨λ p => (p.1⁻¹, p.2⁻¹)⟩
+  sorry
 
 instance instGroup : Group (G × H) :=
-  Group.ofLeftAxioms sorry sorry sorry
+  sorry
 
 theorem fst_mul (p q : G × H) : (p * q).1 = p.1 * q.1 :=
   sorry
@@ -67,25 +67,17 @@ namespace MonoidHom
 
 variable (M : Type u) (N : Type v) [Group M] [Group N]
 
-def fst : M × N →* M where
-  toFun := Prod.fst
-  map_one' := sorry
-  map_mul' := sorry
+def fst : M × N →* M :=
+  sorry
 
-def snd : M × N →* N where
-  toFun := Prod.snd
-  map_one' := sorry
-  map_mul' := sorry
+def snd : M × N →* N :=
+  sorry
 
-def inl : M →* M × N where
-  toFun x := (x, 1)
-  map_one' := sorry
-  map_mul' := sorry
+def inl : M →* M × N :=
+  sorry
 
-def inr : N →* M × N where
-  toFun y := (1, y)
-  map_one' := sorry
-  map_mul' := sorry
+def inr : N →* M × N :=
+  sorry
 
 theorem coe_fst : (fst M N : M × N → M) = Prod.fst :=
   sorry
@@ -116,10 +108,8 @@ theorem commute_inl_inr (m : M) (n : N) : Commute (inl M N m) (inr M N n) :=
 variable {P : Type w} [Group P]
 
 /-- A pair of homs out of `M`, as one hom into the product. -/
-protected def prod (f : M →* N) (g : M →* P) : M →* N × P where
-  toFun x := (f x, g x)
-  map_one' := sorry
-  map_mul' := sorry
+protected def prod (f : M →* N) (g : M →* P) : M →* N × P :=
+  sorry
 
 theorem prod_apply (f : M →* N) (g : M →* P) (x : M) : f.prod g x = (f x, g x) :=
   sorry

@@ -18,22 +18,19 @@ universe u
 namespace My
 
 def Multiplicative (α : Type u) : Type u :=
-  α
+  sorry
 
 namespace Multiplicative
 
 variable {α : Type u}
 
 /-- `x : α`, seen in `Multiplicative α`. -/
-def ofAdd : α ≃ Multiplicative α where
-  toFun x := x
-  invFun x := x
-  left_inv := sorry
-  right_inv := sorry
+def ofAdd : α ≃ Multiplicative α :=
+  sorry
 
 /-- The way back. -/
 def toAdd : Multiplicative α ≃ α :=
-  ofAdd.symm
+  sorry
 
 theorem toAdd_ofAdd (x : α) : toAdd (ofAdd x) = x :=
   sorry
@@ -42,13 +39,13 @@ theorem ofAdd_toAdd (x : Multiplicative α) : ofAdd (toAdd x) = x :=
   sorry
 
 instance [Add α] : Mul (Multiplicative α) :=
-  ⟨λ x y => ofAdd (toAdd x + toAdd y)⟩
+  sorry
 
 instance [Zero α] : One (Multiplicative α) :=
-  ⟨ofAdd 0⟩
+  sorry
 
 instance [Neg α] : Inv (Multiplicative α) :=
-  ⟨λ x => ofAdd (-toAdd x)⟩
+  sorry
 
 theorem ofAdd_add [Add α] (x y : α) : ofAdd (x + y) = ofAdd x * ofAdd y :=
   sorry
@@ -70,7 +67,7 @@ theorem toAdd_inv [Neg α] (x : Multiplicative α) : toAdd x⁻¹ = -toAdd x :=
 
 -- `(ℤ, +, 0, -)` written as `(*, 1, ⁻¹)`: the group axioms are `Int.add_assoc`, …
 instance : CommGroup (Multiplicative Int) :=
-  { Group.ofLeftAxioms sorry sorry sorry with mul_comm := sorry }
+  sorry
 
 end Multiplicative
 

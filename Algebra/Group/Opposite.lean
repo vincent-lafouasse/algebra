@@ -47,27 +47,24 @@ theorem unop_inj {x y : αᵐᵒᵖ} : unop x = unop y ↔ x = y :=
   sorry
 
 /-- `op`, as a bijection. -/
-def opEquiv : α ≃ αᵐᵒᵖ where
-  toFun := op
-  invFun := unop
-  left_inv := sorry
-  right_inv := sorry
+def opEquiv : α ≃ αᵐᵒᵖ :=
+  sorry
 
 /-! ### The group structure: multiplication reversed -/
 
 variable [Group α]
 
 instance : Mul αᵐᵒᵖ :=
-  ⟨λ x y => op (unop y * unop x)⟩
+  sorry
 
 instance : One αᵐᵒᵖ :=
-  ⟨op 1⟩
+  sorry
 
 instance : Inv αᵐᵒᵖ :=
-  ⟨λ x => op (unop x)⁻¹⟩
+  sorry
 
 instance instGroup : Group αᵐᵒᵖ :=
-  Group.ofLeftAxioms sorry sorry sorry
+  sorry
 
 theorem op_mul (x y : α) : op (x * y) = op y * op x :=
   sorry

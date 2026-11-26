@@ -123,11 +123,12 @@ variable {G}
 theorem mem_stabilizer_iff {a : α} {g : G} : g ∈ stabilizer G a ↔ g • a = a :=
   sorry
 
-variable (G α) in
 /-- The points that every element fixes (Mathlib: `MulAction.fixedPoints`). For conjugation
-these are the central elements (`ConjAct.fixedPoints_eq_center`). -/
-def fixedPoints : Set α :=
-  {a | ∀ g : G, g • a = a}
+these are the central elements (`ConjAct.fixedPoints_eq_center`). The binders are written out
+(not taken from `variable`): with a `sorry` body, a `variable` that only the body mentions
+would be dropped, and `fixedPoints G α` would not typecheck. -/
+def fixedPoints (G : Type u) (α : Type v) [Group G] [MulAction G α] : Set α :=
+  sorry
 
 theorem mem_fixedPoints {a : α} : a ∈ fixedPoints G α ↔ ∀ g : G, g • a = a :=
   sorry
@@ -165,11 +166,8 @@ namespace MulAction
 variable {G : Type u} {α : Type v} [Group G] [MulAction G α]
 
 /-- `g`, seen as a permutation of `α`. -/
-def toPerm (g : G) : Equiv.Perm α where
-  toFun := (g • ·)
-  invFun := (g⁻¹ • ·)
-  left_inv := sorry
-  right_inv := sorry
+def toPerm (g : G) : Equiv.Perm α :=
+  sorry
 
 theorem toPerm_injective [FaithfulSMul G α] :
     Function.Injective (MulAction.toPerm : G → Equiv.Perm α) :=
@@ -178,10 +176,8 @@ theorem toPerm_injective [FaithfulSMul G α] :
 variable (G α)
 
 /-- `toPerm` as a hom: `one_smul` and `mul_smul`, read as equations of permutations. -/
-def toPermHom : G →* Equiv.Perm α where
-  toFun := MulAction.toPerm
-  map_one' := sorry
-  map_mul' := sorry
+def toPermHom : G →* Equiv.Perm α :=
+  sorry
 
 theorem coe_toPermHom : (MulAction.toPermHom G α : G → Equiv.Perm α) = MulAction.toPerm :=
   sorry
@@ -221,14 +217,13 @@ instance : FaithfulSMul G G :=
 `Equiv.mulRight_mul`'s reversed order was asking for. -/
 
 instance Mul.toSMulMulOpposite : SMul Gᵐᵒᵖ G :=
-  ⟨λ a b => b * a.unop⟩
+  sorry
 
 theorem op_smul_eq_mul (a b : G) : MulOpposite.op a • b = b * a :=
   sorry
 
-instance Monoid.toOppositeMulAction : MulAction Gᵐᵒᵖ G where
-  one_smul := sorry
-  mul_smul := sorry
+instance Monoid.toOppositeMulAction : MulAction Gᵐᵒᵖ G :=
+  sorry
 
 -- one orbit, and nothing but `1` fixes anything (not in Mathlib in this form)
 theorem MulAction.orbit_self_eq_univ (a : G) : MulAction.orbit G a = Set.univ :=

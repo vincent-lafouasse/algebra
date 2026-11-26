@@ -141,9 +141,8 @@ def leftRel (H : Subgroup G) : Setoid G where
 theorem leftRel_apply {H : Subgroup G} {x y : G} : (leftRel H).r x y ↔ x⁻¹ * y ∈ H :=
   sorry
 
-def rightRel (H : Subgroup G) : Setoid G where
-  r x y := y * x⁻¹ ∈ H
-  iseqv := sorry
+def rightRel (H : Subgroup G) : Setoid G :=
+  sorry
 
 theorem rightRel_apply {H : Subgroup G} {x y : G} : (rightRel H).r x y ↔ y * x⁻¹ ∈ H :=
   sorry

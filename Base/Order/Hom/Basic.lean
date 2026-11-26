@@ -30,7 +30,7 @@ namespace OrderIso
 variable {α : Type u} {β : Type v} [LE α] [LE β]
 
 instance : CoeFun (α ≃o β) (λ _ => α → β) :=
-  ⟨λ e => e.toEquiv⟩
+  sorry
 
 theorem le_iff_le (e : α ≃o β) {x y : α} : e x ≤ e y ↔ x ≤ y :=
   sorry
@@ -40,7 +40,7 @@ end OrderIso
 /-! ### Subtypes inherit the order -/
 
 instance Subtype.le {α : Type u} [LE α] {p : α → Prop} : LE (Subtype p) :=
-  ⟨λ x y => x.val ≤ y.val⟩
+  sorry
 
 theorem Subtype.coe_le_coe {α : Type u} [LE α] {p : α → Prop} {x y : Subtype p} :
     x.val ≤ y.val ↔ x ≤ y :=
@@ -53,7 +53,7 @@ namespace Set
 variable {α : Type u} [Preorder α]
 
 def Ici (a : α) : Set α :=
-  {x | a ≤ x}
+  sorry
 
 theorem mem_Ici {a x : α} : x ∈ Ici a ↔ a ≤ x :=
   sorry

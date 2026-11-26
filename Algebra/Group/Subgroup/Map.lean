@@ -73,7 +73,7 @@ theorem le_comap_map (f : G →* N) (H : Subgroup G) : H ≤ comap f (map f H) :
 how `H ⧸ (H ⊓ N)` is written in the second isomorphism theorem. -/
 
 def subgroupOf (H K : Subgroup G) : Subgroup K :=
-  H.comap K.subtype
+  sorry
 
 theorem mem_subgroupOf {H K : Subgroup G} {h : K} : h ∈ H.subgroupOf K ↔ (h : G) ∈ H :=
   sorry

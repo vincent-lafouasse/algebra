@@ -20,22 +20,22 @@ namespace Set
 variable {α : Type u}
 
 instance : Max (Set α) :=
-  ⟨(· ∪ ·)⟩
+  sorry
 
 instance : Min (Set α) :=
-  ⟨(· ∩ ·)⟩
+  sorry
 
 instance : Top (Set α) :=
-  ⟨univ⟩
+  sorry
 
 instance : Bot (Set α) :=
-  ⟨∅⟩
+  sorry
 
 instance : SupSet (Set α) :=
-  ⟨λ S => {x | ∃ s, s ∈ S ∧ x ∈ s}⟩
+  sorry
 
 instance : InfSet (Set α) :=
-  ⟨λ S => {x | ∀ s, s ∈ S → x ∈ s}⟩
+  sorry
 
 theorem sup_eq_union {s t : Set α} : s ⊔ t = s ∪ t :=
   sorry
@@ -56,24 +56,13 @@ theorem mem_sSup {S : Set (Set α)} {x : α} : x ∈ sSup S ↔ ∃ s ∈ S, x �
 theorem mem_sInf {S : Set (Set α)} {x : α} : x ∈ sInf S ↔ ∀ s ∈ S, x ∈ s :=
   sorry
 
-instance : CompleteLattice (Set α) where
-  le_sup_left := sorry
-  le_sup_right := sorry
-  sup_le := sorry
-  inf_le_left := sorry
-  inf_le_right := sorry
-  le_inf := sorry
-  le_sSup := sorry
-  sSup_le := sorry
-  sInf_le := sorry
-  le_sInf := sorry
-  le_top := sorry
-  bot_le := sorry
+instance : CompleteLattice (Set α) :=
+  sorry
 
 /-! ### Complements -/
 
 instance : Compl (Set α) :=
-  ⟨λ s => {x | x ∉ s}⟩
+  sorry
 
 theorem compl_def (s : Set α) : sᶜ = {x | x ∉ s} :=
   sorry
@@ -107,13 +96,8 @@ theorem compl_union (s t : Set α) : (s ∪ t)ᶜ = sᶜ ∩ tᶜ :=
 theorem compl_inter (s t : Set α) : (s ∩ t)ᶜ = sᶜ ∪ tᶜ :=
   sorry
 
-instance : BooleanAlgebra (Set α) where
-  le_sup_inf := sorry
-  inf_compl_le_bot := sorry
-  top_le_sup_compl := sorry
-  le_top := sorry
-  bot_le := sorry
-  sdiff_eq := sorry
+instance : BooleanAlgebra (Set α) :=
+  sorry
 
 end Set
 

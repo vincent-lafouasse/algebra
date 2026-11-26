@@ -112,13 +112,12 @@ protected theorem MonoidHom.map_isConj (f : α →* β) {a b : α} : IsConj a b 
 /-! ### Conjugacy classes -/
 
 /-- `IsConj` as a `Setoid`: the relation together with the proof that it is an equivalence. -/
-protected def IsConj.setoid (α : Type u) [Group α] : Setoid α where
-  r := IsConj
-  iseqv := sorry
+protected def IsConj.setoid (α : Type u) [Group α] : Setoid α :=
+  sorry
 
 /-- The conjugacy classes of `α`: the quotient of `α` by `IsConj`. -/
 def ConjClasses (α : Type u) [Group α] : Type u :=
-  Quotient (IsConj.setoid α)
+  sorry
 
 namespace ConjClasses
 
@@ -173,7 +172,7 @@ end ConjClasses
 
 /-- The set of conjugates of `a`. -/
 def conjugatesOf (a : α) : Set α :=
-  {b | IsConj a b}
+  sorry
 
 theorem mem_conjugatesOf_self {a : α} : a ∈ conjugatesOf a :=
   sorry

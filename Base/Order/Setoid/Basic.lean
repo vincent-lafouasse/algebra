@@ -26,9 +26,8 @@ namespace Setoid
 variable {α : Type u} {β : Type v}
 
 /-- The kernel of `f`: `x` and `y` are related when `f` can't tell them apart. -/
-def ker (f : α → β) : _root_.Setoid α where
-  r x y := f x = f y
-  iseqv := sorry
+def ker (f : α → β) : _root_.Setoid α :=
+  sorry
 
 -- the interface: the only lemma that looks inside `ker`
 theorem ker_def {f : α → β} {x y : α} : ker f x y ↔ f x = f y :=
