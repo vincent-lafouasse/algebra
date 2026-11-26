@@ -68,7 +68,7 @@ theorem kerLift_injective (f : α → β) : Function.Injective (kerLift f) := by
   obtain ⟨x₁, rfl⟩ := Quotient.exists_rep q₁
   obtain ⟨x₂, rfl⟩ := Quotient.exists_rep q₂
   rw [kerLift_mk, kerLift_mk] at he
-  rw [Quotient.sound]
+  rw [Quotient.eq]
   exact ker_def.mpr he
 
 -- no need for AC because the reps don't leave the function. same with kerLift_injective
