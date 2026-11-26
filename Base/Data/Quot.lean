@@ -97,16 +97,13 @@ theorem lift_comp_mk (f : α → β) (h : ∀ a b : α, a ≈ b → f a = f b) :
     Quotient.lift f h ∘ Quotient.mk sa = f :=
   funext λ _ => rfl
 
-#print Quotient.lift
-
 /-- A map between quotients, from a map `f` that sends related elements to related elements. -/
 protected def map (f : α → β) (h : ∀ ⦃a b : α⦄, a ≈ b → f a ≈ f b) : Quotient sa → Quotient sb := by
-  intro qa
-  -- obtain ⟨a, ha⟩ := Quotient.exists_rep qa
-  let g : α → Quotient sb :=
-    λ a => Quotient.mk sb (f a)
-  have hg : ∀ ⦃a b : α⦄, a ≈ b → g a = g b := sorry
-  exact Quotient.lift g hg qa
+  intro (q : Quotient sa)
+  let g : α → Quotient sb := λ a => Quotient.mk sb (f a)
+  have hg : ∀ ⦃a b : α⦄, a ≈ b → g a = g b :=
+    λ _ _ hab => Quotient.sound (h hab)
+  exact Quotient.lift g hg q
 
 theorem map_mk (f : α → β) (h : ∀ ⦃a b : α⦄, a ≈ b → f a ≈ f b) (x : α) :
     Quotient.map f h (⟦x⟧ : Quotient sa) = (⟦f x⟧ : Quotient sb) :=
