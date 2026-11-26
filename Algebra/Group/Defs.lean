@@ -4,11 +4,12 @@ Mathlib: `Mathlib/Algebra/Group/Defs.lean`.
 
 Mathlib builds `Group` in layers (`Semigroup`, `Monoid`, `DivInvMonoid`, …). Here it is one
 flat class with Mathlib's fields minus the power and division ones (those come later):
-associativity, `1` on both sides, and a *left* inverse. `mul_inv_cancel` is a theorem
-(see `Algebra/Group/Basic.lean`).
+associativity, `1` on both sides, and `⁻¹` on both sides. Mathlib has no `mul_inv_cancel`
+field (there it is a theorem): that field is not in Mathlib.
 
-`mul_one` is a field although it follows from the others: an instance has to prove it.
-`Group.ofLeftAxioms` (in `Algebra/Group/MinimalAxioms.lean`) builds a group without it.
+`mul_one` and `mul_inv_cancel` follow from the other three, so an instance should not prove
+them by hand: `Group.ofLeftAxioms` and `Group.ofRightAxioms` (in
+`Algebra/Group/MinimalAxioms.lean`) build a group from three of the five.
 
 `1`, `*` and `⁻¹` come from core's `One`, `Mul` and `Inv` classes, as in Mathlib. -/
 
