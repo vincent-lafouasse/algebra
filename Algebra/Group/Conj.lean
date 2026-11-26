@@ -30,7 +30,7 @@ def IsConj (a b : α) : Prop :=
 
 -- the interface: the only lemma that looks inside `IsConj`
 theorem isConj_iff {a b : α} : IsConj a b ↔ ∃ c : α, c * a * c⁻¹ = b :=
-  sorry
+  Iff.rfl
 
 /-! ### Conjugation as a function (not in Mathlib)
 
