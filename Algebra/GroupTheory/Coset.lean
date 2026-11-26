@@ -135,8 +135,20 @@ theorem leftCoset_eq_iff (H : Subgroup G) {a b : G} :
 namespace QuotientGroup
 
 def leftRel (H : Subgroup G) : Setoid G where
-  r x y := sorry
-  iseqv := sorry
+  r x y := x⁻¹ * y ∈ H
+  iseqv :=
+    { refl (a : G) := by
+        rw [inv_mul_cancel]
+        exact H.one_mem
+      symm {a b : G} hab := by
+        have h := H.inv_mem hab
+        rw [mul_inv_rev] at h
+        rw [inv_inv] at h
+        exact h
+      trans {x y z : G} hab hbc := by
+        have h := H.mul_mem hab hbc
+        rw [mul_mul_inv_mul_cancel] at h
+        exact h }
 
 theorem leftRel_apply {H : Subgroup G} {x y : G} : (leftRel H).r x y ↔ x⁻¹ * y ∈ H :=
   sorry
