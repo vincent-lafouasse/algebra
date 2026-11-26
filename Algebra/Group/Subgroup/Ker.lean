@@ -38,8 +38,9 @@ def ker (f : G →* H) : Subgroup G where
     rw [f.map_inv]
     exact inv_eq_one.mpr hx
 
-theorem mem_ker {f : G →* H} {x : G} : x ∈ f.ker ↔ f x = 1 :=
-  sorry
+theorem mem_ker {f : G →* H} {x : G} : x ∈ f.ker ↔ f x = 1 := by
+  show x ∈ f ⁻¹' {1} ↔ f x = 1
+  rw [Set.mem_preimage, Set.mem_singleton_iff]
 
 def range (f : G →* H) : Subgroup H where
   carrier := Set.range f
