@@ -67,11 +67,13 @@ theorem mul_left (hac : Commute a c) (hbc : Commute b c) : Commute (a * b) c :=
   Commute.symm (mul_right hac.symm hbc.symm)
 
 -- swapping two neighbours that commute, inside a longer product
-protected theorem right_comm (h : Commute b c) (a : G) : a * b * c = a * c * b :=
-  sorry
+protected theorem right_comm (h : Commute b c) (a : G) : a * b * c = a * c * b := by
+  rw [mul_assoc, mul_assoc]
+  rw [Commute.eq h]
 
-protected theorem left_comm (h : Commute a b) (c : G) : a * (b * c) = b * (a * c) :=
-  sorry
+protected theorem left_comm (h : Commute a b) (c : G) : a * (b * c) = b * (a * c) := by
+  rw [← mul_assoc, ← mul_assoc]
+  rw [Commute.eq h]
 
 protected theorem mul_mul_mul_comm (hbc : Commute b c) (a d : G) :
     a * b * (c * d) = a * c * (b * d) :=

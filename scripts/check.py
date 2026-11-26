@@ -22,6 +22,7 @@ Unlike `api.py` this needs Lean: whether a proof leans on a `sorry` elsewhere is
 from the compiled terms (`collectAxioms`), not from the source.
 """
 
+import os
 import subprocess
 import sys
 import tempfile
@@ -68,21 +69,11 @@ open Lean Elab Command in
 
 
 def run_lean() -> list[tuple[str, str, str, str, int]]:
-    # build first, with lake's progress visible: after an edit low in the import graph this
-    # is most of the running time. The `sorry` warnings are dropped (this report counts them),
-    # and so are the "Replayed" lines that only re-announce them.
-    build = subprocess.Popen(
-        ["lake", "build", "Base", "Algebra"],
-        cwd=ROOT,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT,
-        text=True,
-    )
-    assert build.stdout
-    for line in build.stdout:
-        if "declaration uses `sorry`" not in line and "Replayed" not in line:
-            print(line, end="", flush=True)
-    if build.wait() != 0:
+    # build first, straight to the terminal (so lake keeps its colors and progress bar): after
+    # an edit low in the import graph this is most of the running time. `--log-level=error`
+    # hides the `sorry` warnings, which this report counts anyway.
+    build = ["lake", "build", "--log-level=error", "Base", "Algebra"]
+    if subprocess.run(build, cwd=ROOT).returncode != 0:
         sys.exit("check: build failed")
     with tempfile.TemporaryDirectory() as tmp:
         src = Path(tmp) / "Check.lean"
@@ -100,8 +91,23 @@ def run_lean() -> list[tuple[str, str, str, str, int]]:
     return sorted(rows, key=lambda r: (not r[3].startswith("Base"), r[3], r[4]))
 
 
+# colors only on a terminal, and not if NO_COLOR is set (https://no-color.org)
+COLOR = sys.stdout.isatty() and "NO_COLOR" not in os.environ
+
+
+def paint(text: str, code: str) -> str:
+    return f"\033[{code}m{text}\033[0m" if COLOR else text
+
+
+GREEN, YELLOW, RED, BOLD, DIM = "32", "33", "31", "1", "2"
+
+
 def frac(done: int, total: int) -> str:
-    return f"{done:>3} / {total:<3}" if total else " " * 9
+    """`done / total`, green when finished, yellow when started, dim when not started."""
+    if not total:
+        return " " * 9
+    text = f"{done:>3} / {total:<3}"
+    return paint(text, GREEN if done == total else YELLOW if done else DIM)
 
 
 def main() -> None:
@@ -113,39 +119,45 @@ def main() -> None:
         r for r in run_lean() if not prefixes or any(r[3].startswith(p) for p in prefixes)
     ]
 
-    # per file, per kind: [proved, total]
+    # per file, per kind: [proved, total]; and tainted per file
     table: dict[str, dict[str, list[int]]] = defaultdict(
         lambda: {"theorem": [0, 0], "def": [0, 0]}
     )
+    ntainted: dict[str, int] = defaultdict(int)
     for status, kind, _, path, _ in rows:
         table[path][kind][1] += 1
         if status == "proved":
             table[path][kind][0] += 1
+        elif status == "tainted":
+            ntainted[path] += 1
 
     width = max([len(p) for p in table] + [5])
-    print(f"\n{'':<{width}}   theorems      defs")
+    print(paint(f"\n{'':<{width}}   theorems      defs", BOLD))
     totals = {"theorem": [0, 0], "def": [0, 0]}
     for path, kinds in table.items():
         t, d = kinds["theorem"], kinds["def"]
-        mark = "  ✓" if t[0] == t[1] and d[0] == d[1] else ""
+        mark = paint("  ✓", GREEN) if t[0] == t[1] and d[0] == d[1] else ""
+        if ntainted[path]:
+            mark += paint(f"  {ntainted[path]} tainted", RED)
         print(f"{path:<{width}}   {frac(*t)}   {frac(*d)}{mark}")
         for k in totals:
             totals[k][0] += kinds[k][0]
             totals[k][1] += kinds[k][1]
-    print(f"{'total':<{width}}   {frac(*totals['theorem'])}   {frac(*totals['def'])}")
+    label = paint(f"{'total':<{width}}", BOLD)
+    print(f"{label}   {frac(*totals['theorem'])}   {frac(*totals['def'])}")
 
     def listing(status: str) -> list[str]:
         return [f"  {n:<45} {p}:{l}" for s, _, n, p, l in rows if s == status]
 
     stubs, tainted = listing("stub"), listing("tainted")
     if verbose and stubs:
-        print("\nstubs:", *stubs, sep="\n")
+        print(paint("\nstubs:", BOLD), *stubs, sep="\n")
     if tainted:
-        print("\nTAINTED (no sorry of their own, but depend on one):", *tainted, sep="\n")
+        print(paint("\nTAINTED (no sorry of their own, but depend on one):", RED), *tainted, sep="\n")
         print("  find the culprit with: #print axioms <name>")
-        print(f"\ncheck: {len(tainted)} tainted, {len(stubs)} stubs")
+        print(paint(f"\ncheck: {len(tainted)} tainted, {len(stubs)} stubs", RED))
         sys.exit(1)
-    print(f"\ncheck: ok ({len(stubs)} stubs, nothing else depends on sorry)")
+    print(paint(f"\ncheck: ok ({len(stubs)} stubs, nothing else depends on sorry)", GREEN))
 
 
 if __name__ == "__main__":
