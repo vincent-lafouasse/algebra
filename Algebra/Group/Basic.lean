@@ -339,6 +339,20 @@ theorem conj_eq_one_iff : a * b * a⁻¹ = 1 ↔ b = 1 := by
     rhs; rw [← mul_right_inj a]
   rw [mul_one]
 
+/-! ### Conjugation `x ↦ b * x * b⁻¹`, elementwise
+
+Mathlib: `Mathlib/Algebra/Group/Conj.lean`. These say that conjugation by `b` is a hom and is
+injective. `MulAut.conj b` packages the same map as an automorphism, but it lives in
+`Algebra/Group/End.lean`, which imports `Commute.lean`: so `Commute` lemmas about conjugates
+use these instead. -/
+
+-- conjugating a product is the product of the conjugates (`map_mul` for conjugation by `b`)
+theorem conj_mul {a b c : G} : b * a * b⁻¹ * (b * c * b⁻¹) = b * (a * c) * b⁻¹ :=
+  sorry
+
+theorem conj_injective {x : G} : Function.Injective λ g : G => x * g * x⁻¹ :=
+  sorry
+
 /-! ### Commutative groups -/
 
 section CommGroup
