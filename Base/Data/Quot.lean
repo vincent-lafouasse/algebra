@@ -107,7 +107,7 @@ protected def map (f : α → β) (h : ∀ ⦃a b : α⦄, a ≈ b → f a ≈ f
 
 theorem map_mk (f : α → β) (h : ∀ ⦃a b : α⦄, a ≈ b → f a ≈ f b) (x : α) :
     Quotient.map f h (⟦x⟧ : Quotient sa) = (⟦f x⟧ : Quotient sb) :=
-  sorry
+  rfl
 
 /-- The same for two arguments: how a binary operation (e.g. `*` on `G ⧸ N`) is defined on
 classes. -/
