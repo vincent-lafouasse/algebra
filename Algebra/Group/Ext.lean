@@ -1,4 +1,5 @@
 import Algebra.Group.Basic
+import Algebra.Group.MinimalAxioms
 
 /-! # Group structures are determined by their multiplication
 
@@ -43,9 +44,9 @@ form: Mathlib's hypothesis is the `letI` spelling of `h_mul`).
 Plan: the identities agree (`Group.one_eq_of_mul_eq`), the inverses agree
 (`Group.inv_eq_of_mul_eq`); destructure both instances and substitute. -/
 theorem Group.ext {G : Type u} ⦃g₁ g₂ : Group G⦄ (h_mul : g₁.mul = g₂.mul) :
-    g₁ = g₂ :=
-  have h_one := congrFun h_mul g₁.one
-  have h_one := congrFun h_one g₂.one
+    g₁ = g₂ := by
+  have same_unit : g₁.one = g₂.one := Group.one_eq_of_mul_eq h_mul
+  have same_inv : g₁.inv = g₂.inv := Group.inv_eq_of_mul_eq h_mul
   sorry
 
 theorem Group.ext_iff {G : Type u} {g₁ g₂ : Group G} : g₁ = g₂ ↔ g₁.mul = g₂.mul :=
