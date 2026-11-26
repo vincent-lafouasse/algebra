@@ -28,6 +28,7 @@ abbrev Group.ofLeftAxioms {G : Type u} [Mul G] [Inv G] [One G]
   one_mul := one_mul
   mul_one := sorry
   inv_mul_cancel := inv_mul_cancel
+  mul_inv_cancel := sorry
 
 /-- A group from associativity, a right identity and a right inverse: the mirror image.
 The work is `one_mul` and `inv_mul_cancel`; which one comes first? -/
@@ -39,6 +40,7 @@ abbrev Group.ofRightAxioms {G : Type u} [Mul G] [Inv G] [One G]
   one_mul := sorry
   mul_one := mul_one
   inv_mul_cancel := sorry
+  mul_inv_cancel := sorry
 
 /- Exercise (no stub): what about a left identity `1 * a = a` with a *right* inverse
 `a * a⁻¹ = 1`? Either build `Group.ofMixedAxioms`, or find a type with `*`, `1`, `⁻¹`

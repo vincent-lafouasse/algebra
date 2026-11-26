@@ -21,6 +21,7 @@ class Group (G : Type u) extends Mul G, One G, Inv G where
   protected one_mul : ∀ a : G, 1 * a = a
   protected mul_one : ∀ a : G, a * 1 = a
   protected inv_mul_cancel : ∀ a : G, a⁻¹ * a = 1
+  protected mul_inv_cancel : ∀ a : G, a * a⁻¹ = 1
 
 class CommGroup (G : Type u) extends Group G where
   protected mul_comm : ∀ a b : G, a * b = b * a
@@ -41,6 +42,9 @@ theorem mul_one (a : G) : a * 1 = a :=
 
 theorem inv_mul_cancel (a : G) : a⁻¹ * a = 1 :=
   Group.inv_mul_cancel a
+
+theorem mul_inv_cancel (a : G) : a * a⁻¹ = 1 :=
+  Group.mul_inv_cancel a
 
 instance Group.to_isAssociative : Std.Associative (λ (a b : G) => a * b) :=
   ⟨mul_assoc⟩

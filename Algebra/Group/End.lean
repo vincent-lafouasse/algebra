@@ -38,6 +38,7 @@ instance : Group (MulAut G) where
     show (MulEquiv.refl G).trans a = a
     rfl
   inv_mul_cancel := MulEquiv.self_trans_symm
+  mul_inv_cancel := sorry
 
 theorem mul_def (e₁ e₂ : MulAut G) : e₁ * e₂ = MulEquiv.trans e₂ e₁ :=
   rfl

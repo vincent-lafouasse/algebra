@@ -14,10 +14,6 @@ namespace My
 
 variable {G : Type u} [Group G] {a b c : G}
 
-/-! ### The right inverse
-
-Only the *left* inverse `inv_mul_cancel` is an axiom: prove the right one from it. -/
-
 /-- the special case `a = b` of `mul_eq_left : a * b = a ↔ b = 1` (Mathlib:
 `IsIdempotentElem.iff_eq_one`, stated through a predicate). Proved from the left axioms only. --/
 theorem idem_el_iff_eq_one (e : G) : e * e = e ↔ e = 1 := by
@@ -31,14 +27,6 @@ theorem idem_el_iff_eq_one (e : G) : e * e = e ↔ e = 1 := by
   · intro h
     subst h
     rw [one_mul]
-
-theorem mul_inv_cancel (a : G) : a * a⁻¹ = 1 := by
-  rw [← idem_el_iff_eq_one]
-  calc
-    (a * a⁻¹) * (a * a⁻¹)
-    _ = a * (a⁻¹ * a * a⁻¹) := by simp only [mul_assoc]
-    _ = a * (1 * a⁻¹) := by rw [inv_mul_cancel]
-    _ = a * a⁻¹ := by rw [one_mul]
 
 /-! ### Cancelling a factor and its inverse -/
 

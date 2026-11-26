@@ -156,6 +156,7 @@ instance toGroup : Group H where
     apply Subtype.ext
     show val_a⁻¹ * val_a = 1
     exact inv_mul_cancel val_a
+  mul_inv_cancel := sorry
 
 -- the operations of `↥H` are those of `G` (`↑x` is `x.val`; equality in `↥H` is `Subtype.ext`)
 theorem coe_mul (x y : H) : ((x * y : H) : G) = x * y :=
