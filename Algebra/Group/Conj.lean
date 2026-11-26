@@ -75,8 +75,12 @@ theorem isConj_comm {g h : α} : IsConj g h ↔ IsConj h g :=
 theorem IsConj.trans {a b c : α} : IsConj a b → IsConj b c → IsConj a c := by
   intro ⟨x, hab⟩ ⟨x', hbc⟩
   subst hab
-  have h : (x' * x) * a * (x' * x)⁻¹ = c := sorry
-  exact ⟨x' * x, h⟩
+  have h :=
+    calc
+      x' * (x * a * x⁻¹) * x'⁻¹
+      _ = (x' * x) * a * (x' * x)⁻¹ := sorry
+  rw [h] at hbc
+  exact Exists.intro (x' * x) hbc
 
 /-! ### Conjugates of special elements -/
 
