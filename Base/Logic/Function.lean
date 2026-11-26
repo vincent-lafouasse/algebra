@@ -115,8 +115,14 @@ protected theorem bijective : Bijective f :=
   And.intro h.injective h.surjective
 
 -- an involution moves across `=` (compare `Function.Injective.eq_iff`)
-protected theorem eq_iff {x y : α} : f x = y ↔ x = f y :=
-  sorry
+protected theorem eq_iff {x y : α} : f x = y ↔ x = f y := by
+  apply Iff.intro
+  · intro h'
+    subst h'
+    exact Eq.symm (h x)
+  · intro h'
+    subst h'
+    exact h y
 
 end Involutive
 
