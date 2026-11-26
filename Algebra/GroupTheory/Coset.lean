@@ -99,6 +99,12 @@ theorem preimage_mul_right_singleton : (· * a) ⁻¹' {b} = {b * a⁻¹} := by
 
 end Set
 
+theorem leftCoset_eq_image_mul_left {s : Set α} : a • s = (a * ·) '' s := by
+  apply Set.ext
+  intro x
+  rw [Set.mem_smul_set]
+  rw [Set.mem_image]
+
 theorem mem_leftCoset_iff {s : Set α} {x : α} (a : α) : x ∈ a • s ↔ a⁻¹ * x ∈ s := by
   rw [Set.mem_smul_set]
   apply Iff.intro
