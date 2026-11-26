@@ -129,9 +129,9 @@ protected theorem le_antisymm {H K : Subgroup G} (hHK : H ≤ K) (hKH : K ≤ H)
 -- lemmas (`le_trans`, `le_antisymm`, `Monotone`, `GaloisConnection`, …) apply to them
 instance : PartialOrder (Subgroup G) where
   le H K := H ≤ K
-  le_refl := sorry
-  le_trans := sorry
-  le_antisymm := sorry
+  le_refl := Subgroup.le_refl
+  le_trans := λ _ _ _ => Subgroup.le_trans
+  le_antisymm := λ _ _ => Subgroup.le_antisymm
 
 /-! ### A subgroup as a group -/
 
