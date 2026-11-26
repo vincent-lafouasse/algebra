@@ -47,7 +47,7 @@ run_cmd
       Lean.Meta.registerCoercion ``Setoid.r (some { numArgs := 2, coercee := 1, type := .coe })
 
 instance {α : Sort u} : CoeFun (Setoid α) (λ _ => α → α → Prop) :=
-  sorry
+  ⟨@Setoid.r _⟩
 
 /-- `⟦a⟧`: the class of `a`, for the setoid Lean infers from the expected type. -/
 notation:arg "⟦" a "⟧" => Quotient.mk _ a
