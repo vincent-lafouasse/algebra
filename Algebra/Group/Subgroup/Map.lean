@@ -1,4 +1,5 @@
 import Algebra.Group.Subgroup.Ker
+import Base.Order.GaloisConnection.Defs
 
 /-! # Image and preimage of a subgroup
 
@@ -56,6 +57,25 @@ theorem comap_comap (K : Subgroup P) (g : N →* P) (f : G →* N) :
 -- map and comap are adjoint: f(K) ⊆ H iff K ⊆ f⁻¹(H)
 theorem map_le_iff_le_comap {f : G →* N} {K : Subgroup G} {H : Subgroup N} :
     map f K ≤ H ↔ K ≤ comap f H :=
+  sorry
+
+-- the same, as a Galois connection: the general lemmas then apply to `map f` and `comap f`
+theorem gc_map_comap (f : G →* N) : GaloisConnection (map f) (comap f) :=
+  sorry
+
+-- the unit of that connection
+theorem le_comap_map (f : G →* N) (H : Subgroup G) : H ≤ comap f (map f H) :=
+  sorry
+
+/-! ### A subgroup of `K`, from a subgroup of `G`
+
+`H.subgroupOf K` is `H ∩ K`, seen inside `↥K`: the elements of `K` that lie in `H`. It is
+how `H ⧸ (H ⊓ N)` is written in the second isomorphism theorem. -/
+
+def subgroupOf (H K : Subgroup G) : Subgroup K :=
+  H.comap K.subtype
+
+theorem mem_subgroupOf {H K : Subgroup G} {h : K} : h ∈ H.subgroupOf K ↔ (h : G) ∈ H :=
   sorry
 
 end Subgroup

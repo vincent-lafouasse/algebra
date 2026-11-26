@@ -84,7 +84,9 @@ theorem mem_empty_iff_false (x : α) : x ∈ (∅ : Set α) ↔ False := by
 `↥s` is the subtype `{x // x ∈ s}`: an element is a value with a proof that it lies in `s`
 (the same move as `↥H` for a subgroup). -/
 
--- (Mathlib: `Set.Elem`, with the same coercion)
+-- (Mathlib: `Set.Elem`, with the same coercion). Reducible, as in Mathlib, so that instances
+-- for subtypes (e.g. the order `Subtype.le`) apply to `↥s`.
+@[reducible]
 def Elem (s : Set α) : Type u :=
   { x : α // x ∈ s }
 

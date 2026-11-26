@@ -1,6 +1,7 @@
 import Algebra.Group.Hom
 import Algebra.Group.MinimalAxioms
 import Base.Data.Set
+import Base.Order.Defs.PartialOrder
 
 /-! # Subgroups
 
@@ -123,6 +124,14 @@ protected theorem le_antisymm {H K : Subgroup G} (hHK : H ≤ K) (hKH : K ≤ H)
   constructor
   · intro hh; exact hHK hh
   · intro hk; exact hKH hk
+
+-- the three lemmas above, packaged: subgroups form a partial order, so the general order
+-- lemmas (`le_trans`, `le_antisymm`, `Monotone`, `GaloisConnection`, …) apply to them
+instance : PartialOrder (Subgroup G) where
+  le H K := H ≤ K
+  le_refl := sorry
+  le_trans := sorry
+  le_antisymm := sorry
 
 /-! ### A subgroup as a group -/
 

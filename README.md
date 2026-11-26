@@ -25,7 +25,11 @@ module prefix so that it can later move to its own repository without changing a
 | `Base/Data/Set/Function.lean` | `MapsTo`, `InjOn`, `SurjOn`, `BijOn`, `EqOn`, `InvOn`, `BijOn.equiv` | `Data/Set/Function` |
 | `Base/Data/Int.lean` | `Int.induction_on`, `negSucc` stepping facts | `Data/Int/Init` |
 | `Base/Data/Quot.lean` | `⟦a⟧`, `Quotient.eq`, `Quotient.map₂`, `Quotient.out` | `Data/Quot` |
-| `Base/Order/Notation.lean` | `⊥`, `⊤`, `⊓` | `Order/Notation` |
+| `Base/Order/Notation.lean` | `⊥`, `⊤`, `⊓`, `⊔` | `Order/Notation` |
+| `Base/Order/Defs/PartialOrder.lean` | `Preorder`, `PartialOrder` | `Order/Defs/PartialOrder` |
+| `Base/Order/Monotone/Defs.lean` | `Monotone`, `Antitone` | `Order/Monotone/Defs` |
+| `Base/Order/GaloisConnection/Defs.lean` | `GaloisConnection l u` | `Order/GaloisConnection/Defs` |
+| `Base/Order/Hom/Basic.lean` | order isomorphisms `α ≃o β`, `Subtype.le`, `Set.Ici` | `Order/Hom/Basic`, `Order/Basic`, `Order/Interval/Set/Defs` |
 | `Base/Order/Setoid/Basic.lean` | `Setoid.ker f`, the first isomorphism theorem for sets | `Order/Setoid/Basic` |
 | `Algebra/Group/Defs.lean` | `Group`, `CommGroup` | `Algebra/Group/Defs` |
 | `Algebra/Group/MinimalAxioms.lean` | `Group.ofLeftAxioms`, `Group.ofRightAxioms` | `Algebra/Group/MinimalAxioms` |
@@ -37,10 +41,10 @@ module prefix so that it can later move to its own repository without changing a
 | `Algebra/Group/Equiv.lean` | isomorphisms `G ≃* H` | `Algebra/Group/Equiv/Defs` |
 | `Algebra/Group/End.lean` | `MulAut G`, `MulAut.conj` | `Algebra/Group/End` |
 | `Algebra/Group/Conj.lean` | `IsConj`, `ConjClasses`, `conjugatesOf` | `Algebra/Group/Conj` |
-| `Algebra/Group/Subgroup/` | `Subgroup`, `≤`, `⊥ ⊤ ⊓`, `ker`, `range`, `map`, `comap`, `zpowers`, `closure`, `Normal` | `Algebra/Group/Subgroup/` |
+| `Algebra/Group/Subgroup/` | `Subgroup`, `≤`, `⊥ ⊤ ⊓ ⊔`, `ker`, `range`, `map`, `comap`, `subgroupOf`, `zpowers`, `closure`, `Normal` | `Algebra/Group/Subgroup/` |
 | `Algebra/GroupTheory/Center.lean`, `Centralizer.lean` | `center G`, `centralizer s` | `GroupTheory/Subgroup/{Center,Centralizer}` |
 | `Algebra/GroupTheory/Coset.lean` | `a • s`, `leftRel` | `GroupTheory/Coset/{Defs,Basic}` |
-| `Algebra/GroupTheory/QuotientGroup/` | `G ⧸ N`, `lift`, the first isomorphism theorem | `GroupTheory/QuotientGroup/{Defs,Basic}` |
+| `Algebra/GroupTheory/QuotientGroup/` | `G ⧸ N`, `lift`, `map`, the three isomorphism theorems, the correspondence theorem | `GroupTheory/QuotientGroup/{Defs,Basic}` |
 | `Algebra/GroupTheory/Out.lean` | `Inn G`, `Out G`, `G ⧸ center G ≃* Inn G` | (not in Mathlib; uses `MulAut.conj.range`) |
 | `Algebra/GroupTheory/GroupAction.lean` | `MulAction`, `orbit`, `stabilizer`, `orbitRel`, orbit–stabilizer | `Algebra/Group/Action/Defs`, `GroupTheory/GroupAction/{Defs,Quotient}` |
 | `Exercises/` | exercise sheets, stated with the library above | |

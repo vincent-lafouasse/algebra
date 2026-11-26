@@ -61,6 +61,10 @@ theorem Normal.map {H : Subgroup G} (h : H.Normal) (f : G →* N) (hf : Function
 instance normal_comap {H : Subgroup N} [H.Normal] (f : G →* N) : (comap f H).Normal :=
   sorry
 
+-- `N ∩ H` is normal in `H` when `N` is normal in `G` (a special case of `normal_comap`)
+instance normal_subgroupOf {H N : Subgroup G} [N.Normal] : (N.subgroupOf H).Normal :=
+  sorry
+
 end Subgroup
 
 instance MonoidHom.normal_ker {G : Type u} {H : Type v} [Group G] [Group H] (f : G →* H) :

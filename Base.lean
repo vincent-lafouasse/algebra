@@ -8,3 +8,7 @@ import Base.Data.Set.Image
 import Base.Data.Set.Function
 import Base.Data.Quot
 import Base.Order.Setoid.Basic
+import Base.Order.Defs.PartialOrder
+import Base.Order.Monotone.Defs
+import Base.Order.GaloisConnection.Defs
+import Base.Order.Hom.Basic
