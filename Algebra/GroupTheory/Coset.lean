@@ -153,11 +153,19 @@ def leftRel (H : Subgroup G) : Setoid G where
 theorem leftRel_apply {H : Subgroup G} {x y : G} : (leftRel H).r x y ↔ x⁻¹ * y ∈ H :=
   Iff.rfl
 
-def rightRel (H : Subgroup G) : Setoid G :=
-  sorry
+def rightRel (H : Subgroup G) : Setoid G where
+  r x y := (leftRel H).r x⁻¹ y⁻¹
+  iseqv :=
+    { refl (a : G) := (leftRel H).refl a⁻¹
+      symm {_ _ : G} hab := (leftRel H).symm hab
+      trans {_ _ _ : G} hab hbc := (leftRel H).trans hab hbc }
 
-theorem rightRel_apply {H : Subgroup G} {x y : G} : (rightRel H).r x y ↔ y * x⁻¹ ∈ H :=
-  sorry
+theorem rightRel_apply {H : Subgroup G} {x y : G} : (rightRel H).r x y ↔ y * x⁻¹ ∈ H := by
+  show x⁻¹⁻¹ * y⁻¹ ∈ H ↔ y * x⁻¹ ∈ H
+  rw [← H.inv_mem_iff]
+  rw [mul_inv_rev]
+  rw [inv_inv]
+  rw [inv_inv]
 
 end QuotientGroup
 
