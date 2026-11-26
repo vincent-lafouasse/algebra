@@ -91,8 +91,16 @@ theorem ker_eq_bot_iff (f : G →* H) : f.ker = ⊥ ↔ Function.Injective f := 
 theorem ker_eq_bot (f : G →* H) (hf : Function.Injective f) : f.ker = ⊥ :=
   (ker_eq_bot_iff f).mpr hf
 
-theorem range_eq_top {f : G →* H} : f.range = ⊤ ↔ Function.Surjective f :=
-  sorry
+theorem range_eq_top {f : G →* H} : f.range = ⊤ ↔ Function.Surjective f := by
+  apply Iff.intro
+  · intro h y
+    have hy : y ∈ ⊤ := Subgroup.mem_top y
+    rw [← h] at hy
+    exact hy
+  · intro h_surj
+    rw [Subgroup.eq_top_iff']
+    intro y
+    exact h_surj y
 
 /-! ### Restricting the codomain to the range -/
 
