@@ -61,9 +61,9 @@ abbrev Group.ofLeftAxioms {G : Type u} [Mul G] [Inv G] [One G]
     where
   mul_assoc := assoc
   one_mul := one_mul
-  mul_one := sorry
+  mul_one := And.right (left_axioms assoc one_mul inv_mul_cancel)
   inv_mul_cancel := inv_mul_cancel
-  mul_inv_cancel := sorry
+  mul_inv_cancel := And.left (left_axioms assoc one_mul inv_mul_cancel)
 
 theorem idem_el_iff_eq_one_right_axioms {G : Type u} [Mul G] [Inv G] [One G]
     (assoc : ∀ a b c : G, (a * b) * c = a * (b * c)) (mul_one : ∀ a : G, a * 1 = a)
