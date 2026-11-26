@@ -28,8 +28,15 @@ def ker (f : G →* H) : Subgroup G where
       _ = f a * f b := by rw [f.map_mul]
       _ = 1 * 1 := by rw [ha, hb]
       _ = 1 := by rw [one_mul]
-  one_mem' := sorry
-  inv_mem' := sorry
+  one_mem' := by
+    rw [Set.mem_preimage, Set.mem_singleton_iff]
+    exact f.map_one
+  inv_mem' := by
+    intro x hx
+    rw [Set.mem_preimage, Set.mem_singleton_iff]
+    rw [Set.mem_preimage, Set.mem_singleton_iff] at hx
+    rw [f.map_inv]
+    exact inv_eq_one.mpr hx
 
 theorem mem_ker {f : G →* H} {x : G} : x ∈ f.ker ↔ f x = 1 :=
   sorry
