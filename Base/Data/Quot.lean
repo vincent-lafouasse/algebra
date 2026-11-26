@@ -145,8 +145,10 @@ theorem eq_mk_iff_out {s : Setoid α} {q : Quotient s} {a : α} : q = ⟦a⟧ �
             (Eq.symm ∘ mk_eq_iff_out.mpr ∘ s.iseqv.symm)
 
 theorem out_equiv_out {s : Setoid α} {q₁ q₂ : Quotient s} :
-    Quotient.out q₁ ≈ Quotient.out q₂ ↔ q₁ = q₂ :=
-  sorry
+    Quotient.out q₁ ≈ Quotient.out q₂ ↔ q₁ = q₂ := by
+  conv => rhs; rw [← out_eq q₁]
+  conv => rhs; rw [← out_eq q₂]
+  rw [eq]
 
 theorem out_injective {s : Setoid α} : Function.Injective (@Quotient.out α s) :=
   sorry
