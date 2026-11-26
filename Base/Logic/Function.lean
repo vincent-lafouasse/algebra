@@ -94,6 +94,7 @@ def Involutive {α : Sort u} (f : α → α) : Prop :=
 namespace Involutive
 
 variable {f : α → α} (h : Involutive f)
+
 include h
 
 theorem comp_self : f ∘ f = id :=
