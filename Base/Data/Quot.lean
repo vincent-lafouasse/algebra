@@ -91,7 +91,7 @@ theorem mk_surjective : Function.Surjective (Quotient.mk sa) :=
 -- `lift` computes on classes the way `f` does on representatives
 theorem lift_mk (f : α → β) (h : ∀ a b : α, a ≈ b → f a = f b) (x : α) :
     Quotient.lift f h (Quotient.mk sa x) = f x :=
-  sorry
+  rfl
 
 theorem lift_comp_mk (f : α → β) (h : ∀ a b : α, a ≈ b → f a = f b) :
     Quotient.lift f h ∘ Quotient.mk sa = f :=
