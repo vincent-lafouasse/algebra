@@ -69,8 +69,7 @@ theorem isConj_iff_eq {α : Type u} [CommGroup α] {a b : α} : IsConj a b ↔ a
   sorry
 
 -- a hom sends conjugates to conjugates
-protected theorem MonoidHom.map_isConj (f : α →* β) {a b : α} :
-    IsConj a b → IsConj (f a) (f b) :=
+protected theorem MonoidHom.map_isConj (f : α →* β) {a b : α} : IsConj a b → IsConj (f a) (f b) :=
   sorry
 
 /-! ### Conjugacy classes -/
@@ -158,8 +157,7 @@ def carrier : ConjClasses α → Set α :=
 theorem mem_carrier_mk {a : α} : a ∈ carrier (ConjClasses.mk a) :=
   sorry
 
-theorem mem_carrier_iff_mk_eq {a : α} {b : ConjClasses α} :
-    a ∈ carrier b ↔ ConjClasses.mk a = b :=
+theorem mem_carrier_iff_mk_eq {a : α} {b : ConjClasses α} : a ∈ carrier b ↔ ConjClasses.mk a = b :=
   sorry
 
 theorem carrier_eq_preimage_mk {a : ConjClasses α} : a.carrier = ConjClasses.mk ⁻¹' {a} :=
