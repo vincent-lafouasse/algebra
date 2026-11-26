@@ -26,7 +26,7 @@ namespace Setoid
 variable {α : Type u} {β : Type v}
 
 /-- The kernel of `f`: `x` and `y` are related when `f` can't tell them apart. -/
-def ker (f : α → β) : _root_.Setoid α :=
+def ker (f : α → β) : Setoid α :=
   sorry
 
 -- the interface: the only lemma that looks inside `ker`
