@@ -112,7 +112,7 @@ protected theorem surjective : Function.Surjective f :=
   sorry
 
 protected theorem bijective : Bijective f :=
-  sorry
+  And.intro h.injective h.surjective
 
 -- an involution moves across `=` (compare `Function.Injective.eq_iff`)
 protected theorem eq_iff {x y : α} : f x = y ↔ x = f y :=
