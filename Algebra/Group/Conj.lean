@@ -60,8 +60,14 @@ theorem IsConj.refl (a : α) : IsConj a a := by
   rw [inv_one]
   rw [mul_one, one_mul]
 
-theorem IsConj.symm {a b : α} : IsConj a b → IsConj b a :=
-  sorry
+theorem IsConj.symm {a b : α} : IsConj a b → IsConj b a := by
+  intro h
+  obtain ⟨x, hx⟩ := isConj_iff_conj.mp h
+  rw [conj_apply] at hx
+  replace hx := eq_mul_inv_of_mul_eq hx
+  replace hx := eq_inv_mul_of_mul_eq hx
+  rw [← mul_assoc] at hx
+  exact ⟨x⁻¹, Eq.symm hx⟩
 
 theorem isConj_comm {g h : α} : IsConj g h ↔ IsConj h g :=
   sorry
