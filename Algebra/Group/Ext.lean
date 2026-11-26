@@ -55,7 +55,7 @@ theorem Group.ext {G : Type u} ⦃g₁ g₂ : Group G⦄ (h_mul : g₁.mul = g�
   subst same_unit
   subst same_inv
   subst h_mul
-  sorry -- subst into rfl?
+  rfl
 
 theorem Group.ext_iff {G : Type u} {g₁ g₂ : Group G} : g₁ = g₂ ↔ g₁.mul = g₂.mul :=
   Iff.intro (λ (he : g₁ = g₂) => by subst he; rfl)
