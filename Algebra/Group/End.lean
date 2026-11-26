@@ -1,4 +1,5 @@
 import Algebra.Group.Equiv
+import Algebra.Group.MinimalAxioms
 
 /-! # Automorphisms and conjugation
 
@@ -24,21 +25,24 @@ variable {G : Type u} [Group G]
 instance : CoeFun (MulAut G) (λ _ => G → G) :=
   ⟨λ e => (MulEquiv.toEquiv e).toFun⟩
 
-instance : Group (MulAut G) where
-  mul e₁ e₂ := MulEquiv.trans e₂ e₁
-  one := MulEquiv.refl G
-  inv := MulEquiv.symm
-  mul_assoc := λ _ _ _ => rfl
-  one_mul := by
-    intro a
-    show a.trans (MulEquiv.refl G) = a
-    rfl
-  mul_one := by
-    intro a
-    show (MulEquiv.refl G).trans a = a
-    rfl
-  inv_mul_cancel := MulEquiv.self_trans_symm
-  mul_inv_cancel := sorry
+instance : Mul (MulAut G) :=
+  ⟨λ e₁ e₂ => MulEquiv.trans e₂ e₁⟩
+
+instance : One (MulAut G) :=
+  ⟨MulEquiv.refl G⟩
+
+instance : Inv (MulAut G) :=
+  ⟨MulEquiv.symm⟩
+
+-- the three left axioms; `Group.ofLeftAxioms` proves `mul_one` and `mul_inv_cancel`
+instance : Group (MulAut G) :=
+  Group.ofLeftAxioms
+    (λ _ _ _ => rfl)
+    (by
+      intro a
+      show a.trans (MulEquiv.refl G) = a
+      rfl)
+    MulEquiv.self_trans_symm
 
 theorem mul_def (e₁ e₂ : MulAut G) : e₁ * e₂ = MulEquiv.trans e₂ e₁ :=
   rfl

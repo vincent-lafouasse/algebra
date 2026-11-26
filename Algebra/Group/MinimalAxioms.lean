@@ -4,26 +4,36 @@ import Algebra.Group.Defs
 
 Mathlib: `Mathlib/Algebra/Group/MinimalAxioms.lean`.
 
-`Group` has four axiom fields, but three are enough: one identity law and one inverse law on
+`Group` has five axiom fields, but three are enough: one identity law and one inverse law on
 the same side, plus associativity. These two constructors build a `Group` from three
-equations and prove the missing ones.
+equations and prove the two missing ones.
 
 They are `abbrev`s, not `instance`s (Mathlib: "reducible non-instances"): you use one by
-writing `instance : Group G := Group.ofLeftAxioms h_assoc h_one_mul h_inv_mul`.
+writing `instance : Group G := Group.ofLeftAxioms h_assoc h_one_mul h_inv_mul`, after
+`Mul G`, `One G` and `Inv G` instances for the operations.
 
 Inside the proofs there is no `Group G` yet, so none of `Algebra/Group/Basic.lean` applies:
-only the three hypotheses (and `rw`, `calc`, …). -/
+only the three hypotheses (and `rw`, `calc`, …). The helper theorems take them as explicit
+arguments, since their conclusions don't mention them and Lean could not infer them.
+
+Mathlib proves everything inside the two `abbrev`s with local `have`s; the helpers in the
+`Group` namespace here are not in Mathlib. -/
 
 universe u
 
 namespace My
 
-theorem idem_el_iff_eq_one_left_axioms {G : Type u} [Mul G] [Inv G] [One G]
+namespace Group
+
+/-! ### From the left axioms -/
+
+-- (not in Mathlib) `e * e = e ↔ e = 1`, from the left axioms only
+theorem idem_el_iff_eq_one_of_left_axioms {G : Type u} [Mul G] [Inv G] [One G]
     (assoc : ∀ a b c : G, (a * b) * c = a * (b * c)) (one_mul : ∀ a : G, 1 * a = a)
     (inv_mul_cancel : ∀ a : G, a⁻¹ * a = 1) (e : G) : e * e = e ↔ e = 1 := by
   apply Iff.intro
   · intro h
-    replace h := congrArg (e⁻¹ * .) h
+    replace h := congrArg (e⁻¹ * ·) h
     rw [← assoc] at h
     rw [inv_mul_cancel] at h
     rw [one_mul] at h
@@ -32,13 +42,15 @@ theorem idem_el_iff_eq_one_left_axioms {G : Type u} [Mul G] [Inv G] [One G]
     subst h
     rw [one_mul]
 
-theorem left_axioms {G : Type u} [Mul G] [Inv G] [One G]
+-- (not in Mathlib) the right-hand laws from the left axioms: the inverse law first, since the
+-- identity law uses it
+theorem right_laws_of_left_axioms {G : Type u} [Mul G] [Inv G] [One G]
     (assoc : ∀ a b c : G, (a * b) * c = a * (b * c)) (one_mul : ∀ a : G, 1 * a = a)
     (inv_mul_cancel : ∀ a : G, a⁻¹ * a = 1) :
     (∀ (a : G), a * a⁻¹ = 1) ∧ (∀ (a : G), a * 1 = a) := by
   have mul_inv_cancel : ∀ (a : G), a * a⁻¹ = 1 := by
     intro a
-    rw [← idem_el_iff_eq_one_left_axioms assoc one_mul inv_mul_cancel]
+    rw [← idem_el_iff_eq_one_of_left_axioms assoc one_mul inv_mul_cancel]
     calc
       (a * a⁻¹) * (a * a⁻¹)
       _ = a * (a⁻¹ * a * a⁻¹) := by simp only [assoc]
@@ -53,24 +65,15 @@ theorem left_axioms {G : Type u} [Mul G] [Inv G] [One G]
       _ = a := by rw [one_mul]
   exact And.intro mul_inv_cancel mul_one
 
-/-- A group from associativity, a left identity and a left inverse. The work is `mul_one`;
-you will probably want `a * a⁻¹ = 1` on the way (a local `have`). -/
-abbrev Group.ofLeftAxioms {G : Type u} [Mul G] [Inv G] [One G]
-    (assoc : ∀ a b c : G, (a * b) * c = a * (b * c)) (one_mul : ∀ a : G, 1 * a = a)
-    (inv_mul_cancel : ∀ a : G, a⁻¹ * a = 1) : Group G
-    where
-  mul_assoc := assoc
-  one_mul := one_mul
-  mul_one := And.right (left_axioms assoc one_mul inv_mul_cancel)
-  inv_mul_cancel := inv_mul_cancel
-  mul_inv_cancel := And.left (left_axioms assoc one_mul inv_mul_cancel)
+/-! ### From the right axioms: the mirror image -/
 
-theorem idem_el_iff_eq_one_right_axioms {G : Type u} [Mul G] [Inv G] [One G]
+-- (not in Mathlib) `e * e = e ↔ e = 1`, from the right axioms only
+theorem idem_el_iff_eq_one_of_right_axioms {G : Type u} [Mul G] [Inv G] [One G]
     (assoc : ∀ a b c : G, (a * b) * c = a * (b * c)) (mul_one : ∀ a : G, a * 1 = a)
     (mul_inv_cancel : ∀ a : G, a * a⁻¹ = 1) (e : G) : e * e = e ↔ e = 1 := by
   apply Iff.intro
   · intro h
-    replace h := congrArg (. * e⁻¹) h
+    replace h := congrArg (· * e⁻¹) h
     rw [assoc] at h
     rw [mul_inv_cancel] at h
     rw [mul_one] at h
@@ -79,13 +82,14 @@ theorem idem_el_iff_eq_one_right_axioms {G : Type u} [Mul G] [Inv G] [One G]
     subst h
     rw [mul_one]
 
-theorem right_axioms {G : Type u} [Mul G] [Inv G] [One G]
+-- (not in Mathlib) the left-hand laws from the right axioms: again the inverse law first
+theorem left_laws_of_right_axioms {G : Type u} [Mul G] [Inv G] [One G]
     (assoc : ∀ a b c : G, (a * b) * c = a * (b * c)) (mul_one : ∀ a : G, a * 1 = a)
     (mul_inv_cancel : ∀ a : G, a * a⁻¹ = 1) :
     (∀ (a : G), a⁻¹ * a = 1) ∧ (∀ (a : G), 1 * a = a) := by
   have inv_mul_cancel : ∀ (a : G), a⁻¹ * a = 1 := by
     intro a
-    rw [← idem_el_iff_eq_one_right_axioms assoc mul_one mul_inv_cancel]
+    rw [← idem_el_iff_eq_one_of_right_axioms assoc mul_one mul_inv_cancel]
     calc
       (a⁻¹ * a) * (a⁻¹ * a)
       _ = a⁻¹ * (a * a⁻¹) * a := by simp only [assoc]
@@ -100,16 +104,32 @@ theorem right_axioms {G : Type u} [Mul G] [Inv G] [One G]
       _ = a := by rw [mul_one]
   exact And.intro inv_mul_cancel one_mul
 
+end Group
+
+/-! ### The constructors -/
+
+/-- A group from associativity, a left identity and a left inverse. `mul_one` and
+`mul_inv_cancel` come from `Group.right_laws_of_left_axioms`. -/
+abbrev Group.ofLeftAxioms {G : Type u} [Mul G] [Inv G] [One G]
+    (assoc : ∀ a b c : G, (a * b) * c = a * (b * c)) (one_mul : ∀ a : G, 1 * a = a)
+    (inv_mul_cancel : ∀ a : G, a⁻¹ * a = 1) : Group G
+    where
+  mul_assoc := assoc
+  one_mul := one_mul
+  mul_one := And.right (Group.right_laws_of_left_axioms assoc one_mul inv_mul_cancel)
+  inv_mul_cancel := inv_mul_cancel
+  mul_inv_cancel := And.left (Group.right_laws_of_left_axioms assoc one_mul inv_mul_cancel)
+
 /-- A group from associativity, a right identity and a right inverse: the mirror image.
-The work is `one_mul` and `inv_mul_cancel`; which one comes first? -/
+`one_mul` and `inv_mul_cancel` come from `Group.left_laws_of_right_axioms`. -/
 abbrev Group.ofRightAxioms {G : Type u} [Mul G] [Inv G] [One G]
     (assoc : ∀ a b c : G, (a * b) * c = a * (b * c)) (mul_one : ∀ a : G, a * 1 = a)
     (mul_inv_cancel : ∀ a : G, a * a⁻¹ = 1) : Group G
     where
   mul_assoc := assoc
-  one_mul := And.right (right_axioms assoc mul_one mul_inv_cancel)
+  one_mul := And.right (Group.left_laws_of_right_axioms assoc mul_one mul_inv_cancel)
   mul_one := mul_one
-  inv_mul_cancel := And.left (right_axioms assoc mul_one mul_inv_cancel)
+  inv_mul_cancel := And.left (Group.left_laws_of_right_axioms assoc mul_one mul_inv_cancel)
   mul_inv_cancel := mul_inv_cancel
 
 /- Exercise (no stub): what about a left identity `1 * a = a` with a *right* inverse
