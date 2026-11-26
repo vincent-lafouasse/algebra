@@ -87,7 +87,11 @@ that no proof you consider finished leans on a stub:
 uv run scripts/check.py                 # per-file progress; exits 1 and lists anything tainted
 uv run scripts/check.py Algebra/Group   # only files under a path
 uv run scripts/check.py -v              # also lists every stub
+uv run scripts/check.py -a              # also lists what uses the axiom of choice
 ```
+
+It also counts the axioms proved declarations rest on: Lean's three (`propext`, `Quot.sound`,
+`Classical.choice`) are legitimate, and anything else is reported in red as non-standard.
 
 It prints, per file, proved / total for theorems and for definitions (stubs and tainted ones
 count in the total), with a ✓ on finished files. A declaration is *tainted* if it has no
