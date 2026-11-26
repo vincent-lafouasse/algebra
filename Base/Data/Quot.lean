@@ -157,7 +157,7 @@ theorem out_injective {s : Setoid α} : Function.Injective (@Quotient.out α s) 
   exact congrArg (Quotient.mk s) he
 
 theorem out_inj {s : Setoid α} {q₁ q₂ : Quotient s} : Quotient.out q₁ = Quotient.out q₂ ↔ q₁ = q₂ :=
-  sorry
+  Iff.intro (λ h => out_injective h) (λ h => congrArg Quotient.out h)
 
 end Quotient
 
