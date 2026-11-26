@@ -19,7 +19,7 @@ variable {G : Type u} [Group G]
 
 instance : Bot (Subgroup G) :=
   ⟨{
-      carrier := {x | x = 1}
+      carrier := {1}
       mul_mem' := by
         intro a b (ha : a = 1) (hb : b = 1)
         show a * b = 1
