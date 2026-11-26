@@ -34,6 +34,7 @@ theorem monotone_intro (hu : Monotone u) (hl : Monotone l) (h_u_l : ∀ a, a ≤
   sorry
 
 variable (gc : GaloisConnection l u)
+
 include gc
 
 theorem le_iff_le {a : α} {b : β} : l a ≤ b ↔ a ≤ u b :=
@@ -64,6 +65,7 @@ end
 section PartialOrder
 
 variable [PartialOrder α] [PartialOrder β] {l : α → β} {u : β → α} (gc : GaloisConnection l u)
+
 include gc
 
 theorem u_l_u_eq_u (b : β) : u (l (u b)) = u b :=

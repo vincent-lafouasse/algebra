@@ -71,8 +71,7 @@ theorem lift_comp_mk (f : α → β) (h : ∀ a b : α, a ≈ b → f a = f b) :
   sorry
 
 /-- A map between quotients, from a map `f` that sends related elements to related elements. -/
-protected def map (f : α → β) (h : ∀ ⦃a b : α⦄, a ≈ b → f a ≈ f b) :
-    Quotient sa → Quotient sb :=
+protected def map (f : α → β) (h : ∀ ⦃a b : α⦄, a ≈ b → f a ≈ f b) : Quotient sa → Quotient sb :=
   sorry
 
 theorem map_mk (f : α → β) (h : ∀ ⦃a b : α⦄, a ≈ b → f a ≈ f b) (x : α) :
@@ -105,16 +104,13 @@ theorem out_eq {s : Setoid α} (q : Quotient s) : ⟦Quotient.out q⟧ = q :=
 theorem mk_out {s : Setoid α} (a : α) : s (Quotient.out (⟦a⟧ : Quotient s)) a :=
   sorry
 
-theorem mk_eq_iff_out {s : Setoid α} {x : α} {y : Quotient s} :
-    ⟦x⟧ = y ↔ x ≈ Quotient.out y :=
+theorem mk_eq_iff_out {s : Setoid α} {x : α} {y : Quotient s} : ⟦x⟧ = y ↔ x ≈ Quotient.out y :=
   sorry
 
-theorem eq_mk_iff_out {s : Setoid α} {x : Quotient s} {y : α} :
-    x = ⟦y⟧ ↔ Quotient.out x ≈ y :=
+theorem eq_mk_iff_out {s : Setoid α} {x : Quotient s} {y : α} : x = ⟦y⟧ ↔ Quotient.out x ≈ y :=
   sorry
 
-theorem out_equiv_out {s : Setoid α} {x y : Quotient s} :
-    Quotient.out x ≈ Quotient.out y ↔ x = y :=
+theorem out_equiv_out {s : Setoid α} {x y : Quotient s} : Quotient.out x ≈ Quotient.out y ↔ x = y :=
   sorry
 
 theorem out_injective {s : Setoid α} : Function.Injective (@Quotient.out α s) :=
