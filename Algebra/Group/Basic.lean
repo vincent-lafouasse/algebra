@@ -115,11 +115,15 @@ theorem mul_right_surjective (a : G) : Function.Surjective (· * a) := by
   exact inv_mul_cancel_right y a
 
 -- multiplying by `y`, then by `x`, is multiplying by `x * y` (on the right: by `y * x`)
-theorem comp_mul_left (x y : G) : (x * ·) ∘ (y * ·) = (x * y * ·) :=
-  sorry
+theorem comp_mul_left (x y : G) : (x * ·) ∘ (y * ·) = (x * y * ·) := by
+  funext z
+  show x * (y * z) = x * y * z
+  rw [mul_assoc]
 
-theorem comp_mul_right (x y : G) : (· * x) ∘ (· * y) = (· * (y * x)) :=
-  sorry
+theorem comp_mul_right (x y : G) : (· * x) ∘ (· * y) = (· * (y * x)) := by
+  funext z
+  show (z * y) * x = z * (y * x)
+  rw [mul_assoc]
 
 theorem one_mul_eq_id : ((1 : G) * ·) = id := by
   funext x
