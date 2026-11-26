@@ -56,7 +56,7 @@ variable {sa : Setoid α} {sb : Setoid β}
 
 -- the two directions `Quotient.exact` and `Quotient.sound` as one iff
 theorem eq {r : Setoid α} {x y : α} : Quotient.mk r x = ⟦y⟧ ↔ r x y :=
-  sorry
+  Iff.intro Quotient.exact Quotient.sound
 
 theorem «forall» {p : Quotient sa → Prop} : (∀ a, p a) ↔ ∀ a : α, p ⟦a⟧ :=
   sorry
