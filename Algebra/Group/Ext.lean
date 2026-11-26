@@ -22,24 +22,12 @@ Plan: show the identities agree (`1₁` is a left identity for `*₁ = *₂`, an
 right identity for `*₂`), then the inverses (`funext`, then uniqueness of inverses in one
 structure), then destructure both instances and substitute. -/
 theorem Group.ext {G : Type u} ⦃g₁ g₂ : Group G⦄
-    (h_mul :
-      (letI := g₁;
-          HMul.hMul :
-          G → G → G) =
-        (letI := g₂;
-          HMul.hMul :
-          G → G → G)) :
+    (h_mul : (letI := g₁; HMul.hMul : G → G → G) = (letI := g₂; HMul.hMul : G → G → G)) :
     g₁ = g₂ :=
   sorry
 
 theorem Group.ext_iff {G : Type u} {g₁ g₂ : Group G} :
-    g₁ = g₂ ↔
-      (letI := g₁;
-          HMul.hMul :
-          G → G → G) =
-        (letI := g₂;
-          HMul.hMul :
-          G → G → G) :=
+    g₁ = g₂ ↔ (letI := g₁; HMul.hMul : G → G → G) = (letI := g₂; HMul.hMul : G → G → G) :=
   sorry
 
 end My
