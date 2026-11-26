@@ -84,7 +84,7 @@ theorem «exists» {p : Quotient sa → Prop} : (∃ q, p q) ↔ ∃ a : α, p �
 
 -- every class has a representative
 theorem mk_surjective : Function.Surjective (Quotient.mk sa) :=
-  sorry
+  Quotient.exists_rep
 
 /-! ### Lifting functions -/
 
