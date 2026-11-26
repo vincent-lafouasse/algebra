@@ -32,6 +32,27 @@ def IsConj (a b : α) : Prop :=
 theorem isConj_iff {a b : α} : IsConj a b ↔ ∃ c : α, c * a * c⁻¹ = b :=
   sorry
 
+/-! ### Conjugation as a function (not in Mathlib)
+
+`conj c a` is `c * a * c⁻¹`, as a plain function: a name for the expression, for reading.
+Mathlib has none; it writes the product, or uses `MulAut.conj c`, the same map packaged as an
+automorphism. Lemmas you `rw` with (`conj_mul`, `Normal.conj_mem`, …) stay about the
+product, since that is what shows up in goals: `conj_apply` goes back and forth. -/
+
+def conj (c a : α) : α :=
+  c * a * c⁻¹
+
+-- the interface: the only lemma that looks inside `conj`
+theorem conj_apply (c a : α) : conj c a = c * a * c⁻¹ :=
+  sorry
+
+-- the packaged version is the same map
+theorem MulAut.conj_apply_eq_conj (c a : α) : MulAut.conj c a = conj c a :=
+  sorry
+
+theorem isConj_iff_conj {a b : α} : IsConj a b ↔ ∃ c : α, conj c a = b :=
+  sorry
+
 /-! ### An equivalence relation -/
 
 theorem IsConj.refl (a : α) : IsConj a a :=
