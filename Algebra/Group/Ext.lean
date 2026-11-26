@@ -45,13 +45,14 @@ Plan: the identities agree (`Group.one_eq_of_mul_eq`), the inverses agree
 (`Group.inv_eq_of_mul_eq`); destructure both instances and substitute. -/
 theorem Group.ext {G : Type u} ⦃g₁ g₂ : Group G⦄ (h_mul : g₁.mul = g₂.mul) :
     g₁ = g₂ := by
-  have same_unit : g₁.one = g₂.one := Group.one_eq_of_mul_eq h_mul
-  have same_inv : g₁.inv = g₂.inv := Group.inv_eq_of_mul_eq h_mul
-
   obtain @⟨⟨mul₁⟩, ⟨one₁⟩, ⟨inv₁⟩, assoc₁, one_mul₁, mul_one₁,
     inv_mul_cancel₁, mul_inv_cancel₁⟩ := g₁
   obtain @⟨⟨mul₂⟩, ⟨one₂⟩, ⟨inv₂⟩, assoc₂, one_mul₂, mul_one₂,
     inv_mul_cancel₂, mul_inv_cancel₂⟩ := g₂
+
+  have same_unit : one₁ = one₂:= Group.one_eq_of_mul_eq h_mul
+  have same_inv : inv₁= inv₂ := Group.inv_eq_of_mul_eq h_mul
+
   subst same_unit
   subst same_inv
   subst h_mul
