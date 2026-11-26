@@ -111,7 +111,7 @@ def comp (g : H →* K) (f : G →* H) : G →* K where
 
 -- `g ∘* f` (typed `\o*`) for `g.comp f` (not in Mathlib, which writes `.comp`). Declared
 -- after `def comp`, since the name on the right is resolved here.
-@[inherit_doc] infixr:90 " ∘* " => MonoidHom.comp
+infixr:90 " ∘* " => MonoidHom.comp
 
 theorem comp_apply (g : H →* K) (f : G →* H) (x : G) : (g ∘* f) x = g (f x) :=
   rfl
