@@ -151,7 +151,7 @@ def leftRel (H : Subgroup G) : Setoid G where
         exact h }
 
 theorem leftRel_apply {H : Subgroup G} {x y : G} : (leftRel H).r x y ↔ x⁻¹ * y ∈ H :=
-  sorry
+  Iff.rfl
 
 def rightRel (H : Subgroup G) : Setoid G :=
   sorry
