@@ -62,11 +62,23 @@ theorem image_mul_left' : (a⁻¹ * ·) '' t = (a * ·) ⁻¹' t := by
   rw [image_mul_left]
   rw [inv_inv]
 
-theorem image_mul_right : (· * b) '' t = (· * b⁻¹) ⁻¹' t :=
-  sorry
+theorem image_mul_right : (· * b) '' t = (· * b⁻¹) ⁻¹' t := by
+  apply Set.ext
+  intro x
+  rw [mem_image]
+  rw [mem_preimage]
+  apply Iff.intro
+  · intro ⟨x', ⟨ht, h⟩⟩
+    rw [← eq_mul_inv_iff_mul_eq] at h
+    rw [← h]
+    exact ht
+  · intro h
+    refine ⟨x * b⁻¹, h, ?_⟩
+    rw [inv_mul_cancel_right]
 
-theorem image_mul_right' : (· * b⁻¹) '' t = (· * b) ⁻¹' t :=
-  sorry
+theorem image_mul_right' : (· * b⁻¹) '' t = (· * b) ⁻¹' t := by
+  rw [image_mul_right]
+  rw [inv_inv]
 
 -- the one `x` with `a * x = b`
 theorem preimage_mul_left_singleton : (a * ·) ⁻¹' {b} = {a⁻¹ * b} :=
