@@ -72,8 +72,15 @@ theorem «forall» {p : Quotient sa → Prop} : (∀ q, p q) ↔ ∀ a : α, p �
     subst ha
     exact h a
 
-theorem «exists» {p : Quotient sa → Prop} : (∃ q, p q) ↔ ∃ a : α, p ⟦a⟧ :=
-  sorry
+theorem «exists» {p : Quotient sa → Prop} : (∃ q, p q) ↔ ∃ a : α, p ⟦a⟧ := by
+  apply Iff.intro
+  · intro ⟨q, hq⟩
+    let ⟨a, ha⟩ := Quotient.exists_rep q
+    subst ha
+    exact Exists.intro a hq
+  · intro ⟨a, ha⟩
+    let qa : Quotient sa := Quotient.mk sa a
+    exact Exists.intro qa ha
 
 -- every class has a representative
 theorem mk_surjective : Function.Surjective (Quotient.mk sa) :=
