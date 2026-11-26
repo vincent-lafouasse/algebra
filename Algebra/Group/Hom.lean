@@ -67,9 +67,9 @@ protected theorem map_zpow (f : G →* H) (a : G) (k : Int) : f (a ^ k) = f a ^ 
   | zero =>
     rw [zpow_zero, zpow_zero]; exact MonoidHom.map_one f
   | succ n ih =>
-    rw [zpow_add_one, zpow_add_one]
-    rw [MonoidHom.map_mul f]
-    rw [ih]
+    rw [← Int.natCast_add_one]
+    rw [zpow_natCast, zpow_natCast]
+    exact MonoidHom.map_pow f a (n + 1)
   | pred n ih =>
     rw [zpow_sub_one, zpow_sub_one]
     rw [MonoidHom.map_mul]
