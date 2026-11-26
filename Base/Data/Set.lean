@@ -80,8 +80,11 @@ theorem le_iff_subset {s t : Set α} : s ≤ t ↔ s ⊆ t :=
 
 -- so the general order lemmas (`le_trans`, `le_antisymm`, `GaloisConnection`, …) apply to sets
 -- (Mathlib: from `Set.instBooleanAlgebra`, in `Mathlib/Order/BooleanAlgebra/Set.lean`)
-instance : PartialOrder (Set α) :=
-  sorry
+instance : PartialOrder (Set α) where
+  le :  Set α → Set α → Prop := λ s t => s ⊆ t
+  le_refl (a : Set α) :  a ≤ a := by intro x h; sorry
+  le_trans (a b c : Set α) :  a ≤ b → b ≤ c → a ≤ c := sorry
+  le_antisymm (a b : Set α) :  a ≤ b → b ≤ a → a = b := sorry
 
 -- `{a}`
 instance : Singleton α (Set α) :=
