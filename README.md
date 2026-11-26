@@ -2,8 +2,9 @@
 
 Group theory in Lean 4, from the axioms up, without Mathlib.
 
-The `Group` class has three axioms (associativity, left identity, left inverse);
-everything else is proved here. The library tracks Mathlib: names, statements, namespaces
+The `Group` class has five axioms (associativity, identity and inverse on both sides), but
+three are enough: `Group.ofLeftAxioms` and `Group.ofRightAxioms` build a group from one side's
+laws. Everything else is proved here. The library tracks Mathlib: names, statements, namespaces
 and file layout follow Mathlib's, so that reading this code teaches you Mathlib. Each file's
 header names the Mathlib files it mirrors. Where something has no Mathlib counterpart, a
 comment says "(not in Mathlib)".
