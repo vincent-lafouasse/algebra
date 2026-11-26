@@ -58,9 +58,8 @@ theorem piecewise_constant (f : α → β) : ∀ (a b : α), ker f a b → f a =
   exact h
 
 /-- `f` on classes: well defined, since related elements have the same image by definition. -/
-def kerLift (f : α → β) : Quotient (ker f) → β := by
-  intro qa
-  sorry
+def kerLift (f : α → β) : Quotient (ker f) → β :=
+  λ qa => Quotient.lift f (piecewise_constant f) qa
 
 theorem kerLift_mk (f : α → β) (x : α) : kerLift f ⟦x⟧ = f x :=
   sorry
