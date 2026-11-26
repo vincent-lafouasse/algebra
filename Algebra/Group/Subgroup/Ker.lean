@@ -73,8 +73,17 @@ theorem eq_iff (f : G →* H) {x y : G} : f x = f y ↔ y⁻¹ * x ∈ f.ker := 
   rw [inv_mul_eq_one]
   rw [eq_comm]
 
-theorem ker_eq_bot_iff (f : G →* H) : f.ker = ⊥ ↔ Function.Injective f :=
-  sorry
+theorem ker_eq_bot_iff (f : G →* H) : f.ker = ⊥ ↔ Function.Injective f := by
+  apply Iff.intro
+  · intro h x y he
+    rw [← inv_mul_eq_one] at he
+    rw [← f.map_inv, ← f.map_mul] at he
+    rw [← mem_ker] at he
+    rw [h] at he
+    rw [Subgroup.mem_bot] at he
+    exact eq_of_inv_mul_eq_one he
+  · intro h
+    sorry
 
 theorem ker_eq_bot (f : G →* H) (hf : Function.Injective f) : f.ker = ⊥ :=
   sorry
