@@ -129,7 +129,7 @@ noncomputable def out {s : Setoid α} : Quotient s → α :=
   λ q => Classical.choose (Quotient.exists_rep q)
 
 theorem out_eq {s : Setoid α} (q : Quotient s) : ⟦Quotient.out q⟧ = q :=
-  sorry
+  Classical.choose_spec (Quotient.exists_rep q)
 
 -- the chosen representative of `⟦a⟧` is related to `a`, not necessarily `a` itself
 theorem mk_out {s : Setoid α} (a : α) : s (Quotient.out (⟦a⟧ : Quotient s)) a :=
