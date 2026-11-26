@@ -108,7 +108,7 @@ theorem le_def {H K : Subgroup G} : H ≤ K ↔ ∀ ⦃x⦄, x ∈ H → x ∈ K
 
 -- (Mathlib: `SetLike.coe_subset_coe`)
 theorem coe_subset_coe {H K : Subgroup G} : (H : Set G) ⊆ (K : Set G) ↔ H ≤ K :=
-  sorry
+  Iff.rfl
 
 protected theorem le_refl (H : Subgroup G) : H ≤ H := by
   apply le_def.mpr
