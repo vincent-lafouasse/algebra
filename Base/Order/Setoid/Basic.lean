@@ -70,8 +70,8 @@ theorem kerLift_injective (f : α → β) : Function.Injective (kerLift f) := by
   have ha := Quotient.out_eq qa
   have hb := Quotient.out_eq qb
   rw [← hb, ← ha] at he
-  change kerLift f ⟦a⟧ = kerLift f ⟦b⟧ at he
-  sorry
+  rw [kerLift_mk, kerLift_mk] at he
+  exact Quotient.out_equiv_out.mp he
 
 theorem range_kerLift_eq_range (f : α → β) : Set.range (kerLift f) = Set.range f :=
   sorry
