@@ -126,7 +126,7 @@ theorem map₂_mk {γ : Sort w} {sc : Setoid γ} (f : α → β → γ)
 `Quotient.out q` picks some `a` with `⟦a⟧ = q`, by choice: noncomputable. -/
 
 noncomputable def out {s : Setoid α} : Quotient s → α :=
-  sorry
+  λ q => Classical.choose (Quotient.exists_rep q)
 
 theorem out_eq {s : Setoid α} (q : Quotient s) : ⟦Quotient.out q⟧ = q :=
   sorry
