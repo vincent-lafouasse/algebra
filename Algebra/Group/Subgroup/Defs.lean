@@ -134,8 +134,11 @@ protected theorem le_antisymm {H K : Subgroup G} (hHK : H ≤ K) (hKH : K ≤ H)
 
 -- the three lemmas above, packaged: subgroups form a partial order, so the general order
 -- lemmas (`le_trans`, `le_antisymm`, `Monotone`, `GaloisConnection`, …) apply to them
-instance : PartialOrder (Subgroup G) :=
-  sorry
+instance : PartialOrder (Subgroup G) where
+  le := sorry
+  le_refl := sorry
+  le_trans := sorry
+  le_antisymm := sorry
 
 /-! ### A subgroup as a group -/
 
