@@ -16,8 +16,6 @@ universe u
 
 namespace My
 
-#check congrFun
-
 /-- Two group structures on `G` with the same multiplication are equal.
 
 Plan: show the identities agree (`1₁` is a left identity for `*₁ = *₂`, and `1₂` is a
