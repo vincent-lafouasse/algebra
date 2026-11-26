@@ -130,7 +130,6 @@ theorem leftCoset_eq_iff (H : Subgroup G) {a b : G} :
     rw [← mul_mul_inv_mul_cancel a⁻¹ b x]
     rw [Subgroup.mul_mem_cancel_left H h]
 
-
 /-! ### The relation "same left coset" -/
 
 namespace QuotientGroup

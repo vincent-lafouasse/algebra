@@ -34,7 +34,12 @@ theorem Group.ext {G : Type u} ⦃g₁ g₂ : Group G⦄
 
 theorem Group.ext_iff {G : Type u} {g₁ g₂ : Group G} :
     g₁ = g₂ ↔
-      (letI := g₁; HMul.hMul : G → G → G) = (letI := g₂; HMul.hMul : G → G → G) :=
+      (letI := g₁;
+          HMul.hMul :
+          G → G → G) =
+        (letI := g₂;
+          HMul.hMul :
+          G → G → G) :=
   sorry
 
 end My
