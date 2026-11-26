@@ -55,8 +55,10 @@ theorem isConj_iff_conj {a b : α} : IsConj a b ↔ ∃ c : α, conj c a = b :=
 
 /-! ### An equivalence relation -/
 
-theorem IsConj.refl (a : α) : IsConj a a :=
-  sorry
+theorem IsConj.refl (a : α) : IsConj a a := by
+  refine ⟨1, ?_⟩
+  rw [inv_one]
+  rw [mul_one, one_mul]
 
 theorem IsConj.symm {a b : α} : IsConj a b → IsConj b a :=
   sorry
