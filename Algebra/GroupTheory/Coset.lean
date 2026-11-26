@@ -121,15 +121,14 @@ theorem leftCoset_eq_iff (H : Subgroup G) {a b : G} :
   · intro h
     sorry
   · intro h
-    have solve_side (α β δ : G) : δ ∈ α • (H : Set G) → δ ∈ β • (H : Set G) := by
-      intro ⟨y, ⟨hh, hα⟩⟩
-      rw [mem_leftCoset_iff]
-      rw [← eq_inv_mul_iff_mul_eq] at hα
-      subst hα
-      sorry
     apply Set.ext
-    intro γ
-    exact Iff.intro (solve_side a b γ) (solve_side b a γ)
+    intro x
+    apply Iff.intro
+    · intro h_xa
+      sorry
+    · intro h_xb
+      sorry
+
 
 /-! ### The relation "same left coset" -/
 
