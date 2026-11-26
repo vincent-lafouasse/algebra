@@ -14,20 +14,6 @@ namespace My
 
 variable {G : Type u} [Group G] {a b c : G}
 
-/-- the special case `a = b` of `mul_eq_left : a * b = a ↔ b = 1` (Mathlib:
-`IsIdempotentElem.iff_eq_one`, stated through a predicate). Proved from the left axioms only. --/
-theorem idem_el_iff_eq_one (e : G) : e * e = e ↔ e = 1 := by
-  apply Iff.intro
-  · intro h
-    replace h := congrArg (e⁻¹ * .) h
-    rw [← mul_assoc] at h
-    rw [inv_mul_cancel] at h
-    rw [one_mul] at h
-    exact h
-  · intro h
-    subst h
-    rw [one_mul]
-
 /-! ### Cancelling a factor and its inverse -/
 
 theorem inv_mul_cancel_left (a b : G) : a⁻¹ * (a * b) = b := by
