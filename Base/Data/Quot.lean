@@ -42,9 +42,9 @@ variable {α : Sort u} {β : Sort v}
 -- as the one coerced, printing `↑x y`. Here it is argument 1 (`numArgs := 2`: `α` and `s`).
 -- Mathlib registers it as `.coeFun`, which prints `s x y` with no arrow (not in Mathlib: `.coe`,
 -- for the arrow). This is the only reason the file imports Lean's metaprogramming library.
-run_cmd Lean.Elab.Command.liftTermElabM do
-  Lean.Meta.registerCoercion ``Setoid.r
-    (some { numArgs := 2, coercee := 1, type := .coe })
+run_cmd
+  Lean.Elab.Command.liftTermElabM do
+      Lean.Meta.registerCoercion ``Setoid.r (some { numArgs := 2, coercee := 1, type := .coe })
 
 instance {α : Sort u} : CoeFun (Setoid α) (λ _ => α → α → Prop) :=
   ⟨@Setoid.r _⟩
@@ -67,8 +67,7 @@ theorem «forall» {p : Quotient sa → Prop} : (∀ q, p q) ↔ ∀ a : α, p �
     let qa : Quotient sa := Quotient.mk sa a
     exact h qa
   · intro h q
-    let ⟨(a : α), ha⟩ : ∃ a, ⟦a⟧ = q :=
-      Quotient.exists_rep q
+    let ⟨(a : α), ha⟩ : ∃ a, ⟦a⟧ = q := Quotient.exists_rep q
     subst ha
     exact h a
 
@@ -101,8 +100,7 @@ theorem lift_comp_mk (f : α → β) (h : ∀ a b : α, a ≈ b → f a = f b) :
 protected def map (f : α → β) (h : ∀ ⦃a b : α⦄, a ≈ b → f a ≈ f b) : Quotient sa → Quotient sb := by
   intro (q : Quotient sa)
   let g : α → Quotient sb := λ a => Quotient.mk sb (f a)
-  have hg : ∀ ⦃a b : α⦄, a ≈ b → g a = g b :=
-    λ _ _ hab => Quotient.sound (h hab)
+  have hg : ∀ ⦃a b : α⦄, a ≈ b → g a = g b := λ _ _ hab => Quotient.sound (h hab)
   exact Quotient.lift g hg q
 
 theorem map_mk (f : α → β) (h : ∀ ⦃a b : α⦄, a ≈ b → f a ≈ f b) (x : α) :
@@ -125,18 +123,15 @@ theorem map₂_mk {γ : Sort w} {sc : Setoid γ} (f : α → β → γ)
 
 `Quotient.out q` picks some `a` with `⟦a⟧ = q`, by choice: noncomputable. -/
 
-noncomputable def out {s : Setoid α} : Quotient s → α :=
-  λ q => Classical.choose (Quotient.exists_rep q)
+noncomputable def out {s : Setoid α} : Quotient s → α := λ q =>
+  Classical.choose (Quotient.exists_rep q)
 
 theorem out_eq {s : Setoid α} (q : Quotient s) : ⟦Quotient.out q⟧ = q :=
   Classical.choose_spec (Quotient.exists_rep q)
 
 -- the chosen representative of `⟦a⟧` is related to `a`, not necessarily `a` itself
-theorem mk_out {s : Setoid α} (a : α) : s (Quotient.out (⟦a⟧ : Quotient s)) a := by
-  let qa := Quotient.mk s a
-  have a' := out qa
-  have ha : ⟦out qa⟧ = qa := out_eq qa
-  sorry
+theorem mk_out {s : Setoid α} (a : α) : s (Quotient.out (⟦a⟧ : Quotient s)) a :=
+  Quotient.exact (out_eq (Quotient.mk s a))
 
 theorem mk_eq_iff_out {s : Setoid α} {a : α} {q : Quotient s} : ⟦a⟧ = q ↔ a ≈ Quotient.out q :=
   sorry
@@ -151,8 +146,7 @@ theorem out_equiv_out {s : Setoid α} {q₁ q₂ : Quotient s} :
 theorem out_injective {s : Setoid α} : Function.Injective (@Quotient.out α s) :=
   sorry
 
-theorem out_inj {s : Setoid α} {q₁ q₂ : Quotient s} :
-    Quotient.out q₁ = Quotient.out q₂ ↔ q₁ = q₂ :=
+theorem out_inj {s : Setoid α} {q₁ q₂ : Quotient s} : Quotient.out q₁ = Quotient.out q₂ ↔ q₁ = q₂ :=
   sorry
 
 end Quotient
