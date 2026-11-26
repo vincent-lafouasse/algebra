@@ -51,7 +51,7 @@ theorem MulAut.conj_apply_eq_conj (c a : α) : MulAut.conj c a = conj c a :=
   rfl
 
 theorem isConj_iff_conj {a b : α} : IsConj a b ↔ ∃ c : α, conj c a = b :=
-  sorry
+  Iff.rfl
 
 /-! ### An equivalence relation -/
 
