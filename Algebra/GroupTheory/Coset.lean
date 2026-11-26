@@ -106,15 +106,9 @@ theorem leftCoset_eq_image_mul_left {s : Set α} : a • s = (a * ·) '' s := by
   rw [Set.mem_image]
 
 theorem mem_leftCoset_iff {s : Set α} {x : α} (a : α) : x ∈ a • s ↔ a⁻¹ * x ∈ s := by
-  rw [Set.mem_smul_set]
-  apply Iff.intro
-  · intro ⟨y, ⟨hs, h⟩⟩
-    rw [← eq_inv_mul_iff_mul_eq] at h
-    subst h
-    exact hs
-  · intro h
-    refine ⟨a⁻¹ * x, h, ?_⟩
-    rw [mul_inv_cancel_left]
+  rw [leftCoset_eq_image_mul_left]
+  rw [Set.image_mul_left]
+  rw [Set.mem_preimage]
 
 theorem mem_own_leftCoset (s : Subgroup α) (a : α) : a ∈ a • (s : Set α) :=
   sorry
