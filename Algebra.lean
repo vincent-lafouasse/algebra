@@ -7,6 +7,9 @@ import Algebra.Group.Pow
 import Algebra.Group.Hom
 import Algebra.Group.Equiv
 import Algebra.Group.End
+import Algebra.Group.Prod
+import Algebra.Group.Opposite
+import Algebra.Group.TypeTags.Basic
 import Algebra.Group.Conj
 import Algebra.Group.Subgroup.Defs
 import Algebra.Group.Subgroup.Lattice
@@ -22,3 +25,5 @@ import Algebra.GroupTheory.QuotientGroup.Defs
 import Algebra.GroupTheory.QuotientGroup.Basic
 import Algebra.GroupTheory.Out
 import Algebra.GroupTheory.GroupAction
+import Algebra.GroupTheory.Examples
+import Algebra.GroupTheory.ConjAct

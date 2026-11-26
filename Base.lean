@@ -1,4 +1,5 @@
 import Base.Logic.Function
+import Base.Logic.Function.Conjugate
 import Base.Logic.Equiv
 import Base.Logic.SchroederBernstein
 import Base.Data.Set
@@ -12,3 +13,7 @@ import Base.Order.Defs.PartialOrder
 import Base.Order.Monotone.Defs
 import Base.Order.GaloisConnection.Defs
 import Base.Order.Hom.Basic
+import Base.Order.Lattice
+import Base.Order.CompleteLattice.Defs
+import Base.Data.Set.Lattice
+import Base.Order.BooleanAlgebra.Defs

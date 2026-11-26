@@ -1,4 +1,5 @@
 import Algebra.Group.End
+import Algebra.Group.Opposite
 import Algebra.Group.Subgroup.Lattice
 import Algebra.GroupTheory.QuotientGroup.Defs
 
@@ -122,6 +123,15 @@ variable {G}
 theorem mem_stabilizer_iff {a : α} {g : G} : g ∈ stabilizer G a ↔ g • a = a :=
   sorry
 
+variable (G α) in
+/-- The points that every element fixes (Mathlib: `MulAction.fixedPoints`). For conjugation
+these are the central elements (`ConjAct.fixedPoints_eq_center`). -/
+def fixedPoints : Set α :=
+  {a | ∀ g : G, g • a = a}
+
+theorem mem_fixedPoints {a : α} : a ∈ fixedPoints G α ↔ ∀ g : G, g • a = a :=
+  sorry
+
 /-! ### Orbit–stabilizer
 
 The orbit is a set, so its type is the subtype `{b // b ∈ orbit G a}` (Mathlib writes
@@ -202,6 +212,23 @@ theorem smul_eq_mul (g x : G) : g • x = g * x :=
 -- the action on itself is faithful: compare at `1` (Mathlib: for any `MulOneClass`)
 instance : FaithfulSMul G G :=
   sorry
+
+/-! #### Right multiplication, as a left action of `Gᵐᵒᵖ`
+
+(Mathlib: `Mul.toSMulMulOpposite` in `Mathlib/Algebra/Group/Action/Defs.lean`,
+`Monoid.toOppositeMulAction` in `…/Action/Opposite.lean`.) `op a • b = b * a`. Through
+`MulAction.toPermHom Gᵐᵒᵖ G`, right translation becomes a hom, which is what
+`Equiv.mulRight_mul`'s reversed order was asking for. -/
+
+instance Mul.toSMulMulOpposite : SMul Gᵐᵒᵖ G :=
+  ⟨λ a b => b * a.unop⟩
+
+theorem op_smul_eq_mul (a b : G) : MulOpposite.op a • b = b * a :=
+  sorry
+
+instance Monoid.toOppositeMulAction : MulAction Gᵐᵒᵖ G where
+  one_smul := sorry
+  mul_smul := sorry
 
 -- one orbit, and nothing but `1` fixes anything (not in Mathlib in this form)
 theorem MulAction.orbit_self_eq_univ (a : G) : MulAction.orbit G a = Set.univ :=

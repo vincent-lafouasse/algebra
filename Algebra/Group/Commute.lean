@@ -1,4 +1,5 @@
 import Algebra.Group.Basic
+import Base.Logic.Function.Conjugate
 
 /-! # Commuting elements
 
@@ -82,6 +83,13 @@ protected theorem mul_mul_mul_comm (hbc : Commute b c) (a d : G) :
     _ = a * (b * c) * d := by simp only [mul_assoc]
     _ = a * (c * b) * d := by rw [Commute.eq hbc]
     _ = a * c * (b * d) := by simp only [mul_assoc]
+
+-- commuting elements give commuting translations (Mathlib: `Algebra/Group/Commute/Basic.lean`)
+theorem function_commute_mul_left (h : Commute a b) : Function.Commute (a * ·) (b * ·) :=
+  sorry
+
+theorem function_commute_mul_right (h : Commute a b) : Function.Commute (· * a) (· * b) :=
+  sorry
 
 theorem inv_right (h : Commute a b) : Commute a b⁻¹ := by
   apply Commute.of_eq
