@@ -102,11 +102,17 @@ theorem mul_ne_mul_left (a : G) {b c : G} : b * a ≠ c * a ↔ b ≠ c :=
   Function.Injective.ne_iff (mul_left_injective a)
 
 -- every `x` is `a * _` and `_ * a`: name the `_`
-theorem mul_left_surjective (a : G) : Function.Surjective (a * ·) :=
-  sorry
+theorem mul_left_surjective (a : G) : Function.Surjective (a * ·) := by
+  intro y
+  exists a⁻¹ * y
+  show a * (a⁻¹ * y) = y
+  exact mul_inv_cancel_left a y
 
-theorem mul_right_surjective (a : G) : Function.Surjective (· * a) :=
-  sorry
+theorem mul_right_surjective (a : G) : Function.Surjective (· * a) := by
+  intro y
+  exists y * a⁻¹
+  show (y * a⁻¹) * a = y
+  exact inv_mul_cancel_right y a
 
 -- multiplying by `y`, then by `x`, is multiplying by `x * y` (on the right: by `y * x`)
 theorem comp_mul_left (x y : G) : (x * ·) ∘ (y * ·) = (x * y * ·) :=
