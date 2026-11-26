@@ -67,7 +67,10 @@ theorem «forall» {p : Quotient sa → Prop} : (∀ q, p q) ↔ ∀ a : α, p �
     let qa : Quotient sa := Quotient.mk sa a
     exact h qa
   · intro h q
-    sorry
+    let ⟨(a : α), ha⟩ : ∃ a, ⟦a⟧ = q :=
+      Quotient.exists_rep q
+    subst ha
+    exact h a
 
 theorem «exists» {p : Quotient sa → Prop} : (∃ q, p q) ↔ ∃ a : α, p ⟦a⟧ :=
   sorry
