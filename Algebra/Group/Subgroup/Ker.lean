@@ -111,8 +111,12 @@ def rangeRestrict (f : G →* H) : G →* f.range where
 theorem coe_rangeRestrict (f : G →* H) (x : G) : (f.rangeRestrict x : H) = f x :=
   rfl
 
-theorem rangeRestrict_surjective (f : G →* H) : Function.Surjective f.rangeRestrict :=
-  sorry
+theorem rangeRestrict_surjective (f : G →* H) : Function.Surjective f.rangeRestrict := by
+  intro ⟨y, hy⟩
+  have ⟨x, hx⟩ := hy
+  refine Exists.intro x ?_
+  apply Subtype.ext
+  exact hx
 
 theorem ker_rangeRestrict (f : G →* H) : f.rangeRestrict.ker = f.ker :=
   sorry
