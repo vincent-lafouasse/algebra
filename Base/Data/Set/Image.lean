@@ -1,5 +1,6 @@
 import Base.Data.Set
 import Base.Logic.Function
+import Base.Order.GaloisConnection.Defs
 
 /-! # Images, preimages, ranges
 
@@ -100,6 +101,16 @@ theorem image_preimage_eq {f : α → β} (t : Set β) (hf : Function.Surjective
   obtain ⟨x, hx⟩ := hf y
   subst hx
   exact mem_image_of_mem f h
+
+/-! ### The adjunction, as a Galois connection
+
+(Mathlib: `Mathlib/Data/Set/Lattice/Image.lean`.) `image_subset_iff` is exactly the
+statement of `GaloisConnection (image f) (preimage f)`, `⊆` being `≤` on sets. Through it,
+`subset_preimage_image` is `le_u_l`, `image_preimage_subset` is `l_u_le`, and `image_mono`,
+`preimage_mono` are `monotone_l`, `monotone_u`. -/
+
+protected theorem image_preimage {f : α → β} : GaloisConnection (image f) (preimage f) :=
+  sorry
 
 /-! ### Identity and composition -/
 
