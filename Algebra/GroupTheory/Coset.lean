@@ -110,8 +110,10 @@ theorem mem_leftCoset_iff {s : Set G} {x : G} (a : G) : x ∈ a • s ↔ a⁻¹
   rw [Set.image_mul_left]
   rw [Set.mem_preimage]
 
-theorem mem_own_leftCoset (H : Subgroup G) (a : G) : a ∈ a • (H : Set G) :=
-  sorry
+theorem mem_own_leftCoset (H : Subgroup G) (a : G) : a ∈ a • (H : Set G) := by
+  rw [mem_leftCoset_iff]
+  rw [inv_mul_cancel]
+  exact H.one_mem
 
 theorem leftCoset_eq_iff (H : Subgroup G) {x y : G} :
     x • (H : Set G) = y • (H : Set G) ↔ x⁻¹ * y ∈ H :=
