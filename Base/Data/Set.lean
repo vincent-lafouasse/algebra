@@ -37,8 +37,8 @@ syntax "{" ident " | " term "}" : term
 syntax "{" ident " : " term " | " term "}" : term
 
 macro_rules
-  | `({$x:ident | $p}) => `(ofPred fun $x:ident => $p)
-  | `({$x:ident : $t | $p}) => `(ofPred fun $x:ident : $t => $p)
+  | `({$x:ident | $p}) => `(ofPred λ $x:ident => $p)
+  | `({$x:ident : $t | $p}) => `(ofPred λ $x:ident : $t => $p)
 
 -- the defining property of `{x | p x}` (an `=` of Props, so it `rw`s like an iff)
 theorem mem_ofPred_eq {x : α} {p : α → Prop} : (x ∈ {y | p y}) = p x :=
@@ -59,7 +59,7 @@ theorem subset_def {s t : Set α} : (s ⊆ t) = ∀ x, x ∈ s → x ∈ t :=
 
 -- `{a}`
 instance : Singleton α (Set α) :=
-  ⟨fun a => {x | x = a}⟩
+  ⟨λ a => {x | x = a}⟩
 
 theorem mem_singleton_iff {a b : α} : a ∈ ({b} : Set α) ↔ a = b := by
   show a ∈ {x | x = b} ↔ a = b
@@ -114,13 +114,13 @@ theorem empty_subset (s : Set α) : ∅ ⊆ s := λ _ h_in_empty => False.elim h
 Core provides the notation classes `Inter`, `Union` and `SDiff`. -/
 
 instance : Inter (Set α) :=
-  ⟨fun s t => {x | x ∈ s ∧ x ∈ t}⟩
+  ⟨λ s t => {x | x ∈ s ∧ x ∈ t}⟩
 
 instance : Union (Set α) :=
-  ⟨fun s t => {x | x ∈ s ∨ x ∈ t}⟩
+  ⟨λ s t => {x | x ∈ s ∨ x ∈ t}⟩
 
 instance : SDiff (Set α) :=
-  ⟨fun s t => {x | x ∈ s ∧ x ∉ t}⟩
+  ⟨λ s t => {x | x ∈ s ∧ x ∉ t}⟩
 
 -- the interface: membership in `∩`, `∪`, `\`
 theorem mem_inter_iff (x : α) (s t : Set α) : x ∈ s ∩ t ↔ x ∈ s ∧ x ∈ t :=

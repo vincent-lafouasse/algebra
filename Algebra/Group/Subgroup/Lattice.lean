@@ -45,7 +45,7 @@ instance : Top (Subgroup G) :=
       }⟩
 
 instance : Min (Subgroup G) :=
-  ⟨fun H K =>
+  ⟨λ H K =>
     {
       carrier := H ∩ K
       mul_mem' := by

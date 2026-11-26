@@ -25,7 +25,7 @@ variable {α : Sort u} {β : Sort v} {γ : Sort w}
 
 attribute [coe] Equiv.toFun
 
-instance : CoeFun (α ≃ β) (fun _ => α → β) :=
+instance : CoeFun (α ≃ β) (λ _ => α → β) :=
   ⟨Equiv.toFun⟩
 
 -- two equivalences with the same forward function are equal (the inverse is determined)

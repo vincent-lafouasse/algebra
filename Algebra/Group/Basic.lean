@@ -90,7 +90,7 @@ theorem mul_right_inj (a : G) {b c : G} : a * b = a * c ↔ b = c :=
 theorem mul_left_inj (a : G) {b c : G} : b * a = c * a ↔ b = c :=
   mul_right_cancel_iff
 
--- `(a * ·)` is `fun x => a * x`: left multiplication by `a`
+-- `(a * ·)` is `λ x => a * x`: left multiplication by `a`
 theorem mul_right_injective (a : G) : Function.Injective (a * ·) := by
   intro x y he
   rw [← mul_right_inj a]
@@ -111,7 +111,7 @@ theorem mul_ne_mul_left (a : G) {b c : G} : b * a ≠ c * a ↔ b ≠ c :=
 theorem mul_left_surjective (a : G) : Function.Surjective (a * ·) :=
   sorry
 
-theorem mul_right_surjective (a : G) : Function.Surjective fun x => x * a :=
+theorem mul_right_surjective (a : G) : Function.Surjective (· * a) :=
   sorry
 
 -- multiplying by `y`, then by `x`, is multiplying by `x * y` (on the right: by `y * x`)
@@ -264,10 +264,10 @@ variable (G)
 theorem inv_comp_inv : Inv.inv ∘ Inv.inv = @id G :=
   sorry
 
-theorem leftInverse_inv : Function.LeftInverse (fun a : G => a⁻¹) fun a => a⁻¹ :=
+theorem leftInverse_inv : Function.LeftInverse (λ a : G => a⁻¹) λ a => a⁻¹ :=
   sorry
 
-theorem rightInverse_inv : Function.RightInverse (fun a : G => a⁻¹) fun a => a⁻¹ :=
+theorem rightInverse_inv : Function.RightInverse (λ a : G => a⁻¹) λ a => a⁻¹ :=
   sorry
 
 end

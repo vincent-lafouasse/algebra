@@ -29,7 +29,7 @@ namespace Subgroup
 variable {G : Type u} [Group G]
 
 instance : Membership G (Subgroup G) :=
-  ⟨fun H x => x ∈ H.carrier⟩
+  ⟨λ H x => x ∈ H.carrier⟩
 
 attribute [coe] Subgroup.carrier
 
@@ -99,7 +99,7 @@ Mathlib gets `≤` from `H ⊆ K` on carriers and proves `le_refl` etc. once for
 order; here they are stated for subgroups only. -/
 
 instance : LE (Subgroup G) :=
-  ⟨fun H K => ∀ ⦃x⦄, x ∈ H → x ∈ K⟩
+  ⟨λ H K => ∀ ⦃x⦄, x ∈ H → x ∈ K⟩
 
 theorem le_def {H K : Subgroup G} : H ≤ K ↔ ∀ ⦃x⦄, x ∈ H → x ∈ K :=
   Iff.rfl
@@ -130,7 +130,7 @@ section AsGroup
 variable (H : Subgroup G)
 
 instance : CoeSort (Subgroup G) (Type u) :=
-  ⟨fun H => { x : G // x ∈ H }⟩
+  ⟨λ H => { x : G // x ∈ H }⟩
 
 instance toGroup : Group H where
   mul a b := ⟨a.val * b.val, H.mul_mem a.property b.property⟩

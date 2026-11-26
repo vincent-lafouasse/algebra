@@ -31,8 +31,8 @@ variable {G : Type u} {H : Type v} {K : Type w} [Group G] [Group H] [Group K]
 -- `↑e.toEquiv x`; display only, the term is unchanged. Mathlib shows `⇑e x`, via `EquivLike`.
 attribute [coe] MulEquiv.toEquiv
 
-instance : CoeFun (G ≃* H) (fun _ => G → H) :=
-  ⟨fun e => e.toEquiv⟩
+instance : CoeFun (G ≃* H) (λ _ => G → H) :=
+  ⟨λ e => e.toEquiv⟩
 
 theorem ext {e e' : G ≃* H} (h : ∀ x, e x = e' x) : e = e' := by
   obtain ⟨inner_equiv, _hf_mul⟩ := e

@@ -32,7 +32,7 @@ section Classes
 variable {α : Type u} [Group α]
 
 instance instHasQuotientSubgroup : HasQuotient α (Subgroup α) :=
-  ⟨fun s => Quotient (leftRel s)⟩
+  ⟨λ s => Quotient (leftRel s)⟩
 
 @[coe]
 def mk {s : Subgroup α} (a : α) : α ⧸ s :=

@@ -26,7 +26,7 @@ def npowRec : Nat → G → G
   | n + 1, g => npowRec n g * g
 
 instance : Pow G Nat :=
-  ⟨fun g n => npowRec n g⟩
+  ⟨λ g n => npowRec n g⟩
 
 -- the two defining equations (`rfl`)
 theorem pow_zero (g : G) : g ^ (0 : Nat) = 1 :=
@@ -172,7 +172,7 @@ def zpowRec : Int → G → G
   | Int.negSucc n, g => (g ^ (n + 1))⁻¹
 
 instance : Pow G Int :=
-  ⟨fun g k => zpowRec k g⟩
+  ⟨λ g k => zpowRec k g⟩
 
 -- the defining equations (`rfl`)
 theorem zpow_natCast (g : G) (n : Nat) : g ^ (n : Int) = g ^ n :=

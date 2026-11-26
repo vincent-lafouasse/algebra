@@ -21,8 +21,8 @@ namespace MulAut
 
 variable {G : Type u} [Group G]
 
-instance : CoeFun (MulAut G) (fun _ => G → G) :=
-  ⟨fun e => (MulEquiv.toEquiv e).toFun⟩
+instance : CoeFun (MulAut G) (λ _ => G → G) :=
+  ⟨λ e => (MulEquiv.toEquiv e).toFun⟩
 
 instance : Group (MulAut G) where
   mul e₁ e₂ := MulEquiv.trans e₂ e₁
@@ -63,8 +63,8 @@ theorem inv_apply (e : MulAut G) (x : G) : e⁻¹ x = MulEquiv.symm e x :=
 
 def conj : G →* MulAut G where
   toFun g :=
-    { toFun := fun x => g * x * g⁻¹
-      invFun := fun x => g⁻¹ * x * g
+    { toFun := λ x => g * x * g⁻¹
+      invFun := λ x => g⁻¹ * x * g
       left_inv := by
         intro x
         show g⁻¹ * (g * x * g⁻¹) * g = x

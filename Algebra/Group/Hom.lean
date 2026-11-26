@@ -27,7 +27,7 @@ variable {G : Type u} {H : Type v} {K : Type w} [Group G] [Group H] [Group K]
 
 attribute [coe] MonoidHom.toFun
 
-instance : CoeFun (G →* H) (fun _ => G → H) :=
+instance : CoeFun (G →* H) (λ _ => G → H) :=
   ⟨MonoidHom.toFun⟩
 
 theorem ext {f g : G →* H} (h : ∀ x, f x = g x) : f = g := by

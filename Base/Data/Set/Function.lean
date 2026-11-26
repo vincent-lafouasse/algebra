@@ -70,7 +70,7 @@ theorem MapsTo.comp {g : β → γ} {f : α → β} {s : Set α} {t : Set β} {p
   sorry
 
 /-- `f`, seen as a function `↥s → ↥t`. -/
-def MapsTo.restrict (f : α → β) (s : Set α) (t : Set β) (h : MapsTo f s t) : s → t := fun x =>
+def MapsTo.restrict (f : α → β) (s : Set α) (t : Set β) (h : MapsTo f s t) : s → t := λ x =>
   ⟨f x.val, h x.property⟩
 
 -- (Mathlib: `MapsTo.val_restrict_apply`)
