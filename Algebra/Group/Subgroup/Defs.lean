@@ -53,8 +53,12 @@ theorem ext {H K : Subgroup G} (h : ∀ x, x ∈ H ↔ x ∈ K) : H = K := by
   subst c_eq
   rfl
 
-theorem ext_iff {H K : Subgroup G} : H = K ↔ ∀ x, x ∈ H ↔ x ∈ K :=
-  sorry
+theorem ext_iff {H K : Subgroup G} : H = K ↔ ∀ x, x ∈ H ↔ x ∈ K := by
+  refine ⟨?_, ext⟩
+  intro he
+  intro x
+  subst he
+  rfl
 
 /-! ### Membership: the unprimed API
 
