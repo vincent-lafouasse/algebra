@@ -85,11 +85,21 @@ protected theorem mul_mul_mul_comm (hbc : Commute b c) (a d : G) :
     _ = a * c * (b * d) := by simp only [mul_assoc]
 
 -- commuting elements give commuting translations (Mathlib: `Algebra/Group/Commute/Basic.lean`)
-theorem function_commute_mul_left (h : Commute a b) : Function.Commute (a * ·) (b * ·) :=
-  sorry
+theorem function_commute_mul_left (h : Commute a b) : Function.Commute (a * ·) (b * ·) := by
+  intro x
+  calc
+    a * (b * x)
+    _ = (a * b) * x := by rw [← mul_assoc]
+    _ = (b * a) * x := by rw [Commute.eq h]
+    _ = b * (a * x) := by rw [mul_assoc]
 
-theorem function_commute_mul_right (h : Commute a b) : Function.Commute (· * a) (· * b) :=
-  sorry
+theorem function_commute_mul_right (h : Commute a b) : Function.Commute (· * a) (· * b) := by
+  intro x
+  calc
+    (x * b) * a
+    _ = x * (b * a) := by rw [mul_assoc]
+    _ = x * (a * b) := by rw [Commute.eq h]
+    _ = (x * a) * b := by rw [← mul_assoc]
 
 theorem inv_right (h : Commute a b) : Commute a b⁻¹ := by
   apply Commute.of_eq
