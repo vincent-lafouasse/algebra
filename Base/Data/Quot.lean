@@ -150,8 +150,11 @@ theorem out_equiv_out {s : Setoid α} {q₁ q₂ : Quotient s} :
   conv => rhs; rw [← out_eq q₂]
   rw [eq]
 
-theorem out_injective {s : Setoid α} : Function.Injective (@Quotient.out α s) :=
-  sorry
+theorem out_injective {s : Setoid α} : Function.Injective (@Quotient.out α s) := by
+  intro q₁ q₂ he
+  rw [← out_eq q₁]
+  rw [← out_eq q₂]
+  exact congrArg (Quotient.mk s) he
 
 theorem out_inj {s : Setoid α} {q₁ q₂ : Quotient s} : Quotient.out q₁ = Quotient.out q₂ ↔ q₁ = q₂ :=
   sorry
