@@ -108,7 +108,11 @@ def rangeRestrict (f : G →* H) : G →* f.range where
   map_one' := Subtype.ext f.map_one
   map_mul' := λ a b => Subtype.ext (f.map_mul a b)
 
-theorem coe_rangeRestrict (f : G →* H) (x : G) : (f.rangeRestrict x : H) = f x :=
+theorem coe_rangeRestrict (f : G →* H) (x : G) : (f.rangeRestrict x : H) = f x := by
+  obtain ⟨y, hv⟩ := f.rangeRestrict x
+  obtain ⟨a, ha⟩ := hv
+  show y = f x
+  rw [← ha]
   sorry
 
 theorem rangeRestrict_surjective (f : G →* H) : Function.Surjective f.rangeRestrict :=
