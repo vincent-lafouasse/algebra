@@ -40,8 +40,15 @@ theorem Group.one_eq_of_mul_eq {G : Type u} ⦃g₁ g₂ : Group G⦄ (h_mul : g
 /-- Same multiplication, same inverses (not in Mathlib). With one multiplication and, by
 `Group.one_eq_of_mul_eq`, one identity, `a⁻¹₁` is an inverse of `a` in `g₂` too: uniqueness
 of inverses there. -/
-theorem Group.inv_eq_of_mul_eq {G : Type u} ⦃g₁ g₂ : Group G⦄ (h_mul : g₁.mul = g₂.mul) :
-    g₁.inv = g₂.inv :=
+theorem Group.inv_eq_of_mul_eq {G : Type u} ⦃g₁ g₂ : Group G⦄ (h_mul : g₁.mul = g₂.mul) (h_one : g₁.one = g₂.one) :
+    g₁.inv = g₂.inv := by
+  obtain @⟨⟨mul₁⟩, ⟨one₁⟩, ⟨inv₁⟩, assoc₁, one_mul₁, mul_one₁,
+    inv_mul_cancel₁, mul_inv_cancel₁⟩ := g₁
+  obtain @⟨⟨mul₂⟩, ⟨one₂⟩, ⟨inv₂⟩, assoc₂, one_mul₂, mul_one₂,
+    inv_mul_cancel₂, mul_inv_cancel₂⟩ := g₂
+
+  subst h_mul
+  funext x
   sorry
 
 /-- Two group structures on `G` with the same multiplication are equal (not in Mathlib in this
@@ -57,7 +64,7 @@ theorem Group.ext {G : Type u} ⦃g₁ g₂ : Group G⦄ (h_mul : g₁.mul = g�
     inv_mul_cancel₂, mul_inv_cancel₂⟩ := g₂
 
   have same_unit : one₁ = one₂:= Group.one_eq_of_mul_eq h_mul
-  have same_inv : inv₁= inv₂ := Group.inv_eq_of_mul_eq h_mul
+  have same_inv : inv₁= inv₂ := Group.inv_eq_of_mul_eq h_mul same_unit
 
   subst same_unit
   subst same_inv
