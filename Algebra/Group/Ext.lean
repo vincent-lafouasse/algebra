@@ -48,8 +48,10 @@ theorem Group.ext {G : Type u} ⦃g₁ g₂ : Group G⦄ (h_mul : g₁.mul = g�
   have same_unit : g₁.one = g₂.one := Group.one_eq_of_mul_eq h_mul
   have same_inv : g₁.inv = g₂.inv := Group.inv_eq_of_mul_eq h_mul
 
-  obtain ⟨⟨mul₁⟩, ⟨one₁⟩, ⟨inv₁⟩, assoc₁, one_mul₁, mul_one₁,
+  obtain @⟨⟨mul₁⟩, ⟨one₁⟩, ⟨inv₁⟩, assoc₁, one_mul₁, mul_one₁,
     inv_mul_cancel₁, mul_inv_cancel₁⟩ := g₁
+  obtain @⟨⟨mul₂⟩, ⟨one₂⟩, ⟨inv₂⟩, assoc₂, one_mul₂, mul_one₂,
+    inv_mul_cancel₂, mul_inv_cancel₂⟩ := g₂
   sorry -- subst into rfl?
 
 theorem Group.ext_iff {G : Type u} {g₁ g₂ : Group G} : g₁ = g₂ ↔ g₁.mul = g₂.mul :=
