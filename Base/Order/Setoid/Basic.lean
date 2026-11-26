@@ -77,7 +77,8 @@ theorem range_kerLift_eq_range (f : α → β) : Set.range (kerLift f) = Set.ran
     rw [kerLift_mk] at hx
     exact ⟨Quotient.out q, hx⟩
   · intro y ⟨x, hx⟩
-    sorry
+    rw [← kerLift_mk f x] at hx
+    exact ⟨⟦x⟧, hx⟩
 
 /-! ### The first isomorphism theorem for sets -/
 
