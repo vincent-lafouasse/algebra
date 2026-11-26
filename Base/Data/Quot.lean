@@ -61,8 +61,13 @@ variable {sa : Setoid α} {sb : Setoid β}
 theorem eq {r : Setoid α} {x y : α} : Quotient.mk r x = ⟦y⟧ ↔ r x y :=
   Iff.intro Quotient.exact Quotient.sound
 
-theorem «forall» {p : Quotient sa → Prop} : (∀ q, p q) ↔ ∀ a : α, p ⟦a⟧ :=
-  sorry
+theorem «forall» {p : Quotient sa → Prop} : (∀ q, p q) ↔ ∀ a : α, p ⟦a⟧ := by
+  apply Iff.intro
+  · intro h a
+    let qa : Quotient sa := Quotient.mk sa a
+    exact h qa
+  · intro h q
+    sorry
 
 theorem «exists» {p : Quotient sa → Prop} : (∃ q, p q) ↔ ∃ a : α, p ⟦a⟧ :=
   sorry
