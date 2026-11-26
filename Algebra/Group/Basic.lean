@@ -135,12 +135,55 @@ theorem mul_one_eq_id : (· * (1 : G)) = id := by
   rw [mul_one]
   rfl
 
+/-! ### Moving a factor across an equation -/
+
+theorem eq_mul_inv_iff_mul_eq : a = b * c⁻¹ ↔ a * c = b := by
+  rw [← mul_left_inj c]
+  rw [inv_mul_cancel_right]
+
+theorem eq_mul_inv_of_mul_eq (h : a * c = b) : a = b * c⁻¹ :=
+  eq_mul_inv_iff_mul_eq.2 h
+
+theorem eq_inv_mul_iff_mul_eq : a = b⁻¹ * c ↔ b * a = c := by
+  rw [← mul_right_inj b]
+  rw [mul_inv_cancel_left]
+
+theorem eq_inv_mul_of_mul_eq (h : b * a = c) : a = b⁻¹ * c :=
+  eq_inv_mul_iff_mul_eq.2 h
+
+theorem mul_inv_eq_iff_eq_mul : a * b⁻¹ = c ↔ a = c * b := by
+  rw [← mul_left_inj b]
+  rw [inv_mul_cancel_right]
+
+theorem mul_inv_eq_of_eq_mul (h : a = c * b) : a * b⁻¹ = c :=
+  mul_inv_eq_iff_eq_mul.2 h
+
+theorem inv_mul_eq_iff_eq_mul : a⁻¹ * b = c ↔ b = a * c := by
+  rw [← mul_right_inj a]
+  rw [mul_inv_cancel_left]
+
+theorem inv_mul_eq_of_eq_mul (h : b = a * c) : a⁻¹ * b = c :=
+  inv_mul_eq_iff_eq_mul.2 h
+
+-- the same four moves, the other way: an inverse in the hypothesis, none in the conclusion
+theorem eq_mul_of_mul_inv_eq (h : a * c⁻¹ = b) : a = b * c :=
+  sorry
+
+theorem eq_mul_of_inv_mul_eq (h : b⁻¹ * a = c) : a = b * c :=
+  sorry
+
+theorem mul_eq_of_eq_inv_mul (h : b = a⁻¹ * c) : a * b = c :=
+  sorry
+
+theorem mul_eq_of_eq_mul_inv (h : a = c * b⁻¹) : a * b = c :=
+  sorry
+
 /-! ### A product equal to one of its factors
 
 The other factor is `1`. Mathlib also states each one flipped (`left_eq_mul`) and negated
 (`mul_ne_left`): same content, but `rw` needs the goal's exact shape. -/
 
-theorem mul_eq_left : a * b = a ↔ b = 1 :=
+theorem mul_eq_left : a * b = a ↔ b = 1 := by
   sorry
 
 theorem left_eq_mul : a = a * b ↔ b = 1 :=
@@ -301,49 +344,6 @@ theorem conj_eq_one_iff : a * b * a⁻¹ = 1 ↔ b = 1 := by
   conv =>
     rhs; rw [← mul_right_inj a]
   rw [mul_one]
-
-/-! ### Moving a factor across an equation -/
-
-theorem eq_mul_inv_iff_mul_eq : a = b * c⁻¹ ↔ a * c = b := by
-  rw [← mul_left_inj c]
-  rw [inv_mul_cancel_right]
-
-theorem eq_mul_inv_of_mul_eq (h : a * c = b) : a = b * c⁻¹ :=
-  eq_mul_inv_iff_mul_eq.2 h
-
-theorem eq_inv_mul_iff_mul_eq : a = b⁻¹ * c ↔ b * a = c := by
-  rw [← mul_right_inj b]
-  rw [mul_inv_cancel_left]
-
-theorem eq_inv_mul_of_mul_eq (h : b * a = c) : a = b⁻¹ * c :=
-  eq_inv_mul_iff_mul_eq.2 h
-
-theorem mul_inv_eq_iff_eq_mul : a * b⁻¹ = c ↔ a = c * b := by
-  rw [← mul_left_inj b]
-  rw [inv_mul_cancel_right]
-
-theorem mul_inv_eq_of_eq_mul (h : a = c * b) : a * b⁻¹ = c :=
-  mul_inv_eq_iff_eq_mul.2 h
-
-theorem inv_mul_eq_iff_eq_mul : a⁻¹ * b = c ↔ b = a * c := by
-  rw [← mul_right_inj a]
-  rw [mul_inv_cancel_left]
-
-theorem inv_mul_eq_of_eq_mul (h : b = a * c) : a⁻¹ * b = c :=
-  inv_mul_eq_iff_eq_mul.2 h
-
--- the same four moves, the other way: an inverse in the hypothesis, none in the conclusion
-theorem eq_mul_of_mul_inv_eq (h : a * c⁻¹ = b) : a = b * c :=
-  sorry
-
-theorem eq_mul_of_inv_mul_eq (h : b⁻¹ * a = c) : a = b * c :=
-  sorry
-
-theorem mul_eq_of_eq_inv_mul (h : b = a⁻¹ * c) : a * b = c :=
-  sorry
-
-theorem mul_eq_of_eq_mul_inv (h : a = c * b⁻¹) : a * b = c :=
-  sorry
 
 /-! ### Commutative groups -/
 
