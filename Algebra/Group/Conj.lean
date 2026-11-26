@@ -70,7 +70,7 @@ theorem IsConj.symm {a b : α} : IsConj a b → IsConj b a := by
   exact ⟨x⁻¹, Eq.symm hx⟩
 
 theorem isConj_comm {g h : α} : IsConj g h ↔ IsConj h g :=
-  sorry
+  Iff.intro IsConj.symm IsConj.symm
 
 theorem IsConj.trans {a b c : α} : IsConj a b → IsConj b c → IsConj a c :=
   sorry
