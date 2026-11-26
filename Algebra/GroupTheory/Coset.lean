@@ -81,11 +81,21 @@ theorem image_mul_right' : (· * b⁻¹) '' t = (· * b) ⁻¹' t := by
   rw [inv_inv]
 
 -- the one `x` with `a * x = b`
-theorem preimage_mul_left_singleton : (a * ·) ⁻¹' {b} = {a⁻¹ * b} :=
-  sorry
+theorem preimage_mul_left_singleton : (a * ·) ⁻¹' {b} = {a⁻¹ * b} := by
+  apply Set.ext
+  intro x
+  rw [mem_preimage]
+  rw [mem_singleton_iff]
+  rw [mem_singleton_iff]
+  rw [eq_inv_mul_iff_mul_eq]
 
-theorem preimage_mul_right_singleton : (· * a) ⁻¹' {b} = {b * a⁻¹} :=
-  sorry
+theorem preimage_mul_right_singleton : (· * a) ⁻¹' {b} = {b * a⁻¹} := by
+  apply Set.ext
+  intro x
+  rw [mem_preimage]
+  rw [mem_singleton_iff]
+  rw [mem_singleton_iff]
+  rw [eq_mul_inv_iff_mul_eq]
 
 end Set
 
