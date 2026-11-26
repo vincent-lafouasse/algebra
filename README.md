@@ -87,7 +87,7 @@ that no proof you consider finished leans on a stub:
 uv run scripts/check.py                 # per-file progress; exits 1 and lists anything tainted
 uv run scripts/check.py Algebra/Group   # only files under a path
 uv run scripts/check.py -v              # also lists every stub
-uv run scripts/check.py -a              # also lists what uses the axiom of choice
+uv run scripts/check.py -a              # also lists what uses `Quot.sound` and choice
 ```
 
 It also counts the axioms proved declarations rest on: Lean's three (`propext`, `Quot.sound`,

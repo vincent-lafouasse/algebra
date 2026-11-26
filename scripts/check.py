@@ -7,7 +7,7 @@
     uv run scripts/check.py                  # per-file table + anything tainted
     uv run scripts/check.py Algebra/Group    # only files under a path
     uv run scripts/check.py -v               # also list every stub
-    uv run scripts/check.py -a               # also list what uses the axiom of choice
+    uv run scripts/check.py -a               # also list what uses `Quot.sound` and choice
 
 A declaration is
 * proved   if it uses no `sorry`, directly or through anything it depends on;
@@ -183,8 +183,11 @@ def main() -> None:
     if verbose and stubs:
         print(paint("\nstubs:", BOLD), *stubs, sep="\n")
     if show_choice:
-        choice = listing([r for r in proved if "Classical.choice" in r[5]])
-        print(paint("\nusing the axiom of choice:", BOLD), *(choice or ["  (none)"]), sep="\n")
+        # `propext` is behind every `rw` with an `↔`: its list would be noise, the count is enough
+        for axiom, what in [("Quot.sound", "quotients, and `funext`"),
+                            ("Classical.choice", "the axiom of choice")]:
+            users = listing([r for r in proved if axiom in r[5]])
+            print(paint(f"\nusing {axiom} ({what}):", BOLD), *(users or ["  (none)"]), sep="\n")
     if foreign:
         lines = [f"  {n:<45} {p}:{l}  ({', '.join(a for a in ax if a not in STANDARD)})"
                  for _, _, n, p, l, ax in foreign]
