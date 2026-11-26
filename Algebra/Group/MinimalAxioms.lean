@@ -79,16 +79,11 @@ theorem idem_el_iff_eq_one_right_axioms {G : Type u} [Mul G] [Inv G] [One G]
     subst h
     rw [mul_one]
 
-/-- A group from associativity, a right identity and a right inverse: the mirror image.
-The work is `one_mul` and `inv_mul_cancel`; which one comes first? -/
-abbrev Group.ofRightAxioms {G : Type u} [Mul G] [Inv G] [One G]
+theorem right_axioms {G : Type u} [Mul G] [Inv G] [One G]
     (assoc : ∀ a b c : G, (a * b) * c = a * (b * c)) (mul_one : ∀ a : G, a * 1 = a)
-    (mul_inv_cancel : ∀ a : G, a * a⁻¹ = 1) : Group G
-    where
-  mul_assoc := assoc
-  one_mul := sorry
-  mul_one := mul_one
-  inv_mul_cancel := by
+    (mul_inv_cancel : ∀ a : G, a * a⁻¹ = 1) :
+    (∀ (a : G), a⁻¹ * a = 1) ∧ (∀ (a : G), 1 * a = a) := by
+  have inv_mul_cancel : ∀ (a : G), a⁻¹ * a = 1 := by
     intro a
     rw [← idem_el_iff_eq_one_right_axioms assoc mul_one mul_inv_cancel]
     calc
@@ -96,6 +91,25 @@ abbrev Group.ofRightAxioms {G : Type u} [Mul G] [Inv G] [One G]
       _ = a⁻¹ * (a * a⁻¹) * a := by simp only [assoc]
       _ = a⁻¹ * 1 * a := by rw [mul_inv_cancel]
       _ = a⁻¹ * a := by rw [mul_one]
+  have one_mul : ∀ (a : G), 1 * a = a := λ a =>
+    calc
+      1 * a
+      _ = (a * a⁻¹) * a := by rw [← mul_inv_cancel a]
+      _ = a * (a⁻¹ * a) := by rw [assoc]
+      _ = a * 1 := by rw [inv_mul_cancel]
+      _ = a := by rw [mul_one]
+  exact And.intro inv_mul_cancel one_mul
+
+/-- A group from associativity, a right identity and a right inverse: the mirror image.
+The work is `one_mul` and `inv_mul_cancel`; which one comes first? -/
+abbrev Group.ofRightAxioms {G : Type u} [Mul G] [Inv G] [One G]
+    (assoc : ∀ a b c : G, (a * b) * c = a * (b * c)) (mul_one : ∀ a : G, a * 1 = a)
+    (mul_inv_cancel : ∀ a : G, a * a⁻¹ = 1) : Group G
+    where
+  mul_assoc := assoc
+  one_mul := And.right (right_axioms assoc mul_one mul_inv_cancel)
+  mul_one := mul_one
+  inv_mul_cancel := And.left (right_axioms assoc mul_one mul_inv_cancel)
   mul_inv_cancel := mul_inv_cancel
 
 /- Exercise (no stub): what about a left identity `1 * a = a` with a *right* inverse
