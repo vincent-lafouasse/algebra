@@ -58,10 +58,11 @@ theorem image_mul_left : (a * ·) '' t = (a⁻¹ * ·) ⁻¹' t := by
     refine ⟨h, ?_⟩
     rw [mul_inv_cancel_left]
 
-theorem image_mul_right : (· * b) '' t = (· * b⁻¹) ⁻¹' t :=
-  sorry
+theorem image_mul_left' : (a⁻¹ * ·) '' t = (a * ·) ⁻¹' t := by
+  rw [image_mul_left]
+  rw [inv_inv]
 
-theorem image_mul_left' : (a⁻¹ * ·) '' t = (a * ·) ⁻¹' t :=
+theorem image_mul_right : (· * b) '' t = (· * b⁻¹) ⁻¹' t :=
   sorry
 
 theorem image_mul_right' : (· * b⁻¹) '' t = (· * b) ⁻¹' t :=
