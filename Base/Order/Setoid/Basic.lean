@@ -71,7 +71,7 @@ theorem kerLift_injective (f : α → β) : Function.Injective (kerLift f) := by
   rw [Quotient.sound]
   exact ker_def.mpr he
 
--- no need for AC because the reps don't exit the function
+-- no need for AC because the reps don't leave the function. same with kerLift_injective
 theorem range_kerLift_eq_range (f : α → β) : Set.range (kerLift f) = Set.range f := by
   apply Set.Subset.antisymm
   · intro y ⟨q, hx⟩
