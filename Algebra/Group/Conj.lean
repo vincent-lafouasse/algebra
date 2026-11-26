@@ -48,7 +48,7 @@ theorem conj_apply (c a : α) : conj c a = c * a * c⁻¹ :=
 
 -- the packaged version is the same map
 theorem MulAut.conj_apply_eq_conj (c a : α) : MulAut.conj c a = conj c a :=
-  sorry
+  rfl
 
 theorem isConj_iff_conj {a b : α} : IsConj a b ↔ ∃ c : α, conj c a = b :=
   sorry
