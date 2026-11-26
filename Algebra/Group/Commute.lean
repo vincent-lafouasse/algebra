@@ -100,10 +100,10 @@ theorem inv_left_iff : Commute a⁻¹ b ↔ Commute a b := by
   rw [Commute.symm_iff]
 
 theorem inv_left_self (a : G) : Commute a⁻¹ a :=
-  sorry
+  inv_left (Commute.refl a)
 
 theorem inv_right_self (a : G) : Commute a a⁻¹ :=
-  sorry
+  inv_right (Commute.refl a)
 
 theorem inv_inv (h : Commute a b) : Commute a⁻¹ b⁻¹ :=
   h |> inv_left |> inv_right
