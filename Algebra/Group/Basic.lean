@@ -308,13 +308,13 @@ section
 variable (G)
 
 theorem inv_comp_inv : Inv.inv ∘ Inv.inv = @id G :=
-  sorry
+  inv_involutive |> Function.Involutive.comp_self
 
 theorem leftInverse_inv : Function.LeftInverse (λ a : G => a⁻¹) λ a => a⁻¹ :=
-  sorry
+  inv_involutive |> Function.Involutive.leftInverse
 
 theorem rightInverse_inv : Function.RightInverse (λ a : G => a⁻¹) λ a => a⁻¹ :=
-  sorry
+  inv_involutive |> Function.Involutive.rightInverse
 
 end
 
