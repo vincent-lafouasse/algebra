@@ -153,16 +153,16 @@ theorem inv_mul_eq_of_eq_mul (h : b = a * c) : a⁻¹ * b = c :=
 
 -- the same four moves, the other way: an inverse in the hypothesis, none in the conclusion
 theorem eq_mul_of_mul_inv_eq (h : a * c⁻¹ = b) : a = b * c :=
-  sorry
+  mul_inv_eq_iff_eq_mul.mp h
 
 theorem eq_mul_of_inv_mul_eq (h : b⁻¹ * a = c) : a = b * c :=
-  sorry
+  inv_mul_eq_iff_eq_mul.mp h
 
 theorem mul_eq_of_eq_inv_mul (h : b = a⁻¹ * c) : a * b = c :=
-  sorry
+  eq_inv_mul_iff_mul_eq.mp h
 
 theorem mul_eq_of_eq_mul_inv (h : a = c * b⁻¹) : a * b = c :=
-  sorry
+  eq_mul_inv_iff_mul_eq.mp h
 
 /-! ### A product equal to one of its factors
 
