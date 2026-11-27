@@ -118,7 +118,9 @@ def scan(path: Path) -> list[str]:
                     sig.append(cur[:k])
                     body = [cur[k + 2 :]]
                     break
-                depth += sum(cur.count(c) for c in "([{") - sum(cur.count(c) for c in ")]}")
+                depth += sum(cur.count(c) for c in "([{") - sum(
+                    cur.count(c) for c in ")]}"
+                )
                 if re.search(r"\bwhere\s*$", cur):
                     sig.append(re.sub(r"\bwhere\s*$", "", cur))
                     break

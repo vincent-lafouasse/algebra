@@ -96,7 +96,10 @@ CACHE = ROOT / ".lake" / "check-cache.tsv"
 
 def source_hash() -> str:
     h = hashlib.sha256(LEAN.encode())
-    files = [ROOT / n for n in ("lean-toolchain", "lakefile.toml", "Base.lean", "Algebra.lean")]
+    files = [
+        ROOT / n
+        for n in ("lean-toolchain", "lakefile.toml", "Base.lean", "Algebra.lean")
+    ]
     files += sorted(p for d in ("Base", "Algebra") for p in (ROOT / d).rglob("*.lean"))
     for p in files:
         h.update(str(p.relative_to(ROOT)).encode() + b"\0" + p.read_bytes() + b"\0")
@@ -134,7 +137,9 @@ def run_lean() -> list[Row]:
     rows = []
     for line in lean_output().splitlines():
         status, kind, name, path, lineno, axioms = line.split("\t")
-        rows.append((status, kind, name, path, int(lineno), axioms.split(",") if axioms else []))
+        rows.append(
+            (status, kind, name, path, int(lineno), axioms.split(",") if axioms else [])
+        )
     # Base first: it comes first in the import graph
     return sorted(rows, key=lambda r: (not r[3].startswith("Base"), r[3], r[4]))
 
@@ -175,7 +180,9 @@ def progress_color(done: int, total: int) -> str:
         return GREEN
     if not done:
         return DIM
-    return gradient(0.7 * done / total)  # stops at yellow-green: plain green means finished
+    return gradient(
+        0.7 * done / total
+    )  # stops at yellow-green: plain green means finished
 
 
 def frac(done: int, total: int) -> str:
@@ -192,7 +199,9 @@ def main() -> None:
     prefixes = [a.rstrip("/") for a in args if a not in ("-v", "-a")]
 
     rows = [
-        r for r in run_lean() if not prefixes or any(r[3].startswith(p) for p in prefixes)
+        r
+        for r in run_lean()
+        if not prefixes or any(r[3].startswith(p) for p in prefixes)
     ]
 
     # per file, per kind: [proved, total]; and tainted per file
@@ -232,7 +241,10 @@ def main() -> None:
     # the axioms proved declarations rest on: how many use each
     proved = [r for r in rows if r[0] == "proved"]
     used = {a: sum(a in r[5] for r in proved) for a in STANDARD}
-    print("\naxioms used by proved declarations: " + ", ".join(f"{a} {n}" for a, n in used.items()))
+    print(
+        "\naxioms used by proved declarations: "
+        + ", ".join(f"{a} {n}" for a, n in used.items())
+    )
 
     def listing(rs: list[Row]) -> list[str]:
         return [f"  {n:<45} {p}:{l}" for _, _, n, p, l, _ in rs]
@@ -244,21 +256,44 @@ def main() -> None:
         print(paint("\nstubs:", BOLD), *stubs, sep="\n")
     if show_choice:
         # `propext` is behind every `rw` with an `↔`: its list would be noise, the count is enough
-        for axiom, what in [("Quot.sound", "quotients, and `funext`"),
-                            ("Classical.choice", "the axiom of choice")]:
+        for axiom, what in [
+            ("Quot.sound", "quotients, and `funext`"),
+            ("Classical.choice", "the axiom of choice"),
+        ]:
             users = listing([r for r in proved if axiom in r[5]])
-            print(paint(f"\nusing {axiom} ({what}):", BOLD), *(users or ["  (none)"]), sep="\n")
+            print(
+                paint(f"\nusing {axiom} ({what}):", BOLD),
+                *(users or ["  (none)"]),
+                sep="\n",
+            )
     if foreign:
-        lines = [f"  {n:<45} {p}:{l}  ({', '.join(a for a in ax if a not in STANDARD)})"
-                 for _, _, n, p, l, ax in foreign]
-        print(paint("\nNON-STANDARD AXIOMS (declared with `axiom` in the library):", RED), *lines, sep="\n")
+        lines = [
+            f"  {n:<45} {p}:{l}  ({', '.join(a for a in ax if a not in STANDARD)})"
+            for _, _, n, p, l, ax in foreign
+        ]
+        print(
+            paint("\nNON-STANDARD AXIOMS (declared with `axiom` in the library):", RED),
+            *lines,
+            sep="\n",
+        )
     if tainted or foreign:
-        print(paint("\nTAINTED (no sorry of their own, but depend on one):", RED), *tainted, sep="\n")
+        print(
+            paint("\nTAINTED (no sorry of their own, but depend on one):", RED),
+            *tainted,
+            sep="\n",
+        )
         print("  find the culprit with: #print axioms <name>")
-        print(paint(f"\ncheck: {len(tainted)} tainted, {len(foreign)} non-standard axioms, "
-                    f"{len(stubs)} stubs", RED))
+        print(
+            paint(
+                f"\ncheck: {len(tainted)} tainted, {len(foreign)} non-standard axioms, "
+                f"{len(stubs)} stubs",
+                RED,
+            )
+        )
         sys.exit(1)
-    print(paint(f"\ncheck: ok ({len(stubs)} stubs, nothing else depends on sorry)", GREEN))
+    print(
+        paint(f"\ncheck: ok ({len(stubs)} stubs, nothing else depends on sorry)", GREEN)
+    )
 
 
 if __name__ == "__main__":
