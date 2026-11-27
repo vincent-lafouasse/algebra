@@ -52,6 +52,10 @@ theorem ext_iff {e e' : G ≃* H} : e = e' ↔ ∀ x, e x = e' x := by
 theorem coe_toEquiv (e : G ≃* H) : (e.toEquiv : G → H) = e :=
   rfl
 
+/-- A bijection that preserves multiplication, made into an isomorphism. -/
+def mk' (f : G ≃ H) (h : ∀ x y, f (x * y) = f x * f y) : G ≃* H :=
+  sorry
+
 def toMonoidHom (e : G ≃* H) : G →* H :=
   MonoidHom.mk' e.toFun e.map_mul'
 
