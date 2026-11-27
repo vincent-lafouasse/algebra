@@ -49,8 +49,9 @@ instance normal_bot : (⊥ : Subgroup G).Normal where
     rw [mul_one]
     rw [mul_inv_cancel]
 
-instance normal_top : (⊤ : Subgroup G).Normal :=
-  sorry
+instance normal_top : (⊤ : Subgroup G).Normal where
+  conj_mem : ∀ n, n ∈ ⊤ → ∀ g : G, g * n * g⁻¹ ∈ ⊤ :=
+    λ n _ g => mem_top (g * n * g⁻¹)
 
 instance normal_inf_normal (H K : Subgroup G) [H.Normal] [K.Normal] : (H ⊓ K).Normal :=
   sorry
