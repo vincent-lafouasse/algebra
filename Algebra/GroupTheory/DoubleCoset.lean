@@ -57,8 +57,7 @@ def setoid (H K : Set G) : Setoid G :=
 def Quotient (H K : Set G) : Type u :=
   sorry
 
-theorem rel_iff {H K : Subgroup G} {x y : G} :
-    setoid ↑H ↑K x y ↔ ∃ a ∈ H, ∃ b ∈ K, y = a * x * b :=
+theorem rel_iff {H K : Subgroup G} {x y : G} : setoid ↑H ↑K x y ↔ ∃ a ∈ H, ∃ b ∈ K, y = a * x * b :=
   sorry
 
 -- with `H = ⊥`: the left cosets of `K`
@@ -74,8 +73,7 @@ theorem rel_bot_eq_right_group_rel (H : Subgroup G) :
 def mk (H K : Subgroup G) (a : G) : Quotient (H : Set G) K :=
   sorry
 
-theorem eq {H K : Subgroup G} {a b : G} :
-    mk H K a = mk H K b ↔ ∃ h ∈ H, ∃ k ∈ K, b = h * a * k :=
+theorem eq {H K : Subgroup G} {a b : G} : mk H K a = mk H K b ↔ ∃ h ∈ H, ∃ k ∈ K, b = h * a * k :=
   sorry
 
 theorem mk_eq_of_doubleCoset_eq {H K : Subgroup G} {a b : G}

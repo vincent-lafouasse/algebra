@@ -61,8 +61,8 @@ def MonoidHom.pi {I : Type u} {f : I → Type v} [∀ i, Group (f i)] {γ : Type
     (g : ∀ i, γ →* f i) : γ →* ∀ i, f i :=
   sorry
 
-theorem MonoidHom.pi_apply {I : Type u} {f : I → Type v} [∀ i, Group (f i)] {γ : Type w}
-    [Group γ] (g : ∀ i, γ →* f i) (x : γ) (i : I) : MonoidHom.pi g x i = g i x :=
+theorem MonoidHom.pi_apply {I : Type u} {f : I → Type v} [∀ i, Group (f i)] {γ : Type w} [Group γ]
+    (g : ∀ i, γ →* f i) (x : γ) (i : I) : MonoidHom.pi g x i = g i x :=
   sorry
 
 end My

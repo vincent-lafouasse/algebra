@@ -335,8 +335,7 @@ theorem inv_one : (1 : G)⁻¹ = 1 :=
 
 theorem inv_eq_one : a⁻¹ = 1 ↔ a = 1 := by rw [inv_eq_iff_mul_eq_one, mul_one]
 
-theorem one_eq_inv : 1 = a⁻¹ ↔ a = 1 := by
-  rw [eq_inv_iff_mul_eq_one, one_mul]
+theorem one_eq_inv : 1 = a⁻¹ ↔ a = 1 := by rw [eq_inv_iff_mul_eq_one, one_mul]
 
 theorem inv_ne_one : a⁻¹ ≠ 1 ↔ a ≠ 1 := by
   refine not_congr ?_
@@ -364,8 +363,7 @@ theorem inv_bijective : Function.Bijective (Inv.inv : G → G) :=
   inv_involutive |> Function.Involutive.bijective
 
 -- `⁻¹` moves across `=`
-theorem inv_eq_iff_eq_inv : a⁻¹ = b ↔ a = b⁻¹ := by
-  rw [← inv_inj, inv_inv]
+theorem inv_eq_iff_eq_inv : a⁻¹ = b ↔ a = b⁻¹ := by rw [← inv_inj, inv_inv]
 
 section
 

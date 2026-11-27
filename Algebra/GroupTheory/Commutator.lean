@@ -103,8 +103,7 @@ instance commutator_normal : (commutator G).Normal :=
   sorry
 
 -- any subgroup containing `G'` is normal (`My.`: inside `Subgroup`, `commutator` is the instance)
-theorem Subgroup.Normal.of_commutator_le {H : Subgroup G} (h : My.commutator G ≤ H) :
-    H.Normal :=
+theorem Subgroup.Normal.of_commutator_le {H : Subgroup G} (h : My.commutator G ≤ H) : H.Normal :=
   sorry
 
 theorem commutator_eq_bot_iff_center_eq_top : commutator G = ⊥ ↔ Subgroup.center G = ⊤ :=
