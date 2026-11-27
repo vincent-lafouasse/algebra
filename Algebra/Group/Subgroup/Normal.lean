@@ -41,7 +41,8 @@ theorem Normal.mem_comm_iff {H : Subgroup G} (nH : H.Normal) {a b : G} : a * b �
   Iff.intro (Normal.mem_comm nH) (Normal.mem_comm nH)
 
 instance normal_bot : (⊥ : Subgroup G).Normal where
-  conj_mem : ∀ n, n ∈ ⊥ → ∀ g : G, g * n * g⁻¹ ∈ ⊥ := by
+  conj_mem :
+    ∀ n, n ∈ ⊥ → ∀ g : G, g * n * g⁻¹ ∈ ⊥ := by
     intro n hn g
     rw [mem_bot] at hn
     subst hn
@@ -50,16 +51,18 @@ instance normal_bot : (⊥ : Subgroup G).Normal where
     rw [mul_inv_cancel]
 
 instance normal_top : (⊤ : Subgroup G).Normal where
-  conj_mem : ∀ n, n ∈ ⊤ → ∀ g : G, g * n * g⁻¹ ∈ ⊤ :=
-    λ n _ g => mem_top (g * n * g⁻¹)
+  conj_mem : ∀ n, n ∈ ⊤ → ∀ g : G, g * n * g⁻¹ ∈ ⊤ := λ n _ g => mem_top (g * n * g⁻¹)
 
 instance normal_inf_normal (H K : Subgroup G) [H.Normal] [K.Normal] : (H ⊓ K).Normal where
-  conj_mem : ∀ n, n ∈ H ⊓ K → ∀ g : G, g * n * g⁻¹ ∈ H ⊓ K :=
-    λ n ⟨hh, hk⟩ g => ⟨Normal.conj_mem n hh g, Normal.conj_mem n hk g⟩
+  conj_mem := λ n ⟨hh, hk⟩ g => ⟨Normal.conj_mem n hh g, Normal.conj_mem n hk g⟩
 
 -- in a commutative group every subgroup is normal (Mathlib: for `[IsMulCommutative G]`)
 theorem normal_of_isMulCommutative {G : Type u} [CommGroup G] (H : Subgroup G) : H.Normal :=
-  sorry
+  {
+    conj_mem n hn g := by
+      rw [mul_comm]
+      rw [inv_mul_cancel_left]
+      exact hn }
 
 -- normal = invariant under every inner automorphism
 theorem normal_iff_map_conj_eq {H : Subgroup G} :
