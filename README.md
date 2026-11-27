@@ -46,7 +46,8 @@ module prefix so that it can later move to its own repository without changing a
 | `Algebra/Group/Prod.lean` | `G × H`, `fst`, `snd`, `inl`, `inr`, `MonoidHom.prod` | `Algebra/Notation/Prod`, `Algebra/Group/Prod` |
 | `Algebra/Group/Opposite.lean` | the opposite group `Gᵐᵒᵖ` | `Algebra/Opposites`, `Algebra/Group/Opposite` |
 | `Algebra/Group/TypeTags/Basic.lean` | `Multiplicative α`, the group `Multiplicative ℤ` | `Algebra/Group/TypeTags/Basic` |
-| `Algebra/Group/End.lean` | the group `Perm α`, `MulAut G`, `MulAut.conj`, translations `Equiv.mulLeft`/`mulRight` | `Algebra/Group/{End,Units/Equiv}` |
+| `Algebra/Group/Units/Equiv.lean` | translations `Equiv.mulLeft`/`mulRight`, `Group.mulLeft_bijective` | `Algebra/Group/Units/Equiv` |
+| `Algebra/Group/End.lean` | the group `Perm α`, how translations compose, `MulAut G`, `MulAut.conj` | `Algebra/Group/End` |
 | `Algebra/Group/Conj.lean` | `IsConj`, `ConjClasses`, `conjugatesOf` | `Algebra/Group/Conj` |
 | `Algebra/Group/Subgroup/` | `Subgroup`, `≤`, `⊥ ⊤ ⊓ ⊔`, `ker`, `range`, `map`, `comap`, `subgroupOf`, `zpowers`, `closure`, `Normal` | `Algebra/Group/Subgroup/` |
 | `Algebra/GroupTheory/Center.lean`, `Centralizer.lean` | `center G`, `centralizer s` | `GroupTheory/Subgroup/{Center,Centralizer}` |

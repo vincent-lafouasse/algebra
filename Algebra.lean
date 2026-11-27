@@ -5,6 +5,7 @@ import Algebra.Group.Commute
 import Algebra.Group.Pow
 import Algebra.Group.Hom
 import Algebra.Group.Equiv
+import Algebra.Group.Units.Equiv
 import Algebra.Group.End
 import Algebra.Group.Prod
 import Algebra.Group.Opposite

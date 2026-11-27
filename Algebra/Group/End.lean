@@ -1,4 +1,5 @@
 import Algebra.Group.Equiv
+import Algebra.Group.Units.Equiv
 import Algebra.Group.MinimalAxioms
 
 /-! # Automorphisms and conjugation
@@ -72,6 +73,60 @@ theorem inv_eq_iff_eq {f : Perm α} {x y : α} : f⁻¹ x = y ↔ x = f y :=
   sorry
 
 end Equiv.Perm
+
+/-! ### Composing translations
+
+Mathlib: `Mathlib/Algebra/Group/End.lean`. The translations themselves are in
+`Algebra/Group/Units/Equiv.lean`.
+
+`a ↦ mulLeft a` is a hom `G → Perm G` (`mulLeft_mul`, `mulLeft_one`), and an injective one:
+that is Cayley's theorem (`Algebra/GroupTheory/GroupAction.lean`). Right translation reverses
+the order: `mulRight (a * b) = mulRight b * mulRight a`. -/
+
+namespace Equiv
+
+variable {G : Type u} [Group G]
+
+/-! #### `a ↦ mulLeft a` is a hom, `a ↦ mulRight a` an anti-hom -/
+
+section
+
+variable (a b : G)
+
+theorem mulLeft_one : Equiv.mulLeft (1 : G) = 1 :=
+  sorry
+
+theorem mulRight_one : Equiv.mulRight (1 : G) = 1 :=
+  sorry
+
+theorem mulLeft_mul : Equiv.mulLeft (a * b) = Equiv.mulLeft a * Equiv.mulLeft b :=
+  sorry
+
+-- the order reverses
+theorem mulRight_mul : Equiv.mulRight (a * b) = Equiv.mulRight b * Equiv.mulRight a :=
+  sorry
+
+theorem inv_mulLeft : (Equiv.mulLeft a)⁻¹ = Equiv.mulLeft a⁻¹ :=
+  sorry
+
+theorem inv_mulRight : (Equiv.mulRight a)⁻¹ = Equiv.mulRight a⁻¹ :=
+  sorry
+
+theorem pow_mulLeft (n : Nat) : Equiv.mulLeft a ^ n = Equiv.mulLeft (a ^ n) :=
+  sorry
+
+theorem pow_mulRight (n : Nat) : Equiv.mulRight a ^ n = Equiv.mulRight (a ^ n) :=
+  sorry
+
+theorem zpow_mulLeft (n : Int) : Equiv.mulLeft a ^ n = Equiv.mulLeft (a ^ n) :=
+  sorry
+
+theorem zpow_mulRight (n : Int) : Equiv.mulRight a ^ n = Equiv.mulRight (a ^ n) :=
+  sorry
+
+end
+
+end Equiv
 
 abbrev MulAut (G : Type u) [Group G] : Type u :=
   G ≃* G
@@ -165,95 +220,5 @@ theorem conj_inv_apply (g x : G) : (conj g)⁻¹ x = g⁻¹ * x * g :=
   rfl
 
 end MulAut
-
-/-! ### Translations
-
-Mathlib: `Mathlib/Algebra/Group/Units/Equiv.lean` (the definitions),
-`Mathlib/Algebra/Group/End.lean` (how they compose).
-
-Left translation `x ↦ a * x` is a permutation of `G`, with inverse `x ↦ a⁻¹ * x`: that is
-`Equiv.mulLeft a`. It is *not* a hom (it sends `1` to `a`), so it lives in `Perm G`, not in
-`MulAut G`. But `a ↦ mulLeft a` is a hom `G → Perm G` (`mulLeft_mul`, `mulLeft_one`), and an
-injective one: that is Cayley's theorem (`Algebra/GroupTheory/GroupAction.lean`).
-
-Right translation reverses the order: `mulRight (a * b) = mulRight b * mulRight a`. -/
-
-namespace Equiv
-
-variable {G : Type u} [Group G]
-
-/-- Left multiplication by `a`, as a permutation of `G`. -/
-protected def mulLeft (a : G) : Perm G :=
-  sorry
-
-theorem coe_mulLeft (a : G) : ((Equiv.mulLeft a : Perm G) : G → G) = (a * ·) :=
-  sorry
-
-theorem mulLeft_symm_apply (a : G) : ((Equiv.mulLeft a).symm : G → G) = (a⁻¹ * ·) :=
-  sorry
-
-theorem mulLeft_symm (a : G) : (Equiv.mulLeft a).symm = Equiv.mulLeft a⁻¹ :=
-  sorry
-
-/-- Right multiplication by `a`, as a permutation of `G`. -/
-protected def mulRight (a : G) : Perm G :=
-  sorry
-
-theorem coe_mulRight (a : G) : ((Equiv.mulRight a : Perm G) : G → G) = (· * a) :=
-  sorry
-
-theorem mulRight_symm (a : G) : (Equiv.mulRight a).symm = Equiv.mulRight a⁻¹ :=
-  sorry
-
-theorem mulRight_symm_apply (a : G) : ((Equiv.mulRight a).symm : G → G) = (· * a⁻¹) :=
-  sorry
-
-/-! #### `a ↦ mulLeft a` is a hom, `a ↦ mulRight a` an anti-hom -/
-
-section
-
-variable (a b : G)
-
-theorem mulLeft_one : Equiv.mulLeft (1 : G) = 1 :=
-  sorry
-
-theorem mulRight_one : Equiv.mulRight (1 : G) = 1 :=
-  sorry
-
-theorem mulLeft_mul : Equiv.mulLeft (a * b) = Equiv.mulLeft a * Equiv.mulLeft b :=
-  sorry
-
--- the order reverses
-theorem mulRight_mul : Equiv.mulRight (a * b) = Equiv.mulRight b * Equiv.mulRight a :=
-  sorry
-
-theorem inv_mulLeft : (Equiv.mulLeft a)⁻¹ = Equiv.mulLeft a⁻¹ :=
-  sorry
-
-theorem inv_mulRight : (Equiv.mulRight a)⁻¹ = Equiv.mulRight a⁻¹ :=
-  sorry
-
-theorem pow_mulLeft (n : Nat) : Equiv.mulLeft a ^ n = Equiv.mulLeft (a ^ n) :=
-  sorry
-
-theorem pow_mulRight (n : Nat) : Equiv.mulRight a ^ n = Equiv.mulRight (a ^ n) :=
-  sorry
-
-theorem zpow_mulLeft (n : Int) : Equiv.mulLeft a ^ n = Equiv.mulLeft (a ^ n) :=
-  sorry
-
-theorem zpow_mulRight (n : Int) : Equiv.mulRight a ^ n = Equiv.mulRight (a ^ n) :=
-  sorry
-
-end
-
-end Equiv
-
--- (Mathlib: `_root_.Group.mulLeft_bijective`, stated in the `Equiv` section)
-theorem Group.mulLeft_bijective {G : Type u} [Group G] (a : G) : Function.Bijective (a * ·) :=
-  sorry
-
-theorem Group.mulRight_bijective {G : Type u} [Group G] (a : G) : Function.Bijective (· * a) :=
-  sorry
 
 end My
