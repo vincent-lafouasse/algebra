@@ -224,7 +224,7 @@ theorem inv_inv (a : G) : a⁻¹⁻¹ = a := by
 
 -- `inv_inv` says exactly this; Mathlib then gets `inv_injective`, `inv_surjective`, … from it
 theorem inv_involutive : Function.Involutive (Inv.inv : G → G) :=
-  sorry
+  λ x => inv_inv x
 
 -- two right inverses of `x` are equal (Mathlib: for commutative monoids, where one-sided is enough)
 theorem inv_unique {x y z : G} (hy : x * y = 1) (hz : x * z = 1) : y = z :=
