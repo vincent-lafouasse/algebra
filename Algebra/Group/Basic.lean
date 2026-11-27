@@ -300,8 +300,8 @@ theorem inv_bijective : Function.Bijective (Inv.inv : G → G) :=
   inv_involutive |> Function.Involutive.bijective
 
 -- `⁻¹` moves across `=`
-theorem inv_eq_iff_eq_inv : a⁻¹ = b ↔ a = b⁻¹ :=
-  sorry
+theorem inv_eq_iff_eq_inv : a⁻¹ = b ↔ a = b⁻¹ := by
+  rw [← inv_inj, inv_inv]
 
 section
 
