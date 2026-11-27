@@ -12,6 +12,99 @@ universe u
 
 namespace My
 
+/-! ### In any monoid
+
+These use only associativity and `1`, so they hold in every monoid: a ring under `*`, or
+functions `α → α` under composition. Groups get them through `Group.toMonoid`. -/
+
+section Monoid
+
+variable {M : Type u} [Monoid M] {a b c : M}
+
+-- multiplying by `y`, then by `x`, is multiplying by `x * y` (on the right: by `y * x`)
+theorem comp_mul_left (x y : M) : (x * ·) ∘ (y * ·) = (x * y * ·) := by
+  funext z
+  show x * (y * z) = x * y * z
+  rw [mul_assoc]
+
+theorem comp_mul_right (x y : M) : (· * x) ∘ (· * y) = (· * (y * x)) := by
+  funext z
+  show (z * y) * x = z * (y * x)
+  rw [mul_assoc]
+
+theorem one_mul_eq_id : ((1 : M) * ·) = id := by
+  funext x
+  rw [one_mul]
+  rfl
+
+theorem mul_one_eq_id : (· * (1 : M)) = id := by
+  funext x
+  rw [mul_one]
+  rfl
+
+-- if `a * b = 1`, one factor is trivial exactly when the other is
+theorem eq_one_iff_eq_one_of_mul_eq_one (h : a * b = 1) : a = 1 ↔ b = 1 :=
+  Iff.intro
+    (λ h' => by
+      rw [h', one_mul] at h; exact h)
+    (λ h' => by
+      rw [h', mul_one] at h; exact h)
+
+end Monoid
+
+section CommMonoid
+
+variable {M : Type u} [CommMonoid M]
+
+-- rearranging products (Mathlib: for any commutative semigroup)
+theorem mul_left_comm (a b c : M) : a * (b * c) = b * (a * c) :=
+  calc
+    a * (b * c)
+    _ = (a * b) * c := by simp only [mul_assoc]
+    _ = (b * a) * c := by rw [mul_comm b a]
+    _ = b * (a * c) := by simp only [mul_assoc]
+
+theorem mul_right_comm (a b c : M) : a * b * c = a * c * b :=
+  calc
+    a * b * c
+    _ = a * (b * c) := by simp only [mul_assoc]
+    _ = a * (c * b) := by rw [mul_comm b c]
+    _ = a * c * b := by simp only [mul_assoc]
+
+theorem mul_mul_mul_comm (a b c d : M) : a * b * (c * d) = a * c * (b * d) :=
+  calc
+    a * b * (c * d)
+    _ = a * (b * c) * d := by simp only [mul_assoc]
+    _ = a * (c * b) * d := by rw [mul_comm b c]
+    _ = a * c * (b * d) := by simp only [mul_assoc]
+
+theorem mul_mul_mul_comm' (a b c d : M) : a * b * c * d = a * c * b * d :=
+  calc
+    a * b * c * d
+    _ = a * (b * c) * d := by simp only [mul_assoc]
+    _ = a * (c * b) * d := by rw [mul_comm b c]
+    _ = a * c * b * d := by simp only [mul_assoc]
+
+theorem mul_rotate (a b c : M) : a * b * c = b * c * a :=
+  calc
+    a * b * c
+    _ = b * a * c := by rw [mul_comm a b]
+    _ = b * (a * c) := by simp only [mul_assoc]
+    _ = b * (c * a) := by rw [mul_comm a c]
+    _ = b * c * a := by simp only [mul_assoc]
+
+theorem mul_rotate' (a b c : M) : a * (b * c) = b * (c * a) :=
+  calc
+    a * (b * c)
+    _ = (a * b) * c := by simp only [mul_assoc]
+    _ = (b * a) * c := by rw [mul_comm a b]
+    _ = b * (a * c) := by simp only [mul_assoc]
+    _ = b * (c * a) := by rw [mul_comm a c]
+
+end CommMonoid
+
+/-! ## In a group -/
+
 variable {G : Type u} [Group G] {a b c : G}
 
 /-! ### Cancelling a factor and its inverse -/
@@ -99,27 +192,6 @@ theorem mul_right_surjective (a : G) : Function.Surjective (· * a) := by
   exists y * a⁻¹
   show (y * a⁻¹) * a = y
   exact inv_mul_cancel_right y a
-
--- multiplying by `y`, then by `x`, is multiplying by `x * y` (on the right: by `y * x`)
-theorem comp_mul_left (x y : G) : (x * ·) ∘ (y * ·) = (x * y * ·) := by
-  funext z
-  show x * (y * z) = x * y * z
-  rw [mul_assoc]
-
-theorem comp_mul_right (x y : G) : (· * x) ∘ (· * y) = (· * (y * x)) := by
-  funext z
-  show (z * y) * x = z * (y * x)
-  rw [mul_assoc]
-
-theorem one_mul_eq_id : ((1 : G) * ·) = id := by
-  funext x
-  rw [one_mul]
-  rfl
-
-theorem mul_one_eq_id : (· * (1 : G)) = id := by
-  funext x
-  rw [mul_one]
-  rfl
 
 /-! ### Moving a factor across an equation -/
 
@@ -228,14 +300,6 @@ theorem inv_involutive : Function.Involutive (Inv.inv : G → G) := λ x => inv_
 -- two right inverses of `x` are equal (Mathlib: for commutative monoids, where one-sided is enough)
 theorem inv_unique {x y z : G} (hy : x * y = 1) (hz : x * z = 1) : y = z :=
   mul_left_cancel (Eq.trans hy hz.symm)
-
--- if `a * b = 1`, one factor is trivial exactly when the other is
-theorem eq_one_iff_eq_one_of_mul_eq_one (h : a * b = 1) : a = 1 ↔ b = 1 :=
-  Iff.intro
-    (λ h' => by
-      rw [h', one_mul] at h; exact h)
-    (λ h' => by
-      rw [h', mul_one] at h; exact h)
 
 -- `a * b = 1` four ways: solve for `a` or for `b`, inverse on either side of the `=`
 theorem mul_eq_one_iff_eq_inv : a * b = 1 ↔ a = b⁻¹ := by
@@ -397,51 +461,6 @@ theorem mul_inv_cancel_comm_assoc (a b : G) : a * (b * a⁻¹) = b := by
 theorem mul_inv (a b : G) : (a * b)⁻¹ = a⁻¹ * b⁻¹ := by
   rw [mul_inv_rev]
   exact mul_comm b⁻¹ a⁻¹
-
--- rearranging products (Mathlib: for any commutative semigroup)
-theorem mul_left_comm (a b c : G) : a * (b * c) = b * (a * c) :=
-  calc
-    a * (b * c)
-    _ = (a * b) * c := by simp only [mul_assoc]
-    _ = (b * a) * c := by rw [mul_comm b a]
-    _ = b * (a * c) := by simp only [mul_assoc]
-
-theorem mul_right_comm (a b c : G) : a * b * c = a * c * b :=
-  calc
-    a * b * c
-    _ = a * (b * c) := by simp only [mul_assoc]
-    _ = a * (c * b) := by rw [mul_comm b c]
-    _ = a * c * b := by simp only [mul_assoc]
-
-theorem mul_mul_mul_comm (a b c d : G) : a * b * (c * d) = a * c * (b * d) :=
-  calc
-    a * b * (c * d)
-    _ = a * (b * c) * d := by simp only [mul_assoc]
-    _ = a * (c * b) * d := by rw [mul_comm b c]
-    _ = a * c * (b * d) := by simp only [mul_assoc]
-
-theorem mul_mul_mul_comm' (a b c d : G) : a * b * c * d = a * c * b * d :=
-  calc
-    a * b * c * d
-    _ = a * (b * c) * d := by simp only [mul_assoc]
-    _ = a * (c * b) * d := by rw [mul_comm b c]
-    _ = a * c * b * d := by simp only [mul_assoc]
-
-theorem mul_rotate (a b c : G) : a * b * c = b * c * a :=
-  calc
-    a * b * c
-    _ = b * a * c := by rw [mul_comm a b]
-    _ = b * (a * c) := by simp only [mul_assoc]
-    _ = b * (c * a) := by rw [mul_comm a c]
-    _ = b * c * a := by simp only [mul_assoc]
-
-theorem mul_rotate' (a b c : G) : a * (b * c) = b * (c * a) :=
-  calc
-    a * (b * c)
-    _ = (a * b) * c := by simp only [mul_assoc]
-    _ = (b * a) * c := by rw [mul_comm a b]
-    _ = b * (a * c) := by simp only [mul_assoc]
-    _ = b * (c * a) := by rw [mul_comm a c]
 
 end CommGroup
 

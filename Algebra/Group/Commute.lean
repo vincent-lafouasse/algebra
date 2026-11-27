@@ -45,13 +45,15 @@ protected theorem symm_iff : Commute a b ↔ Commute b a :=
 
 end Mul
 
-variable {G : Type u} [Group G] {a b c : G}
+section Monoid
 
-theorem one_left (a : G) : Commute 1 a :=
+variable {M : Type u} [Monoid M] {a b c : M}
+
+theorem one_left (a : M) : Commute 1 a :=
   have h : 1 * a = a * 1 := by rw [mul_one, one_mul]
   Commute.of_eq h
 
-theorem one_right (a : G) : Commute a 1 :=
+theorem one_right (a : M) : Commute a 1 :=
   Commute.symm (one_left a)
 
 theorem mul_right (hab : Commute a b) (hac : Commute a c) : Commute a (b * c) := by
@@ -68,15 +70,15 @@ theorem mul_left (hac : Commute a c) (hbc : Commute b c) : Commute (a * b) c :=
   Commute.symm (mul_right hac.symm hbc.symm)
 
 -- swapping two neighbours that commute, inside a longer product
-protected theorem right_comm (h : Commute b c) (a : G) : a * b * c = a * c * b := by
+protected theorem right_comm (h : Commute b c) (a : M) : a * b * c = a * c * b := by
   rw [mul_assoc, mul_assoc]
   rw [Commute.eq h]
 
-protected theorem left_comm (h : Commute a b) (c : G) : a * (b * c) = b * (a * c) := by
+protected theorem left_comm (h : Commute a b) (c : M) : a * (b * c) = b * (a * c) := by
   rw [← mul_assoc, ← mul_assoc]
   rw [Commute.eq h]
 
-protected theorem mul_mul_mul_comm (hbc : Commute b c) (a d : G) :
+protected theorem mul_mul_mul_comm (hbc : Commute b c) (a d : M) :
     a * b * (c * d) = a * c * (b * d) :=
   calc
     a * b * (c * d)
@@ -100,6 +102,12 @@ theorem function_commute_mul_right (h : Commute a b) : Function.Commute (· * a)
     _ = x * (b * a) := by rw [mul_assoc]
     _ = x * (a * b) := by rw [Commute.eq h]
     _ = (x * a) * b := by rw [← mul_assoc]
+
+end Monoid
+
+section Group
+
+variable {G : Type u} [Group G] {a b c : G}
 
 theorem inv_right (h : Commute a b) : Commute a b⁻¹ := by
   apply Commute.of_eq
@@ -171,10 +179,12 @@ protected theorem conj_iff (h : G) : Commute (h * a * h⁻¹) (h * b * h⁻¹) �
 protected theorem conj (comm : Commute a b) (h : G) : Commute (h * a * h⁻¹) (h * b * h⁻¹) :=
   (Commute.conj_iff h).mpr comm
 
+end Group
+
 end Commute
 
--- in a commutative group everything commutes (Mathlib states it for any `CommMagma`)
-theorem Commute.all {G : Type u} [CommGroup G] (a b : G) : Commute a b :=
+-- in a commutative monoid everything commutes (Mathlib states it for any `CommMagma`)
+theorem Commute.all {M : Type u} [CommMonoid M] (a b : M) : Commute a b :=
   mul_comm a b |> Commute.of_eq
 
 end My

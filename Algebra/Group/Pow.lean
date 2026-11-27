@@ -11,41 +11,44 @@ makes `pow_succ` true by `rfl`). Then `g ^ k` for `k : Int` by cases (`zpowRec`)
 `Int.ofNat n` (k ≥ 0) and `Int.negSucc n` (k = -(n+1)).
 
 In Mathlib the power is a field of `Monoid` with `npowRec` as its default; here it is just
-this definition. -/
+this definition, for any monoid. The `Nat` laws are monoid lemmas, except `pow_sub` and
+`inv_pow`; the `Int` powers need `⁻¹`, so they are group lemmas. -/
 
 universe u
 
 namespace My
 
-variable {G : Type u} [Group G]
+section Monoid
+
+variable {M : Type u} [Monoid M]
 
 /-! ### Natural powers -/
 
-def npowRec : Nat → G → G
+def npowRec : Nat → M → M
   | 0, _ => 1
   | n + 1, g => npowRec n g * g
 
-instance : Pow G Nat :=
+instance : Pow M Nat :=
   ⟨λ g n => npowRec n g⟩
 
 -- the two defining equations (`rfl`)
-theorem pow_zero (g : G) : g ^ (0 : Nat) = 1 :=
+theorem pow_zero (g : M) : g ^ (0 : Nat) = 1 :=
   rfl
 
-theorem pow_succ (g : G) (n : Nat) : g ^ (n + 1) = g ^ n * g :=
+theorem pow_succ (g : M) (n : Nat) : g ^ (n + 1) = g ^ n * g :=
   rfl
 
-theorem pow_one (g : G) : g ^ (1 : Nat) = g := by
+theorem pow_one (g : M) : g ^ (1 : Nat) = g := by
   rw [pow_succ]
   rw [pow_zero]
   rw [one_mul]
 
-theorem one_pow (n : Nat) : (1 : G) ^ n = 1 := by
+theorem one_pow (n : Nat) : (1 : M) ^ n = 1 := by
   induction n with
   | zero => exact pow_zero 1
   | succ n ih => rw [pow_succ, ih, mul_one]
 
-theorem pow_add (g : G) (m n : Nat) : g ^ (m + n) = g ^ m * g ^ n := by
+theorem pow_add (g : M) (m n : Nat) : g ^ (m + n) = g ^ m * g ^ n := by
   induction n with
   | zero => rw [Nat.add_zero, pow_zero, mul_one]
   | succ n ih =>
@@ -54,24 +57,24 @@ theorem pow_add (g : G) (m n : Nat) : g ^ (m + n) = g ^ m * g ^ n := by
     rw [ih]
     rw [mul_assoc]
 
-theorem pow_succ' (g : G) (n : Nat) : g ^ (n + 1) = g * g ^ n := by
+theorem pow_succ' (g : M) (n : Nat) : g ^ (n + 1) = g * g ^ n := by
   rw [Nat.add_comm]
   rw [pow_add]
   rw [pow_one]
 
-theorem pow_two (g : G) : g ^ 2 = g * g := by
+theorem pow_two (g : M) : g ^ 2 = g * g := by
   rw [pow_succ]
   rw [pow_one]
 
-theorem pow_three' (g : G) : g ^ 3 = g * g * g := by
+theorem pow_three' (g : M) : g ^ 3 = g * g * g := by
   rw [pow_succ]
   rw [pow_two]
 
-theorem pow_three (g : G) : g ^ 3 = g * (g * g) := by
+theorem pow_three (g : M) : g ^ 3 = g * (g * g) := by
   rw [← mul_assoc]
   rw [pow_three']
 
-theorem pow_mul (g : G) (m n : Nat) : g ^ (m * n) = (g ^ m) ^ n := by
+theorem pow_mul (g : M) (m n : Nat) : g ^ (m * n) = (g ^ m) ^ n := by
   induction n with
   | zero => rw [Nat.mul_zero, pow_zero, pow_zero]
   | succ n ih =>
@@ -81,46 +84,34 @@ theorem pow_mul (g : G) (m n : Nat) : g ^ (m * n) = (g ^ m) ^ n := by
     rw [ih]
     rw [Nat.mul_one]
 
-theorem pow_mul' (g : G) (m n : Nat) : g ^ (m * n) = (g ^ n) ^ m := by
+theorem pow_mul' (g : M) (m n : Nat) : g ^ (m * n) = (g ^ n) ^ m := by
   rw [Nat.mul_comm]
   rw [pow_mul]
 
 -- powers of the same element commute
-theorem pow_mul_comm (g : G) (m n : Nat) : g ^ m * g ^ n = g ^ n * g ^ m := by
+theorem pow_mul_comm (g : M) (m n : Nat) : g ^ m * g ^ n = g ^ n * g ^ m := by
   rw [← pow_add]
   rw [Nat.add_comm]
   rw [pow_add]
 
 -- the case `n = 1` of the above, on one side
-theorem pow_mul_comm' (g : G) (n : Nat) : g ^ n * g = g * g ^ n :=
+theorem pow_mul_comm' (g : M) (n : Nat) : g ^ n * g = g * g ^ n :=
   sorry
 
 -- (ab)ⁿa = a(ba)ⁿ: slide the extra `a` through, no commutativity needed
-theorem mul_pow_mul (a b : G) (n : Nat) : (a * b) ^ n * a = a * (b * a) ^ n :=
+theorem mul_pow_mul (a b : M) (n : Nat) : (a * b) ^ n * a = a * (b * a) ^ n :=
   sorry
 
--- `m - n` is truncated subtraction on `Nat`, hence `h`
-theorem pow_sub (g : G) {m n : Nat} (h : n ≤ m) : g ^ (m - n) = g ^ m * (g ^ n)⁻¹ :=
-  sorry
-
-theorem pow_right_comm (g : G) (m n : Nat) : (g ^ m) ^ n = (g ^ n) ^ m := by
+theorem pow_right_comm (g : M) (m n : Nat) : (g ^ m) ^ n = (g ^ n) ^ m := by
   rw [← pow_mul]
   rw [Nat.mul_comm]
   rw [pow_mul]
-
-theorem inv_pow (g : G) (n : Nat) : g⁻¹ ^ n = (g ^ n)⁻¹ := by
-  induction n with
-  | zero => rw [pow_zero, pow_zero, inv_one]
-  | succ n ih =>
-    rw [pow_succ, pow_succ']
-    rw [ih]
-    rw [mul_inv_rev]
 
 /-! ### Commuting with powers -/
 
 namespace Commute
 
-variable {a b : G}
+variable {a b : M}
 
 theorem pow_left (h : Commute a b) (n : Nat) : Commute (a ^ n) b := by
   induction n with
@@ -136,13 +127,13 @@ theorem pow_right (h : Commute a b) (n : Nat) : Commute a (b ^ n) :=
 theorem pow_pow (h : Commute a b) (m n : Nat) : Commute (a ^ m) (b ^ n) :=
   pow_right (pow_left h m) n
 
-theorem self_pow (g : G) (n : Nat) : Commute g (g ^ n) :=
+theorem self_pow (g : M) (n : Nat) : Commute g (g ^ n) :=
   pow_right (Commute.refl g) n
 
-theorem pow_self (g : G) (n : Nat) : Commute (g ^ n) g :=
+theorem pow_self (g : M) (n : Nat) : Commute (g ^ n) g :=
   sorry
 
-theorem pow_pow_self (g : G) (m n : Nat) : Commute (g ^ m) (g ^ n) :=
+theorem pow_pow_self (g : M) (m n : Nat) : Commute (g ^ m) (g ^ n) :=
   sorry
 
 -- (ab)^n = a^n b^n needs a and b to commute: false in general (try n = 2)
@@ -161,8 +152,28 @@ protected theorem mul_pow (h : Commute a b) (n : Nat) : (a * b) ^ n = a ^ n * b 
 
 end Commute
 
-theorem mul_pow {G : Type u} [CommGroup G] (a b : G) (n : Nat) : (a * b) ^ n = a ^ n * b ^ n :=
+theorem mul_pow {M : Type u} [CommMonoid M] (a b : M) (n : Nat) : (a * b) ^ n = a ^ n * b ^ n :=
   Commute.mul_pow (Commute.all a b) n
+
+end Monoid
+
+section Group
+
+variable {G : Type u} [Group G]
+
+/-! ### Natural powers in a group -/
+
+-- `m - n` is truncated subtraction on `Nat`, hence `h`
+theorem pow_sub (g : G) {m n : Nat} (h : n ≤ m) : g ^ (m - n) = g ^ m * (g ^ n)⁻¹ :=
+  sorry
+
+theorem inv_pow (g : G) (n : Nat) : g⁻¹ ^ n = (g ^ n)⁻¹ := by
+  induction n with
+  | zero => rw [pow_zero, pow_zero, inv_one]
+  | succ n ih =>
+    rw [pow_succ, pow_succ']
+    rw [ih]
+    rw [mul_inv_rev]
 
 /-! ### Integer powers -/
 
@@ -361,5 +372,7 @@ end Commute
 
 theorem mul_zpow {G : Type u} [CommGroup G] (a b : G) (k : Int) : (a * b) ^ k = a ^ k * b ^ k :=
   sorry
+
+end Group
 
 end My

@@ -47,12 +47,12 @@ module prefix so that it can later move to its own repository without changing a
 | `Base/Order/BooleanAlgebra/Defs.lean` | `BooleanAlgebra`: complements `xᶜ`, De Morgan | `Order/BooleanAlgebra/{Defs,Basic}`, `Order/Heyting/Basic` |
 | `Base/Order/CompleteLattice/Defs.lean` | `sSup`, `sInf`, `CompleteLattice` | `Order/SetNotation`, `Order/CompleteLattice/Defs` |
 | `Base/Order/Setoid/Basic.lean` | `Setoid.ker f`, the first isomorphism theorem for sets | `Order/Setoid/Basic` |
-| `Algebra/Group/Defs.lean` | `Group`, `CommGroup` | `Algebra/Group/Defs` |
+| `Algebra/Group/Defs.lean` | `Monoid`, `CommMonoid`, `Group`, `CommGroup` | `Algebra/Group/Defs` |
 | `Algebra/Group/MinimalAxioms.lean` | `Group.ofLeftAxioms`, `Group.ofRightAxioms` | `Algebra/Group/MinimalAxioms` |
-| `Algebra/Group/Basic.lean` | cancellation, inverses | `Algebra/Group/{Defs,Basic}` |
+| `Algebra/Group/Basic.lean` | monoid rearrangements, then cancellation, inverses | `Algebra/Group/{Defs,Basic}` |
 | `Algebra/Group/Commute.lean` | `Commute a b` | `Algebra/Group/Commute/{Defs,Basic}` |
 | `Algebra/Group/Pow.lean` | `g ^ n` (Nat and Int) | `Algebra/Group/Defs`, `…/Basic` |
-| `Algebra/Group/Hom.lean` | homomorphisms `G →* H` | `Algebra/Group/Hom/Defs` |
+| `Algebra/Group/Hom.lean` | monoid homomorphisms `M →* N` (`map_inv`, `mk'` for groups) | `Algebra/Group/Hom/Defs` |
 | `Algebra/Group/Equiv.lean` | isomorphisms `G ≃* H` | `Algebra/Group/Equiv/Defs` |
 | `Algebra/Group/Prod.lean` | `G × H`, `fst`, `snd`, `inl`, `inr`, `MonoidHom.prod` | `Algebra/Notation/Prod`, `Algebra/Group/Prod` |
 | `Algebra/Group/Opposite.lean` | the opposite group `Gᵐᵒᵖ` | `Algebra/Opposites`, `Algebra/Group/Opposite` |

@@ -92,7 +92,7 @@ end Relation
 
 /-! ### Quotients by an arbitrary relation -/
 
-open Relation
+open _root_.My.Relation
 
 theorem Quot.eqvGen_exact {α : Type u} {r : α → α → Prop} {a b : α}
     (H : Quot.mk r a = Quot.mk r b) : EqvGen r a b :=

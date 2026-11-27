@@ -14,7 +14,7 @@ Per-file proof counts live in `uv run scripts/check.py`; this file is about depe
 
 | # | Milestone | Status | Where |
 |---|---|---|---|
-| 0 | Foundations: sets, functions, `Quot`, groups, homs, subgroups, cosets | ✓/◐ | `Base/`, `Algebra/Group/` |
+| 0 | Foundations: sets, functions, `Quot`, monoids and groups, homs, subgroups, cosets | ✓/◐ | `Base/`, `Algebra/Group/` |
 | 1 | **Noether 1**: `G ⧸ ker f ≃* range f` | ○ | `QuotientGroup/Basic` |
 | 2 | **Noether 2, 3**, correspondence theorem | ○ | `QuotientGroup/Basic` |
 | 3 | **Lagrange**: the order of a subgroup divides the order of the group | · | needs a cardinality layer |
@@ -141,11 +141,15 @@ PartialOrder ─ Monotone ─ GaloisConnection ─┬─ GaloisInsertion ─ Sub
 
 ---
 
-## Blocked on a decision
+## Decisions pending
 
-- **Units `Mˣ`** (Mathlib: `Algebra/Group/Units/Defs`). They need a `Monoid` class, and `Group`
-  doesn't extend one. Adding a separate `Monoid` would give every group two `Mul` instances.
-  Needed (hard) by: the sign `Perm α →* ℤˣ` (or use `Multiplicative`/`Bool`), `(ℤ/n)ˣ` and Euler's theorem.
+- **`npow` as a field of `Monoid`** (Mathlib's design). Today `^` is the free `npowRec` for every
+  monoid, and `pow_zero`/`pow_succ` are `rfl`. Needed (hard) once ℕ or ℤ become `My.Monoid`s:
+  core already has `Pow Nat Nat` and `Pow Int Nat`, and a second `^` on them would not be the
+  same term, so `rw` with the general lemmas would miss. Making it a field turns those two
+  `rfl`s into the field axioms.
+- **Units `Mˣ`** (Mathlib: `Algebra/Group/Units/Defs`): unblocked by `Monoid`, not stubbed yet.
+  Needed (hard) by the sign `Perm α →* ℤˣ` (or use `Multiplicative`/`Bool`), `(ℤ/n)ˣ`, Euler.
 - **`Nat` and `Int` as `My.Preorder`s.** Without them there's no `Monotone`/`Antitone` over `ℕ`
   (`derivedSeries_antitone` is stated by hand for now).
 - **`to_additive`** (·): halves every additive copy: additive groups, ℤ-modules, ideals, `∑`.

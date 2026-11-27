@@ -21,7 +21,8 @@ namespace FreeGroup
 
 variable {α : Type u} [DecidableEq α] {L L₁ L₂ : List (α × Bool)}
 
-def reduce (L : List (α × Bool)) : List (α × Bool) :=
+-- explicit `[DecidableEq α]`: with a `sorry` body, the `variable` would be dropped
+def reduce {α : Type u} [DecidableEq α] (L : List (α × Bool)) : List (α × Bool) :=
   sorry
 
 theorem reduce.red : Red L (reduce L) :=
@@ -44,7 +45,7 @@ theorem reduce.self : mk (reduce L) = mk L :=
   sorry
 
 -- the reduced word of an element
-def toWord : FreeGroup α → List (α × Bool) :=
+def toWord {α : Type u} [DecidableEq α] : FreeGroup α → List (α × Bool) :=
   sorry
 
 theorem mk_toWord {x : FreeGroup α} : mk (toWord x) = x :=
