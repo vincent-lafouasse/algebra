@@ -271,11 +271,12 @@ theorem inv_one : (1 : G)⁻¹ = 1 :=
 
 theorem inv_eq_one : a⁻¹ = 1 ↔ a = 1 := by rw [inv_eq_iff_mul_eq_one, mul_one]
 
-theorem one_eq_inv : 1 = a⁻¹ ↔ a = 1 :=
-  sorry
+theorem one_eq_inv : 1 = a⁻¹ ↔ a = 1 := by
+  rw [eq_inv_iff_mul_eq_one, one_mul]
 
-theorem inv_ne_one : a⁻¹ ≠ 1 ↔ a ≠ 1 :=
-  sorry
+theorem inv_ne_one : a⁻¹ ≠ 1 ↔ a ≠ 1 := by
+  refine not_congr ?_
+  rw [inv_eq_one]
 
 -- the inverse of a product reverses the order
 theorem mul_inv_rev (a b : G) : (a * b)⁻¹ = b⁻¹ * a⁻¹ := by
