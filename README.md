@@ -11,6 +11,8 @@ comment says "(not in Mathlib)".
 
 ## Layout
 
+What each file needs and where it leads: [ROADMAP.md](ROADMAP.md).
+
 Two libraries. `Base` holds the foundations that are not algebra (functions, bijections,
 sets, order) and imports nothing but core; `Algebra` is built on it. `Base` has its own
 module prefix so that it can later move to its own repository without changing any import.
@@ -20,8 +22,10 @@ module prefix so that it can later move to its own repository without changing a
 | `Base/Logic/Function.lean` | injective/surjective/bijective, `surjInv`, `invFun` | `Logic/Function/{Defs,Basic}` |
 | `Base/Logic/Function/Conjugate.lean` | `Function.Semiconj`, `Function.Commute` | `Logic/Function/Conjugate` |
 | `Base/Logic/Equiv.lean` | bijections `α ≃ β`, permutations `Equiv.Perm α` | `Logic/Equiv/Defs` |
+| `Base/Logic/Nontrivial.lean` | `Nontrivial α`: two distinct elements | `Basic/Nontrivial/Defs` |
+| `Base/Logic/Relation.lean` | `ReflTransGen`, `EqvGen`, `Join`; `Quot.eq` for any relation | `Logic/Relation`, `Data/Quot` |
 | `Base/Logic/SchroederBernstein.lean` | injections both ways give a bijection | `SetTheory/Cardinal/SchroederBernstein` |
-| `Base/Data/Set.lean` | `Set α`, `{x \| p x}`, `⊆` (= `≤`, a partial order), `{a}`, `univ`, `∅`, `∩ ∪ \`, `↥s` | `Data/Set/{Defs,Basic}` |
+| `Base/Data/Set.lean` | `Set α`, `{x \| p x}`, `⊆` (= `≤`, a partial order), `{a}`, `univ`, `∅`, `∩ ∪ \`, `↥s`, `Set.Nonempty`, `Set.Pairwise` | `Data/Set/{Defs,Basic}` |
 | `Base/Data/Set/Image.lean` | images `f '' s`, preimages `f ⁻¹' t`, `range f`, `Set.image_preimage` | `Data/Set/{Defs,Operations,Image,Lattice/Image}` |
 | `Base/Data/Set/Function.lean` | `MapsTo`, `InjOn`, `SurjOn`, `BijOn`, `EqOn`, `InvOn`, `BijOn.equiv` | `Data/Set/Function` |
 | `Base/Data/Set/Lattice.lean` | `Set α` as a complete lattice (`⊔ = ∪`, `sSup` = union of a family) and a Boolean algebra (`sᶜ`) | `Order/BooleanAlgebra/Set`, `Data/Set/Lattice` |
@@ -30,8 +34,15 @@ module prefix so that it can later move to its own repository without changing a
 | `Base/Order/Notation.lean` | `⊥`, `⊤`, `⊓`, `⊔`, `ᶜ` | `Order/Notation` |
 | `Base/Order/Defs/PartialOrder.lean` | `Preorder`, `PartialOrder` | `Order/Defs/PartialOrder` |
 | `Base/Order/Monotone/Defs.lean` | `Monotone`, `Antitone` | `Order/Monotone/Defs` |
-| `Base/Order/GaloisConnection/Defs.lean` | `GaloisConnection l u` | `Order/GaloisConnection/Defs` |
-| `Base/Order/Hom/Basic.lean` | order isomorphisms `α ≃o β`, `Subtype.le`, `Set.Ici` | `Order/Hom/Basic`, `Order/Basic`, `Order/Interval/Set/Defs` |
+| `Base/Order/GaloisConnection/Defs.lean` | `GaloisConnection l u`, `GaloisInsertion` | `Order/GaloisConnection/Defs` |
+| `Base/Order/Hom/Basic.lean` | order isomorphisms `α ≃o β`, order homs `α →o β`, `Subtype.le`, `Set.Ici`, `Set.Icc` | `Order/Hom/Basic`, `Order/Basic`, `Order/Interval/Set/Defs` |
+| `Base/Order/Max.lean` | `IsMax`, `IsTop`, `Maximal` | `Order/Max`, `Order/Minimal` |
+| `Base/Order/Bounds/Defs.lean` | `upperBounds`, `BddAbove`, `IsLeast`, `IsLUB` and duals | `Order/Bounds/{Defs,Basic}` |
+| `Base/Order/Disjoint.lean` | `Disjoint a b`, `Set.disjoint_left` | `Order/Disjoint`, `Data/Set/Disjoint` |
+| `Base/Order/Closure.lean` | `ClosureOperator`, `GaloisConnection.closureOperator` | `Order/Closure` |
+| `Base/Order/FixedPoints.lean` | Knaster–Tarski: `OrderHom.lfp`, `gfp` | `Order/FixedPoints`, `Logic/Function/Defs`, `Dynamics/FixedPoints/Defs` |
+| `Base/Order/Zorn.lean` | `IsChain`, `zorn_le`, `zorn_subset` | `Order/Preorder/Chain`, `Order/Zorn` |
+| `Base/Order/ModularLattice.lean` | `IsModularLattice`, the diamond isomorphism | `Order/ModularLattice` |
 | `Base/Order/Lattice.lean` | `SemilatticeSup`, `SemilatticeInf`, `Lattice`, `DistribLattice` | `Order/Defs/Lattice` |
 | `Base/Order/BooleanAlgebra/Defs.lean` | `BooleanAlgebra`: complements `xᶜ`, De Morgan | `Order/BooleanAlgebra/{Defs,Basic}`, `Order/Heyting/Basic` |
 | `Base/Order/CompleteLattice/Defs.lean` | `sSup`, `sInf`, `CompleteLattice` | `Order/SetNotation`, `Order/CompleteLattice/Defs` |
@@ -46,16 +57,27 @@ module prefix so that it can later move to its own repository without changing a
 | `Algebra/Group/Prod.lean` | `G × H`, `fst`, `snd`, `inl`, `inr`, `MonoidHom.prod` | `Algebra/Notation/Prod`, `Algebra/Group/Prod` |
 | `Algebra/Group/Opposite.lean` | the opposite group `Gᵐᵒᵖ` | `Algebra/Opposites`, `Algebra/Group/Opposite` |
 | `Algebra/Group/TypeTags/Basic.lean` | `Multiplicative α`, the group `Multiplicative ℤ` | `Algebra/Group/TypeTags/Basic` |
+| `Algebra/Group/Pi.lean` | products of families `∀ i, f i`, `Pi.evalMonoidHom`, `MonoidHom.pi` | `Algebra/Notation/Pi/Defs`, `Algebra/Group/Pi/{Basic,Hom}` |
+| `Algebra/Group/Pointwise/Set.lean` | products of sets `s * t` | `Algebra/Group/Pointwise/Set/Basic` |
+| `Algebra/Notation/Bracket.lean` | the notation `⁅x, y⁆` | `Algebra/Notation/Bracket` |
 | `Algebra/Group/Units/Equiv.lean` | translations `Equiv.mulLeft`/`mulRight`, `Group.mulLeft_bijective` | `Algebra/Group/Units/Equiv` |
 | `Algebra/Group/End.lean` | the group `Perm α`, how translations compose, `MulAut G`, `MulAut.conj` | `Algebra/Group/End` |
 | `Algebra/Group/Conj.lean` | `IsConj`, `ConjClasses`, `conjugatesOf` | `Algebra/Group/Conj` |
-| `Algebra/Group/Subgroup/` | `Subgroup`, `≤`, `⊥ ⊤ ⊓ ⊔`, `ker`, `range`, `map`, `comap`, `subgroupOf`, `zpowers`, `closure`, `Normal` | `Algebra/Group/Subgroup/` |
+| `Algebra/Group/Subgroup/` | `Subgroup`, `≤`, `⊥ ⊤ ⊓ ⊔`, `ker`, `range`, `map`, `comap`, `subgroupOf`, `zpowers`, `closure`, `Subgroup.gi`, `Normal`, `normalClosure`, `H * N` | `Algebra/Group/Subgroup/` |
 | `Algebra/GroupTheory/Center.lean`, `Centralizer.lean` | `center G`, `centralizer s` | `GroupTheory/Subgroup/{Center,Centralizer}` |
 | `Algebra/GroupTheory/Coset.lean` | `a • s`, translating sets, `leftRel` | `GroupTheory/Coset/{Defs,Basic}`, `Algebra/Group/Pointwise/Set/Basic` |
 | `Algebra/GroupTheory/QuotientGroup/` | `G ⧸ N`, `lift`, `map`, the three isomorphism theorems, the correspondence theorem | `GroupTheory/QuotientGroup/{Defs,Basic}` |
 | `Algebra/GroupTheory/Out.lean` | `Inn G`, `Out G`, `G ⧸ center G ≃* Inn G` | (not in Mathlib; uses `MulAut.conj.range`) |
 | `Algebra/GroupTheory/GroupAction.lean` | `MulAction`, `orbit`, `stabilizer`, `orbitRel`, orbit–stabilizer, `toPerm`, Cayley | `Algebra/Group/Action/{Defs,Basic,End,Faithful}`, `GroupTheory/GroupAction/{Defs,Quotient}`, `GroupTheory/Perm/Subgroup` |
 | `Algebra/GroupTheory/ConjAct.lean` | conjugation as an action: orbits = classes, stabilizers = centralizers | `GroupTheory/GroupAction/ConjAct` |
+| `Algebra/GroupTheory/Commutator.lean` | `⁅g, h⁆`, `⁅H, K⁆`, the commutator subgroup `commutator G` | `Algebra/Group/Commutator`, `GroupTheory/Commutator/Basic` |
+| `Algebra/GroupTheory/Abelianization.lean` | `Gᵃᵇ = G ⧸ G'` and its universal property | `GroupTheory/Abelianization/Defs` |
+| `Algebra/GroupTheory/Simple.lean` | `IsSimpleGroup` | `GroupTheory/Subgroup/Simple` |
+| `Algebra/GroupTheory/Solvable.lean` | `derivedSeries`, `IsSolvable`, closure under subgroups, quotients, extensions | `GroupTheory/Solvable` |
+| `Algebra/GroupTheory/SemidirectProduct.lean` | `N ⋊[φ] G`, `inl`, `inr`, `rightHom`, `lift` | `GroupTheory/SemidirectProduct` |
+| `Algebra/GroupTheory/DoubleCoset.lean` | `H a K`, `H \ G / K` | `GroupTheory/DoubleCoset` |
+| `Algebra/GroupTheory/FreeGroup/` | `FreeGroup α`, reduction, `lift`, reduced words | `GroupTheory/FreeGroup/{Basic,Reduce}` |
+| `Algebra/GroupTheory/PresentedGroup.lean` | `⟨α \| rels⟩`, `toGroup` | `GroupTheory/PresentedGroup` |
 | `Algebra/GroupTheory/Examples.lean` | `PUnit`, `Bool` under xor, `ℤ ⧸ 2ℤ ≃* Bool` | (not in Mathlib) |
 | `Exercises/` | exercise sheets, stated with the library above | |
 

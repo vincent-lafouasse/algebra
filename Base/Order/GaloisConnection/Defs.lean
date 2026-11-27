@@ -1,4 +1,5 @@
 import Base.Order.Monotone.Defs
+import Base.Logic.Function
 
 /-! # Galois connections
 
@@ -11,7 +12,12 @@ subgroups (`Subgroup.gc_map_comap`), `closure` and the carrier of a subgroup.
 Everything follows from the one equivalence, at `a := u b` or `b := l a` and `le_refl`:
 - `le_u_l : a ≤ u (l a)` and `l_u_le : l (u b) ≤ b`;
 - `monotone_l`, `monotone_u`;
-- in a partial order, `u (l (u b)) = u b` and `l (u (l a)) = l a`. -/
+- in a partial order, `u (l (u b)) = u b` and `l (u (l a)) = l a`.
+
+A Galois *insertion* is a connection where `l ∘ u` is the identity: `β` sits inside `α` as the
+"closed" elements. `closure` and the carrier make `Subgroup G` one inside `Set G`
+(`Subgroup.gi`), and that alone builds the complete lattice of subgroups in Mathlib. The
+`choice` field lets `l` be computed on elements already known to be closed. -/
 
 universe u v w
 
@@ -88,5 +94,39 @@ protected theorem compose [Preorder α] [Preorder β] [Preorder γ] {l1 : α →
   sorry
 
 end GaloisConnection
+
+/-! ### Galois insertions -/
+
+structure GaloisInsertion [Preorder α] [Preorder β] (l : α → β) (u : β → α) where
+  choice : ∀ x : α, u (l x) ≤ x → β
+  gc : GaloisConnection l u
+  le_l_u : ∀ x, x ≤ l (u x)
+  choice_eq : ∀ a h, choice a h = l a
+
+-- a connection with `b ≤ l (u b)` is an insertion (`choice` is just `l`)
+def GaloisConnection.toGaloisInsertion [Preorder α] [Preorder β] {l : α → β} {u : β → α}
+    (gc : GaloisConnection l u) (h : ∀ b, b ≤ l (u b)) : GaloisInsertion l u :=
+  sorry
+
+namespace GaloisInsertion
+
+variable [Preorder α] [PartialOrder β] {l : α → β} {u : β → α}
+
+theorem l_u_eq (gi : GaloisInsertion l u) (b : β) : l (u b) = b :=
+  sorry
+
+theorem leftInverse_l_u (gi : GaloisInsertion l u) : Function.LeftInverse l u :=
+  sorry
+
+theorem l_surjective (gi : GaloisInsertion l u) : Function.Surjective l :=
+  sorry
+
+theorem u_injective (gi : GaloisInsertion l u) : Function.Injective u :=
+  sorry
+
+theorem u_le_u_iff (gi : GaloisInsertion l u) {a b : β} : u a ≤ u b ↔ a ≤ b :=
+  sorry
+
+end GaloisInsertion
 
 end My

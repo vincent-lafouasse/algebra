@@ -10,6 +10,9 @@ import Algebra.Group.End
 import Algebra.Group.Prod
 import Algebra.Group.Opposite
 import Algebra.Group.TypeTags.Basic
+import Algebra.Group.Pi
+import Algebra.Group.Pointwise.Set
+import Algebra.Notation.Bracket
 import Algebra.Group.Conj
 import Algebra.Group.Subgroup.Defs
 import Algebra.Group.Subgroup.Lattice
@@ -18,6 +21,8 @@ import Algebra.Group.Subgroup.Map
 import Algebra.Group.Subgroup.ZPowers
 import Algebra.Group.Subgroup.Closure
 import Algebra.Group.Subgroup.Normal
+import Algebra.Group.Subgroup.Basic
+import Algebra.Group.Subgroup.Pointwise
 import Algebra.GroupTheory.Center
 import Algebra.GroupTheory.Centralizer
 import Algebra.GroupTheory.Coset
@@ -27,3 +32,12 @@ import Algebra.GroupTheory.Out
 import Algebra.GroupTheory.GroupAction
 import Algebra.GroupTheory.Examples
 import Algebra.GroupTheory.ConjAct
+import Algebra.GroupTheory.Commutator
+import Algebra.GroupTheory.Abelianization
+import Algebra.GroupTheory.Simple
+import Algebra.GroupTheory.Solvable
+import Algebra.GroupTheory.SemidirectProduct
+import Algebra.GroupTheory.DoubleCoset
+import Algebra.GroupTheory.FreeGroup.Basic
+import Algebra.GroupTheory.FreeGroup.Reduce
+import Algebra.GroupTheory.PresentedGroup

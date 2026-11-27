@@ -196,6 +196,27 @@ theorem union_comm (s t : Set α) : s ∪ t = t ∪ s :=
 -- (`diff_subset` until 2026)
 theorem sdiff_subset {s t : Set α} : s \ t ⊆ s := λ _ ⟨hs, _⟩ => hs
 
+/-! ### Nonempty sets, pairwise relations
+
+Mathlib: `Mathlib/Data/Set/Defs.lean` (`Set.Nonempty`), `Mathlib/Logic/Pairwise.lean`
+(`Set.Pairwise`). Needed by bounds (`BddAbove`) and chains (`IsChain`, for Zorn).
+`pairwise_def` is not in Mathlib, where `Set.Pairwise` unfolds by `Iff.rfl`. -/
+
+-- `s` has an element (Mathlib prefers it to `s ≠ ∅`: it is positive, and gives a witness)
+protected def Nonempty (s : Set α) : Prop :=
+  sorry
+
+-- `r` holds between any two *distinct* elements of `s`
+protected def Pairwise (s : Set α) (r : α → α → Prop) : Prop :=
+  sorry
+
+theorem nonempty_def {s : Set α} : s.Nonempty ↔ ∃ x, x ∈ s :=
+  sorry
+
+theorem pairwise_def {s : Set α} {r : α → α → Prop} :
+    s.Pairwise r ↔ ∀ ⦃x⦄, x ∈ s → ∀ ⦃y⦄, y ∈ s → x ≠ y → r x y :=
+  sorry
+
 end Set
 
 end My

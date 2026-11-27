@@ -17,3 +17,12 @@ import Base.Order.Lattice
 import Base.Order.CompleteLattice.Defs
 import Base.Data.Set.Lattice
 import Base.Order.BooleanAlgebra.Defs
+import Base.Logic.Nontrivial
+import Base.Logic.Relation
+import Base.Order.Max
+import Base.Order.Bounds.Defs
+import Base.Order.Disjoint
+import Base.Order.Closure
+import Base.Order.FixedPoints
+import Base.Order.Zorn
+import Base.Order.ModularLattice
