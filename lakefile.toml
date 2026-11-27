@@ -6,6 +6,8 @@ defaultTargets = ["Base", "Algebra"]
 [leanOptions]
 linter.all = true
 linter.missingDocs = false
+# no "declaration uses `sorry`" warnings: `scripts/check.py` counts stubs from the axioms instead
+warn.sorry = false
 
 # foundations: logic, functions, bijections, sets, order. Imports nothing but core.
 # Its own lib (and module prefix) so it can move to its own repo without renaming imports.
