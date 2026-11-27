@@ -287,20 +287,17 @@ theorem mul_inv_rev (a b : G) : (a * b)⁻¹ = b⁻¹ * a⁻¹ := by
     _ = b⁻¹ * b := by rw [inv_mul_cancel, mul_one]
     _ = 1 := by rw [inv_mul_cancel]
 
-theorem inv_injective : Function.Injective (Inv.inv : G → G) := by
-  intro a b he
-  replace he := congrArg Inv.inv he
-  rw [inv_inv, inv_inv] at he
-  exact he
+theorem inv_injective : Function.Injective (Inv.inv : G → G) :=
+  inv_involutive |> Function.Involutive.injective
 
 theorem inv_inj : a⁻¹ = b⁻¹ ↔ a = b :=
   Function.Injective.eq_iff inv_injective
 
 theorem inv_surjective : Function.Surjective (Inv.inv : G → G) :=
-  sorry
+  inv_involutive |> Function.Involutive.surjective
 
 theorem inv_bijective : Function.Bijective (Inv.inv : G → G) :=
-  sorry
+  inv_involutive |> Function.Involutive.bijective
 
 -- `⁻¹` moves across `=`
 theorem inv_eq_iff_eq_inv : a⁻¹ = b ↔ a = b⁻¹ :=
