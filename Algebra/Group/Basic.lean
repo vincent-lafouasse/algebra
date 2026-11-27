@@ -443,13 +443,6 @@ theorem mul_rotate' (a b c : G) : a * (b * c) = b * (c * a) :=
     _ = b * (a * c) := by simp only [mul_assoc]
     _ = b * (c * a) := by rw [mul_comm a c]
 
--- `a b⁻¹ = c d⁻¹` is "cross-multiplying" (Mathlib states it via `a / b = c / d`)
-theorem mul_inv_eq_mul_inv_iff_mul_eq_mul {a b c d : G} : a * b⁻¹ = c * d⁻¹ ↔ a * d = c * b :=
-  sorry
-
-theorem inv_mul_eq_inv_mul_iff_mul_eq_mul {a b c d : G} : b⁻¹ * a = d⁻¹ * c ↔ a * d = c * b :=
-  sorry
-
 end CommGroup
 
 end My
