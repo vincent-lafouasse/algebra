@@ -223,8 +223,7 @@ theorem inv_inv (a : G) : a⁻¹⁻¹ = a := by
   exact mul_inv_cancel a
 
 -- `inv_inv` says exactly this; Mathlib then gets `inv_injective`, `inv_surjective`, … from it
-theorem inv_involutive : Function.Involutive (Inv.inv : G → G) :=
-  λ x => inv_inv x
+theorem inv_involutive : Function.Involutive (Inv.inv : G → G) := λ x => inv_inv x
 
 -- two right inverses of `x` are equal (Mathlib: for commutative monoids, where one-sided is enough)
 theorem inv_unique {x y z : G} (hy : x * y = 1) (hz : x * z = 1) : y = z :=
@@ -232,8 +231,11 @@ theorem inv_unique {x y z : G} (hy : x * y = 1) (hz : x * z = 1) : y = z :=
 
 -- if `a * b = 1`, one factor is trivial exactly when the other is
 theorem eq_one_iff_eq_one_of_mul_eq_one (h : a * b = 1) : a = 1 ↔ b = 1 :=
-  Iff.intro (λ h' => by rw [h', one_mul] at h; exact h)
-            (λ h' => by rw [h', mul_one] at h; exact h)
+  Iff.intro
+    (λ h' => by
+      rw [h', one_mul] at h; exact h)
+    (λ h' => by
+      rw [h', mul_one] at h; exact h)
 
 -- `a * b = 1` four ways: solve for `a` or for `b`, inverse on either side of the `=`
 theorem mul_eq_one_iff_eq_inv : a * b = 1 ↔ a = b⁻¹ := by
