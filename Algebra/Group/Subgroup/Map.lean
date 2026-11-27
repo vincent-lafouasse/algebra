@@ -40,7 +40,7 @@ theorem coe_map (f : G →* N) (K : Subgroup G) : (map f K : Set N) = f '' (K : 
   rfl
 
 theorem mem_map {f : G →* N} {K : Subgroup G} {y : N} : y ∈ map f K ↔ ∃ x ∈ K, f x = y :=
-  sorry
+  Iff.rfl
 
 def comap (f : G →* N) (K : Subgroup N) : Subgroup G where
   carrier := f ⁻¹' (K : Set N)
