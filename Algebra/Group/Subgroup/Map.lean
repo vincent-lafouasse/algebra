@@ -36,10 +36,8 @@ def map (f : G →* N) (H : Subgroup G) : Subgroup N where
       f (β₁ * β₂)
       _ = f β₁ * f β₂ := by rw [f.map_mul]
       _ = α₁ * α₂ := by rw [hf₁, hf₂]
-  one_mem' := by
-    rw [Set.mem_image]
-    refine ⟨1, sorry, ?_⟩
-    sorry
+  one_mem' :=
+    ⟨1, H.one_mem, f.map_one⟩
   inv_mem' := by
     intro y ⟨x, hx, hf⟩
     refine ⟨x⁻¹, H.inv_mem hx, ?_⟩
