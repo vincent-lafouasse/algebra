@@ -44,9 +44,20 @@ theorem mem_map {f : G →* N} {K : Subgroup G} {y : N} : y ∈ map f K ↔ ∃ 
 
 def comap (f : G →* N) (K : Subgroup N) : Subgroup G where
   carrier := f ⁻¹' (K : Set N)
-  mul_mem' := sorry
-  one_mem' := sorry
-  inv_mem' := sorry
+  mul_mem' := by
+    intro _ _ ha hb
+    rw [Set.mem_preimage]
+    rw [f.map_mul]
+    exact K.mul_mem ha hb
+  one_mem' := by
+    rw [Set.mem_preimage]
+    rw [f.map_one]
+    exact K.one_mem
+  inv_mem' := by
+    intro x hx
+    rw [Set.mem_preimage]
+    rw [f.map_inv]
+    exact K.inv_mem hx
 
 theorem coe_comap (K : Subgroup N) (f : G →* N) : (comap f K : Set G) = f ⁻¹' (K : Set N) :=
   rfl
