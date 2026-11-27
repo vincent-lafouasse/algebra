@@ -57,12 +57,12 @@ theorem evalMonoidHom_apply (i : I) (x : ∀ i, f i) : evalMonoidHom f i x = x i
 end Pi
 
 -- the universal property of the product: a family of homs into the `f i` is one hom into `∀ i, f i`
-def MonoidHom.pi {I : Type u} {f : I → Type v} [∀ i, Group (f i)] {γ : Type w} [Group γ]
-    (g : ∀ i, γ →* f i) : γ →* ∀ i, f i :=
+def MonoidHom.pi {I : Type u} {f : I → Type v} [∀ i, Group (f i)] {G : Type w} [Group G]
+    (g : ∀ i, G →* f i) : G →* ∀ i, f i :=
   sorry
 
-theorem MonoidHom.pi_apply {I : Type u} {f : I → Type v} [∀ i, Group (f i)] {γ : Type w} [Group γ]
-    (g : ∀ i, γ →* f i) (x : γ) (i : I) : MonoidHom.pi g x i = g i x :=
+theorem MonoidHom.pi_apply {I : Type u} {f : I → Type v} [∀ i, Group (f i)] {G : Type w} [Group G]
+    (g : ∀ i, G →* f i) (x : G) (i : I) : MonoidHom.pi g x i = g i x :=
   sorry
 
 end My

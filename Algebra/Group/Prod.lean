@@ -8,7 +8,7 @@ Mathlib: `Mathlib/Algebra/Notation/Prod.lean` (the operations), `Mathlib/Algebra
 
 `G × H` is a group componentwise: `(a₁, b₁) * (a₂, b₂) = (a₁ * a₂, b₁ * b₂)`. It comes with
 four homs: the projections `fst`, `snd` and the inclusions `inl a = (a, 1)`, `inr b = (1, b)`.
-Its universal property: a hom into `N × P` is the same as a pair of homs into `N` and `P`
+Its universal property: a hom into `H × K` is the same as a pair of homs into `H` and `K`
 (`MonoidHom.prod`, `fst_comp_prod`, `snd_comp_prod`, `prod_unique`). -/
 
 universe u v w
@@ -65,69 +65,69 @@ end Prod
 
 namespace MonoidHom
 
-variable (M : Type u) (N : Type v) [Group M] [Group N]
+variable (G : Type u) (H : Type v) [Group G] [Group H]
 
-def fst : M × N →* M :=
+def fst : G × H →* G :=
   sorry
 
-def snd : M × N →* N :=
+def snd : G × H →* H :=
   sorry
 
-def inl : M →* M × N :=
+def inl : G →* G × H :=
   sorry
 
-def inr : N →* M × N :=
+def inr : H →* G × H :=
   sorry
 
-theorem coe_fst : (fst M N : M × N → M) = Prod.fst :=
+theorem coe_fst : (fst G H : G × H → G) = Prod.fst :=
   sorry
 
-theorem coe_snd : (snd M N : M × N → N) = Prod.snd :=
+theorem coe_snd : (snd G H : G × H → H) = Prod.snd :=
   sorry
 
-variable {M N}
+variable {G H}
 
-theorem inl_apply (x : M) : inl M N x = (x, 1) :=
+theorem inl_apply (x : G) : inl G H x = (x, 1) :=
   sorry
 
-theorem inr_apply (y : N) : inr M N y = (1, y) :=
+theorem inr_apply (y : H) : inr G H y = (1, y) :=
   sorry
 
-theorem fst_comp_inl : fst M N ∘* inl M N = MonoidHom.id M :=
+theorem fst_comp_inl : fst G H ∘* inl G H = MonoidHom.id G :=
   sorry
 
-theorem snd_comp_inr : snd M N ∘* inr M N = MonoidHom.id N :=
+theorem snd_comp_inr : snd G H ∘* inr G H = MonoidHom.id H :=
   sorry
 
 -- the two factors commute inside the product
-theorem commute_inl_inr (m : M) (n : N) : Commute (inl M N m) (inr M N n) :=
+theorem commute_inl_inr (m : G) (n : H) : Commute (inl G H m) (inr G H n) :=
   sorry
 
 /-! ### The universal property -/
 
-variable {P : Type w} [Group P]
+variable {K : Type w} [Group K]
 
-/-- A pair of homs out of `M`, as one hom into the product. -/
-protected def prod (f : M →* N) (g : M →* P) : M →* N × P :=
+/-- A pair of homs out of `G`, as one hom into the product. -/
+protected def prod (f : G →* H) (g : G →* K) : G →* H × K :=
   sorry
 
-theorem prod_apply (f : M →* N) (g : M →* P) (x : M) : f.prod g x = (f x, g x) :=
+theorem prod_apply (f : G →* H) (g : G →* K) (x : G) : f.prod g x = (f x, g x) :=
   sorry
 
-theorem fst_comp_prod (f : M →* N) (g : M →* P) : fst N P ∘* f.prod g = f :=
+theorem fst_comp_prod (f : G →* H) (g : G →* K) : fst H K ∘* f.prod g = f :=
   sorry
 
-theorem snd_comp_prod (f : M →* N) (g : M →* P) : snd N P ∘* f.prod g = g :=
+theorem snd_comp_prod (f : G →* H) (g : G →* K) : snd H K ∘* f.prod g = g :=
   sorry
 
 -- every hom into a product is a pair
-theorem prod_unique (f : M →* N × P) : (fst N P ∘* f).prod (snd N P ∘* f) = f :=
+theorem prod_unique (f : G →* H × K) : (fst H K ∘* f).prod (snd H K ∘* f) = f :=
   sorry
 
 end MonoidHom
 
 /-- `G × H ≃* H × G`. -/
-def MulEquiv.prodComm (M : Type u) (N : Type v) [Group M] [Group N] : M × N ≃* N × M :=
+def MulEquiv.prodComm (G : Type u) (H : Type v) [Group G] [Group H] : G × H ≃* H × G :=
   sorry
 
 end My

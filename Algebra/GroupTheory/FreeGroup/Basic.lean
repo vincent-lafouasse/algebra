@@ -118,20 +118,20 @@ protected theorem induction_on {motive : FreeGroup α → Prop} (z : FreeGroup �
 
 /-! ### The universal property -/
 
-variable {β : Type v} [Group β]
+variable {G : Type v} [Group G]
 
-def lift : (α → β) ≃ (FreeGroup α →* β) :=
+def lift : (α → G) ≃ (FreeGroup α →* G) :=
   sorry
 
-theorem lift_apply_of {f : α → β} {x : α} : lift f (of x) = f x :=
+theorem lift_apply_of {f : α → G} {x : α} : lift f (of x) = f x :=
   sorry
 
-theorem lift_unique {f : α → β} (g : FreeGroup α →* β) (hg : ∀ x, g (of x) = f x)
+theorem lift_unique {f : α → G} (g : FreeGroup α →* G) (hg : ∀ x, g (of x) = f x)
     {x : FreeGroup α} : g x = lift f x :=
   sorry
 
 -- homs out of a free group are determined by the generators
-theorem ext_hom (f g : FreeGroup α →* β) (h : ∀ a, f (of a) = g (of a)) : f = g :=
+theorem ext_hom (f g : FreeGroup α →* G) (h : ∀ a, f (of a) = g (of a)) : f = g :=
   sorry
 
 end FreeGroup
