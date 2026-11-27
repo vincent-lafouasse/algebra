@@ -38,7 +38,7 @@ theorem Normal.mem_comm {H : Subgroup G} (nH : H.Normal) {a b : G} (h : a * b �
   exact h
 
 theorem Normal.mem_comm_iff {H : Subgroup G} (nH : H.Normal) {a b : G} : a * b ∈ H ↔ b * a ∈ H :=
-  sorry
+  Iff.intro (Normal.mem_comm nH) (Normal.mem_comm nH)
 
 instance normal_bot : (⊥ : Subgroup G).Normal :=
   sorry
