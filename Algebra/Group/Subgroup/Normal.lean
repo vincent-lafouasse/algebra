@@ -33,15 +33,21 @@ theorem Normal.mem_comm {H : Subgroup G} (nH : H.Normal) {a b : G} (h : a * b �
   have h := nH.conj_mem (a * b) h a⁻¹
   rw [inv_inv] at h
   rw [← mul_assoc a⁻¹ a b] at h
-  rw [Group.inv_mul_cancel] at h
+  rw [inv_mul_cancel] at h
   rw [one_mul] at h
   exact h
 
 theorem Normal.mem_comm_iff {H : Subgroup G} (nH : H.Normal) {a b : G} : a * b ∈ H ↔ b * a ∈ H :=
   Iff.intro (Normal.mem_comm nH) (Normal.mem_comm nH)
 
-instance normal_bot : (⊥ : Subgroup G).Normal :=
-  sorry
+instance normal_bot : (⊥ : Subgroup G).Normal where
+  conj_mem : ∀ n, n ∈ ⊥ → ∀ g : G, g * n * g⁻¹ ∈ ⊥ := by
+    intro n hn g
+    rw [mem_bot] at hn
+    subst hn
+    rw [mem_bot]
+    rw [mul_one]
+    rw [mul_inv_cancel]
 
 instance normal_top : (⊤ : Subgroup G).Normal :=
   sorry
