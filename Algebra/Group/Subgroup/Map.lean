@@ -65,8 +65,18 @@ theorem coe_comap (K : Subgroup N) (f : G →* N) : (comap f K : Set G) = f ⁻�
 theorem mem_comap {K : Subgroup N} {f : G →* N} {x : G} : x ∈ comap f K ↔ f x ∈ K :=
   Iff.rfl
 
-theorem map_id (K : Subgroup G) : map (MonoidHom.id G) K = K :=
-  sorry
+theorem map_id (K : Subgroup G) : map (MonoidHom.id G) K = K := by
+  apply Subgroup.ext
+  intro x
+  rw [mem_map]
+  apply Iff.intro
+  · intro ⟨a, ha, hf⟩
+    rw [MonoidHom.id_apply] at hf
+    subst hf
+    exact ha
+  · intro hx
+    refine ⟨x, hx, ?_⟩
+    rw [MonoidHom.id_apply]
 
 theorem map_map (K : Subgroup G) (g : N →* P) (f : G →* N) : map g (map f K) = map (g ∘* f) K :=
   sorry
