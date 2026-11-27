@@ -54,11 +54,8 @@ instance normal_top : (⊤ : Subgroup G).Normal where
     λ n _ g => mem_top (g * n * g⁻¹)
 
 instance normal_inf_normal (H K : Subgroup G) [H.Normal] [K.Normal] : (H ⊓ K).Normal where
-  conj_mem : ∀ n, n ∈ H ⊓ K → ∀ g : G, g * n * g⁻¹ ∈ H ⊓ K := by
-    intro n ⟨hh, hk⟩ g
-    constructor
-    · exact Normal.conj_mem n hh g
-    · exact Normal.conj_mem n hk g
+  conj_mem : ∀ n, n ∈ H ⊓ K → ∀ g : G, g * n * g⁻¹ ∈ H ⊓ K :=
+    λ n ⟨hh, hk⟩ g => ⟨Normal.conj_mem n hh g, Normal.conj_mem n hk g⟩
 
 -- in a commutative group every subgroup is normal (Mathlib: for `[IsMulCommutative G]`)
 theorem normal_of_isMulCommutative {G : Type u} [CommGroup G] (H : Subgroup G) : H.Normal :=
