@@ -147,12 +147,35 @@ def paint(text: str, code: str) -> str:
     return f"\033[{code}m{text}\033[0m" if COLOR else text
 
 
-GREEN, YELLOW, RED, BOLD, DIM = "32", "33", "31", "1", "2"
+GREEN, RED, BOLD, DIM = "32", "31", "1", "2"
+
+
+# 24-bit color where the terminal says it has it, else the 6×6×6 cube of the 256-color palette
+TRUECOLOR = os.environ.get("COLORTERM", "") in ("truecolor", "24bit")
+
+
+def gradient(x: float) -> str:
+    """A color from red (`x = 0`) through orange and yellow to green (`x = 1`): the hue goes
+    from 0° to 120° at full saturation, slightly darkened so yellow stays readable."""
+    hue = 120 * max(0.0, min(1.0, x))
+    # HSV to RGB with S = 1, V = 0.9, for hues in [0°, 120°]
+    v = 0.9
+    rgb = (v, v * hue / 60, 0.0) if hue < 60 else (v * (120 - hue) / 60, v, 0.0)
+    r, g, b = (round(255 * c) for c in rgb)
+    if TRUECOLOR:
+        return f"38;2;{r};{g};{b}"
+    cube = lambda c: round(c / 255 * 5)
+    return f"38;5;{16 + 36 * cube(r) + 6 * cube(g) + cube(b)}"
 
 
 def progress_color(done: int, total: int) -> str:
-    """Green when finished, yellow when started, dim when not started."""
-    return GREEN if done == total else YELLOW if done else DIM
+    """Green when finished, dim when not started, and in between a red → orange → yellow
+    gradient by the fraction proved."""
+    if done == total:
+        return GREEN
+    if not done:
+        return DIM
+    return gradient(0.7 * done / total)  # stops at yellow-green: plain green means finished
 
 
 def frac(done: int, total: int) -> str:
