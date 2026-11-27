@@ -328,10 +328,10 @@ theorem inv_mul_eq_one : a⁻¹ * b = 1 ↔ a = b := by
 
 -- the `→` halves, for when you have the hypothesis in hand
 theorem eq_of_inv_mul_eq_one (h : a⁻¹ * b = 1) : a = b :=
-  sorry
+  inv_mul_eq_one.mp h
 
 theorem eq_of_mul_inv_eq_one (h : a * b⁻¹ = 1) : a = b :=
-  sorry
+  mul_inv_eq_one.mp h
 
 -- a conjugate of b is trivial only if b is
 theorem conj_eq_one_iff : a * b * a⁻¹ = 1 ↔ b = 1 := by
