@@ -36,7 +36,10 @@ def map (f : G →* N) (H : Subgroup G) : Subgroup N where
       f (β₁ * β₂)
       _ = f β₁ * f β₂ := by rw [f.map_mul]
       _ = α₁ * α₂ := by rw [hf₁, hf₂]
-  one_mem' := sorry
+  one_mem' := by
+    rw [Set.mem_image]
+    refine ⟨1, sorry, ?_⟩
+    sorry
   inv_mem' := sorry
 
 theorem coe_map (f : G →* N) (K : Subgroup G) : (map f K : Set N) = f '' (K : Set G) :=
