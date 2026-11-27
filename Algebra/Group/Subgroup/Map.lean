@@ -40,7 +40,12 @@ def map (f : G →* N) (H : Subgroup G) : Subgroup N where
     rw [Set.mem_image]
     refine ⟨1, sorry, ?_⟩
     sorry
-  inv_mem' := sorry
+  inv_mem' := by
+    intro y ⟨x, hx, hf⟩
+    refine ⟨x⁻¹, H.inv_mem hx, ?_⟩
+    rw [f.map_inv]
+    rw [inv_inj]
+    exact hf
 
 theorem coe_map (f : G →* N) (K : Subgroup G) : (map f K : Set N) = f '' (K : Set G) :=
   rfl
