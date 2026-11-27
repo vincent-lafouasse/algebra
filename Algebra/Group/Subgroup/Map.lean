@@ -22,7 +22,20 @@ namespace Subgroup
 
 def map (f : G →* N) (H : Subgroup G) : Subgroup N where
   carrier := f '' (H : Set G)
-  mul_mem' := sorry
+  mul_mem' := by
+    intro α₁ α₂ h₁ h₂
+    rw [Set.mem_image]
+    rw [Set.mem_image] at h₁
+    rw [Set.mem_image] at h₂
+    obtain ⟨β₁, hx₁, hf₁⟩ := h₁
+    obtain ⟨β₂, hx₂, hf₂⟩ := h₂
+    refine ⟨β₁ * β₂, ?_⟩
+    have hb := H.mul_mem hx₁ hx₂
+    refine ⟨hb, ?_⟩
+    calc
+      f (β₁ * β₂)
+      _ = f β₁ * f β₂ := by rw [f.map_mul]
+      _ = α₁ * α₂ := by rw [hf₁, hf₂]
   one_mem' := sorry
   inv_mem' := sorry
 
