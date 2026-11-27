@@ -350,8 +350,10 @@ use these instead. For the same reason they are here and not in `Algebra/Group/C
 `ConjClasses`, `conj_pow`. -/
 
 -- the inverse of a conjugate is the conjugate of the inverse (`map_inv` for conjugation by `b`)
-theorem conj_inv {a b : G} : (b * a * b⁻¹)⁻¹ = b * a⁻¹ * b⁻¹ :=
-  sorry
+theorem conj_inv {a b : G} : (b * a * b⁻¹)⁻¹ = b * a⁻¹ * b⁻¹ := by
+  rw [mul_inv_rev, mul_inv_rev]
+  rw [inv_inv]
+  simp only [mul_assoc]
 
 -- conjugating a product is the product of the conjugates (`map_mul` for conjugation by `b`)
 theorem conj_mul {a b c : G} : b * a * b⁻¹ * (b * c * b⁻¹) = b * (a * c) * b⁻¹ :=
@@ -398,22 +400,48 @@ theorem mul_inv (a b : G) : (a * b)⁻¹ = a⁻¹ * b⁻¹ := by
 
 -- rearranging products (Mathlib: for any commutative semigroup)
 theorem mul_left_comm (a b c : G) : a * (b * c) = b * (a * c) :=
-  sorry
+  calc
+    a * (b * c)
+    _ = (a * b) * c := by simp only [mul_assoc]
+    _ = (b * a) * c := by rw [mul_comm b a]
+    _ = b * (a * c) := by simp only [mul_assoc]
 
 theorem mul_right_comm (a b c : G) : a * b * c = a * c * b :=
-  sorry
+  calc
+    a * b * c
+    _ = a * (b * c) := by simp only [mul_assoc]
+    _ = a * (c * b) := by rw [mul_comm b c]
+    _ = a * c * b := by simp only [mul_assoc]
 
 theorem mul_mul_mul_comm (a b c d : G) : a * b * (c * d) = a * c * (b * d) :=
-  sorry
+  calc
+    a * b * (c * d)
+    _ = a * (b * c) * d := by simp only [mul_assoc]
+    _ = a * (c * b) * d := by rw [mul_comm b c]
+    _ = a * c * (b * d) := by simp only [mul_assoc]
 
 theorem mul_mul_mul_comm' (a b c d : G) : a * b * c * d = a * c * b * d :=
-  sorry
+  calc
+    a * b * c * d
+    _ = a * (b * c) * d := by simp only [mul_assoc]
+    _ = a * (c * b) * d := by rw [mul_comm b c]
+    _ = a * c * b * d := by simp only [mul_assoc]
 
 theorem mul_rotate (a b c : G) : a * b * c = b * c * a :=
-  sorry
+  calc
+    a * b * c
+    _ = b * a * c := by rw [mul_comm a b]
+    _ = b * (a * c) := by simp only [mul_assoc]
+    _ = b * (c * a) := by rw [mul_comm a c]
+    _ = b * c * a := by simp only [mul_assoc]
 
 theorem mul_rotate' (a b c : G) : a * (b * c) = b * (c * a) :=
-  sorry
+  calc
+    a * (b * c)
+    _ = (a * b) * c := by simp only [mul_assoc]
+    _ = (b * a) * c := by rw [mul_comm a b]
+    _ = b * (a * c) := by simp only [mul_assoc]
+    _ = b * (c * a) := by rw [mul_comm a c]
 
 -- `a b⁻¹ = c d⁻¹` is "cross-multiplying" (Mathlib states it via `a / b = c / d`)
 theorem mul_inv_eq_mul_inv_iff_mul_eq_mul {a b c d : G} : a * b⁻¹ = c * d⁻¹ ↔ a * d = c * b :=
