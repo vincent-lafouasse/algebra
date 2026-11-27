@@ -24,8 +24,10 @@ class Normal (H : Subgroup G) : Prop where
 
 -- conjugating the other way round also stays in H
 theorem Normal.conj_mem' {H : Subgroup G} (nH : H.Normal) (n : G) (hn : n ∈ H) (g : G) :
-    g⁻¹ * n * g ∈ H :=
-  sorry
+    g⁻¹ * n * g ∈ H := by
+  have h : g⁻¹ * n * g⁻¹⁻¹ ∈ H := nH.conj_mem n hn g⁻¹
+  rw [inv_inv] at h
+  exact h
 
 theorem Normal.mem_comm {H : Subgroup G} (nH : H.Normal) {a b : G} (h : a * b ∈ H) : b * a ∈ H :=
   sorry
