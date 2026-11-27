@@ -30,7 +30,7 @@ theorem Normal.conj_mem' {H : Subgroup G} (nH : H.Normal) (n : G) (hn : n ∈ H)
   exact h
 
 theorem Normal.mem_comm {H : Subgroup G} (nH : H.Normal) {a b : G} (h : a * b ∈ H) : b * a ∈ H := by
-  have h := nH.conj_mem (a * b) h a⁻¹
+  replace h := nH.conj_mem (a * b) h a⁻¹
   rw [inv_inv] at h
   rw [← mul_assoc a⁻¹ a b] at h
   rw [inv_mul_cancel] at h
@@ -51,7 +51,8 @@ instance normal_bot : (⊥ : Subgroup G).Normal where
     rw [mul_inv_cancel]
 
 instance normal_top : (⊤ : Subgroup G).Normal where
-  conj_mem : ∀ n, n ∈ ⊤ → ∀ g : G, g * n * g⁻¹ ∈ ⊤ := λ n _ g => mem_top (g * n * g⁻¹)
+  conj_mem : ∀ n, n ∈ ⊤ → ∀ g : G, g * n * g⁻¹ ∈ ⊤ :=
+    λ n _ g => mem_top (g * n * g⁻¹)
 
 instance normal_inf_normal (H K : Subgroup G) [H.Normal] [K.Normal] : (H ⊓ K).Normal where
   conj_mem := λ n ⟨hh, hk⟩ g => ⟨Normal.conj_mem n hh g, Normal.conj_mem n hk g⟩
