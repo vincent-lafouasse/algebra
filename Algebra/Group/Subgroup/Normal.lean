@@ -29,7 +29,11 @@ theorem Normal.conj_mem' {H : Subgroup G} (nH : H.Normal) (n : G) (hn : n ∈ H)
   rw [inv_inv] at h
   exact h
 
-theorem Normal.mem_comm {H : Subgroup G} (nH : H.Normal) {a b : G} (h : a * b ∈ H) : b * a ∈ H :=
+theorem Normal.mem_comm {H : Subgroup G} (nH : H.Normal) {a b : G} (h : a * b ∈ H) : b * a ∈ H := by
+  have h := nH.conj_mem (a * b) h (b⁻¹ * a⁻¹)
+  rw [mul_inv_rev b⁻¹ a⁻¹] at h
+  rw [inv_inv, inv_inv] at h
+  rw [mul_inv_mul_mul_cancel] at h
   sorry
 
 theorem Normal.mem_comm_iff {H : Subgroup G} (nH : H.Normal) {a b : G} : a * b ∈ H ↔ b * a ∈ H :=
